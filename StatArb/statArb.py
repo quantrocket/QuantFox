@@ -5,7 +5,7 @@ from pyalgotrade.tools import yahoofinance
 from pyalgotrade.stratanalyzer import returns
 from pyalgotrade.stratanalyzer import sharpe
 from pyalgotrade.utils import stats
-
+#
 import os
 import csv
 
