@@ -10,8 +10,13 @@ import os
 import csv
 
 etf = 'xlb'
-instruments = ['apd', 'dd', 'dow', 'ecl', 'fcx', 'ip', 'lyb', 'mon', 'ppg', 'px']
-instFeed = ['xlb', 'apd', 'dd', 'dow', 'ecl', 'fcx', 'ip', 'lyb', 'mon', 'ppg', 'px']
+instrument_list = 'instruments.csv'
+instReader = csv.reader(open(instrument_list, "rb"), delimiter = ",")
+instruments = [name for line in instReader for name in line]
+instFeed = []
+for symbol in instruments:
+    instFeed.append(symbol)
+instFeed.append(etf)
 instPrices = {i:[] for i in instruments}
 instStock = {i:0 for i in instruments}
 etfStock = {etf:0}
@@ -35,7 +40,7 @@ class MyStrategy(strategy.Strategy):
         
     
     def onBars(self, bars):
-        writer = csv.writer(open('orders.csv', 'ab'), delimiter=',')
+        writer = csv.writer(open('orders.csv', 'ab'), delimiter = ',')
         for symbol in instruments:
             # define shares | get prices
             shares = self.getBroker().getShares(symbol)
