@@ -12,10 +12,8 @@ import csv
 etf = 'xlb'
 instrument_list = 'instruments.csv'
 instReader = csv.reader(open(instrument_list, "rb"), delimiter = ",")
-instruments = [name for line in instReader for name in line]
-instFeed = []
-for symbol in instruments:
-    instFeed.append(symbol)
+instruments = [symbol for line in instReader for symbol in line]
+instFeed = [symbol for symbol in instruments]
 instFeed.append(etf)
 instPrices = {i:[] for i in instruments}
 instStock = {i:0 for i in instruments}
@@ -38,27 +36,25 @@ class MyStrategy(strategy.Strategy):
         instStock[symbol] = qInst
         etfStock[etf] = qEtf
         
-    
     def onBars(self, bars):
         writer = csv.writer(open('orders.csv', 'ab'), delimiter = ',')
         for symbol in instruments:
-            # define shares | get prices
+            # Define shares | get prices
             shares = self.getBroker().getShares(symbol)
             instPrice = bars[symbol].getAdjClose()
             etfPrice = bars[self.__etf].getAdjClose()
-            # append prices to list
+            # Append prices to list
             instPrices[symbol].append(instPrice)
             etfPrices.append(etfPrice)
-            # normalize price
+            # Normalize price
             naInstPrice = instPrice / instPrices[symbol][0]
             naEtfPrice = etfPrice / etfPrices[0]
-            # define notational, spread                            
+            # Define notational, spread                            
             notional = shares * instPrice
             spread = naInstPrice - naEtfPrice
             
-            # define trade rules
-            if spread <= -enterSpread and notional < 1000000:
-                if instStock[symbol] == 0:
+            # Define trade rules
+            if spread <= -enterSpread and instStock[symbol] == 0 and notional < 1000000:
                     qInst = 10000 / instPrice
                     qEtf = 10000 / etfPrice
                     self.order(symbol, qInst)
@@ -68,10 +64,7 @@ class MyStrategy(strategy.Strategy):
                     etf_to_enter = [str(bars[etf].getDateTime()), etf, round(spread, 4), 'Sell', str(round(qEtf))]
                     writer.writerow(inst_to_enter)
                     writer.writerow(etf_to_enter)
-                else:
-                    pass
-            elif spread >= -exitSpread and notional > 0:
-                if instStock[symbol] > 0:
+            elif spread >= -exitSpread and instStock[symbol] > 0 and notional > 0:
                     qInst = 10000 / instPrice
                     qEtf = 10000 / etfPrice
                     self.order(symbol, -(instStock[symbol]))
@@ -81,8 +74,6 @@ class MyStrategy(strategy.Strategy):
                     etf_to_enter = [str(bars[etf].getDateTime()), etf, round(spread, 4), 'Buy', str(round(qEtf, 2))]
                     writer.writerow(inst_to_enter)
                     writer.writerow(etf_to_enter)
-                else:
-                    pass
             else:
                 pass
  
@@ -101,13 +92,10 @@ def build_feed(instFeed, fromYear, toYear):
             feed.addBarsFromCSV(symbol, fileName)
     return feed
 
-
-
-
 def main(plot):
     # Download the bars.
     feed = build_feed(instFeed, 2011, 2012)
-    
+    # Define Strategy
     myStrategy = MyStrategy(feed, etf)
 
     if plot:
@@ -118,7 +106,7 @@ def main(plot):
     myStrategy.attachAnalyzer(retAnalyzer)
     sharpeRatioAnalyzer = sharpe.SharpeRatio()
     myStrategy.attachAnalyzer(sharpeRatioAnalyzer)
-    # run the strategy
+    # Run the strategy
     myStrategy.run()
     print "Final portfolio value: $%.2f" % myStrategy.getResult()
     print "Anual return: %.2f %%" % (retAnalyzer.getCumulativeReturns()[-1] * 100)
