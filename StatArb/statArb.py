@@ -5,22 +5,27 @@ from pyalgotrade.tools import yahoofinance
 from pyalgotrade.stratanalyzer import returns
 from pyalgotrade.stratanalyzer import sharpe
 from pyalgotrade.utils import stats
+from pyalgotrade import dataseries
 #
 import os
 import csv
 
-etf = 'xlb'
+etf = 'XLB'
 instrument_list = 'instruments.csv'
 instReader = csv.reader(open(instrument_list, "rb"), delimiter = ",")
 instruments = [symbol for line in instReader for symbol in line]
 instFeed = [symbol for symbol in instruments]
 instFeed.append(etf)
 instPrices = {i:[] for i in instruments}
-instStock = {i:0 for i in instruments}
+naInstPrices = {i:[] for i in instruments}
+instSpread = {i:[] for i in instruments}
+instStock = {i:[0, 0, 20000] for i in instruments}  # [Shares, enteredSpread]
 etfStock = {etf:0}
 etfPrices = []
+naEtfPrices = []
+marketValue = {i:[20000] for i in instruments}
 
-enterSpread = 0.05
+enterSpread = 0.03
 exitSpread = 0.03
 
 class MyStrategy(strategy.Strategy):
@@ -29,13 +34,23 @@ class MyStrategy(strategy.Strategy):
         self.getBroker().setUseAdjustedValues(True)
         self.__etf = etf
         
-    def inventory(self, symbol, qInst, qEtf):
+    def instInventory(self, symbol, qInst, enterSpread):
         self.__symbol = symbol
         self.__qInst = qInst
+        instStock[symbol][0] = qInst
+        instStock[symbol][1] = enterSpread
+
+    def etfInventory(self, qEtf):
         self.__qEtf = qEtf
-        instStock[symbol] = qInst
         etfStock[etf] = qEtf
         
+    def instValue(self, symbol, enterSpread, spread):
+        self.__symbol = symbol
+        self.__enterSpread = enterSpread
+        self.__spread = spread
+        gain = (spread - enterSpread) * 10000
+        return gain
+
     def onBars(self, bars):
         writer = csv.writer(open('orders.csv', 'ab'), delimiter = ',')
         for symbol in instruments:
@@ -49,33 +64,45 @@ class MyStrategy(strategy.Strategy):
             # Normalize price
             naInstPrice = instPrice / instPrices[symbol][0]
             naEtfPrice = etfPrice / etfPrices[0]
-            # Define notational, spread                            
+            naInstPrices[symbol].append(naInstPrice)
+            naEtfPrices.append(naEtfPrice)
+            # Define notational, spread
             notional = shares * instPrice
             spread = naInstPrice - naEtfPrice
-            
+            instSpread[symbol].append(spread)
+            # Update Market Value of Inventory
+            if instStock[symbol][0] > 0:
+                gain = self.instValue(symbol, instStock[symbol][1], spread)
+                instStock[symbol][2] = 20000 + gain
+                marketValue[symbol].append(20000 + gain)
+            else:
+                marketValue[symbol].append(instStock[symbol][2])    
             # Define trade rules
-            if spread <= -enterSpread and instStock[symbol] == 0 and notional < 1000000:
+            if spread <= -enterSpread and instStock[symbol][0] == 0 and notional < 1000000:
                     qInst = 10000 / instPrice
                     qEtf = 10000 / etfPrice
                     self.order(symbol, qInst)
                     self.order(self.__etf, -qEtf)
-                    self.inventory(symbol, qInst, etfStock[etf] - qEtf)
+                    self.instInventory(symbol, qInst, spread)
+                    self.etfInventory(etfStock[etf] - qEtf)
                     inst_to_enter = [str(bars[symbol].getDateTime()), symbol, round(spread, 4), 'Buy', str(round(qInst))]
                     etf_to_enter = [str(bars[etf].getDateTime()), etf, round(spread, 4), 'Sell', str(round(qEtf))]
                     writer.writerow(inst_to_enter)
                     writer.writerow(etf_to_enter)
-            elif spread >= -exitSpread and instStock[symbol] > 0 and notional > 0:
+            elif spread >= -exitSpread and instStock[symbol][0] > 0 and notional > 0:
                     qInst = 10000 / instPrice
                     qEtf = 10000 / etfPrice
-                    self.order(symbol, -(instStock[symbol]))
+                    self.order(symbol, -(instStock[symbol][0]))
                     self.order(self.__etf, qEtf)
-                    self.inventory(symbol, 0, (etfStock[etf] + qEtf))
+                    self.instInventory(symbol, 0, 0)
+                    self.etfInventory(etfStock[etf] + qEtf)
                     inst_to_enter = [str(bars[symbol].getDateTime()), symbol, round(spread, 4), 'Sell', str(round(qInst, 2))]
                     etf_to_enter = [str(bars[etf].getDateTime()), etf, round(spread, 4), 'Buy', str(round(qEtf, 2))]
                     writer.writerow(inst_to_enter)
                     writer.writerow(etf_to_enter)
             else:
                 pass
+            #print instStock["MON"][2]
  
 def build_feed(instFeed, fromYear, toYear):
     feed = yahoofeed.Feed()
@@ -99,7 +126,28 @@ def main(plot):
     myStrategy = MyStrategy(feed, etf)
 
     if plot:
-        plt = plotter.StrategyPlotter(myStrategy, True, True, True)
+        symbol = "MON"
+        enterSpreadDS = [-enterSpread]
+        exitSpreadDS = [-exitSpread]
+        instPriceDS = dataseries.SequenceDataSeries(instPrices[symbol])
+        naInstPriceDS = dataseries.SequenceDataSeries(naInstPrices[symbol])
+        naEtfPriceDS = dataseries.SequenceDataSeries(naEtfPrices)
+        etfPriceDS = dataseries.SequenceDataSeries(etfPrices)
+        spreadDS = dataseries.SequenceDataSeries(instSpread[symbol])
+        returnDS = dataseries.SequenceDataSeries(marketValue[symbol])
+        plt = plotter.StrategyPlotter(myStrategy, False, False, False)
+        #plt.getInstrumentSubplot(symbol)  
+        #plt.getOrCreateSubplot("priceChart").addDataSeries(symbol, instPriceDS)
+        #plt.getOrCreateSubplot("priceChart").addDataSeries(etf, etfPriceDS)
+        plt.getOrCreateSubplot("naPriceChart").addDataSeries(symbol, naInstPriceDS)
+        plt.getOrCreateSubplot("naPriceChart").addDataSeries(etf, naEtfPriceDS)
+        plt.getOrCreateSubplot("naPriceChart").addDataSeries("Spread", spreadDS)
+        plt.getOrCreateSubplot("naPriceChart").addDataSeries("Enter", enterSpreadDS)
+        plt.getOrCreateSubplot("naPriceChart").addDataSeries("Exit", exitSpreadDS)
+        plt.getOrCreateSubplot("instReturn").addDataSeries("Return", returnDS)
+    
+            
+        
     
     # Attach returns and sharpe ratio analyzers.
     retAnalyzer = returns.Returns()
