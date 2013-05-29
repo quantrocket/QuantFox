@@ -117,25 +117,25 @@ class MyStrategy(strategy.Strategy):
                 marketValue[symbol].append(instStock[symbol][2])
             # Define trade rules
             if spread <= lower and lower != 0 and instStock[symbol][0] == 0 and notional < 1000000:
-                    qInst = 10000 / instPrice
-                    qEtf = 10000 / etfPrice
+                    qInst = round((10000 / instPrice), 2)
+                    qEtf = round((10000 / etfPrice), 2)
                     self.order(symbol, qInst)
                     self.order(self.__etf, -qEtf)
                     self.instInventory(symbol, qInst, spread)
                     self.etfInventory(symbol, -qEtf)
-                    inst_to_enter = [str(bars[symbol].getDateTime()), symbol, round(spread, 4), 'Buy', str(round(qInst))]
-                    etf_to_enter = [str(bars[etf].getDateTime()), etf, round(spread, 4), 'Sell', str(round(qEtf))]
+                    inst_to_enter = [str(bars[symbol].getDateTime()), symbol, round(spread, 4), 'Buy', str(qInst)]
+                    etf_to_enter = [str(bars[etf].getDateTime()), etf, round(spread, 4), 'Sell', str(qEtf)]
                     writer.writerow(inst_to_enter)
                     writer.writerow(etf_to_enter)
             elif spread >= upper and upper != 0 and instStock[symbol][0] > 0 and notional > 0:
-                    qInst = 10000 / instPrice
-                    qEtf = 10000 / etfPrice
-                    self.order(symbol, -(instStock[symbol][0]))
-                    self.order(self.__etf, etfStock[symbol])
+                    qInst = instStock[symbol][0]
+                    qEtf = etfStock[symbol]
+                    self.order(symbol, -(qInst))
+                    self.order(self.__etf, qEtf)
                     self.instInventory(symbol, 0, 0)
                     self.etfInventory(symbol, 0)
-                    inst_to_enter = [str(bars[symbol].getDateTime()), symbol, round(spread, 4), 'Sell', str(round(qInst, 2))]
-                    etf_to_enter = [str(bars[etf].getDateTime()), etf, round(spread, 4), 'Buy', str(round(qEtf, 2))]
+                    inst_to_enter = [str(bars[symbol].getDateTime()), symbol, round(spread, 4), 'Sell', str(qInst), str(round((gain / 200), 2))]    #200 to get percentage
+                    etf_to_enter = [str(bars[etf].getDateTime()), etf, round(spread, 4), 'Buy', str(-qEtf)]
                     writer.writerow(inst_to_enter)
                     writer.writerow(etf_to_enter)
             else:
@@ -167,44 +167,46 @@ def main(plot):
     sharpeRatioAnalyzer = sharpe.SharpeRatio()
     
     if plot:
-        symbol = "FCX"
-        #instPriceDS = dataseries.SequenceDataSeries(instPrices[symbol])
-        naInstPriceDS = dataseries.SequenceDataSeries(naInstPrices[symbol])
-        naEtfPriceDS = dataseries.SequenceDataSeries(naEtfPrices)
-        #etfPriceDS = dataseries.SequenceDataSeries(etfPrices)
-        spreadDS = dataseries.SequenceDataSeries(instSpread[symbol])
-        returnDS = dataseries.SequenceDataSeries(marketValue[symbol])
-        middleBandDS = dataseries.SequenceDataSeries(bollingerBands[symbol][1])
-        upperBandDS = dataseries.SequenceDataSeries(bollingerBands[symbol][2])
-        lowerBandDS = dataseries.SequenceDataSeries(bollingerBands[symbol][0])
-        tenMADS = dataseries.SequenceDataSeries(bollingerBands[symbol][3])
-        plt = plotter.StrategyPlotter(myStrategy, False, False, False)
-        #plt.getOrCreateSubplot("priceChart").addDataSeries(symbol, instPriceDS)
-        #plt.getOrCreateSubplot("priceChart").addDataSeries(etf, etfPriceDS)
-        plt.getOrCreateSubplot("naPriceChart").addDataSeries(symbol, naInstPriceDS)
-        plt.getOrCreateSubplot("naPriceChart").addDataSeries(etf, naEtfPriceDS)
-        plt.getOrCreateSubplot("spread").addDataSeries("Spread", spreadDS)
-        plt.getOrCreateSubplot("spread").addDataSeries("Middle", middleBandDS)
-        plt.getOrCreateSubplot("spread").addDataSeries("10 MA", tenMADS)
-        plt.getOrCreateSubplot("spread").addDataSeries("Upper", upperBandDS)
-        plt.getOrCreateSubplot("spread").addDataSeries("Lower", lowerBandDS)
-        #plt.getOrCreateSubplot("naPriceChart").addDataSeries("Enter", enterSpreadDS)
-        #plt.getOrCreateSubplot("naPriceChart").addDataSeries("Exit", exitSpreadDS)
-        plt.getOrCreateSubplot("returns").addDataSeries(symbol + "-Return", returnDS)
-        #plt.getOrCreateSubplot("returns").addDataSeries("Net return", returnsAnalyzer.getReturns())
-        plt.getOrCreateSubplot("returns").addDataSeries("Cum. return", returnsAnalyzer.getCumulativeReturns())
-    
-    myStrategy.attachAnalyzer(sharpeRatioAnalyzer)
-    # Run the strategy
-    myStrategy.run()
-    print "Final portfolio value: $%.2f" % myStrategy.getResult()
-    print "Anual return: %.2f %%" % (returnsAnalyzer.getCumulativeReturns()[-1] * 100)
-    print "Average daily return: %.2f %%" % (stats.mean(returnsAnalyzer.getReturns()) * 100)
-    print "Std. dev. daily return: %.4f" % (stats.stddev(returnsAnalyzer.getReturns()))
-    print "Sharpe ratio: %.2f" % (sharpeRatioAnalyzer.getSharpeRatio(0, 252))
-    
-    if plot:
-        plt.plot()
+        for symbol in instruments:
+            plt = symbol
+            #symbol = "FCX"
+            #instPriceDS = dataseries.SequenceDataSeries(instPrices[symbol])
+            naInstPriceDS = dataseries.SequenceDataSeries(naInstPrices[symbol])
+            naEtfPriceDS = dataseries.SequenceDataSeries(naEtfPrices)
+            #etfPriceDS = dataseries.SequenceDataSeries(etfPrices)
+            spreadDS = dataseries.SequenceDataSeries(instSpread[symbol])
+            returnDS = dataseries.SequenceDataSeries(marketValue[symbol])
+            middleBandDS = dataseries.SequenceDataSeries(bollingerBands[symbol][1])
+            upperBandDS = dataseries.SequenceDataSeries(bollingerBands[symbol][2])
+            lowerBandDS = dataseries.SequenceDataSeries(bollingerBands[symbol][0])
+            tenMADS = dataseries.SequenceDataSeries(bollingerBands[symbol][3])
+            plt = plotter.StrategyPlotter(myStrategy, False, False, False)
+            #plt.getOrCreateSubplot("priceChart").addDataSeries(symbol, instPriceDS)
+            #plt.getOrCreateSubplot("priceChart").addDataSeries(etf, etfPriceDS)
+            plt.getOrCreateSubplot("naPriceChart").addDataSeries(symbol, naInstPriceDS)
+            plt.getOrCreateSubplot("naPriceChart").addDataSeries(etf, naEtfPriceDS)
+            plt.getOrCreateSubplot("spread").addDataSeries("Spread", spreadDS)
+            plt.getOrCreateSubplot("spread").addDataSeries("Middle", middleBandDS)
+            plt.getOrCreateSubplot("spread").addDataSeries("10 MA", tenMADS)
+            plt.getOrCreateSubplot("spread").addDataSeries("Upper", upperBandDS)
+            plt.getOrCreateSubplot("spread").addDataSeries("Lower", lowerBandDS)
+            #plt.getOrCreateSubplot("naPriceChart").addDataSeries("Enter", enterSpreadDS)
+            #plt.getOrCreateSubplot("naPriceChart").addDataSeries("Exit", exitSpreadDS)
+            plt.getOrCreateSubplot("returns").addDataSeries(symbol + "-Return", returnDS)
+            #plt.getOrCreateSubplot("returns").addDataSeries("Net return", returnsAnalyzer.getReturns())
+            plt.getOrCreateSubplot("returns").addDataSeries("Cum. return", returnsAnalyzer.getCumulativeReturns())
+        
+        myStrategy.attachAnalyzer(sharpeRatioAnalyzer)
+        # Run the strategy
+        myStrategy.run()
+        print "Final portfolio value: $%.2f" % myStrategy.getResult()
+        print "Anual return: %.2f %%" % (returnsAnalyzer.getCumulativeReturns()[-1] * 100)
+        print "Average daily return: %.2f %%" % (stats.mean(returnsAnalyzer.getReturns()) * 100)
+        print "Std. dev. daily return: %.4f" % (stats.stddev(returnsAnalyzer.getReturns()))
+        print "Sharpe ratio: %.2f" % (sharpeRatioAnalyzer.getSharpeRatio(0, 252))
+        
+        if plot:
+                plt.plot()
 
 if __name__ == "__main__":
     main(True)
