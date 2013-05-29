@@ -6,6 +6,7 @@ from pyalgotrade.stratanalyzer import returns
 from pyalgotrade.stratanalyzer import sharpe
 from pyalgotrade.utils import stats
 from pyalgotrade import dataseries
+from pyalgotrade.stratanalyzer import returns
 #
 import os
 import csv
@@ -19,13 +20,13 @@ instFeed.append(etf)
 instPrices = {i:[] for i in instruments}
 naInstPrices = {i:[] for i in instruments}
 instSpread = {i:[] for i in instruments}
-instStock = {i:[0, 0, 20000] for i in instruments}  # [Shares, enteredSpread]
+instStock = {i:[0, 0, ((20000 / 20000) - 1)] for i in instruments}  # [Shares, enteredSpread]
 etfStock = {etf:0}
 etfPrices = []
 naEtfPrices = []
 marketValue = {i:[20000] for i in instruments}
 
-enterSpread = 0.03
+enterSpread = 0.05
 exitSpread = 0.03
 
 class MyStrategy(strategy.Strategy):
@@ -73,8 +74,8 @@ class MyStrategy(strategy.Strategy):
             # Update Market Value of Inventory
             if instStock[symbol][0] > 0:
                 gain = self.instValue(symbol, instStock[symbol][1], spread)
-                instStock[symbol][2] = 20000 + gain
-                marketValue[symbol].append(20000 + gain)
+                instStock[symbol][2] = ((20000 + gain) / 20000) - 1
+                marketValue[symbol].append(((20000 + gain) / 20000) - 1)
             else:
                 marketValue[symbol].append(instStock[symbol][2])    
             # Define trade rules
@@ -124,9 +125,14 @@ def main(plot):
     feed = build_feed(instFeed, 2011, 2012)
     # Define Strategy
     myStrategy = MyStrategy(feed, etf)
-
+    
+     # Attach returns and sharpe ratio analyzers.
+    returnsAnalyzer = returns.Returns()
+    myStrategy.attachAnalyzer(returnsAnalyzer)
+    sharpeRatioAnalyzer = sharpe.SharpeRatio()
+    
     if plot:
-        symbol = "MON"
+        symbol = "MOS"
         enterSpreadDS = [-enterSpread]
         exitSpreadDS = [-exitSpread]
         instPriceDS = dataseries.SequenceDataSeries(instPrices[symbol])
@@ -144,26 +150,26 @@ def main(plot):
         plt.getOrCreateSubplot("naPriceChart").addDataSeries("Spread", spreadDS)
         plt.getOrCreateSubplot("naPriceChart").addDataSeries("Enter", enterSpreadDS)
         plt.getOrCreateSubplot("naPriceChart").addDataSeries("Exit", exitSpreadDS)
-        plt.getOrCreateSubplot("instReturn").addDataSeries("Return", returnDS)
+        plt.getOrCreateSubplot("returns").addDataSeries(symbol + "-Return", returnDS)
+        #plt.getOrCreateSubplot("returns").addDataSeries("Net return", returnsAnalyzer.getReturns())
+        plt.getOrCreateSubplot("returns").addDataSeries("Cum. return", returnsAnalyzer.getCumulativeReturns())
     
             
         
-    
-    # Attach returns and sharpe ratio analyzers.
-    retAnalyzer = returns.Returns()
-    myStrategy.attachAnalyzer(retAnalyzer)
-    sharpeRatioAnalyzer = sharpe.SharpeRatio()
+
     myStrategy.attachAnalyzer(sharpeRatioAnalyzer)
     # Run the strategy
     myStrategy.run()
     print "Final portfolio value: $%.2f" % myStrategy.getResult()
-    print "Anual return: %.2f %%" % (retAnalyzer.getCumulativeReturns()[-1] * 100)
-    print "Average daily return: %.2f %%" % (stats.mean(retAnalyzer.getReturns()) * 100)
-    print "Std. dev. daily return: %.4f" % (stats.stddev(retAnalyzer.getReturns()))
+    print "Anual return: %.2f %%" % (returnsAnalyzer.getCumulativeReturns()[-1] * 100)
+    print "Average daily return: %.2f %%" % (stats.mean(returnsAnalyzer.getReturns()) * 100)
+    print "Std. dev. daily return: %.4f" % (stats.stddev(returnsAnalyzer.getReturns()))
     print "Sharpe ratio: %.2f" % (sharpeRatioAnalyzer.getSharpeRatio(0, 252))
     
     if plot:
         plt.plot()
+        
+       # .savefig('MON.pdf', format='pdf')
 
 if __name__ == "__main__":
     main(True)
