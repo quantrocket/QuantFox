@@ -6,6 +6,8 @@ from pyalgotrade.stratanalyzer import returns
 from pyalgotrade.stratanalyzer import sharpe
 from pyalgotrade.utils import stats
 from pyalgotrade import dataseries
+from numpy import mean, std
+
 
 import os
 import csv
@@ -19,11 +21,14 @@ instFeed.append(etf)
 instPrices = {i:[] for i in instruments}
 naInstPrices = {i:[] for i in instruments}
 instSpread = {i:[] for i in instruments}
-instStock = {i:[0, 0, 0] for i in instruments}  # [Shares, EnteredSpread, MarketValue]
+instStock = {i:[0, 0, 0] for i in instruments} # [Shares, EnteredSpread, MarketValue]
 etfStock = {etf:0}
 etfPrices = []
 naEtfPrices = []
 marketValue = {i:[20000] for i in instruments}
+spreadUpper = {i:[] for i in instruments}
+spreadLower = {i:[] for i in instruments}
+spreadMiddle = {i:[] for i in instruments}
 
 enterSpread = 0.05
 exitSpread = 0.03
@@ -50,6 +55,20 @@ class MyStrategy(strategy.Strategy):
         self.__spread = spread
         gain = (spread - enterSpread) * 10000
         return gain
+    
+        
+    def middleBand(self, symbol):
+        self.__symbol = symbol
+        middle = mean(instSpread[symbol][-20:])
+        return middle
+    def upperBand(self, symbol):
+        self.__symbol = symbol
+        upper = self.middleBand(symbol) + (std(instSpread[symbol][-20:]) * 2)
+        return upper
+    def lowerBand(self, symbol):
+        self.__symbol = symbol
+        lower = self.middleBand(symbol) - (std(instSpread[symbol][-20:]) * 2)
+        return lower
 
     def onBars(self, bars):
         writer = csv.writer(open('orders.csv', 'ab'), delimiter = ',')
@@ -70,13 +89,24 @@ class MyStrategy(strategy.Strategy):
             notional = shares * instPrice
             spread = naInstPrice - naEtfPrice
             instSpread[symbol].append(spread)
+            if len(instSpread[symbol]) >= 20:
+                middle = self.middleBand(symbol)
+                upper = self.upperBand(symbol)
+                lower = self.lowerBand(symbol)
+                spreadMiddle[symbol].append(middle)
+                spreadUpper[symbol].append(upper)
+                spreadLower[symbol].append(lower)
+            else:
+                spreadMiddle[symbol].append(0)
+                spreadUpper[symbol].append(0)
+                spreadLower[symbol].append(0)
             # Update Market Value of Inventory
             if instStock[symbol][0] > 0:
                 gain = self.instValue(symbol, instStock[symbol][1], spread)
                 instStock[symbol][2] = ((20000 + gain) / 20000) - 1
                 marketValue[symbol].append(((20000 + gain) / 20000) - 1)
             else:
-                marketValue[symbol].append(instStock[symbol][2])    
+                marketValue[symbol].append(instStock[symbol][2])
             # Define trade rules
             if spread <= -enterSpread and instStock[symbol][0] == 0 and notional < 1000000:
                     qInst = 10000 / instPrice
@@ -138,14 +168,20 @@ def main(plot):
         #etfPriceDS = dataseries.SequenceDataSeries(etfPrices)
         spreadDS = dataseries.SequenceDataSeries(instSpread[symbol])
         returnDS = dataseries.SequenceDataSeries(marketValue[symbol])
+        middleBandDS = dataseries.SequenceDataSeries(spreadMiddle[symbol])
+        upperBandDS = dataseries.SequenceDataSeries(spreadUpper[symbol])
+        lowerBandDS = dataseries.SequenceDataSeries(spreadLower[symbol])
         plt = plotter.StrategyPlotter(myStrategy, False, False, False)
         #plt.getOrCreateSubplot("priceChart").addDataSeries(symbol, instPriceDS)
         #plt.getOrCreateSubplot("priceChart").addDataSeries(etf, etfPriceDS)
         plt.getOrCreateSubplot("naPriceChart").addDataSeries(symbol, naInstPriceDS)
         plt.getOrCreateSubplot("naPriceChart").addDataSeries(etf, naEtfPriceDS)
         plt.getOrCreateSubplot("naPriceChart").addDataSeries("Spread", spreadDS)
-        plt.getOrCreateSubplot("naPriceChart").addDataSeries("Enter", enterSpreadDS)
-        plt.getOrCreateSubplot("naPriceChart").addDataSeries("Exit", exitSpreadDS)
+        plt.getOrCreateSubplot("naPriceChart").addDataSeries("Middle", middleBandDS)
+        plt.getOrCreateSubplot("naPriceChart").addDataSeries("Upper", upperBandDS)
+        plt.getOrCreateSubplot("naPriceChart").addDataSeries("Lower", lowerBandDS)
+        #plt.getOrCreateSubplot("naPriceChart").addDataSeries("Enter", enterSpreadDS)
+        #plt.getOrCreateSubplot("naPriceChart").addDataSeries("Exit", exitSpreadDS)
         plt.getOrCreateSubplot("returns").addDataSeries(symbol + "-Return", returnDS)
         #plt.getOrCreateSubplot("returns").addDataSeries("Net return", returnsAnalyzer.getReturns())
         plt.getOrCreateSubplot("returns").addDataSeries("Cum. return", returnsAnalyzer.getCumulativeReturns())
