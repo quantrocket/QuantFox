@@ -26,7 +26,6 @@ naEtfPrices = []
 bollingerBands = {i:[[],[],[], []] for i in instruments}
 marketValue = {i:[20000] for i in instruments}
 
-
 enterSpread = 0.05
 exitSpread = 0.03
 
