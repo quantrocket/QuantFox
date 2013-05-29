@@ -97,6 +97,9 @@ class MyStrategy(strategy.Strategy):
                 spreadUpper[symbol].append(upper)
                 spreadLower[symbol].append(lower)
             else:
+                middle = 0
+                upper = 0
+                lower = 0
                 spreadMiddle[symbol].append(0)
                 spreadUpper[symbol].append(0)
                 spreadLower[symbol].append(0)
@@ -108,7 +111,8 @@ class MyStrategy(strategy.Strategy):
             else:
                 marketValue[symbol].append(instStock[symbol][2])
             # Define trade rules
-            if spread <= -enterSpread and instStock[symbol][0] == 0 and notional < 1000000:
+            #if spread <= -enterSpread and instStock[symbol][0] == 0 and notional < 1000000:
+            if spread <= lower and lower != 0 and instStock[symbol][0] == 0 and notional < 1000000:
                     qInst = 10000 / instPrice
                     qEtf = 10000 / etfPrice
                     self.order(symbol, qInst)
@@ -119,7 +123,8 @@ class MyStrategy(strategy.Strategy):
                     etf_to_enter = [str(bars[etf].getDateTime()), etf, round(spread, 4), 'Sell', str(round(qEtf))]
                     writer.writerow(inst_to_enter)
                     writer.writerow(etf_to_enter)
-            elif spread >= -exitSpread and instStock[symbol][0] > 0 and notional > 0:
+            #elif spread >= -exitSpread and instStock[symbol][0] > 0 and notional > 0:
+            elif spread >= upper and upper != 0 and instStock[symbol][0] > 0 and notional > 0:
                     qInst = 10000 / instPrice
                     qEtf = 10000 / etfPrice
                     self.order(symbol, -(instStock[symbol][0]))
@@ -159,7 +164,7 @@ def main(plot):
     sharpeRatioAnalyzer = sharpe.SharpeRatio()
     
     if plot:
-        symbol = "MOS"
+        symbol = "FCX"
         enterSpreadDS = [-enterSpread]
         exitSpreadDS = [-exitSpread]
         #instPriceDS = dataseries.SequenceDataSeries(instPrices[symbol])
