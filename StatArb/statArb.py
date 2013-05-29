@@ -20,7 +20,7 @@ instPrices = {i:[] for i in instruments}
 naInstPrices = {i:[] for i in instruments}
 instSpread = {i:[] for i in instruments}
 instStock = {i:[0, 0, 0] for i in instruments} # [Shares, EnteredSpread, MarketValue]
-etfStock = {etf:0}
+etfStock = {i:[0] for i in instruments}
 etfPrices = []
 naEtfPrices = []
 bollingerBands = {i:[[],[],[], []] for i in instruments}
@@ -41,9 +41,10 @@ class MyStrategy(strategy.Strategy):
         instStock[symbol][0] = qInst
         instStock[symbol][1] = enterSpread
 
-    def etfInventory(self, qEtf):
+    def etfInventory(self, symbol, qEtf):
+        self.__symbol = symbol
         self.__qEtf = qEtf
-        etfStock[etf] = qEtf
+        etfStock[symbol] = qEtf
         
     def instValue(self, symbol, enterSpread, spread):
         self.__symbol = symbol
@@ -121,7 +122,7 @@ class MyStrategy(strategy.Strategy):
                     self.order(symbol, qInst)
                     self.order(self.__etf, -qEtf)
                     self.instInventory(symbol, qInst, spread)
-                    self.etfInventory(etfStock[etf] - qEtf)
+                    self.etfInventory(symbol, -qEtf)
                     inst_to_enter = [str(bars[symbol].getDateTime()), symbol, round(spread, 4), 'Buy', str(round(qInst))]
                     etf_to_enter = [str(bars[etf].getDateTime()), etf, round(spread, 4), 'Sell', str(round(qEtf))]
                     writer.writerow(inst_to_enter)
@@ -130,9 +131,9 @@ class MyStrategy(strategy.Strategy):
                     qInst = 10000 / instPrice
                     qEtf = 10000 / etfPrice
                     self.order(symbol, -(instStock[symbol][0]))
-                    self.order(self.__etf, qEtf)
+                    self.order(self.__etf, etfStock[symbol])
                     self.instInventory(symbol, 0, 0)
-                    self.etfInventory(etfStock[etf] + qEtf)
+                    self.etfInventory(symbol, 0)
                     inst_to_enter = [str(bars[symbol].getDateTime()), symbol, round(spread, 4), 'Sell', str(round(qInst, 2))]
                     etf_to_enter = [str(bars[etf].getDateTime()), etf, round(spread, 4), 'Buy', str(round(qEtf, 2))]
                     writer.writerow(inst_to_enter)
