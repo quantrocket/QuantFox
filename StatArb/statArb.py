@@ -6,8 +6,7 @@ from pyalgotrade.stratanalyzer import returns
 from pyalgotrade.stratanalyzer import sharpe
 from pyalgotrade.utils import stats
 from pyalgotrade import dataseries
-from pyalgotrade.stratanalyzer import returns
-#
+
 import os
 import csv
 
@@ -20,7 +19,7 @@ instFeed.append(etf)
 instPrices = {i:[] for i in instruments}
 naInstPrices = {i:[] for i in instruments}
 instSpread = {i:[] for i in instruments}
-instStock = {i:[0, 0, ((20000 / 20000) - 1)] for i in instruments}  # [Shares, enteredSpread]
+instStock = {i:[0, 0, 0] for i in instruments}  # [Shares, EnteredSpread, MarketValue]
 etfStock = {etf:0}
 etfPrices = []
 naEtfPrices = []
@@ -103,7 +102,6 @@ class MyStrategy(strategy.Strategy):
                     writer.writerow(etf_to_enter)
             else:
                 pass
-            #print instStock["MON"][2]
  
 def build_feed(instFeed, fromYear, toYear):
     feed = yahoofeed.Feed()
@@ -125,8 +123,7 @@ def main(plot):
     feed = build_feed(instFeed, 2011, 2012)
     # Define Strategy
     myStrategy = MyStrategy(feed, etf)
-    
-     # Attach returns and sharpe ratio analyzers.
+    # Attach returns and sharpe ratio analyzers.
     returnsAnalyzer = returns.Returns()
     myStrategy.attachAnalyzer(returnsAnalyzer)
     sharpeRatioAnalyzer = sharpe.SharpeRatio()
@@ -135,14 +132,13 @@ def main(plot):
         symbol = "MOS"
         enterSpreadDS = [-enterSpread]
         exitSpreadDS = [-exitSpread]
-        instPriceDS = dataseries.SequenceDataSeries(instPrices[symbol])
+        #instPriceDS = dataseries.SequenceDataSeries(instPrices[symbol])
         naInstPriceDS = dataseries.SequenceDataSeries(naInstPrices[symbol])
         naEtfPriceDS = dataseries.SequenceDataSeries(naEtfPrices)
-        etfPriceDS = dataseries.SequenceDataSeries(etfPrices)
+        #etfPriceDS = dataseries.SequenceDataSeries(etfPrices)
         spreadDS = dataseries.SequenceDataSeries(instSpread[symbol])
         returnDS = dataseries.SequenceDataSeries(marketValue[symbol])
         plt = plotter.StrategyPlotter(myStrategy, False, False, False)
-        #plt.getInstrumentSubplot(symbol)  
         #plt.getOrCreateSubplot("priceChart").addDataSeries(symbol, instPriceDS)
         #plt.getOrCreateSubplot("priceChart").addDataSeries(etf, etfPriceDS)
         plt.getOrCreateSubplot("naPriceChart").addDataSeries(symbol, naInstPriceDS)
@@ -154,9 +150,6 @@ def main(plot):
         #plt.getOrCreateSubplot("returns").addDataSeries("Net return", returnsAnalyzer.getReturns())
         plt.getOrCreateSubplot("returns").addDataSeries("Cum. return", returnsAnalyzer.getCumulativeReturns())
     
-            
-        
-
     myStrategy.attachAnalyzer(sharpeRatioAnalyzer)
     # Run the strategy
     myStrategy.run()
@@ -168,8 +161,6 @@ def main(plot):
     
     if plot:
         plt.plot()
-        
-       # .savefig('MON.pdf', format='pdf')
 
 if __name__ == "__main__":
     main(True)
