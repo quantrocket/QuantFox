@@ -11,7 +11,7 @@ import os
 import csv
 
 etf = 'XLB'
-instrument_list = 'instruments.csv'
+instrument_list = 'ConsumerDiscretionary.csv'
 instReader = csv.reader(open(instrument_list, "rb"), delimiter = ",")
 instruments = [symbol for line in instReader for symbol in line]
 instFeed = [symbol for symbol in instruments]
@@ -25,9 +25,13 @@ etfPrices = []
 naEtfPrices = []
 bollingerBands = {i:[[],[],[], []] for i in instruments}
 marketValue = {i:[20000] for i in instruments}
+gain = {i:[0] for i in instruments}
 
 enterSpread = 0.05
 exitSpread = 0.03
+
+stopLoss = False
+stop = -.10
 
 class MyStrategy(strategy.Strategy):
     def __init__(self, feed, etf):
@@ -89,7 +93,7 @@ class MyStrategy(strategy.Strategy):
             notional = shares * instPrice
             spread = naInstPrice - naEtfPrice
             instSpread[symbol].append(spread)
-            if len(instSpread[symbol]) >= 20:
+            if len(instSpread[symbol]) >= 30:
                 middle = self.middleBand(symbol)
                 upper = self.upperBand(symbol)
                 lower = self.lowerBand(symbol)
@@ -111,14 +115,13 @@ class MyStrategy(strategy.Strategy):
             # Update Market Value of Inventory
             if instStock[symbol][0] > 0:
                 gain = self.instValue(symbol, instStock[symbol][1], spread)
-                instStock[symbol][2] += gain
+                instStock[symbol][2] = gain
                 marketValue[symbol].append(instStock[symbol][2])
             else:
-                gain = 0
-                instStock[symbol][2] += gain
+                #gain = 0
                 marketValue[symbol].append(instStock[symbol][2])
             # Define trade rules
-            if spread <= lower and lower != 0 and notional < 1000000:
+            if spread <= lower and lower != 0 and instStock[symbol][0] == 0 and notional < 1000000:
                     qInst = round((10000 / instPrice), 2)
                     qEtf = round((10000 / etfPrice), 2)
                     self.order(symbol, qInst)
@@ -129,7 +132,7 @@ class MyStrategy(strategy.Strategy):
                     etf_to_enter = [str(bars[etf].getDateTime()), etf, round(spread, 4), 'Sell', str(qEtf)]
                     writer.writerow(inst_to_enter)
                     writer.writerow(etf_to_enter)
-            elif spread >= upper and upper != 0 and instStock[symbol][0] > 0 and notional > 0:
+            elif ((spread >= upper and upper != 0) or (stopLoss == True and 1 < 2)) and instStock[symbol][0] > 0 and notional > 0:
                     qInst = instStock[symbol][0]
                     qEtf = etfStock[symbol]
                     self.order(symbol, -(qInst))
@@ -169,7 +172,7 @@ def main(plot):
     sharpeRatioAnalyzer = sharpe.SharpeRatio()
     
     if plot:
-        symbol = "AA"
+        symbol = "DIS"
         #instPriceDS = dataseries.SequenceDataSeries(instPrices[symbol])
         naInstPriceDS = dataseries.SequenceDataSeries(naInstPrices[symbol])
         naEtfPriceDS = dataseries.SequenceDataSeries(naEtfPrices)
@@ -204,6 +207,9 @@ def main(plot):
     print "Average daily return: %.2f %%" % (stats.mean(returnsAnalyzer.getReturns()) * 100)
     print "Std. dev. daily return: %.4f" % (stats.stddev(returnsAnalyzer.getReturns()))
     print "Sharpe ratio: %.2f" % (sharpeRatioAnalyzer.getSharpeRatio(0, 252))
+    
+    for symbol in instruments:
+        print str(symbol)+ ": " + str(round(marketValue[symbol][-1], 4) * 100) + "%"
     
     if plot:
             plt.plot()
