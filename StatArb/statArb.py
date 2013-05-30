@@ -12,6 +12,10 @@ import csv
 
 etf = 'XLB'
 instrument_list = 'ConsumerDiscretionary.csv'
+orders_file = 'orders.csv'
+orders_file = open(orders_file, "w")
+orders_file.truncate()
+orders_file.close()
 instReader = csv.reader(open(instrument_list, "rb"), delimiter = ",")
 instruments = [symbol for line in instReader for symbol in line]
 instFeed = [symbol for symbol in instruments]
@@ -73,7 +77,8 @@ class MyStrategy(strategy.Strategy):
         self.__symbol = symbol
         tenMA = mean(instSpread[symbol][-10:])
         return tenMA
-
+    
+    
     def onBars(self, bars):
         writer = csv.writer(open('orders.csv', 'ab'), delimiter = ',')
         for symbol in instruments:
