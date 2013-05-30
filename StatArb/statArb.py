@@ -1,5 +1,4 @@
-from pyalgotrade.stratanalyzer import returns
-from pyalgotrade.stratanalyzer import sharpe
+from pyalgotrade.stratanalyzer import returns, trades, drawdown, sharpe
 from pyalgotrade.tools import yahoofinance
 from pyalgotrade.barfeed import yahoofeed
 from pyalgotrade.utils import stats
@@ -175,6 +174,10 @@ def main(plot):
     returnsAnalyzer = returns.Returns()
     myStrategy.attachAnalyzer(returnsAnalyzer)
     sharpeRatioAnalyzer = sharpe.SharpeRatio()
+    tradesAnalyzer = trades.Trades()
+    myStrategy.attachAnalyzer(tradesAnalyzer)
+    drawDownAnalyzer = drawdown.DrawDown()
+    myStrategy.attachAnalyzer(drawDownAnalyzer)
     
     if plot:
         symbol = "DIS"
@@ -207,12 +210,52 @@ def main(plot):
     myStrategy.attachAnalyzer(sharpeRatioAnalyzer)
     # Run the strategy
     myStrategy.run()
+    
     print "Final portfolio value: $%.2f" % myStrategy.getResult()
     print "Anual return: %.2f %%" % (returnsAnalyzer.getCumulativeReturns()[-1] * 100)
     print "Average daily return: %.2f %%" % (stats.mean(returnsAnalyzer.getReturns()) * 100)
     print "Std. dev. daily return: %.4f" % (stats.stddev(returnsAnalyzer.getReturns()))
     print "Sharpe ratio: %.2f" % (sharpeRatioAnalyzer.getSharpeRatio(0, 252))
-    
+    print
+    print "Total trades: %d" % (tradesAnalyzer.getCount())
+    if tradesAnalyzer.getCount() > 0:
+        profits = tradesAnalyzer.getAll()
+        print "Avg. profit: $%2.f" % (profits.mean())
+        print "Profits std. dev.: $%2.f" % (profits.std())
+        print "Max. profit: $%2.f" % (profits.max())
+        print "Min. profit: $%2.f" % (profits.min())
+        returnz = tradesAnalyzer.getAllReturns()
+        print "Avg. return: %2.f %%" % (returnz.mean() * 100)
+        print "Returns std. dev.: %2.f %%" % (returnz.std() * 100)
+        print "Max. return: %2.f %%" % (returnz.max() * 100)
+        print "Min. return: %2.f %%" % (returnz.min() * 100)
+    print
+    print "Profitable trades: %d" % (tradesAnalyzer.getProfitableCount())
+    if tradesAnalyzer.getProfitableCount() > 0:
+        profits = tradesAnalyzer.getProfits()
+        print "Avg. profit: $%2.f" % (profits.mean())
+        print "Profits std. dev.: $%2.f" % (profits.std())
+        print "Max. profit: $%2.f" % (profits.max())
+        print "Min. profit: $%2.f" % (profits.min())
+        returnz = tradesAnalyzer.getPositiveReturns()
+        print "Avg. return: %2.f %%" % (returnz.mean() * 100)
+        print "Returns std. dev.: %2.f %%" % (returnz.std() * 100)
+        print "Max. return: %2.f %%" % (returnz.max() * 100)
+        print "Min. return: %2.f %%" % (returnz.min() * 100)
+    print
+    print "Unprofitable trades: %d" % (tradesAnalyzer.getUnprofitableCount())
+    if tradesAnalyzer.getUnprofitableCount() > 0:
+        losses = tradesAnalyzer.getLosses()
+        print "Avg. loss: $%2.f" % (losses.mean())
+        print "Losses std. dev.: $%2.f" % (losses.std())
+        print "Max. loss: $%2.f" % (losses.min())
+        print "Min. loss: $%2.f" % (losses.max())
+        returnz = tradesAnalyzer.getNegativeReturns()
+        print "Avg. return: %2.f %%" % (returnz.mean() * 100)
+        print "Returns std. dev.: %2.f %%" % (returnz.std() * 100)
+        print "Max. return: %2.f %%" % (returnz.max() * 100)
+        print "Min. return: %2.f %%" % (returnz.min() * 100)
+    print    
     for symbol in instruments:
         print str(symbol)+ ": " + str(round(marketValue[symbol][-1], 4) * 100) + "%"
     
