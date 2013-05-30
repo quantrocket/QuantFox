@@ -118,7 +118,7 @@ class MyStrategy(strategy.Strategy):
                 instStock[symbol][2] += gain
                 marketValue[symbol].append(instStock[symbol][2])
             # Define trade rules
-            if spread <= lower and lower != 0 and instStock[symbol][0] == 0 and notional < 1000000:
+            if spread <= lower and lower != 0 and notional < 1000000:
                     qInst = round((10000 / instPrice), 2)
                     qEtf = round((10000 / etfPrice), 2)
                     self.order(symbol, qInst)
