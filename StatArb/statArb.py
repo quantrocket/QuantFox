@@ -132,8 +132,8 @@ class MyStrategy(strategy.Strategy):
                     self.order(self.__etf, -qEtf)
                     self.instInventory(symbol, qInst, spread)
                     self.etfInventory(symbol, -qEtf)
-                    inst_to_enter = [str(bars[symbol].getDateTime()), symbol, round(spread, 4), 'Buy', str(qInst)]
-                    etf_to_enter = [str(bars[etf].getDateTime()), etf, round(spread, 4), 'Sell', str(qEtf)]
+                    inst_to_enter = [str(bars[symbol].getDateTime().year), str(bars[symbol].getDateTime().month), str(bars[symbol].getDateTime().day), symbol, round(spread, 4), 'Buy', str(qInst)]
+                    etf_to_enter = [str(bars[symbol].getDateTime().year), str(bars[symbol].getDateTime().month), str(bars[symbol].getDateTime().day), etf, round(spread, 4), 'Sell', str(qEtf)]
                     writer.writerow(inst_to_enter)
                     writer.writerow(etf_to_enter)
             elif ((spread >= upper and upper != 0) or (stopLoss == True and 1 < 2)) and instStock[symbol][0] > 0 and notional > 0:
@@ -143,8 +143,8 @@ class MyStrategy(strategy.Strategy):
                     self.order(self.__etf, qEtf)
                     self.instInventory(symbol, 0, 0)
                     self.etfInventory(symbol, 0)
-                    inst_to_enter = [str(bars[symbol].getDateTime()), symbol, round(spread, 4), 'Sell', str(qInst), str(round(gain, 2))]
-                    etf_to_enter = [str(bars[etf].getDateTime()), etf, round(spread, 4), 'Buy', str(-qEtf)]
+                    inst_to_enter = [str(bars[symbol].getDateTime().year), str(bars[symbol].getDateTime().month), str(bars[symbol].getDateTime().day), symbol, round(spread, 4), 'Sell', str(qInst), str(round(gain, 2))]
+                    etf_to_enter = [str(bars[symbol].getDateTime().year), str(bars[symbol].getDateTime().month), str(bars[symbol].getDateTime().day), etf, round(spread, 4), 'Buy', str(-qEtf)]
                     writer.writerow(inst_to_enter)
                     writer.writerow(etf_to_enter)
             else:
