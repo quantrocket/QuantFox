@@ -32,6 +32,7 @@ gain = {i:[0] for i in instruments}
 
 enterSpread = 0.05
 exitSpread = 0.03
+bbandPeriod = 50
 
 stopLoss = False
 stop = -.10
@@ -64,20 +65,26 @@ class MyStrategy(strategy.Strategy):
         self.__symbol = symbol
         self.__enterSpread = enterSpread
         self.__spread = spread
-        gain = (spread - enterSpread) * 0.5
+        
+        if instStock[symbol][0] > 0:
+            gain = (spread - enterSpread) * 0.5
+        elif instStock[symbol][0] < 0:
+            gain = (enterSpread - spread) * 0.5
+        else:
+            gain = instStock[symbol][2]
         return gain
          
     def middleBand(self, symbol):
         self.__symbol = symbol
-        middle = mean(instSpread[symbol][-20:])
+        middle = mean(instSpread[symbol][-bbandPeriod:])
         return middle
     def upperBand(self, symbol):
         self.__symbol = symbol
-        upper = self.middleBand(symbol) + (std(instSpread[symbol][-20:]) * 2)
+        upper = self.middleBand(symbol) + (std(instSpread[symbol][-bbandPeriod:]) * 2)
         return upper
     def lowerBand(self, symbol):
         self.__symbol = symbol
-        lower = self.middleBand(symbol) - (std(instSpread[symbol][-20:]) * 2)
+        lower = self.middleBand(symbol) - (std(instSpread[symbol][-bbandPeriod:]) * 2)
         return lower
     def tenMA(self, symbol):
         self.__symbol = symbol
@@ -85,7 +92,7 @@ class MyStrategy(strategy.Strategy):
         return tenMA  
     def bollingerBands(self, symbol):
         self.__symbol = symbol
-        if len(instSpread[symbol]) >= 30:
+        if len(instSpread[symbol]) >= bbandPeriod:
             middle = self.middleBand(symbol)
             upper = self.upperBand(symbol)
             lower = self.lowerBand(symbol)
@@ -109,6 +116,8 @@ class MyStrategy(strategy.Strategy):
     
     def onBars(self, bars):
         for symbol in instruments:
+            instShares = self.getBroker().getShares(symbol)
+            etfShares = self.getBroker().getShares(etf)
             # Define shares | get prices
             shares = self.getBroker().getShares(symbol)
             instPrice = bars[symbol].getAdjClose()
@@ -129,38 +138,41 @@ class MyStrategy(strategy.Strategy):
             lower = self.lowerBand(symbol)
             self.bollingerBands(symbol)                  
             # Update Market Value of Inventory
-            if instStock[symbol][0] > 0:
-                gain = self.instValue(symbol, instStock[symbol][1], spread)
-                instStock[symbol][2] = gain
-                marketValue[symbol].append(instStock[symbol][2])
-            else:
-                #gain = 0
-                marketValue[symbol].append(instStock[symbol][2])
+            gain = self.instValue(symbol, instStock[symbol][1], spread)
+            instStock[symbol][2] = gain
+            marketValue[symbol].append(gain)
+ 
             # Define trade rules
-            if spread <= lower and lower and instStock[symbol][0] == 0 and notional < 1000000:
+            if spread <= lower and bollingerBands[symbol][0] != 0 and instShares == 0 and notional < 1000000:
                     qInst = round((10000 / instPrice), 2)
                     qEtf = round((10000 / etfPrice), 2)
                     instType = "BUY"
                     etfType = "SELL"
                     gainLog = "N/A"
-                    self.order(symbol, qInst)
-                    self.order(self.__etf, -qEtf)
-                    self.instInventory(symbol, qInst, spread)
-                    self.etfInventory(symbol, -qEtf)
+                    self.enterLong(symbol, qInst, True)
+                    self.enterShort(self.__etf, qEtf, True)
                     self.orderWriter(bars[symbol].getDateTime().year, bars[symbol].getDateTime().month, bars[symbol].getDateTime().day, symbol, etf, spread, instType, etfType, qInst, qEtf, gainLog)
-            elif ((spread >= upper and upper != 0) or (stopLoss == True and 1 < 2)) and instStock[symbol][0] > 0 and notional > 0:
-                    qInst = instStock[symbol][0]
-                    qEtf = etfStock[symbol]
-                    instType = "SELL"
-                    etfType = "Buy"
-                    gainLog = gain
-                    self.order(symbol, -2 * qInst)
-                    self.order(self.__etf, 2 * qEtf)
-                    self.instInventory(symbol, 0, 0)
-                    self.etfInventory(symbol, 0)
-                    self.orderWriter(bars[symbol].getDateTime().year, bars[symbol].getDateTime().month, bars[symbol].getDateTime().day, symbol, etf, spread, instType, etfType, qInst, (-qEtf), (round(gainLog, 4) * 100))
-            else:
-                pass
+            elif spread >= upper and bollingerBands[symbol][2] != 0 and instShares > 0 and notional > 0:                   
+                    if instShares > 0:
+                        qInst = round((10000 / instPrice), 2) + instShares
+                        qEtf = round((10000 / etfPrice), 2) + abs(etfShares)
+                        instType = "SELL"
+                        etfType = "Buy"
+                        gainLog = gain
+                        self.enterShort(symbol, qInst, True)
+                        self.enterLong(self.__etf, qEtf, True)
+                        self.orderWriter(bars[symbol].getDateTime().year, bars[symbol].getDateTime().month, bars[symbol].getDateTime().day, symbol, etf, spread, instType, etfType, qInst, qEtf, (round(gainLog, 4) * 100))   
+                    elif instShares == 0:
+                        qInst = round((10000 / instPrice), 2)
+                        qEtf = round((10000 / etfPrice), 2)
+                        instType = "SELL"
+                        etfType = "Buy"
+                        gainLog = "N/A"
+                        self.enterShort(symbol, qInst, True)
+                        self.enterLong(self.__etf, qEtf, True)
+                        self.orderWriter(bars[symbol].getDateTime().year, bars[symbol].getDateTime().month, bars[symbol].getDateTime().day, symbol, etf, spread, instType, etfType, qInst, qEtf, (round(gainLog, 4) * 100))  
+                    else:
+                        pass
             
 def build_feed(instFeed, fromYear, toYear):
     feed = yahoofeed.Feed()
