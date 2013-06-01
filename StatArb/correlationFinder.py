@@ -3,13 +3,13 @@ from pyalgotrade.barfeed import yahoofeed
 from pyalgotrade import strategy
 from numpy import corrcoef
 
-
 import os
 import csv
 
+
 etf = 'XLB'
-start = 2010
-end = 2011
+start = 2009
+end = 2010
 instrument_list = 'ConsumerDiscretionary.csv'
 instReader = csv.reader(open(instrument_list, "rb"), delimiter = ",")
 instruments = [symbol for line in instReader for symbol in line]
@@ -48,20 +48,20 @@ def build_feed(instFeed, fromYear, toYear):
             feed.addBarsFromCSV(symbol, fileName)
     return feed
 
-feed = build_feed(instFeed, start, end)
-myStrategy = MyStrategy(feed, etf)
-myStrategy.run()
-
 def correlationFinder(symbol):
     corr = corrcoef(instPrices[symbol], etfPrices)[1,0]
     return corr
     
-for symbol in instruments:
-    corr = correlationFinder(symbol)
-    
-    if  corr >= .7:
-        highCorrs.append(symbol)
-        print symbol + ": " + str(corr)
+def run(start, end):
+    feed = build_feed(instFeed, start, end)
+    myStrategy = MyStrategy(feed, etf)
+    myStrategy.run()
+    for symbol in instruments:
+        corr = correlationFinder(symbol)
+        if  corr >= .7:
+            highCorrs.append(symbol)
+            #print symbol + ": " + str(corr)
 
-#print highCorrs
+run(2009, 2010)
+print highCorrs
     

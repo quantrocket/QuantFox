@@ -10,6 +10,10 @@ from numpy import mean, std
 import os
 import csv
 
+startYear = 2011
+endYear = 2012
+lookBack = 2
+
 etf = 'XLB'
 instrument_list = 'ConsumerDiscretionary.csv'
 orders_file = 'orders.csv'
@@ -87,7 +91,7 @@ class MyStrategy(strategy.Strategy):
     def tenMA(self, symbol):
         self.__symbol = symbol
         tenMA = mean(instSpread[symbol][-10:])
-        return tenMA  
+        return tenMA
     def bollingerBands(self, symbol):
         self.__symbol = symbol
         if len(instSpread[symbol]) >= bbandPeriod:
@@ -144,37 +148,39 @@ class MyStrategy(strategy.Strategy):
             marketValue[symbol].append(gain)
  
             # Define trade rules
-            if spread <= lower and len(instSpread[symbol]) >= bbandPeriod and instShares == 0 and notional < 1000000:
-                    qInst = round((10000 / instPrice), 2)
-                    qEtf = round((10000 / etfPrice), 2)
-                    instType = "BUY"
-                    etfType = "SELL"
-                    gainLog = "N/A"
-                    self.enterLong(symbol, qInst, True)
-                    self.enterShort(self.__etf, qEtf, True)
-                    self.orderWriter(bars[symbol].getDateTime().year, bars[symbol].getDateTime().month, bars[symbol].getDateTime().day, symbol, etf, spread, instType, etfType, qInst, qEtf, gainLog)
-            elif spread >= upper and len(instSpread[symbol]) >= bbandPeriod and notional > 0:                   
-                    if instShares > 0:
-                        qInst = round((10000 / instPrice), 2) + instShares
-                        qEtf = round((10000 / etfPrice), 2) + abs(etfShares)
-                        instType = "SELL"
-                        etfType = "Buy"
-                        gainLog = gain
-                        self.enterShort(symbol, qInst, True)
-                        self.enterLong(self.__etf, qEtf, True)
-                        self.orderWriter(bars[symbol].getDateTime().year, bars[symbol].getDateTime().month, bars[symbol].getDateTime().day, symbol, etf, spread, instType, etfType, qInst, qEtf, (round(gainLog, 4) * 100))   
-                    elif instShares == 0:
+            if bars[symbol].getDateTime().year >= startYear:
+                if spread <= lower and len(instSpread[symbol]) >= bbandPeriod and instShares == 0 and notional < 1000000:
                         qInst = round((10000 / instPrice), 2)
                         qEtf = round((10000 / etfPrice), 2)
-                        instType = "SELL"
-                        etfType = "Buy"
+                        instType = "BUY"
+                        etfType = "SELL"
                         gainLog = "N/A"
-                        self.enterShort(symbol, qInst, True)
-                        self.enterLong(self.__etf, qEtf, True)
-                        self.orderWriter(bars[symbol].getDateTime().year, bars[symbol].getDateTime().month, bars[symbol].getDateTime().day, symbol, etf, spread, instType, etfType, qInst, qEtf, (round(gainLog, 4) * 100))  
-                    else:
-                        pass
-            
+                        self.enterLong(symbol, qInst, True)
+                        self.enterShort(self.__etf, qEtf, True)
+                        self.orderWriter(bars[symbol].getDateTime().year, bars[symbol].getDateTime().month, bars[symbol].getDateTime().day, symbol, etf, spread, instType, etfType, qInst, qEtf, gainLog)
+                elif spread >= upper and len(instSpread[symbol]) >= bbandPeriod and notional > 0:
+                        if instShares > 0:
+                            qInst = round((10000 / instPrice), 2) + instShares
+                            qEtf = round((10000 / etfPrice), 2) + abs(etfShares)
+                            instType = "SELL"
+                            etfType = "Buy"
+                            gainLog = gain
+                            self.enterShort(symbol, qInst, True)
+                            self.enterLong(self.__etf, qEtf, True)
+                            self.orderWriter(bars[symbol].getDateTime().year, bars[symbol].getDateTime().month, bars[symbol].getDateTime().day, symbol, etf, spread, instType, etfType, qInst, qEtf, (round(gainLog, 4) * 100))
+                        elif instShares == 0:
+                            qInst = round((10000 / instPrice), 2)
+                            qEtf = round((10000 / etfPrice), 2)
+                            instType = "SELL"
+                            etfType = "Buy"
+                            gainLog = "N/A"
+                            self.enterShort(symbol, qInst, True)
+                            self.enterLong(self.__etf, qEtf, True)
+                            self.orderWriter(bars[symbol].getDateTime().year, bars[symbol].getDateTime().month, bars[symbol].getDateTime().day, symbol, etf, spread, instType, etfType, qInst, qEtf, (round(gainLog, 4) * 100))
+                        else:
+                            pass
+            else:
+                pass
 def build_feed(instFeed, fromYear, toYear):
     feed = yahoofeed.Feed()
 
@@ -192,7 +198,7 @@ def build_feed(instFeed, fromYear, toYear):
 
 def main(plot):
     # Download the bars.
-    feed = build_feed(instFeed, 2011, 2012)
+    feed = build_feed(instFeed, startYear, endYear)
     # Define Strategy
     myStrategy = MyStrategy(feed, etf)
     # Attach returns and sharpe ratio analyzers.
@@ -274,7 +280,7 @@ def main(plot):
         print "Returns std. dev.: %2.f %%" % (returnz.std() * 100)
         print "Max. return: %2.f %%" % (returnz.max() * 100)
         print "Min. return: %2.f %%" % (returnz.min() * 100)
-    print    
+    print
     for symbol in instruments:
         print str(symbol)+ ": " + str(round(marketValue[symbol][-1], 4) * 100) + "%"
     
