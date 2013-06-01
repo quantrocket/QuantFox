@@ -31,7 +31,7 @@ bollingerBands = {i:[[],[],[], []] for i in instruments}
 marketValue = {i:[20000] for i in instruments}
 gain = {i:[0] for i in instruments}
 
-bbandPeriod = 200
+bbandPeriod = 30
 
 stopLoss = False
 stop = -.10
