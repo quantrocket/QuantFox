@@ -8,17 +8,16 @@ import os
 import csv
 
 etf = 'XLB'
+start = 2010
+end = 2011
 instrument_list = 'ConsumerDiscretionary.csv'
 instReader = csv.reader(open(instrument_list, "rb"), delimiter = ",")
 instruments = [symbol for line in instReader for symbol in line]
 instFeed = [symbol for symbol in instruments]
 instFeed.append(etf)
-correlation = {i:[0] for i in instruments}
 instPrices = {i:[] for i in instruments}
 etfPrices = []
-dis = []
-symbol = dis
-
+highCorrs = []
 
 
 class MyStrategy(strategy.Strategy):
@@ -49,7 +48,7 @@ def build_feed(instFeed, fromYear, toYear):
             feed.addBarsFromCSV(symbol, fileName)
     return feed
 
-feed = build_feed(instFeed, 2011, 2012)
+feed = build_feed(instFeed, start, end)
 myStrategy = MyStrategy(feed, etf)
 myStrategy.run()
 
@@ -59,6 +58,10 @@ def correlationFinder(symbol):
     
 for symbol in instruments:
     corr = correlationFinder(symbol)
-    if  corr > .69:
+    
+    if  corr >= .7:
+        highCorrs.append(symbol)
         print symbol + ": " + str(corr)
+
+#print highCorrs
     
