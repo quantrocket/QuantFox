@@ -169,8 +169,8 @@ class MyStrategy(strategy.Strategy):
                         etfStock[symbol] = -qEtf
                         self.orderWriter(bars[symbol].getDateTime().year, bars[symbol].getDateTime().month, bars[symbol].getDateTime().day, symbol, etf, spread, instType, etfType, qInst, qEtf, gainLog)
                     elif instShares < 0:
-                        qInst = abs(instShares) #round((10000 / instPrice), 2)
-                        qEtf = etfStock[symbol] #round((10000 / etfPrice), 2)
+                        qInst = abs(instShares) + round((10000 / instPrice), 2)
+                        qEtf = etfStock[symbol]  + round((10000 / etfPrice), 2)
                         instType = "BUY"
                         etfType = "SELL"
                         gainLog = "N/A"
@@ -183,8 +183,8 @@ class MyStrategy(strategy.Strategy):
                 #elif spread >= upper and notional > 0:
                 elif spread >= upper:
                     if instShares > 0:
-                        qInst = instShares #round((10000 / instPrice), 2) + instShares
-                        qEtf = abs(etfStock[symbol]) #round((10000 / etfPrice), 2) + abs(etfShares)
+                        qInst = instShares + round((10000 / instPrice), 2)
+                        qEtf = abs(etfStock[symbol]) + round((10000 / etfPrice), 2)
                         instType = "SELL"
                         etfType = "Buy"
                         gainLog = gain
@@ -239,7 +239,7 @@ def main(plot):
     myStrategy.attachAnalyzer(drawDownAnalyzer)
     
     if plot:
-        symbol = "TIF"
+        symbol = "YUM"
         naInstPriceDS = dataseries.SequenceDataSeries(naInstPrices[symbol])
         naEtfPriceDS = dataseries.SequenceDataSeries(naEtfPrices)
         spreadDS = dataseries.SequenceDataSeries(instSpread[symbol])
