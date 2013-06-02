@@ -20,6 +20,13 @@ etfPrices = []
 highCorrs = []
 
 
+orders_file = 'highCorrFeed.csv'
+orders_file = open(orders_file, "w")
+orders_file.truncate()
+orders_file.close()
+writer = csv.writer(open('highCorrFeed.csv', 'ab'), delimiter = ",")
+
+
 class MyStrategy(strategy.Strategy):
     def __init__(self, feed, etf):
         strategy.Strategy.__init__(self, feed)
@@ -58,8 +65,14 @@ def run(start, end):
     myStrategy.run()
     for symbol in instruments:
         corr = correlationFinder(symbol)
-        if  corr >= .7:
-            highCorrs.append(symbol)
+        if  corr >= .8:
+            highCorrs.append(symbol)     
+            writer.writerow([symbol])
+
+            
+            
+            
+            
             #print symbol + ": " + str(corr)
 
 run(2009, 2010)

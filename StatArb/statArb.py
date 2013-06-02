@@ -9,19 +9,21 @@ from pyalgotrade import plotter
 from numpy import mean, std
 import os
 import csv
+import correlationFinder
 
 startYear = 2011
 endYear = 2012
 lookBack = 2
 
 etf = 'XLB'
-instrument_list = 'ConsumerDiscretionary.csv'
+instruments = correlationFinder.highCorrs
 orders_file = 'orders.csv'
 orders_file = open(orders_file, "w")
 orders_file.truncate()
 orders_file.close()
-instReader = csv.reader(open(instrument_list, "rb"), delimiter = ",")
-instruments = [symbol for line in instReader for symbol in line]
+#instReader = csv.reader(open(instrument_list, "rb"), delimiter = ",")
+#instruments = [symbol for line in instReader for symbol in line]
+print instruments
 instFeed = [symbol for symbol in instruments]
 instFeed.append(etf)
 instPrices = {i:[] for i in instruments}
