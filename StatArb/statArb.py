@@ -5,6 +5,7 @@ from pyalgotrade.utils import stats
 from pyalgotrade import dataseries
 from pyalgotrade import strategy
 from pyalgotrade import plotter
+from datetime import datetime
 
 from numpy import mean, std
 import os
@@ -14,6 +15,7 @@ import correlationFinder
 startYear = 2011
 endYear = 2012
 lookBack = 2
+start = startYear - lookBack
 
 etf = 'XLB'
 instruments = correlationFinder.highCorrs
@@ -200,7 +202,7 @@ def build_feed(instFeed, fromYear, toYear):
 
 def main(plot):
     # Download the bars.
-    feed = build_feed(instFeed, startYear, endYear)
+    feed = build_feed(instFeed, start, endYear)
     # Define Strategy
     myStrategy = MyStrategy(feed, etf)
     # Attach returns and sharpe ratio analyzers.
@@ -287,7 +289,7 @@ def main(plot):
         print str(symbol)+ ": " + str(round(marketValue[symbol][-1], 4) * 100) + "%"
     
     if plot:
-            plt.plot()
+            plt.plot(datetime.strptime('01/01/' + str(startYear), '%m/%d/%Y'))
 
 if __name__ == "__main__":
     main(True)
