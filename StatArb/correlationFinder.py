@@ -6,11 +6,11 @@ from numpy import corrcoef
 import os
 import csv
 
-
-etf = 'XLB'
-start = 2009
-end = 2010
-instrument_list = 'ConsumerDiscretionary.csv'
+import statArbVars as v
+etf = v.etf
+start = v.startYear - v.lookBack
+end = v.endYear - v.lookBack
+instrument_list = v.instrument_list
 instReader = csv.reader(open(instrument_list, "rb"), delimiter = ",")
 instruments = [symbol for line in instReader for symbol in line]
 instFeed = [symbol for symbol in instruments]
@@ -68,13 +68,13 @@ def run(start, end):
         if  corr >= .8:
             highCorrs.append(symbol)     
             writer.writerow([symbol])
+    return highCorrs
 
             
             
             
             
             #print symbol + ": " + str(corr)
-
-run(2009, 2010)
-print highCorrs
+run(start, end)
+#print highCorrs
     
