@@ -37,7 +37,7 @@ bollingerBands = {i:[[],[],[], []] for i in instruments}
 marketValue = {i:[0] for i in instruments}
 gain = {i:[0] for i in instruments}
 
-bbandPeriod = 30
+bbandPeriod = 20
 
 stopLoss = False
 stop = -.10
@@ -65,7 +65,7 @@ class MyStrategy(strategy.Strategy):
         elif self.getBroker().getShares(symbol) < 0:
             gain = (enterSpread - spread) * 0.5
         else:
-            gain = instStock[symbol][2]
+            gain = 0
         return gain
          
     def middleBand(self, symbol):
@@ -78,22 +78,26 @@ class MyStrategy(strategy.Strategy):
     def upperBand(self, symbol):
         self.__symbol = symbol
         if len(instSpread[symbol]) >= bbandPeriod:
-            upper = self.middleBand(symbol) + (std(instSpread[symbol][-bbandPeriod:]) * 1.5)
+            upper = self.middleBand(symbol) + (std(instSpread[symbol][-bbandPeriod:]) * 2)
         else:
             upper = 0
         return upper
     def lowerBand(self, symbol):
         self.__symbol = symbol
         if len(instSpread[symbol]) >= bbandPeriod:
-            lower = self.middleBand(symbol) - (std(instSpread[symbol][-bbandPeriod:]) * 1.5)
+            lower = self.middleBand(symbol) - (std(instSpread[symbol][-bbandPeriod:]) * 2)
         else:
             lower = 0
         return lower
 
     def tenMA(self, symbol):
         self.__symbol = symbol
-        tenMA = mean(instSpread[symbol][-10:])
+        if len(instSpread[symbol]) >= 10:
+            tenMA = mean(instSpread[symbol][-10:])
+        else:
+            tenMA = 0
         return tenMA
+        
     def bollingerBands(self, symbol):
         self.__symbol = symbol
         if len(instSpread[symbol]) >= bbandPeriod:
@@ -136,30 +140,24 @@ class MyStrategy(strategy.Strategy):
             naEtfPrices.append(naEtfPrice)
             # Define notational, spread
             notional = (instShares * instPrice) * 2
-            
             spread = naInstPrice - naEtfPrice
+            #Update Market Value of Inventory
             instSpread[symbol].append(spread)   # for plotting spread
             gain = self.instValue(symbol, instStock[symbol][1], spread)
             instStock[symbol][1] = spread   # track last spread
             marketValue[symbol].append(marketValue[symbol][-1] + gain)
-            
-            #instStock[symbol][2] = gain
-
             middle = self.middleBand(symbol)
             upper = self.upperBand(symbol)
             lower = self.lowerBand(symbol)
+            tenMA = self.tenMA(symbol)
             bollingerBands[symbol][0].append(lower)
             bollingerBands[symbol][1].append(middle)
             bollingerBands[symbol][2].append(upper)
-            #Update Market Value of Inventory
+            bollingerBands[symbol][3].append(tenMA)
 
-            
-            
- 
             # Define trade rules
             if bars[symbol].getDateTime().year >= startYear:
-                #if spread <= lower and len(instSpread[symbol]) >= bbandPeriod and instShares == 0 and notional < 1000000:
-                if spread <= -.15  and instShares == 0 and notional < 1000000:
+                if spread <= lower and instShares == 0 and notional < 1000000000000000000:
                         qInst = round((10000 / instPrice), 2)
                         qEtf = round((10000 / etfPrice), 2)
                         instType = "BUY"
@@ -169,28 +167,28 @@ class MyStrategy(strategy.Strategy):
                         self.enterShort(self.__etf, qEtf, True)
                         instStock[symbol][1] = spread
                         self.orderWriter(bars[symbol].getDateTime().year, bars[symbol].getDateTime().month, bars[symbol].getDateTime().day, symbol, etf, spread, instType, etfType, qInst, qEtf, gainLog)
-                #elif spread >= upper and len(instSpread[symbol]) >= bbandPeriod and notional > 0:
-                elif spread >= .3 and notional > 0:
+                #elif spread >= upper and notional > 0:
+                elif spread >= upper:
                         if instShares > 0:
-                            qInst = round((10000 / instPrice), 2) + instShares
-                            qEtf = round((10000 / etfPrice), 2) + abs(etfShares)
+                            qInst = instShares #round((10000 / instPrice), 2) + instShares
+                            qEtf = abs(etfShares) + 1 #round((10000 / etfPrice), 2) + abs(etfShares)
                             instType = "SELL"
                             etfType = "Buy"
                             gainLog = gain
                             self.enterShort(symbol, qInst, True)
                             self.enterLong(self.__etf, qEtf, True)
                             instStock[symbol][1] = spread
-                            self.orderWriter(bars[symbol].getDateTime().year, bars[symbol].getDateTime().month, bars[symbol].getDateTime().day, symbol, etf, spread, instType, etfType, qInst, qEtf, (round(gainLog, 4) * 100))
-                        elif instShares == 0:
+                            self.orderWriter(bars[symbol].getDateTime().year, bars[symbol].getDateTime().month, bars[symbol].getDateTime().day, symbol, etf, spread, instType, etfType, qInst, qEtf, 0)
+                            """elif instShares == 0:
                             qInst = round((10000 / instPrice), 2)
                             qEtf = round((10000 / etfPrice), 2)
                             instType = "SELL"
-                            etfType = "Buy"
+                            etfType = "BUY"
                             gainLog = "N/A"
                             self.enterShort(symbol, qInst, True)
                             self.enterLong(self.__etf, qEtf, True)
                             instStock[symbol][1] = spread
-                            self.orderWriter(bars[symbol].getDateTime().year, bars[symbol].getDateTime().month, bars[symbol].getDateTime().day, symbol, etf, spread, instType, etfType, qInst, qEtf, (round(gainLog, 4) * 100))
+                            self.orderWriter(bars[symbol].getDateTime().year, bars[symbol].getDateTime().month, bars[symbol].getDateTime().day, symbol, etf, spread, instType, etfType, qInst, qEtf, gainLog)"""
                         else:
                             pass
             else:
@@ -226,7 +224,7 @@ def main(plot):
     myStrategy.attachAnalyzer(drawDownAnalyzer)
     
     if plot:
-        symbol = "DIS"
+        symbol = "TIF"
         naInstPriceDS = dataseries.SequenceDataSeries(naInstPrices[symbol])
         naEtfPriceDS = dataseries.SequenceDataSeries(naEtfPrices)
         spreadDS = dataseries.SequenceDataSeries(instSpread[symbol])
@@ -294,7 +292,6 @@ def main(plot):
         print "Returns std. dev.: %2.f %%" % (returnz.std() * 100)
         print "Max. return: %2.f %%" % (returnz.max() * 100)
         print "Min. return: %2.f %%" % (returnz.min() * 100)
-        print tradesAnalyzer.getAllReturns()
     print
     for symbol in instruments:
         print str(symbol)+ ": " + str(round(marketValue[symbol][-1], 4) * 100) + "%"
@@ -304,3 +301,5 @@ def main(plot):
 
 if __name__ == "__main__":
     main(True)
+    
+orders_file.close()
