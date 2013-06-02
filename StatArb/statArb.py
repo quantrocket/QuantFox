@@ -140,7 +140,7 @@ class MyStrategy(strategy.Strategy):
             naEtfPrices.append(naEtfPrice)
             # Define notational, spread
             notional = (instShares * instPrice) * 2
-            spread = naInstPrice - naEtfPrice
+            spread = instPrice / etfPrice
             #Update Market Value of Inventory
             instSpread[symbol].append(spread)   # for plotting spread
             gain = self.instValue(symbol, instStock[symbol][1], spread)
@@ -236,7 +236,7 @@ def main(plot):
         plt = plotter.StrategyPlotter(myStrategy, False, False, False)
         plt.getOrCreateSubplot("naPriceChart").addDataSeries(symbol, naInstPriceDS)
         plt.getOrCreateSubplot("naPriceChart").addDataSeries(etf, naEtfPriceDS)
-        plt.getOrCreateSubplot("spread").addDataSeries("Spread", spreadDS)
+        plt.getOrCreateSubplot("spread").addDataSeries(symbol + ":" + etf, spreadDS)
         plt.getOrCreateSubplot("spread").addDataSeries("Middle", middleBandDS)
         plt.getOrCreateSubplot("spread").addDataSeries("10 MA", tenMADS)
         plt.getOrCreateSubplot("spread").addDataSeries("Upper", upperBandDS)
