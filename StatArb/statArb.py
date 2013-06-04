@@ -23,7 +23,7 @@ instFeed = [symbol for symbol in instruments]
 instFeed.append(etf)
 bbandPeriod = v.bbandPeriod
 stopLoss = v.stopLoss
-stop = - v.stop
+stop = v.stop
 
 instPrices = {i:[] for i in instruments}
 etfPrices = [] 
@@ -35,6 +35,7 @@ etfStock = {i:[0] for i in instruments}                     # For correct order 
 marketValue = {i:[0] for i in instruments}                  # Tracks cumulative gain
 gain = {i:[0] for i in instruments}                         # Tracks net gain
 bollingerBands = {i:[[],[],[], []] for i in instruments}
+tradeGain = {i:[0, 0] for i in instruments}                 # [enteredSpread]
 
 
 class MyStrategy(strategy.Strategy):
@@ -69,6 +70,16 @@ class MyStrategy(strategy.Strategy):
             gain = 0
         return gain
  
+    def tGain(self, symbol, spread):
+        self.__symbol = symbol
+        self.__spread = spread
+        if self.getBroker().getShares(symbol) > 0:
+            return (spread - tradeGain[symbol][1]) / tradeGain[symbol][1]
+        elif self.getBroker().getShares(symbol) < 0:
+            return  (tradeGain[symbol][1] - spread) / tradeGain[symbol][1]
+        else:
+            return 0
+        
     def enterBuyInst(self, symbol, instPrice, etfPrice, spread, qInst, qEtf):
         self.__symbol = symbol
         self.__instPrice = instPrice
@@ -183,6 +194,7 @@ class MyStrategy(strategy.Strategy):
             #Update Market Value of Inventory
             instSpread[symbol].append(spread)                           # for plotting spread
             gain = self.instValue(symbol, instStock[symbol], spread)
+            tGain = self.tGain(symbol, spread)
             instStock[symbol] = spread                                  # track last spread
             marketValue[symbol].append(marketValue[symbol][-1] + gain)
             middle = self.middleBand(symbol)
@@ -196,14 +208,14 @@ class MyStrategy(strategy.Strategy):
 
             # Define trade rules
             if bars[symbol].getDateTime().year >= startYear:
-                if stopLoss == True and marketValue[symbol][-1] < -.1:
+                if stopLoss == True and tGain < stop:
                     print "stop"
                     if instShares > 0:
                         qInst = instShares
                         qEtf = abs(etfStock[symbol])
                         instType = "SELL"
                         etfType = "Buy"
-                        gainLog = round(marketValue[symbol][-1], 4) * 100
+                        gainLog = round(tGain, 4) * 100
                         self.exitBuyInst(symbol, instShares, instPrice, etfPrice, spread, qInst, qEtf)
                         self.orderWriter(bars[symbol].getDateTime().year, bars[symbol].getDateTime().month, bars[symbol].getDateTime().day, symbol, etf, spread, instType, etfType, qInst, qEtf, gainLog)
                     elif instShares < 0:
@@ -211,7 +223,7 @@ class MyStrategy(strategy.Strategy):
                         qEtf = etfStock[symbol]
                         instType = "BUY"
                         etfType = "SELL"
-                        gainLog = round(marketValue[symbol][-1], 4) * 100
+                        gainLog = round(tGain, 4) * 100
                         self.exitShortInst(symbol, instShares, instPrice, etfPrice, spread, qInst, qEtf)
                         self.orderWriter(bars[symbol].getDateTime().year, bars[symbol].getDateTime().month, bars[symbol].getDateTime().day, symbol, etf, spread, instType, etfType, qInst, qEtf, gainLog)
                 else:
@@ -223,13 +235,17 @@ class MyStrategy(strategy.Strategy):
                             etfType = "SELL"
                             gainLog = "N/A"
                             self.enterBuyInst(symbol, instPrice, etfPrice, spread, qInst, qEtf)
+                            tradeGain[symbol][0] = 1
+                            tradeGain[symbol][1] = spread
                             self.orderWriter(bars[symbol].getDateTime().year, bars[symbol].getDateTime().month, bars[symbol].getDateTime().day, symbol, etf, spread, instType, etfType, qInst, qEtf, gainLog)
                         elif spread >= upper:   # Enter Short Inst
                             qInst = round((10000 / instPrice), 2)
                             qEtf = round((10000 / etfPrice), 2)
                             instType = "SELL"
                             etfType = "Buy"
-                            gainLog = round(marketValue[symbol][-1], 4) * 100
+                            tradeGain[symbol][0] = -1
+                            tradeGain[symbol][1] = spread
+                            gainLog = round(tGain, 4) * 100
                             self.enterShortInst(symbol, instPrice, etfPrice, spread, qInst, qEtf)
                             self.orderWriter(bars[symbol].getDateTime().year, bars[symbol].getDateTime().month, bars[symbol].getDateTime().day, symbol, etf, spread, instType, etfType, qInst, qEtf, gainLog)
                         else:
@@ -240,7 +256,7 @@ class MyStrategy(strategy.Strategy):
                             qEtf = abs(etfStock[symbol])
                             instType = "SELL"
                             etfType = "Buy"
-                            gainLog = round(marketValue[symbol][-1], 4) * 100
+                            gainLog = round(tGain, 4) * 100
                             self.exitBuyInst(symbol, instShares, instPrice, etfPrice, spread, qInst, qEtf)
                             self.orderWriter(bars[symbol].getDateTime().year, bars[symbol].getDateTime().month, bars[symbol].getDateTime().day, symbol, etf, spread, instType, etfType, qInst, qEtf, gainLog)
                         else:
@@ -251,7 +267,7 @@ class MyStrategy(strategy.Strategy):
                             qEtf = etfStock[symbol]
                             instType = "BUY"
                             etfType = "SELL"
-                            gainLog = round(marketValue[symbol][-1], 4) * 100
+                            gainLog = round(tGain, 4) * 100
                             self.exitShortInst(symbol, instShares, instPrice, etfPrice, spread, qInst, qEtf)
                             self.orderWriter(bars[symbol].getDateTime().year, bars[symbol].getDateTime().month, bars[symbol].getDateTime().day, symbol, etf, spread, instType, etfType, qInst, qEtf, gainLog)
                         else:
