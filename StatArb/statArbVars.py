@@ -4,7 +4,7 @@ lookBack = 2
 etf = 'XLB'
 instrument_list = 'ConsumerDiscretionary.csv'
 orders_file = 'orders.csv'
-bbandPeriod = 20
+bbandPeriod = 12
 stopLoss = False
-stop = -.05
+stop = -0.08
 
