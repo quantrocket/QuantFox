@@ -6,7 +6,6 @@ from pyalgotrade import strategy, plotter, dataseries
 from datetime import datetime
 from numpy import mean, std
 import os, csv
-import correlationFinder
 import statArbVars as v
 from pyalgotrade.talibext import indicator
 
@@ -19,10 +18,14 @@ end = endYear - lookBack
 etf = v.etf
 instrument_list = v.instrument_list
 orders_file = v.orders_file
-instruments = correlationFinder.highCorrs
+
+instReader = csv.reader(open(instrument_list, "rb"), delimiter = ",")
+instruments = [symbol for line in instReader for symbol in line]
 print instruments
+
 instFeed = [symbol for symbol in instruments]
 instFeed.append(etf)
+
 bbandPeriod = v.bbandPeriod
 stopLoss = v.stopLoss
 stop = v.stop
@@ -186,8 +189,8 @@ class MyStrategy(strategy.Strategy):
         eMFI = indicator.MFI(ebarDs, 252, 14)
         etfMFI.append(eMFI[-1])
         
-        n = ["TJX"]
-        for symbol in n:
+
+        for symbol in instruments:
             ibarDs = self.getFeed().getDataSeries(symbol)
             iMFI = indicator.MFI(ibarDs, 252, 14)
             instMFI[symbol].append(iMFI[-1])
@@ -318,7 +321,7 @@ def main(plot):
     myStrategy.attachAnalyzer(drawDownAnalyzer)
     
     if plot:
-        symbol = "TJX"
+        symbol = "VMC"
         #naInstPriceDS = dataseries.SequenceDataSeries(naInstPrices[symbol])
         #naEtfPriceDS = dataseries.SequenceDataSeries(naEtfPrices)
         spreadDS = dataseries.SequenceDataSeries(instSpread[symbol])
