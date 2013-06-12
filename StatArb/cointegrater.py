@@ -3,13 +3,13 @@ from pyalgotrade.barfeed import yahoofeed
 from pyalgotrade import strategy
 from statsmodels import *
 import numpy as np
+import statsmodels.api as sm
+import statsmodels.tsa.stattools as ts
 from numpy import corrcoef
-
-
 import os
 import csv
-
 import statArbVars as v
+
 etf = v.etf
 start = v.startYear - v.lookBack
 end = v.endYear - v.lookBack
@@ -20,15 +20,14 @@ instFeed = [symbol for symbol in instruments]
 instFeed.append(etf)
 instPrices = {i:np.array([]) for i in instruments}
 etfPrices = np.array([])
+coints = {i:[] for i in instruments}
 highCorrs = []
-
 
 pairs_file = 'pairs.csv'
 pairs_file = open(pairs_file, "w")
 pairs_file.truncate()
 pairs_file.close()
-writer = csv.writer(open('highCorrFeed.csv', 'ab'), delimiter = ",")
-
+writer = csv.writer(open('pairs.csv', 'ab'), delimiter = ",")
 
 class MyStrategy(strategy.Strategy):
     def __init__(self, feed, etf):
@@ -43,8 +42,6 @@ class MyStrategy(strategy.Strategy):
         for symbol in instruments:
             instPrice = bars[symbol].getAdjClose()
             instPrices[symbol] = np.append(instPrices[symbol], instPrice)
-
-        #etfPrices.append(etfPrice)
 
 def build_feed(instFeed, fromYear, toYear):
     feed = yahoofeed.Feed()
@@ -61,24 +58,34 @@ def build_feed(instFeed, fromYear, toYear):
             feed.addBarsFromCSV(symbol, fileName)
     return feed
 
-def correlationFinder(symbol):
-    corr = corrcoef(instPrices[symbol], etfPrices)[1,0]
-    return corr
+def cointegration_test(symbol, etf):
+    # Step 1: regress one variable on the other
+    ols_result = sm.OLS(instPrices[symbol], etfPrices).fit()
+    # Step 2: obtain the residual (ols_resuld.resid)
+    # Step 3: apply Augmented Dickey-Fuller test to see whether 
+    # the residual is unit root    
+    return ts.adfuller(ols_result.resid)
     
 def run(start, end):
     feed = build_feed(instFeed, start, end)
     myStrategy = MyStrategy(feed, etf)
     myStrategy.run()
     for symbol in instruments:
-        corr = correlationFinder(symbol)
-        if  corr >= .8:
+        coint = cointegration_test(symbol, etf)
+        coints[symbol].append(coint)
+        if coint[1] < 0.05:
             highCorrs.append(symbol)     
             writer.writerow([symbol])
-    return highCorrs
+        
+def print_adf():
+    for symbol in instruments:
+        print symbol + str(coints[symbol])
+    
+def print_highCorrs():
+    print highCorrs
 
-            #print symbol + ": " + str(corr)
 run(start, end)
-print highCorrs
-print etfPrices
-print instPrices["DD"]
+#print_highCorrs()
+
+
     
