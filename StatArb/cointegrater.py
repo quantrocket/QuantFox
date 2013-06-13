@@ -28,11 +28,14 @@ pairs_file.truncate()
 pairs_file.close()
 writer = csv.writer(open('pairs.csv', 'ab'), delimiter = ",")
 
+
+
 class MyStrategy(strategy.Strategy):
     def __init__(self, feed, etf):
         strategy.Strategy.__init__(self, feed)
         self.getBroker().setUseAdjustedValues(True)
         self.__etf = etf
+
         
     def onBars(self, bars):
         global etfPrices

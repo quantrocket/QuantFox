@@ -33,6 +33,7 @@ instFeed.append(etf)
 bbandPeriod = v.bbandPeriod
 stopLoss = v.stopLoss
 stop = v.stop
+starting_cash = v.starting_cash
 
 instPrices = {i:[] for i in instruments}
 etfPrices = [] 
@@ -43,9 +44,9 @@ pltSpread = {i:[] for i in instruments}
 instStock = {i:[0] for i in instruments}                    # [lastSpread]
 etfStock = {i:[0] for i in instruments}                     # For correct order quantities
 marketValue = {i:[0] for i in instruments}                  # Tracks cumulative gain
-gain = {i:[0] for i in instruments}                         # Tracks net gain
+gain = {i:[0, 0] for i in instruments}                         # Tracks net gain
 bollingerBands = {i:[[],[],[], []] for i in instruments}
-tradeGain = {i:[0, 0] for i in instruments}                 # [enteredSpread]
+tradeGain = {i:[0, 0, 0] for i in instruments}                 # [enteredSpread]
 instMFI = {i:[] for i in instruments}                  # [[1-day],[MFR], [MFI]]
 etfMFI = []                                            # [[1-day],[MFR], [MFI]]
 spreadMFI = {i:[] for i in instruments}
@@ -54,17 +55,27 @@ ltenMFI = {i:[] for i in instruments}
 
 
 class MyStrategy(strategy.Strategy):
-    def __init__(self, feed, etf):
+    def __init__(self, feed, etf, starting_cash):
         strategy.Strategy.__init__(self, feed)
         self.getBroker().setUseAdjustedValues(True)
         self.__etf = etf
+        self._starting_Cash = starting_cash
+        self.getBroker().setCash(starting_cash)
         
     def clearOrders(self, orders_file):
         orders_file = orders_file
         orders_file = open(orders_file, "w")
         orders_file.truncate()
         orders_file.close()
-              
+     
+    def trade_life(self, symbol):
+        self.__symbol = symbol
+        if self.getBroker().getShares(symbol) > 0:
+            tradeGain[symbol][2] += 1
+        else:
+            pass
+        
+                  
     def orderWriter(self, year, month, day, symbol, etf, spread, instType, etfType, qInst, qEtf, gainLog):
         writer = csv.writer(open(orders_file, 'ab'), delimiter = ',')
         inst_to_enter = [str(year), str(month), str(day), symbol, round(spread, 4), instType, qInst, gainLog]
@@ -196,7 +207,11 @@ class MyStrategy(strategy.Strategy):
             gain = self.instValue(symbol, instStock[symbol], spread)
             tGain = self.tGain(symbol, spread)
             instStock[symbol] = spread                                  # track last spread
-            marketValue[symbol].append(marketValue[symbol][-1] + gain)            
+            marketValue[symbol].append(marketValue[symbol][-1] + gain)
+            self.trade_life(symbol)
+            trade_age = tradeGain[symbol][2]
+            print trade_age
+                          
             
 
             tenMFI = self.tenMFI(symbol)
@@ -204,11 +219,12 @@ class MyStrategy(strategy.Strategy):
             lower = bollingerBands[symbol][0][-1]
             middle = bollingerBands[symbol][1][-1]
             upper = bollingerBands[symbol][2][-1]
+            print self.getBroker().getPositions()
 
             ltenMFI[symbol].append(tenMFI)
             # Define trade rules
             if bars[symbol].getDateTime().year >= startYear:
-                if stopLoss == True and tGain < stop:
+                if stopLoss == True and ((tGain < stop) or (trade_age >= 50)):
                     print "stop"
                     if instShares > 0:
                         qInst = instShares
@@ -257,6 +273,7 @@ class MyStrategy(strategy.Strategy):
                             instType = "SELL"
                             etfType = "Buy"
                             gainLog = round(tGain, 4) * 100
+                            tradeGain[symbol][2] = 0
                             self.exitBuyInst(symbol, instShares, instPrice, etfPrice, spread, qInst, qEtf)
                             self.orderWriter(bars[symbol].getDateTime().year, bars[symbol].getDateTime().month, bars[symbol].getDateTime().day, symbol, etf, spread, instType, etfType, qInst, qEtf, gainLog)
                         else:
@@ -268,6 +285,7 @@ class MyStrategy(strategy.Strategy):
                             instType = "BUY"
                             etfType = "SELL"
                             gainLog = round(tGain, 4) * 100
+                            tradeGain[symbol][2] = 0
                             self.exitShortInst(symbol, instShares, instPrice, etfPrice, spread, qInst, qEtf)
                             self.orderWriter(bars[symbol].getDateTime().year, bars[symbol].getDateTime().month, bars[symbol].getDateTime().day, symbol, etf, spread, instType, etfType, qInst, qEtf, gainLog)
                         else:
@@ -294,7 +312,7 @@ def main(plot):
     # Download the bars.
     feed = build_feed(instFeed, start, endYear)
     # Define Strategy
-    myStrategy = MyStrategy(feed, etf)
+    myStrategy = MyStrategy(feed, etf, starting_cash)
     # Attach returns and sharpe ratio analyzers.
     returnsAnalyzer = returns.Returns()
     myStrategy.attachAnalyzer(returnsAnalyzer)

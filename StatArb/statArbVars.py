@@ -7,4 +7,4 @@ orders_file = 'orders.csv'
 bbandPeriod = 130
 stopLoss = True
 stop = -0.2
-
+starting_cash = 70000
