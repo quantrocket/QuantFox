@@ -8,6 +8,9 @@ from numpy import mean, std
 import os, csv
 import statArbVars as v
 from pyalgotrade.talibext import indicator
+from pyalgotrade.technical import bollinger
+import talib
+from talib import MA_Type
 
 
 startYear = v.startYear
@@ -45,6 +48,7 @@ instMFI = {i:[] for i in instruments}                  # [[1-day],[MFR], [MFI]]
 etfMFI = []                                            # [[1-day],[MFR], [MFI]]
 spreadMFI = {i:[] for i in instruments}
 ltenMFI = {i:[] for i in instruments}
+
 
 
 class MyStrategy(strategy.Strategy):
@@ -131,27 +135,6 @@ class MyStrategy(strategy.Strategy):
         instStock[symbol] = spread
         etfStock[symbol] = qEtf
 
-    def middleBand(self, symbol):
-        self.__symbol = symbol
-        if len(instSpread[symbol]) >= bbandPeriod:
-            middle = mean(instSpread[symbol][-bbandPeriod:])
-        else:
-            middle = 0
-        return middle
-    def upperBand(self, symbol):
-        self.__symbol = symbol
-        if len(instSpread[symbol]) >= bbandPeriod:
-            upper = self.middleBand(symbol) + (std(instSpread[symbol][-bbandPeriod:]) * 2)
-        else:
-            upper = 0
-        return upper
-    def lowerBand(self, symbol):
-        self.__symbol = symbol
-        if len(instSpread[symbol]) >= bbandPeriod:
-            lower = self.middleBand(symbol) - (std(instSpread[symbol][-bbandPeriod:]) * 2)
-        else:
-            lower = 0
-        return lower
     def tenMFI(self, symbol):
         self.__symbol = symbol
         if len(spreadMFI[symbol]) >= 9:
@@ -160,26 +143,6 @@ class MyStrategy(strategy.Strategy):
             tenMFI = 0
         return tenMFI
         
-    def bollingerBands(self, symbol):
-        self.__symbol = symbol
-        if len(instSpread[symbol]) >= bbandPeriod:
-            middle = self.middleBand(symbol)
-            upper = self.upperBand(symbol)
-            lower = self.lowerBand(symbol)
-            bollingerBands[symbol][1].append(middle)
-            bollingerBands[symbol][2].append(upper)
-            bollingerBands[symbol][0].append(lower)
-            return middle, lower, upper
-        else:
-            lower = 0
-            middle = 0
-            upper = 0
-            bollingerBands[symbol][1].append(0)
-            bollingerBands[symbol][2].append(0)
-            bollingerBands[symbol][0].append(0)
-            return middle, lower, upper
-   
-                
     def onBars(self, bars):
         etfPrice = bars[self.__etf].getAdjClose()
         etfPrices.append(etfPrice)
@@ -191,6 +154,7 @@ class MyStrategy(strategy.Strategy):
         
 
         for symbol in instruments:
+            spreadDS = dataseries.SequenceDataSeries(instSpread[symbol])
             ibarDs = self.getFeed().getDataSeries(symbol)
             iMFI = indicator.MFI(ibarDs, 252, 14)
             instMFI[symbol].append(iMFI[-1])
@@ -213,9 +177,23 @@ class MyStrategy(strategy.Strategy):
             tGain = self.tGain(symbol, spread)
             instStock[symbol] = spread                                  # track last spread
             marketValue[symbol].append(marketValue[symbol][-1] + gain)
-            middle = self.middleBand(symbol)
-            upper = self.upperBand(symbol)
-            lower = self.lowerBand(symbol)
+            #middle = self.middleBand(symbol)
+            #upper = self.upperBand(symbol)
+            #lower = self.lowerBand(symbol)
+            
+            
+            if len(etfPrices) >= bbandPeriod:
+                upper, middle, lower = indicator.BBANDS(spreadDS, bbandPeriod, 2, 2, matype=MA_Type.T3)
+                #upper, middle, lower = indicator.BBANDS(dataseries.SequenceDataSeries(instSpread[symbol]), bbandPeriod)
+                lower = lower[-1]
+                upper = upper[-1]
+                middle = middle[-1]
+                print lower
+            else:
+                print "none"
+                lower = 0
+                middle = 0
+                upper = 0
             tenMFI = self.tenMFI(symbol)
             bollingerBands[symbol][0].append(lower)
             bollingerBands[symbol][1].append(middle)
@@ -243,7 +221,7 @@ class MyStrategy(strategy.Strategy):
                         self.orderWriter(bars[symbol].getDateTime().year, bars[symbol].getDateTime().month, bars[symbol].getDateTime().day, symbol, etf, spread, instType, etfType, qInst, qEtf, gainLog)
                 else:
                     if instShares == 0:
-                        if spread <= lower and tenMFI > 1:     # Enter Long Inst
+                        if spread <= lower: #and tenMFI > 1:     # Enter Long Inst
                             qInst = round((10000 / instPrice), 2)
                             qEtf = round((10000 / etfPrice), 2)
                             instType = "BUY"
@@ -253,7 +231,7 @@ class MyStrategy(strategy.Strategy):
                             tradeGain[symbol][0] = 1
                             tradeGain[symbol][1] = spread
                             self.orderWriter(bars[symbol].getDateTime().year, bars[symbol].getDateTime().month, bars[symbol].getDateTime().day, symbol, etf, spread, instType, etfType, qInst, qEtf, gainLog)
-                        elif spread >= upper and tenMFI < 1:   # Enter Short Inst
+                        elif spread >= upper: # and tenMFI < 1:   # Enter Short Inst
                             qInst = round((10000 / instPrice), 2)
                             qEtf = round((10000 / etfPrice), 2)
                             instType = "SELL"
@@ -321,7 +299,7 @@ def main(plot):
     myStrategy.attachAnalyzer(drawDownAnalyzer)
     
     if plot:
-        symbol = "VMC"
+        symbol = "BMS"
         #naInstPriceDS = dataseries.SequenceDataSeries(naInstPrices[symbol])
         #naEtfPriceDS = dataseries.SequenceDataSeries(naEtfPrices)
         spreadDS = dataseries.SequenceDataSeries(instSpread[symbol])
@@ -344,6 +322,9 @@ def main(plot):
         plt.getOrCreateSubplot("returns").addDataSeries(symbol + "-Return", returnDS)
         plt.getOrCreateSubplot("returns").addDataSeries("Cum. return", returnsAnalyzer.getCumulativeReturns())
         plt.getOrCreateSubplot("MFI").addDataSeries(symbol + ":" + etf + "-MFI", spreadMFIds)
+        #plt.getOrCreateSubplot("spread").addDataSeries("upper", myStrategy.getBollingerBands().getUpperBand())
+        #plt.getOrCreateSubplot("spread").addDataSeries("middle", myStrategy.getBollingerBands().getMiddleBand())
+        #plt.getOrCreateSubplot("spread").addDataSeries("lower", myStrategy.getBollingerBands().getLowerBand())
         #plt.getOrCreateSubplot("MFI").addDataSeries(symbol + "-MFI", instMFIds)
         #plt.getOrCreateSubplot("MFI").addDataSeries(etf + "-MFI", etfMFIds)
         #plt.getOrCreateSubplot("MFI").addDataSeries("80", 80)
