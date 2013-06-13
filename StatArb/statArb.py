@@ -228,7 +228,7 @@ class MyStrategy(strategy.Strategy):
                         self.orderWriter(bars[symbol].getDateTime().year, bars[symbol].getDateTime().month, bars[symbol].getDateTime().day, symbol, etf, spread, instType, etfType, qInst, qEtf, gainLog)
                 else:
                     if instShares == 0:
-                        if spread >= lower and instSpread[symbol][-2] < bollingerBands[symbol][0][-2]: #and tenMFI > 1:     # Enter Long Inst
+                        if spread >= lower and instSpread[symbol][-2] < bollingerBands[symbol][0][-2] and sMFI > tenMFI:     # Enter Long Inst
                             qInst = round((10000 / instPrice), 2)
                             qEtf = round((10000 / etfPrice), 2)
                             instType = "BUY"
@@ -238,7 +238,7 @@ class MyStrategy(strategy.Strategy):
                             tradeGain[symbol][0] = 1
                             tradeGain[symbol][1] = spread
                             self.orderWriter(bars[symbol].getDateTime().year, bars[symbol].getDateTime().month, bars[symbol].getDateTime().day, symbol, etf, spread, instType, etfType, qInst, qEtf, gainLog)
-                        elif spread <= upper and instSpread[symbol][-2] > bollingerBands[symbol][2][-2]: # and tenMFI < 1:   # Enter Short Inst
+                        elif spread <= upper and instSpread[symbol][-2] > bollingerBands[symbol][2][-2] and sMFI < tenMFI:   # Enter Short Inst
                             qInst = round((10000 / instPrice), 2)
                             qEtf = round((10000 / etfPrice), 2)
                             instType = "SELL"
@@ -306,7 +306,7 @@ def main(plot):
     myStrategy.attachAnalyzer(drawDownAnalyzer)
     
     if plot:
-        symbol = "SEE"
+        symbol = "APA"
         #naInstPriceDS = dataseries.SequenceDataSeries(naInstPrices[symbol])
         #naEtfPriceDS = dataseries.SequenceDataSeries(naEtfPrices)
         spreadDS = dataseries.SequenceDataSeries(pltSpread[symbol])

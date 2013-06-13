@@ -5,7 +5,6 @@ from statsmodels import *
 import numpy as np
 import statsmodels.api as sm
 import statsmodels.tsa.stattools as ts
-from numpy import corrcoef
 import os
 import csv
 import statArbVars as v
@@ -13,7 +12,7 @@ import statArbVars as v
 etf = v.etf
 start = v.startYear - v.lookBack
 end = v.endYear - v.lookBack
-instrument_list = v.instrument_list
+instrument_list = "BasicMaterials.csv"
 instReader = csv.reader(open(instrument_list, "rb"), delimiter = ",")
 instruments = [symbol for line in instReader for symbol in line]
 instFeed = [symbol for symbol in instruments]
@@ -85,7 +84,7 @@ def print_highCorrs():
     print highCorrs
 
 run(start, end)
-#print_highCorrs()
+print_highCorrs()
 
 
     
