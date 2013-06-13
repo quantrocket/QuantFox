@@ -2,6 +2,9 @@ from pyalgotrade.tools import yahoofinance
 from pyalgotrade.barfeed import yahoofeed
 from pyalgotrade import strategy
 from numpy import corrcoef
+from statsmodels import *
+import numpy as np
+
 
 import os
 import csv
@@ -70,11 +73,13 @@ def run(start, end):
             writer.writerow([symbol])
     return highCorrs
 
-            
+fff = np.array([1, 2, 3])
+fff.np.append(4)
             
             
             
             #print symbol + ": " + str(corr)
 run(start, end)
-#print highCorrs
+print highCorrs
+print fff
     

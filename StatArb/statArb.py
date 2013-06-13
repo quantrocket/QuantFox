@@ -324,7 +324,7 @@ def main(plot):
     myStrategy.attachAnalyzer(drawDownAnalyzer)
     
     if plot:
-        symbol = "APA"
+        symbol = "BHI"
         #naInstPriceDS = dataseries.SequenceDataSeries(naInstPrices[symbol])
         #naEtfPriceDS = dataseries.SequenceDataSeries(naEtfPrices)
         spreadDS = dataseries.SequenceDataSeries(pltSpread[symbol])
