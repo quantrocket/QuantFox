@@ -51,7 +51,7 @@ instMFI = {i:[] for i in instruments}                  # [[1-day],[MFR], [MFI]]
 etfMFI = []                                            # [[1-day],[MFR], [MFI]]
 spreadMFI = {i:np.array([]) for i in instruments}
 #ltenMFI = {i:[] for i in instruments}
-MFI_MACD = {i:[[],[],[]] for i in instruments}              # [[MACD],[trigger],[oscillator]]
+MFI_MACD = {i:[[],[],[],[], []] for i in instruments}              # [[MACD],[trigger],[oscillator], [ROC]]
 plt_spread_MFI = {i:[] for i in instruments}
 
 
@@ -176,7 +176,7 @@ class MyStrategy(strategy.Strategy):
         bollingerBands[symbol][2].append(upper)
         return upper, middle, lower
     
-    def get_etf_MFI(self, etf):
+    """def get_etf_MFI(self, etf):
         self.__etf = etf
         etf_barDs = self.getFeed().getDataSeries(etf)
         if len(etfPrices) >= 14:
@@ -205,15 +205,19 @@ class MyStrategy(strategy.Strategy):
             spread_MFI = 0
         spreadMFI[symbol] = np.append(spreadMFI[symbol], spread_MFI)
         plt_spread_MFI[symbol].append(spread_MFI)
-        return spread_MFI
+        return spread_MFI"""
         
-    def get_MFI_MACD(self, symbol, spread_MFI):
+    def get_MFI_MACD(self, symbol): #, spread_MFI):
         self.__symbol = symbol
-        self.__spread_MFI = spread_MFI
+        spreadDS = instSpread[symbol]
+        #self.__spread_MFI = spread_MFI
         if len(etfPrices) >= 35:
-            MACD = talib.MACD(spreadMFI[symbol], 12, 26, 9)[0][-1]
-            MACD_trigger = talib.MACD(spreadMFI[symbol], 12, 26, 9)[1][-1]
-            MACD_oscillator = talib.MACD(spreadMFI[symbol], 12, 26, 9)[2][-1]
+            #MACD = talib.MACD(spreadMFI[symbol], 12, 26, 9)[0][-1]
+            #MACD_trigger = talib.MACD(spreadMFI[symbol], 12, 26, 9)[1][-1]
+            #MACD_oscillator = talib.MACD(spreadMFI[symbol], 12, 26, 9)[2][-1]
+            MACD = talib.MACD(spreadDS, 12, 26, 9)[0][-1]
+            MACD_trigger = talib.MACD(spreadDS, 12, 26, 9)[1][-1]
+            MACD_oscillator = talib.MACD(spreadDS, 12, 26, 9)[2][-1]
             #print "MACD: " + str(MACD)
             #print "MACD TRIP: " + str(MACD_trigger)
             #print "MACD OS: " + str(MACD_oscillator)
@@ -227,7 +231,21 @@ class MyStrategy(strategy.Strategy):
         MFI_MACD[symbol][2].append(MACD_oscillator)
         #print MFI_MACD[symbol]
         return MACD, MACD_trigger, MACD_oscillator
-       
+    
+    def get_MACD_ROC(self, symbol):
+        self.__symbol = symbol
+        if len(etfPrices) > 13:
+            MACD_ROC = MFI_MACD[symbol][2][-1] - MFI_MACD[symbol][2][-13]
+        else:
+            MACD_ROC = 0
+        MFI_MACD[symbol][3].append(MACD_ROC)
+        return MACD_ROC
+        """if len(etfPrices) > 4:
+            MACD_ROC2 = MFI_MACD[symbol][3][-1] - MFI_MACD[symbol][3][-2]
+        else:
+            MACD_ROC2 = 0
+        MFI_MACD[symbol][4].append(MACD_ROC2)
+        return MACD_ROC2"""
         
         
     def onBars(self, bars):
@@ -235,9 +253,10 @@ class MyStrategy(strategy.Strategy):
         etfPrices.append(etfPrice)
     
         for symbol in instruments:
-            spread_MFI = self.get_spread_MFI(symbol)
+            #spread_MFI = self.get_spread_MFI(symbol)
             #print "spred MFI: " + str(spreadMFI[symbol])
-            self.get_MFI_MACD(symbol, spread_MFI)
+            self.get_MFI_MACD(symbol) #, spread_MFI)
+            MACD_ROC = self.get_MACD_ROC(symbol)
             
             
             
@@ -297,7 +316,7 @@ class MyStrategy(strategy.Strategy):
                         self.orderWriter(bars[symbol].getDateTime().year, bars[symbol].getDateTime().month, bars[symbol].getDateTime().day, symbol, etf, spread, instType, etfType, qInst, qEtf, gainLog)
                 else:
                     if instShares == 0:
-                        if spread >= lower and instSpread[symbol][-2] < bollingerBands[symbol][0][-2] and MFI_MACD[symbol][2] > 0.01:     # Enter Long Inst
+                        if spread >= lower and instSpread[symbol][-2] < bollingerBands[symbol][0][-2] and MACD_ROC > 0.00:     # Enter Long Inst
                             qInst = round((10000 / instPrice), 2)
                             qEtf = round((10000 / etfPrice), 2)
                             instType = "BUY"
@@ -307,7 +326,7 @@ class MyStrategy(strategy.Strategy):
                             tradeGain[symbol][0] = 1
                             tradeGain[symbol][1] = spread
                             self.orderWriter(bars[symbol].getDateTime().year, bars[symbol].getDateTime().month, bars[symbol].getDateTime().day, symbol, etf, spread, instType, etfType, qInst, qEtf, gainLog)
-                        elif spread <= upper and instSpread[symbol][-2] > bollingerBands[symbol][2][-2] and MFI_MACD[symbol][2] < -0.01:   # Enter Short Inst
+                        elif spread <= upper and instSpread[symbol][-2] > bollingerBands[symbol][2][-2] and MACD_ROC < -0.00:   # Enter Short Inst
                             qInst = round((10000 / instPrice), 2)
                             qEtf = round((10000 / etfPrice), 2)
                             instType = "SELL"
@@ -384,6 +403,7 @@ def main(plot):
         returnDS = dataseries.SequenceDataSeries(marketValue[symbol])
         instMFIds = dataseries.SequenceDataSeries(instMFI[symbol])
         etfMFIds = dataseries.SequenceDataSeries(etfMFI)
+        MACD_ROC = dataseries.SequenceDataSeries(MFI_MACD[symbol][3])
         spreadMFIds = dataseries.SequenceDataSeries(spreadMFI[symbol])
         middleBandDS = dataseries.SequenceDataSeries(bollingerBands[symbol][1])
         upperBandDS = dataseries.SequenceDataSeries(bollingerBands[symbol][2])
@@ -403,7 +423,8 @@ def main(plot):
         plt.getOrCreateSubplot("returns").addDataSeries("Cum. return", returnsAnalyzer.getCumulativeReturns())
         #plt.getOrCreateSubplot("MFI").addDataSeries("MFI-MACD", MFI_MACD_ds)
         #plt.getOrCreateSubplot("MFI").addDataSeries("Trigger", MFI_MACDtrigger_ds)
-        plt.getOrCreateSubplot("MFI").addDataSeries("Oscillator", MFI_MACDoscillator_ds)
+        #plt.getOrCreateSubplot("MFI").addDataSeries("Oscillator", MFI_MACDoscillator_ds)
+        plt.getOrCreateSubplot("MFI").addDataSeries("ROC", MACD_ROC)
         #plt.getOrCreateSubplot("MFI").addDataSeries(symbol + "-MFI", instMFIds)
         #plt.getOrCreateSubplot("MFI").addDataSeries(etf + "-MFI", etfMFIds)
         #plt.getOrCreateSubplot("MFI").addDataSeries("80", 80)
