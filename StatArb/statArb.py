@@ -152,7 +152,9 @@ class MyStrategy(strategy.Strategy):
     """def tenMFI(self, symbol):
         self.__symbol = symbol
         if len(spreadMFI[symbol]) >= 9:
-            tenMFI = mean(spreadMFI[symbol][-9:])
+            tenMFI = mean(spre            # Normalize pricespread
+            #naInstPrice = instPrice / instPrices[symbol][0]
+            #naInstPrices[symbol].append(naInstPrice)adMFI[symbol][-9:])
         else:
             tenMFI = 0
         return tenMFI"""
@@ -207,21 +209,13 @@ class MyStrategy(strategy.Strategy):
         plt_spread_MFI[symbol].append(spread_MFI)
         return spread_MFI"""
         
-    def get_MFI_MACD(self, symbol): #, spread_MFI):
+    def get_MFI_MACD(self, symbol):
         self.__symbol = symbol
         spreadDS = instSpread[symbol]
-        #self.__spread_MFI = spread_MFI
         if len(etfPrices) >= 35:
-            #MACD = talib.MACD(spreadMFI[symbol], 12, 26, 9)[0][-1]
-            #MACD_trigger = talib.MACD(spreadMFI[symbol], 12, 26, 9)[1][-1]
-            #MACD_oscillator = talib.MACD(spreadMFI[symbol], 12, 26, 9)[2][-1]
             MACD = talib.MACD(spreadDS, 12, 26, 9)[0][-1]
             MACD_trigger = talib.MACD(spreadDS, 12, 26, 9)[1][-1]
-            MACD_oscillator = talib.MACD(spreadDS, 12, 26, 9)[2][-1]
-            #print "MACD: " + str(MACD)
-            #print "MACD TRIP: " + str(MACD_trigger)
-            #print "MACD OS: " + str(MACD_oscillator)
-            
+            MACD_oscillator = talib.MACD(spreadDS, 12, 26, 9)[2][-1] 
         else:
             MACD = 0
             MACD_trigger = 0
@@ -229,7 +223,6 @@ class MyStrategy(strategy.Strategy):
         MFI_MACD[symbol][0].append(MACD)
         MFI_MACD[symbol][1].append(MACD_trigger)
         MFI_MACD[symbol][2].append(MACD_oscillator)
-        #print MFI_MACD[symbol]
         return MACD, MACD_trigger, MACD_oscillator
     
     def get_MACD_ROC(self, symbol):
@@ -239,36 +232,21 @@ class MyStrategy(strategy.Strategy):
         else:
             MACD_ROC = 0
         MFI_MACD[symbol][3].append(MACD_ROC)
-        return MACD_ROC
-        """if len(etfPrices) > 4:
-            MACD_ROC2 = MFI_MACD[symbol][3][-1] - MFI_MACD[symbol][3][-2]
-        else:
-            MACD_ROC2 = 0
-        MFI_MACD[symbol][4].append(MACD_ROC2)
-        return MACD_ROC2"""
-        
+        return MACD_ROC       
         
     def onBars(self, bars):
         etfPrice = bars[self.__etf].getAdjClose()
         etfPrices.append(etfPrice)
     
         for symbol in instruments:
-            #spread_MFI = self.get_spread_MFI(symbol)
-            #print "spred MFI: " + str(spreadMFI[symbol])
-            self.get_MFI_MACD(symbol) #, spread_MFI)
+            self.get_MFI_MACD(symbol)
             MACD_ROC = self.get_MACD_ROC(symbol)
-            
-            
-            
             # Get position status for symbol
             instShares = self.getBroker().getShares(symbol)
             # Get prices
             instPrice = bars[symbol].getAdjClose()
             # Append prices to list
             instPrices[symbol].append(instPrice)
-            # Normalize pricespread
-            #naInstPrice = instPrice / instPrices[symbol][0]
-            #naInstPrices[symbol].append(naInstPrice)
             # Define Spread
             spread = instPrice / etfPrice
             #Update Market Value of Inventory
@@ -280,18 +258,12 @@ class MyStrategy(strategy.Strategy):
             marketValue[symbol].append(marketValue[symbol][-1] + gain)
             self.trade_life(symbol)
             trade_age = tradeGain[symbol][2]
-            #print trade_age
-                          
-            
-
-            #tenMFI = self.tenMFI(symbol)
             self.bbands(symbol)
             lower = bollingerBands[symbol][0][-1]
             middle = bollingerBands[symbol][1][-1]
             upper = bollingerBands[symbol][2][-1]
             print self.getBroker().getPositions()
 
-            #ltenMFI[symbol].append(tenMFI)
             # Define trade rules
             if bars[symbol].getDateTime().year >= startYear:
                 if stopLoss == True and ((tGain < stop) or (trade_age == 50)):
@@ -397,18 +369,12 @@ def main(plot):
     
     if plot:
         symbol = "BHI"
-        #naInstPriceDS = dataseries.SequenceDataSeries(naInstPrices[symbol])
-        #naEtfPriceDS = dataseries.SequenceDataSeries(naEtfPrices)
         spreadDS = dataseries.SequenceDataSeries(pltSpread[symbol])
         returnDS = dataseries.SequenceDataSeries(marketValue[symbol])
-        instMFIds = dataseries.SequenceDataSeries(instMFI[symbol])
-        etfMFIds = dataseries.SequenceDataSeries(etfMFI)
         MACD_ROC = dataseries.SequenceDataSeries(MFI_MACD[symbol][3])
-        spreadMFIds = dataseries.SequenceDataSeries(spreadMFI[symbol])
         middleBandDS = dataseries.SequenceDataSeries(bollingerBands[symbol][1])
         upperBandDS = dataseries.SequenceDataSeries(bollingerBands[symbol][2])
         lowerBandDS = dataseries.SequenceDataSeries(bollingerBands[symbol][0])
-        #tenMFI = dataseries.SequenceDataSeries(ltenMFI[symbol])
         MFI_MACD_ds = dataseries.SequenceDataSeries(MFI_MACD[symbol][0])
         MFI_MACDtrigger_ds = dataseries.SequenceDataSeries(MFI_MACD[symbol][1])
         MFI_MACDoscillator_ds = dataseries.SequenceDataSeries(MFI_MACD[symbol][2])
@@ -417,21 +383,14 @@ def main(plot):
         plt.getOrCreateSubplot("spread").addDataSeries("Middle", middleBandDS)
         plt.getOrCreateSubplot("spread").addDataSeries("Upper", upperBandDS)
         plt.getOrCreateSubplot("spread").addDataSeries("Lower", lowerBandDS)
-        #plt.getOrCreateSubplot("MFI").addDataSeries("10 MFI", tenMFI)
-
         plt.getOrCreateSubplot("returns").addDataSeries(symbol + "-Return", returnDS)
         plt.getOrCreateSubplot("returns").addDataSeries("Cum. return", returnsAnalyzer.getCumulativeReturns())
         #plt.getOrCreateSubplot("MFI").addDataSeries("MFI-MACD", MFI_MACD_ds)
         #plt.getOrCreateSubplot("MFI").addDataSeries("Trigger", MFI_MACDtrigger_ds)
         #plt.getOrCreateSubplot("MFI").addDataSeries("Oscillator", MFI_MACDoscillator_ds)
-        plt.getOrCreateSubplot("MFI").addDataSeries("ROC", MACD_ROC)
-        #plt.getOrCreateSubplot("MFI").addDataSeries(symbol + "-MFI", instMFIds)
-        #plt.getOrCreateSubplot("MFI").addDataSeries(etf + "-MFI", etfMFIds)
-        #plt.getOrCreateSubplot("MFI").addDataSeries("80", 80)
-        #plt.getOrCreateSubplot("MFI").addDataSeries("20", 20)
+        plt.getOrCreateSubplot("MACD").addDataSeries("ROC", MACD_ROC)
+        plt.getOrCreateSubplot("MACD").addDataSeries("0", [0])
         
-        
-    
     # Run the strategy
     print "Running Strategy..."
     myStrategy.clearOrders(orders_file)
