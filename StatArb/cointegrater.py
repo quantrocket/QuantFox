@@ -12,7 +12,7 @@ import statArbVars as v
 etf = v.etf
 start = v.startYear - v.lookBack
 end = v.endYear - v.lookBack
-instrument_list = "BasicMaterials.csv"
+instrument_list = "Financials.csv"
 instReader = csv.reader(open(instrument_list, "rb"), delimiter = ",")
 instruments = [symbol for line in instReader for symbol in line]
 instFeed = [symbol for symbol in instruments]
@@ -22,13 +22,11 @@ etfPrices = np.array([])
 coints = {i:[] for i in instruments}
 highCorrs = []
 
-pairs_file = 'pairs.csv'
+pairs_file = 'Financials_Pairs.csv'
 pairs_file = open(pairs_file, "w")
 pairs_file.truncate()
 pairs_file.close()
-writer = csv.writer(open('pairs.csv', 'ab'), delimiter = ",")
-
-
+writer = csv.writer(open('Financials_Pairs.csv', 'ab'), delimiter = ",")
 
 class MyStrategy(strategy.Strategy):
     def __init__(self, feed, etf):
