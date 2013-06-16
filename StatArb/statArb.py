@@ -23,15 +23,15 @@ end = endYear - lookBack
 instrument_list = v.instrument_list
 orders_file = v.orders_file
 sym_dictionary = sd.sym_dictionary
-etf_list = ["XLF", "XLB"]
+etf_list = v.etf_list
 
 instReader = csv.reader(open(instrument_list, "rb"), delimiter = ",")
 instruments = [symbol for line in instReader for symbol in line]
 print instruments
 
 instFeed = [symbol for symbol in instruments]
-instFeed.append("XLF")
-instFeed.append("XLB")
+for etf in etf_list:
+    instFeed.append(etf)
 
 bbandPeriod = v.bbandPeriod
 stopLoss = v.stopLoss
@@ -219,12 +219,12 @@ class MyStrategy(strategy.Strategy):
             lower = bollingerBands[symbol][0][-1]
             middle = bollingerBands[symbol][1][-1]
             upper = bollingerBands[symbol][2][-1]
-            print self.getBroker().getPositions()
+            #print self.getBroker().getPositions()
 
             # Define trade rules
             if bars[symbol].getDateTime().year >= startYear:
                 if stopLoss == True and ((tGain < stop) or (trade_age == 50)):
-                    print "stop"
+                    #print "stop"
                     if instShares > 0:
                         qInst = instShares
                         qEtf = abs(etfStock[symbol])
@@ -401,7 +401,7 @@ def main(plot):
     print
     for symbol in instruments:
         print str(symbol)+ ": " + str(round(marketValue[symbol][-1], 4) * 100) + "%"
-       
+    print bbandPeriod   
     if plot:
             plt.plot(datetime.strptime('01/01/' + str(startYear), '%m/%d/%Y'))
 

@@ -1,10 +1,20 @@
 startYear = 2011
 endYear = 2012
 lookBack = 2
-etf = 'XLF'
-instrument_list = 'Financials_Pairs.csv'
+starting_cash = 430000
+
+
+instrument_list = 'pairs.csv'
 orders_file = 'orders.csv'
-bbandPeriod = 130
-stopLoss = True
+etf_list = ["XLY", "XLP", "XLE", "XLI", "XLF", "XLV", "XLB", "XLK", "XLU"]
+
+
+bbandPeriod = 20
+stopLoss = False
 stop = -0.2
-starting_cash = 110000
+
+
+execfile("statArb.py")
+
+
+
