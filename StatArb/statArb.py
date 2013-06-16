@@ -37,6 +37,7 @@ bbandPeriod = v.bbandPeriod
 stopLoss = v.stopLoss
 stop = v.stop
 starting_cash = v.starting_cash
+take_profit = v.take_profit
 
 instPrices = {i:np.array([]) for i in instruments}
 etfPrices = {i:np.array([]) for i in etf_list}
@@ -46,7 +47,7 @@ instStock = {i:[0] for i in instruments}                    # [lastSpread]
 etfStock = {i:[0] for i in instruments}                     # For correct order quantities
 marketValue = {i:[0] for i in instruments}                  # Tracks cumulative gain
 gain = {i:[0, 0] for i in instruments}                         # Tracks net gain
-bollingerBands = {i:[[],[],[], []] for i in instruments}
+bollingerBands = {i:[[],[],[],[],[]] for i in instruments}
 tradeGain = {i:[0, 0, 0] for i in instruments}                 # [enteredSpread]
 instMFI = {i:[] for i in instruments}                  # [[1-day],[MFR], [MFI]]
 etfMFI = []                                            # [[1-day],[MFR], [MFI]]
@@ -153,16 +154,22 @@ class MyStrategy(strategy.Strategy):
         spreadDS = instSpread[symbol]
         if len(spreadDS) >= bbandPeriod:
             upper = talib.BBANDS(spreadDS, bbandPeriod, 2, 2)[0][-1]
+            umiddle = talib.BBANDS(spreadDS, bbandPeriod, 1, 1)[0][-1]
             middle = talib.BBANDS(spreadDS, bbandPeriod, 2, 2)[1][-1]
+            lmiddle = talib.BBANDS(spreadDS, bbandPeriod, 1, 1)[2][-1]
             lower = talib.BBANDS(spreadDS, bbandPeriod, 2, 2)[2][-1]
         else:
             lower = 0
             middle = 0
             upper = 0
+            umiddle = 0
+            lmiddle = 0
         bollingerBands[symbol][0].append(lower)
         bollingerBands[symbol][1].append(middle)
         bollingerBands[symbol][2].append(upper)
-        return upper, middle, lower
+        bollingerBands[symbol][3].append(umiddle)
+        bollingerBands[symbol][4].append(lmiddle)
+        return upper, middle, lower, umiddle, lmiddle
 
     def get_MFI_MACD(self, symbol):
         self.__symbol = symbol
@@ -178,7 +185,7 @@ class MyStrategy(strategy.Strategy):
         MFI_MACD[symbol][0].append(MACD)
         MFI_MACD[symbol][1].append(MACD_trigger)
         MFI_MACD[symbol][2].append(MACD_oscillator)
-        return MACD, MACD_trigger, MACD_oscillator
+        return MACD_oscillator
     
     def get_MACD_ROC(self, symbol):
         self.__symbol = symbol
@@ -197,7 +204,7 @@ class MyStrategy(strategy.Strategy):
             etf = sym_dictionary[symbol]
             etfPrice = etfPrices[etf][-1]
             self.get_MFI_MACD(symbol)
-            MACD_ROC = self.get_MACD_ROC(symbol)
+            MACD_ROC = self.get_MFI_MACD(symbol)
             # Get position status for symbol
             instShares = self.getBroker().getShares(symbol)
             # Get prices
@@ -219,11 +226,13 @@ class MyStrategy(strategy.Strategy):
             lower = bollingerBands[symbol][0][-1]
             middle = bollingerBands[symbol][1][-1]
             upper = bollingerBands[symbol][2][-1]
+            umiddle = bollingerBands[symbol][3][-1]
+            lmiddle = bollingerBands[symbol][4][-1]
             #print self.getBroker().getPositions()
 
             # Define trade rules
             if bars[symbol].getDateTime().year >= startYear:
-                if stopLoss == True and ((tGain < stop) or (trade_age == 50)):
+                if stopLoss == True and ((tGain < stop) or (tGain > take_profit) or (trade_age == 50)):
                     #print "stop"
                     if instShares > 0:
                         qInst = instShares
@@ -245,7 +254,7 @@ class MyStrategy(strategy.Strategy):
                         self.orderWriter(bars[symbol].getDateTime().year, bars[symbol].getDateTime().month, bars[symbol].getDateTime().day, symbol, etf, spread, instType, etfType, qInst, qEtf, gainLog)
                 else:
                     if instShares == 0:
-                        if spread >= lower and instSpread[symbol][-2] < bollingerBands[symbol][0][-2]: # and MACD_ROC > 0.00:     # Enter Long Inst
+                        if spread >= lower and instSpread[symbol][-2] < bollingerBands[symbol][0][-2]:     # Enter Long Inst
                             qInst = round((10000 / instPrice), 2)
                             qEtf = round((10000 / etfPrice), 2)
                             instType = "BUY"
@@ -255,7 +264,7 @@ class MyStrategy(strategy.Strategy):
                             tradeGain[symbol][0] = 1
                             tradeGain[symbol][1] = spread
                             self.orderWriter(bars[symbol].getDateTime().year, bars[symbol].getDateTime().month, bars[symbol].getDateTime().day, symbol, etf, spread, instType, etfType, qInst, qEtf, gainLog)
-                        elif spread <= upper and instSpread[symbol][-2] > bollingerBands[symbol][2][-2]: # and MACD_ROC < -0.00:   # Enter Short Inst
+                        elif spread <= upper and instSpread[symbol][-2] > bollingerBands[symbol][2][-2]:  # Enter Short Inst
                             qInst = round((10000 / instPrice), 2)
                             qEtf = round((10000 / etfPrice), 2)
                             instType = "SELL"
@@ -268,7 +277,7 @@ class MyStrategy(strategy.Strategy):
                         else:
                             pass
                     elif instShares > 0:        # Exit Long Inst
-                        if spread >= middle:
+                        if spread >= lmiddle:
                             qInst = instShares
                             qEtf = abs(etfStock[symbol])
                             instType = "SELL"
@@ -280,7 +289,7 @@ class MyStrategy(strategy.Strategy):
                         else:
                             pass
                     elif instShares < 0:        # Exit Short Inst
-                        if spread <= middle:
+                        if spread <= umiddle:
                             qInst = abs(instShares)
                             qEtf = etfStock[symbol]
                             instType = "BUY"
@@ -333,6 +342,8 @@ def main(plot):
         middleBandDS = dataseries.SequenceDataSeries(bollingerBands[symbol][1])
         upperBandDS = dataseries.SequenceDataSeries(bollingerBands[symbol][2])
         lowerBandDS = dataseries.SequenceDataSeries(bollingerBands[symbol][0])
+        umiddleBandDS = dataseries.SequenceDataSeries(bollingerBands[symbol][3])
+        lmiddleBandDS = dataseries.SequenceDataSeries(bollingerBands[symbol][4])
         MFI_MACD_ds = dataseries.SequenceDataSeries(MFI_MACD[symbol][0])
         MFI_MACDtrigger_ds = dataseries.SequenceDataSeries(MFI_MACD[symbol][1])
         MFI_MACDoscillator_ds = dataseries.SequenceDataSeries(MFI_MACD[symbol][2])
@@ -341,12 +352,14 @@ def main(plot):
         plt.getOrCreateSubplot("spread").addDataSeries("Middle", middleBandDS)
         plt.getOrCreateSubplot("spread").addDataSeries("Upper", upperBandDS)
         plt.getOrCreateSubplot("spread").addDataSeries("Lower", lowerBandDS)
+        plt.getOrCreateSubplot("spread").addDataSeries("Mid-L", lmiddleBandDS)
+        plt.getOrCreateSubplot("spread").addDataSeries("Mid-U", umiddleBandDS)
         plt.getOrCreateSubplot("returns").addDataSeries(symbol + "-Return", returnDS)
         plt.getOrCreateSubplot("returns").addDataSeries("Cum. return", returnsAnalyzer.getCumulativeReturns())
         #plt.getOrCreateSubplot("MFI").addDataSeries("MFI-MACD", MFI_MACD_ds)
         #plt.getOrCreateSubplot("MFI").addDataSeries("Trigger", MFI_MACDtrigger_ds)
-        #plt.getOrCreateSubplot("MFI").addDataSeries("Oscillator", MFI_MACDoscillator_ds)
-        plt.getOrCreateSubplot("MACD").addDataSeries("ROC", MACD_ROC)
+        plt.getOrCreateSubplot("MACD").addDataSeries("Oscillator", MFI_MACDoscillator_ds)
+        #plt.getOrCreateSubplot("MACD").addDataSeries("ROC", MACD_ROC)
         plt.getOrCreateSubplot("MACD").addDataSeries("0", [0])
         
     # Run the strategy

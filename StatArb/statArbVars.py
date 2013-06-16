@@ -10,11 +10,12 @@ etf_list = ["XLY", "XLP", "XLE", "XLI", "XLF", "XLV", "XLB", "XLK", "XLU"]
 
 
 bbandPeriod = 20
-stopLoss = False
+stopLoss = True
 stop = -0.2
+take_profit = 0.20
 
 
-execfile("statArb.py")
+#execfile("statArb.py")
 
 
 
