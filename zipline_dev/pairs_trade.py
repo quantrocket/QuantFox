@@ -9,8 +9,17 @@ from zipline.algorithm import TradingAlgorithm
 from zipline.transforms import batch_transform
 from zipline.utils.factory import load_from_yahoo
 
-sym_list = {'SEE':'XLB'}
+sym_list = {'SEE':'XLB'}#,'BEAM':'XLP'}
+etf_list = {'XLB'} #,'XLP'}
 
+def build_feed():
+    feed = []
+    for sym in sym_list:
+        feed.append(sym)
+    for etf in etf_list:
+        feed.append(etf)
+    return feed 
+    
 @batch_transform
 def ols_transform(data, sid1, sid2):
     """
@@ -25,7 +34,7 @@ def ols_transform(data, sid1, sid2):
 class Pairtrade(TradingAlgorithm):
     
     def initialize(self, window_length=100):
-        self.spreads = []
+        self.spreads = {sym:[] for sym in sym_list}
         self.invested = 0
         self.window_length = window_length
         self.ols_transform = ols_transform(refresh_period=self.window_length,
@@ -53,8 +62,8 @@ class Pairtrade(TradingAlgorithm):
         # 1. Compute the spread given slope and intercept.
         # 2. z-score the spread.
         spread = (data[sym].price - (slope * data[etf].price + intercept))
-        self.spreads.append(spread)
-        spread_wind = self.spreads[-self.window_length:]
+        self.spreads[sym].append(spread)
+        spread_wind = self.spreads[sym][-self.window_length:]
         zscore = (spread - np.mean(spread_wind)) / np.std(spread_wind)
         return zscore
 
@@ -85,7 +94,8 @@ class Pairtrade(TradingAlgorithm):
 if __name__ == '__main__':
     start = datetime(2010, 1, 1, 0, 0, 0, 0, pytz.utc)
     end = datetime(2012, 12, 31, 0, 0, 0, 0, pytz.utc)
-    data = load_from_yahoo(stocks=['SEE', 'XLB'], indexes={},
+    feed = build_feed()
+    data = load_from_yahoo(stocks=feed, indexes={},
                            start=start, end=end)
     
     pairtrade = Pairtrade()
@@ -93,14 +103,16 @@ if __name__ == '__main__':
     print results.portfolio_value[-1]
     data['spreads'] = np.nan
 
-    ax1 = plt.subplot(211)
-    data[['SEE', 'XLB']].plot(ax=ax1)
-    plt.ylabel('price')
-    plt.setp(ax1.get_xticklabels(), visible=False)
-
-    ax2 = plt.subplot(212, sharex=ax1)
-    results.zscores.plot(ax=ax2, color='r')
-    plt.ylabel('zscored spread')
-
-    plt.gcf().set_size_inches(18, 8)
-    plt.savefig('homework1.pdf', format='pdf')
+    for sym in sym_list:
+        etf = sym_list[sym]
+        ax1 = plt.subplot(211)
+        data[[sym, etf]].plot(ax=ax1)
+        plt.ylabel('Price')
+        plt.setp(ax1.get_xticklabels(), visible=False)
+    
+        ax2 = plt.subplot(212, sharex=ax1)
+        results.zscores.plot(ax=ax2, color='r')
+        plt.ylabel('z-scored spread')
+    
+        plt.gcf().set_size_inches(18, 8)
+        plt.savefig(str(sym)+":"+str(etf), format='pdf')
