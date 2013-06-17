@@ -9,8 +9,8 @@ from zipline.algorithm import TradingAlgorithm
 from zipline.transforms import batch_transform
 from zipline.utils.factory import load_from_yahoo
 
-sym_list = {'SEE':'XLB'}#,'BEAM':'XLP'}
-etf_list = {'XLB'} #,'XLP'}
+sym_list = {'SEE':'XLB','BEAM':'XLP'}
+etf_list = {'XLB','XLP'}
 
 def build_feed():
     feed = []
@@ -35,7 +35,7 @@ class Pairtrade(TradingAlgorithm):
     
     def initialize(self, window_length=100):
         self.spreads = {sym:[] for sym in sym_list}
-        self.invested = 0
+        self.invested = {sym:[0,0] for sym in sym_list}
         self.window_length = window_length
         self.ols_transform = ols_transform(refresh_period=self.window_length,
                                            window_length=self.window_length)
@@ -70,23 +70,27 @@ class Pairtrade(TradingAlgorithm):
     def place_orders(self, data, sym, etf, zscore):
         ####################################################################
         # Buy spread if z-score is > 2, sell if z-score < .5.
-        if zscore >= 2.0 and not self.invested:
-            self.order(sym, int(100 / data[sym].price))
-            self.order(etf, -int(100 / data[etf].price))
-            self.invested = True
-        elif zscore <= -2.0 and not self.invested:
-            self.order(etf, -int(100 / data[etf].price))
-            self.order(sym, int(100 / data[etf].price))
-            self.invested = True
-        elif abs(zscore) < .5 and self.invested:
+        if zscore >= 2.0 and self.invested[sym][0] == 0:
+            sym_quantity = int(100 / data[sym].price)
+            etf_quantity = int(100 / data[etf].price)
+            self.order(sym, sym_quantity)
+            self.order(etf, -etf_quantity)
+            self.invested[sym] = [sym_quantity,-etf_quantity]
+        elif zscore <= -2.0 and self.invested[sym][0] == 0:
+            sym_quantity = int(100 / data[sym].price)
+            etf_quantity = int(100 / data[etf].price)
+            self.order(etf, etf_quantity)
+            self.order(sym, sym_quantity)
+            self.invested[sym] = [-sym_quantity,etf_quantity]
+        elif abs(zscore) < .5 and self.invested[sym][0] != 0:
             self.sell_spread(sym, etf)
-            self.invested = False
+            self.invested[sym] = [0,0]
 
     def sell_spread(self, sym, etf):
         #####################################################################
         # decrease exposure, regardless of position long/short.
         # buy for a short position, sell for a long.
-        etf_amount = self.portfolio.positions[etf].amount
+        etf_amount = self.invested[sym][0]
         self.order(etf, -1 * etf_amount)
         sym_amount = self.portfolio.positions[sym].amount
         self.order(sym, -1 * sym_amount)
