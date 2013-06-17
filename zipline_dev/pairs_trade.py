@@ -1,0 +1,106 @@
+
+import matplotlib.pyplot as plt
+import numpy as np
+import statsmodels.api as sm
+from datetime import datetime
+import pytz
+
+from zipline.algorithm import TradingAlgorithm
+from zipline.transforms import batch_transform
+from zipline.utils.factory import load_from_yahoo
+
+sym_list = {'SEE':'XLB'}
+
+@batch_transform
+def ols_transform(data, sid1, sid2):
+    """
+    Computes regression coefficient (slope and intercept)
+    via Ordinary Least Squares between two instruments.
+    """
+    p0 = data.price[sid1]
+    p1 = sm.add_constant(data.price[sid2], prepend=True)
+    slope, intercept = sm.OLS(p0, p1).fit().params
+    return slope, intercept
+
+class Pairtrade(TradingAlgorithm):
+    
+    def initialize(self, window_length=100):
+        self.spreads = []
+        self.invested = 0
+        self.window_length = window_length
+        self.ols_transform = ols_transform(refresh_period=self.window_length,
+                                           window_length=self.window_length)
+
+    def handle_data(self, data):
+        for sym in sym_list:
+            etf = sym_list[sym]
+            ################################################################
+            # 1. Compute regression coefficients between the two instruments
+            params = self.ols_transform.handle_data(data, sym, etf)
+            if params is None:
+                return
+            intercept, slope = params
+            ################################################################
+            # 2. Compute spread and z-score
+            zscore = self.compute_zscore(data, sym, etf, slope, intercept)
+            self.record(zscores=zscore)
+            ################################################################
+            # 3. Place orders
+            self.place_orders(data, sym, etf, zscore)
+
+    def compute_zscore(self, data, sym, etf, slope, intercept):
+        ####################################################################
+        # 1. Compute the spread given slope and intercept.
+        # 2. z-score the spread.
+        spread = (data[sym].price - (slope * data[etf].price + intercept))
+        self.spreads.append(spread)
+        spread_wind = self.spreads[-self.window_length:]
+        zscore = (spread - np.mean(spread_wind)) / np.std(spread_wind)
+        return zscore
+
+    def place_orders(self, data, sym, etf, zscore):
+        ####################################################################
+        # Buy spread if z-score is > 2, sell if z-score < .5.
+        if zscore >= 2.0 and not self.invested:
+            self.order(sym, int(100 / data[sym].price))
+            self.order(etf, -int(100 / data[etf].price))
+            self.invested = True
+        elif zscore <= -2.0 and not self.invested:
+            self.order(etf, -int(100 / data[etf].price))
+            self.order(sym, int(100 / data[etf].price))
+            self.invested = True
+        elif abs(zscore) < .5 and self.invested:
+            self.sell_spread(sym, etf)
+            self.invested = False
+
+    def sell_spread(self, sym, etf):
+        #####################################################################
+        # decrease exposure, regardless of position long/short.
+        # buy for a short position, sell for a long.
+        etf_amount = self.portfolio.positions[etf].amount
+        self.order(etf, -1 * etf_amount)
+        sym_amount = self.portfolio.positions[sym].amount
+        self.order(sym, -1 * sym_amount)
+
+if __name__ == '__main__':
+    start = datetime(2010, 1, 1, 0, 0, 0, 0, pytz.utc)
+    end = datetime(2012, 12, 31, 0, 0, 0, 0, pytz.utc)
+    data = load_from_yahoo(stocks=['SEE', 'XLB'], indexes={},
+                           start=start, end=end)
+    
+    pairtrade = Pairtrade()
+    results = pairtrade.run(data)
+    print results.portfolio_value[-1]
+    data['spreads'] = np.nan
+
+    ax1 = plt.subplot(211)
+    data[['SEE', 'XLB']].plot(ax=ax1)
+    plt.ylabel('price')
+    plt.setp(ax1.get_xticklabels(), visible=False)
+
+    ax2 = plt.subplot(212, sharex=ax1)
+    results.zscores.plot(ax=ax2, color='r')
+    plt.ylabel('zscored spread')
+
+    plt.gcf().set_size_inches(18, 8)
+    plt.savefig('homework1.pdf', format='pdf')
