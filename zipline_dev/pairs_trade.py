@@ -11,7 +11,7 @@ from zipline.utils.date_utils import days_since_epoch
 from zipline.utils.factory import load_from_yahoo
 from zipline.finance import performance
 
-sym_list = {'SEE':'XLB','BEAM':'XLP'}
+sym_list = {'SEE':'XLB'}#,'BEAM':'XLP'}
 etf_list = {'XLB','XLP'}
 
 def build_feed():
@@ -40,7 +40,8 @@ class Pairtrade(TradingAlgorithm):
         #self.ratios = {sym:np.array([]) for sym in sym_list}
         self.ratios = {sym:np.array([]) for sym in sym_list}
         self.invested = {sym:[0,0] for sym in sym_list}            # invested[sym,etf]
-        self.returns = {sym:[0,0,0,0] for sym in sym_list}         # returns[sym][enterSpread,currentSpread,tradeReturn,cumReturn]
+        self.returns = {sym:[0,0,0] for sym in sym_list}         # returns[sym][enterSpread,currentSpread,tradeReturn]
+        self.cumReturns = {sym:[] for sym in sym_list}
         self.zscores = {sym:np.array([0]*(window_length-1)) for sym in sym_list}
         self.dates = []
         self.window_length = window_length
@@ -49,14 +50,16 @@ class Pairtrade(TradingAlgorithm):
                                            window_length=self.window_length)
         
     def trade_return(self, sym, ratio):
-        self.returns[1] = ratio
-        enterSpread = self.returns[sym][0]
-        if self.invested[sym][0] > 0:
-            tradeReturn = (ratio - enterSpread)/enterSpread
-        elif self.invested[sym][0] < 0:
-            tradeReturn = (enterSpread - ratio)/enterSpread
-        else:
+        if self.day_count == 1:
             tradeReturn = 0
+        else:
+            lastRatio = self.ratios[sym][-1]
+            if self.invested[sym][0] > 0:
+                tradeReturn = (ratio - lastRatio)/lastRatio
+            elif self.invested[sym][0] < 0:
+                tradeReturn = (lastRatio - ratio)/lastRatio
+            else:
+                tradeReturn = 0
         return tradeReturn
 
     def handle_data(self, data):
@@ -67,9 +70,12 @@ class Pairtrade(TradingAlgorithm):
         for sym in sym_list:
             etf = sym_list[sym]
             ratio = data[sym].price / data[etf].price
-            self.ratios[sym] = np.append(self.ratios[sym], ratio)
             tradeReturn = self.trade_return(sym, ratio)
-            self.returns[sym].append(self.returns[sym][-1] + tradeReturn)
+            self.ratios[sym] = np.append(self.ratios[sym], ratio)
+            if self.day_count == 1:
+                self.cumReturns[sym].append(0)
+            else:
+                self.cumReturns[sym].append(self.cumReturns[sym][-1] + tradeReturn)
         for sym in sym_list:
             ################################################################
             # 1. Compute regression coefficients between the two instruments
@@ -100,18 +106,18 @@ class Pairtrade(TradingAlgorithm):
         ####################################################################
         # Buy spread if z-score is > 2, sell if z-score < .5.
         if zscore >= 2.0 and self.invested[sym][0] == 0:
-            sym_quantity = int(100 / data[sym].price)
+            sym_quantity = -int(100 / data[sym].price)
             etf_quantity = int(100 / data[etf].price)
             self.order(sym, sym_quantity)
-            self.order(etf, -etf_quantity)
-            self.invested[sym] = [sym_quantity,-etf_quantity]
+            self.order(etf, etf_quantity)
+            self.invested[sym] = [sym_quantity, etf_quantity]
             self.returns[sym][0] = ratio
         elif zscore <= -2.0 and self.invested[sym][0] == 0:
             sym_quantity = int(100 / data[sym].price)
-            etf_quantity = int(100 / data[etf].price)
-            self.order(etf, etf_quantity)
+            etf_quantity = -int(100 / data[etf].price)
             self.order(sym, sym_quantity)
-            self.invested[sym] = [-sym_quantity,etf_quantity]
+            self.order(etf, etf_quantity)
+            self.invested[sym] = [sym_quantity, etf_quantity]
             self.returns[sym][0] = ratio
         elif abs(zscore) < .5 and self.invested[sym][0] != 0:
             self.sell_spread(sym, etf)
@@ -121,7 +127,7 @@ class Pairtrade(TradingAlgorithm):
         #####################################################################
         # decrease exposure, regardless of position long/short.
         # buy for a short position, sell for a long.
-        etf_amount = self.invested[sym][0]
+        etf_amount = self.invested[sym][1]
         self.order(etf, -1 * etf_amount)
         sym_amount = self.portfolio.positions[sym].amount
         self.order(sym, -1 * sym_amount)
@@ -141,18 +147,33 @@ if __name__ == '__main__':
     for sym in sym_list:
         etf = sym_list[sym]
 
-        ax1 = plt.subplot(311, ylabel=(str(sym)+":"+str(etf))+' Adjusted Close')
+        ax1 = plt.subplot(411, ylabel=(str(sym)+":"+str(etf))+' Adjusted Close')
         plt.plot(pairtrade.dates, pairtrade.ratios[sym])
         plt.setp(ax1.get_xticklabels(), visible=True)
+        plt.xticks(rotation=45)
+        plt.grid(b=True, which='major', color='k')
     
-        ax2 = plt.subplot(312, ylabel='z-scored spread')
-        plt.plot(pairtrade.dates, pairtrade.zscores[sym])
+        ax2 = plt.subplot(412, ylabel='z-scored spread')
+        plt.plot(pairtrade.dates, pairtrade.zscores[sym], color='r')
         plt.setp(ax2.get_xticklabels(), visible=True)
+        plt.xticks(rotation=45)
+        plt.grid(b=True, which='major', color='k')
         
-        ax3 = plt.subplot(313, ylabel='portfolio value')
+        ax3 = plt.subplot(413, ylabel=(str(sym)+":"+str(etf))+' Return')
+        plt.plot(pairtrade.dates, pairtrade.cumReturns[sym])
+        plt.setp(ax3.get_xticklabels(), visible=True)
+        plt.xticks(rotation=45)
+        plt.grid(b=True, which='major', color='k')
+        
+        ax4 = plt.subplot(414, ylabel='portfolio value')
+        results.portfolio_value.plot(ax=ax4)
+        plt.setp(ax4.get_xticklabels(), visible=True)
+        
+        """
         results.portfolio_value.plot(ax=ax3)
         plt.setp(ax3.get_xticklabels(), visible=True)
-    
-        plt.gcf().set_size_inches(18, 16)
+        """
+        plt.gcf().set_size_inches(30, 20)
         plt.savefig(str(sym)+":"+str(etf), format='pdf')
+        #plt.show()
         plt.clf()
