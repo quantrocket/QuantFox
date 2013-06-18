@@ -1,4 +1,3 @@
-
 import matplotlib.pyplot as plt
 import numpy as np
 import statsmodels.api as sm
@@ -38,10 +37,12 @@ class Pairtrade(TradingAlgorithm):
     
     def initialize(self, window_length=100):
         self.spreads = {sym:[] for sym in sym_list}
+        #self.ratios = {sym:np.array([]) for sym in sym_list}
+        self.ratios = {sym:np.array([]) for sym in sym_list}
         self.invested = {sym:[0,0] for sym in sym_list}            # invested[sym,etf]
         self.returns = {sym:[0,0,0,0] for sym in sym_list}         # returns[sym][enterSpread,currentSpread,tradeReturn,cumReturn]
         self.zscores = {sym:np.array([0]*(window_length-1)) for sym in sym_list}
-        self.zdates = []
+        self.dates = []
         self.window_length = window_length
         self.day_count = 0
         self.ols_transform = ols_transform(refresh_period=self.window_length,
@@ -61,13 +62,15 @@ class Pairtrade(TradingAlgorithm):
     def handle_data(self, data):
         print self.day_count
         self.day_count += 1
-        self.zdates = np.append(self.zdates, self.day_count) #TradingAlgorithm.get_datetime(self).__format__('%Y-%m-%d'))
+        self.dates = np.append(self.dates, TradingAlgorithm.get_datetime(self))
         
         for sym in sym_list:
             etf = sym_list[sym]
             ratio = data[sym].price / data[etf].price
+            self.ratios[sym] = np.append(self.ratios[sym], ratio)
             tradeReturn = self.trade_return(sym, ratio)
             self.returns[sym].append(self.returns[sym][-1] + tradeReturn)
+        for sym in sym_list:
             ################################################################
             # 1. Compute regression coefficients between the two instruments
             params = self.ols_transform.handle_data(data, sym, etf)
@@ -138,15 +141,12 @@ if __name__ == '__main__':
     for sym in sym_list:
         etf = sym_list[sym]
 
-        ax1 = plt.subplot(311, ylabel='price')
-        data[[sym, etf]].plot(ax=ax1)
+        ax1 = plt.subplot(311, ylabel=(str(sym)+":"+str(etf))+' Adjusted Close')
+        plt.plot(pairtrade.dates, pairtrade.ratios[sym])
         plt.setp(ax1.get_xticklabels(), visible=True)
     
         ax2 = plt.subplot(312, ylabel='z-scored spread')
-        print len(pairtrade.zdates)
-        print len(pairtrade.zscores[sym])
-        plt.plot(pairtrade.zdates, pairtrade.zscores[sym])
-        #self.zscores[sym].plot(ax=ax2, color='r')
+        plt.plot(pairtrade.dates, pairtrade.zscores[sym])
         plt.setp(ax2.get_xticklabels(), visible=True)
         
         ax3 = plt.subplot(313, ylabel='portfolio value')
@@ -156,4 +156,3 @@ if __name__ == '__main__':
         plt.gcf().set_size_inches(18, 16)
         plt.savefig(str(sym)+":"+str(etf), format='pdf')
         plt.clf()
-        
