@@ -5,9 +5,12 @@ import statsmodels.api as sm
 from datetime import datetime
 import pytz
 
+
 from zipline.algorithm import TradingAlgorithm
 from zipline.transforms import batch_transform
+from zipline.utils.date_utils import days_since_epoch
 from zipline.utils.factory import load_from_yahoo
+from zipline.finance import performance
 
 sym_list = {'SEE':'XLB','BEAM':'XLP'}
 etf_list = {'XLB','XLP'}
@@ -35,14 +38,36 @@ class Pairtrade(TradingAlgorithm):
     
     def initialize(self, window_length=100):
         self.spreads = {sym:[] for sym in sym_list}
-        self.invested = {sym:[0,0] for sym in sym_list}
+        self.invested = {sym:[0,0] for sym in sym_list}            # invested[sym,etf]
+        self.returns = {sym:[0,0,0,0] for sym in sym_list}         # returns[sym][enterSpread,currentSpread,tradeReturn,cumReturn]
+        self.zscores = {sym:np.array([0]*(window_length-1)) for sym in sym_list}
+        self.zdates = []
         self.window_length = window_length
+        self.day_count = 0
         self.ols_transform = ols_transform(refresh_period=self.window_length,
                                            window_length=self.window_length)
+        
+    def trade_return(self, sym, ratio):
+        self.returns[1] = ratio
+        enterSpread = self.returns[sym][0]
+        if self.invested[sym][0] > 0:
+            tradeReturn = (ratio - enterSpread)/enterSpread
+        elif self.invested[sym][0] < 0:
+            tradeReturn = (enterSpread - ratio)/enterSpread
+        else:
+            tradeReturn = 0
+        return tradeReturn
 
     def handle_data(self, data):
+        print self.day_count
+        self.day_count += 1
+        self.zdates = np.append(self.zdates, self.day_count) #TradingAlgorithm.get_datetime(self).__format__('%Y-%m-%d'))
+        
         for sym in sym_list:
             etf = sym_list[sym]
+            ratio = data[sym].price / data[etf].price
+            tradeReturn = self.trade_return(sym, ratio)
+            self.returns[sym].append(self.returns[sym][-1] + tradeReturn)
             ################################################################
             # 1. Compute regression coefficients between the two instruments
             params = self.ols_transform.handle_data(data, sym, etf)
@@ -52,10 +77,10 @@ class Pairtrade(TradingAlgorithm):
             ################################################################
             # 2. Compute spread and z-score
             zscore = self.compute_zscore(data, sym, etf, slope, intercept)
-            self.record(zscores=zscore)
+            #self.record(zscores[sym]=zscore)
             ################################################################
             # 3. Place orders
-            self.place_orders(data, sym, etf, zscore)
+            self.place_orders(data, sym, etf, zscore, ratio)
 
     def compute_zscore(self, data, sym, etf, slope, intercept):
         ####################################################################
@@ -65,9 +90,10 @@ class Pairtrade(TradingAlgorithm):
         self.spreads[sym].append(spread)
         spread_wind = self.spreads[sym][-self.window_length:]
         zscore = (spread - np.mean(spread_wind)) / np.std(spread_wind)
+        self.zscores[sym] = np.append(self.zscores[sym], zscore)
         return zscore
 
-    def place_orders(self, data, sym, etf, zscore):
+    def place_orders(self, data, sym, etf, zscore, ratio):
         ####################################################################
         # Buy spread if z-score is > 2, sell if z-score < .5.
         if zscore >= 2.0 and self.invested[sym][0] == 0:
@@ -76,12 +102,14 @@ class Pairtrade(TradingAlgorithm):
             self.order(sym, sym_quantity)
             self.order(etf, -etf_quantity)
             self.invested[sym] = [sym_quantity,-etf_quantity]
+            self.returns[sym][0] = ratio
         elif zscore <= -2.0 and self.invested[sym][0] == 0:
             sym_quantity = int(100 / data[sym].price)
             etf_quantity = int(100 / data[etf].price)
             self.order(etf, etf_quantity)
             self.order(sym, sym_quantity)
             self.invested[sym] = [-sym_quantity,etf_quantity]
+            self.returns[sym][0] = ratio
         elif abs(zscore) < .5 and self.invested[sym][0] != 0:
             self.sell_spread(sym, etf)
             self.invested[sym] = [0,0]
@@ -96,11 +124,11 @@ class Pairtrade(TradingAlgorithm):
         self.order(sym, -1 * sym_amount)
 
 if __name__ == '__main__':
-    start = datetime(2010, 1, 1, 0, 0, 0, 0, pytz.utc)
+    start = datetime(2012, 1, 1, 0, 0, 0, 0, pytz.utc)
     end = datetime(2012, 12, 31, 0, 0, 0, 0, pytz.utc)
     feed = build_feed()
     data = load_from_yahoo(stocks=feed, indexes={},
-                           start=start, end=end)
+                           start=start, end=end, adjusted=True)
     
     pairtrade = Pairtrade()
     results = pairtrade.run(data)
@@ -109,14 +137,23 @@ if __name__ == '__main__':
 
     for sym in sym_list:
         etf = sym_list[sym]
-        ax1 = plt.subplot(211)
+
+        ax1 = plt.subplot(311, ylabel='price')
         data[[sym, etf]].plot(ax=ax1)
-        plt.ylabel('Price')
-        plt.setp(ax1.get_xticklabels(), visible=False)
+        plt.setp(ax1.get_xticklabels(), visible=True)
     
-        ax2 = plt.subplot(212, sharex=ax1)
-        results.zscores.plot(ax=ax2, color='r')
-        plt.ylabel('z-scored spread')
+        ax2 = plt.subplot(312, ylabel='z-scored spread')
+        print len(pairtrade.zdates)
+        print len(pairtrade.zscores[sym])
+        plt.plot(pairtrade.zdates, pairtrade.zscores[sym])
+        #self.zscores[sym].plot(ax=ax2, color='r')
+        plt.setp(ax2.get_xticklabels(), visible=True)
+        
+        ax3 = plt.subplot(313, ylabel='portfolio value')
+        results.portfolio_value.plot(ax=ax3)
+        plt.setp(ax3.get_xticklabels(), visible=True)
     
-        plt.gcf().set_size_inches(18, 8)
+        plt.gcf().set_size_inches(18, 16)
         plt.savefig(str(sym)+":"+str(etf), format='pdf')
+        plt.clf()
+        
