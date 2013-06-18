@@ -11,7 +11,7 @@ from zipline.utils.date_utils import days_since_epoch
 from zipline.utils.factory import load_from_yahoo
 from zipline.finance import performance
 
-sym_list = {'SEE':'XLB','BEAM':'XLP'}
+sym_list = {'SEE':'XLB'}#,'BEAM':'XLP'}
 etf_list = {'XLB','XLP'}
 
 def build_feed():
@@ -119,16 +119,16 @@ class Pairtrade(TradingAlgorithm):
         ####################################################################
         # Buy spread if z-score is > 2, sell if z-score < .5.
         if zscore >= 2.0 and self.invested[sym][0] == 0:
-            sym_quantity = -int(100 / data[sym].price)
-            etf_quantity = int(100 / data[etf].price)
+            sym_quantity = -int(10000 / data[sym].price)
+            etf_quantity = int(10000 / data[etf].price)
             self.order(sym, sym_quantity)
             self.order(etf, etf_quantity)
             self.invested[sym] = [sym_quantity, etf_quantity]
             self.returns[sym][0] = data[sym].price
             self.returns[sym][1] = data[etf].price
         elif zscore <= -2.0 and self.invested[sym][0] == 0:
-            sym_quantity = int(100 / data[sym].price)
-            etf_quantity = -int(100 / data[etf].price)
+            sym_quantity = int(10000 / data[sym].price)
+            etf_quantity = -int(10000 / data[etf].price)
             self.order(sym, sym_quantity)
             self.order(etf, etf_quantity)
             self.invested[sym] = [sym_quantity, etf_quantity]
@@ -156,7 +156,7 @@ if __name__ == '__main__':
     
     pairtrade = Pairtrade()
     results = pairtrade.run(data)
-    print results.portfolio_value[-1]
+    print results.portfolio_value/1000
     for sym in sym_list:
         print str(sym)+": "+str((pairtrade.cumReturns[sym][-1])*100)
     data['spreads'] = np.nan
@@ -183,13 +183,11 @@ if __name__ == '__main__':
         plt.grid(b=True, which='major', color='k')
         
         ax4 = plt.subplot(414, ylabel='portfolio value')
-        results.portfolio_value.plot(ax=ax4)
+        plt.plot(pairtrade.dates, results.portfolio_value/100000)
         plt.setp(ax4.get_xticklabels(), visible=True)
+        plt.xticks(rotation=45)
+        plt.grid(b=True, which='major', color='k')
         
-        """
-        results.portfolio_value.plot(ax=ax3)
-        plt.setp(ax3.get_xticklabels(), visible=True)
-        """
         plt.gcf().set_size_inches(30, 20)
         plt.savefig(str(sym)+":"+str(etf), format='pdf')
         #plt.show()
