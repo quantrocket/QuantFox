@@ -11,7 +11,7 @@ from zipline.utils.date_utils import days_since_epoch
 from zipline.utils.factory import load_from_yahoo
 from zipline.finance import performance
 
-sym_list = {'SEE':'XLB'}#,'BEAM':'XLP'}
+sym_list = {'SEE':'XLB','BEAM':'XLP'}
 etf_list = {'XLB','XLP'}
 
 def build_feed():
@@ -40,7 +40,7 @@ class Pairtrade(TradingAlgorithm):
         #self.ratios = {sym:np.array([]) for sym in sym_list}
         self.ratios = {sym:np.array([]) for sym in sym_list}
         self.invested = {sym:[0,0] for sym in sym_list}            # invested[sym,etf]
-        self.returns = {sym:[0,0,0] for sym in sym_list}         # returns[sym][enterSpread,currentSpread,tradeReturn]
+        self.returns = {sym:[0,0,0,0] for sym in sym_list}         # returns[sym][enterdSymPrice,enterdEtfPrice]
         self.cumReturns = {sym:[] for sym in sym_list}
         self.zscores = {sym:np.array([0]*(window_length-1)) for sym in sym_list}
         self.dates = []
@@ -49,33 +49,46 @@ class Pairtrade(TradingAlgorithm):
         self.ols_transform = ols_transform(refresh_period=self.window_length,
                                            window_length=self.window_length)
         
-    def trade_return(self, sym, ratio):
+    def trade_return(self, sym, ratio, currentSym, currentEtf):
         if self.day_count == 1:
             tradeReturn = 0
         else:
-            lastRatio = self.ratios[sym][-1]
+            enteredSym = self.returns[sym][0]
+            enteredEtf = self.returns[sym][1]
             if self.invested[sym][0] > 0:
-                tradeReturn = (ratio - lastRatio)/lastRatio
+                symReturn = (currentSym-enteredSym)/enteredSym
+                etfReturn = (enteredEtf-currentEtf)/enteredEtf
+                tradeReturn = symReturn + etfReturn
             elif self.invested[sym][0] < 0:
-                tradeReturn = (lastRatio - ratio)/lastRatio
+                symReturn = (enteredSym-currentSym)/enteredSym
+                etfReturn = (currentEtf-enteredEtf)/enteredEtf
+                tradeReturn = symReturn + etfReturn
             else:
                 tradeReturn = 0
         return tradeReturn
 
     def handle_data(self, data):
+        ####################################################################
+        # Keep track of days
         print self.day_count
         self.day_count += 1
         self.dates = np.append(self.dates, TradingAlgorithm.get_datetime(self))
-        
+        ####################################################################
+        # Get the prices and do some calculations
         for sym in sym_list:
             etf = sym_list[sym]
             ratio = data[sym].price / data[etf].price
-            tradeReturn = self.trade_return(sym, ratio)
             self.ratios[sym] = np.append(self.ratios[sym], ratio)
+        ####################################################################
+        # Calculate the trade return for analysis purposes
+            tradeReturn = self.trade_return(sym, ratio, data[sym].price, data[etf].price)
             if self.day_count == 1:
                 self.cumReturns[sym].append(0)
             else:
                 self.cumReturns[sym].append(self.cumReturns[sym][-1] + tradeReturn)
+            self.returns[sym] = [data[sym].price, data[etf].price]
+        ####################################################################
+        # Trade related calculations loop
         for sym in sym_list:
             ################################################################
             # 1. Compute regression coefficients between the two instruments
@@ -111,14 +124,16 @@ class Pairtrade(TradingAlgorithm):
             self.order(sym, sym_quantity)
             self.order(etf, etf_quantity)
             self.invested[sym] = [sym_quantity, etf_quantity]
-            self.returns[sym][0] = ratio
+            self.returns[sym][0] = data[sym].price
+            self.returns[sym][1] = data[etf].price
         elif zscore <= -2.0 and self.invested[sym][0] == 0:
             sym_quantity = int(100 / data[sym].price)
             etf_quantity = -int(100 / data[etf].price)
             self.order(sym, sym_quantity)
             self.order(etf, etf_quantity)
             self.invested[sym] = [sym_quantity, etf_quantity]
-            self.returns[sym][0] = ratio
+            self.returns[sym][0] = data[sym].price
+            self.returns[sym][1] = data[etf].price
         elif abs(zscore) < .5 and self.invested[sym][0] != 0:
             self.sell_spread(sym, etf)
             self.invested[sym] = [0,0]
@@ -142,6 +157,8 @@ if __name__ == '__main__':
     pairtrade = Pairtrade()
     results = pairtrade.run(data)
     print results.portfolio_value[-1]
+    for sym in sym_list:
+        print str(sym)+": "+str((pairtrade.cumReturns[sym][-1])*100)
     data['spreads'] = np.nan
 
     for sym in sym_list:
