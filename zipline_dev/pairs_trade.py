@@ -9,12 +9,16 @@ import os
 
 from zipline.algorithm import TradingAlgorithm
 from zipline.transforms import batch_transform
-from zipline.utils.date_utils import days_since_epoch
+from zipline.utils.factory import create_returns_from_list
 from zipline.utils.factory import load_from_yahoo
-from zipline.finance import performance
+from zipline.finance import performance, slippage, risk
+from zipline.finance import trading
 
-sym_list = {'SEE':'XLB','BEAM':'XLP'}
-etf_list = {'XLB','XLP'}
+#sym_list = {'GLD':'IAU'}
+#sym_list = {'KO':'PEP'}
+sym_list = {'CH':'ECH'}
+#sym_list = {'GLD':'IAU','KO':'PEP'}
+etf_list = {'IAU','PEP','ECH'}
 
 def build_feed():
     feed = []
@@ -49,6 +53,9 @@ class Pairtrade(TradingAlgorithm):
     
     def initialize(self, window_length=100):
         clearOrders()
+        """ Slippage was messing up orders, setting to fixed corrected revisit this
+        """    
+        self.set_slippage(slippage.FixedSlippage())
         self.day_count = 0
         self.dates = []
         self.spreads = {sym:[] for sym in sym_list}
@@ -69,7 +76,7 @@ class Pairtrade(TradingAlgorithm):
             net_gain = 0
             self.returns[sym][0].append(net_gain)
         else:
-            if self.invested[sym][0] == 0:
+            if self.portfolio.positions[sym].amount == 0:
                 symReturn = 0
                 etfReturn = 0
                 net_gain = 0
@@ -77,12 +84,12 @@ class Pairtrade(TradingAlgorithm):
             else:
                 sym_cost_basis = self.portfolio['positions'][sym]['cost_basis']
                 etf_cost_basis = self.portfolio['positions'][etf]['cost_basis']
-                if self.invested[sym][0] > 0:
+                if self.portfolio.positions[sym].amount > 0:
                     symReturn = (currentSym-sym_cost_basis)/sym_cost_basis
                     etfReturn = (etf_cost_basis-currentEtf)/etf_cost_basis
                     net_gain = symReturn + etfReturn
                     self.returns[sym][0].append(net_gain)
-                elif self.invested[sym][0] < 0:
+                elif self.portfolio.positions[sym].amount < 0:
                     symReturn = (sym_cost_basis-currentSym)/sym_cost_basis
                     etfReturn = (currentEtf-etf_cost_basis)/etf_cost_basis
                     net_gain = symReturn + etfReturn
@@ -92,7 +99,7 @@ class Pairtrade(TradingAlgorithm):
         if self.day_count < 1:
             self.returns[sym][1].append(0)
         else:
-            if self.invested[sym][0] == 0:
+            if self.portfolio.positions[sym].amount == 0:
                 delta = 0
                 self.returns[sym][1].append(self.returns[sym][1][-1] + delta)
             else:
@@ -116,6 +123,7 @@ class Pairtrade(TradingAlgorithm):
         for sym in sym_list:
             etf = sym_list[sym]
             print str(self.dates[-1]) + ': ' + str(self.portfolio['positions'][sym]) #[1][sym]['position'])
+            print str(self.dates[-1]) + ': ' + str(self.portfolio['positions'][etf]) #[1][sym]['position'])
             sym_price = data[sym].price
             etf_price = data[etf].price
             ratio = sym_price / etf_price
@@ -161,31 +169,32 @@ class Pairtrade(TradingAlgorithm):
     def place_orders(self, data, sym, etf, sym_price, etf_price, sym_gain, etf_gain, zscore):
         ####################################################################
         # Buy spread if z-score is > 2, sell if z-score < .5.
-        if zscore >= 2.0 and self.invested[sym][0] == 0:
+        etf = sym_list[sym]
+        sym_price = data[sym].price
+        etf_price = data[etf].price
+        if zscore >= 2 and self.portfolio.positions[sym].amount == 0:
             sym_quantity = -int(10000 / sym_price)
             etf_quantity = int(10000 / etf_price)
             self.order(sym, sym_quantity)
             self.order(etf, etf_quantity)
-            self.invested[sym] = [sym_quantity, etf_quantity]
             self.orderWriter(str(self.dates[-1])[:10], sym, zscore, sym_price, sym_quantity, 'Short')
             self.orderWriter(str(self.dates[-1])[:10], etf, zscore, etf_price, etf_quantity, 'Long')
-        elif zscore <= -2.0 and self.invested[sym][0] == 0:
+        elif zscore <= -2 and self.portfolio.positions[sym].amount == 0:
             sym_quantity = int(10000 / sym_price)
             etf_quantity = -int(10000 / etf_price)
             self.order(sym, sym_quantity)
             self.order(etf, etf_quantity)
-            self.invested[sym] = [sym_quantity, etf_quantity]
             self.orderWriter(str(self.dates[-1])[:10], sym, zscore, sym_price, sym_quantity, 'Long')
             self.orderWriter(str(self.dates[-1])[:10], etf, zscore, etf_price, etf_quantity, 'Short')
-        elif abs(zscore) < .5 and self.invested[sym][0] != 0:
+        elif abs(zscore) < .5 and self.portfolio.positions[sym].amount != 0:
             self.sell_spread(sym, etf, sym_price, etf_price, sym_gain, etf_gain, zscore)
-            self.invested[sym] = [0,0]
 
     def sell_spread(self, sym, etf, sym_price, etf_price, sym_gain, etf_gain, zscore):
         #####################################################################
         # decrease exposure, regardless of position long/short.
         # buy for a short position, sell for a long.
-        etf_amount = self.invested[sym][1]
+        etf = sym_list[sym]
+        etf_amount = self.portfolio.positions[etf].amount
         self.order(etf, -1 * etf_amount)
         sym_amount = self.portfolio.positions[sym].amount
         self.order(sym, -1 * sym_amount)
@@ -193,7 +202,7 @@ class Pairtrade(TradingAlgorithm):
         self.orderWriter(str(self.dates[-1])[:10], etf, zscore, etf_price, etf_amount, 'Exit', etf_gain, self.returns[sym][0][-1])
 
 if __name__ == '__main__':
-    start = datetime(2012, 1, 1, 0, 0, 0, 0, pytz.utc)
+    start = datetime(2008, 1, 1, 0, 0, 0, 0, pytz.utc)
     end = datetime(2012, 12, 31, 0, 0, 0, 0, pytz.utc)
     feed = build_feed()
     data = load_from_yahoo(stocks=feed, indexes={},
@@ -201,7 +210,18 @@ if __name__ == '__main__':
     
     pairtrade = Pairtrade()
     results = pairtrade.run(data)
-    #print results.portfolio_value/1000
+    #print str((results.portfolio_value[-1] - 100000)/1000) + ' %'
+    
+    from zipline.finance import trading
+    from zipline.utils.factory import create_returns_from_list
+    from zipline.finance.risk import RiskMetricsBase
+    start = results.first_valid_index().replace(tzinfo=pytz.utc)
+    end = results.last_valid_index().replace(tzinfo=pytz.utc)
+    env = trading.SimulationParameters(start, end)
+    returns_risk = create_returns_from_list(results.returns, env)
+    risk = RiskMetricsBase(start, end, returns_risk)
+    print risk
+    
     for sym in sym_list:
         print str(sym)+": "+str((pairtrade.returns[sym][1][-1])*100)
     data['spreads'] = np.nan
