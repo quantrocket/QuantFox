@@ -13,19 +13,20 @@ from zipline.utils.factory import create_returns_from_list
 from zipline.utils.factory import load_from_yahoo
 from zipline.finance import performance, slippage, risk
 from zipline.finance import trading
+from zipline.finance.risk import RiskMetricsBase
 
 #sym_list = {'GLD':'IAU'}
 #sym_list = {'KO':'PEP'}
+#sym_list = {'VALE':'RIO'}
 sym_list = {'CH':'ECH'}
+#sym_list = {'XOM':'COP'}
 #sym_list = {'GLD':'IAU','KO':'PEP'}
-etf_list = {'IAU','PEP','ECH'}
 
 def build_feed():
     feed = []
     for sym in sym_list:
         feed.append(sym)
-    for etf in etf_list:
-        feed.append(etf)
+        feed.append(sym_list[sym])
     return feed 
     
 @batch_transform
@@ -116,14 +117,15 @@ class Pairtrade(TradingAlgorithm):
     def handle_data(self, data):
         ####################################################################
         # Keep track of days
-        print self.day_count
+        #print self.day_count
         self.dates = np.append(self.dates, TradingAlgorithm.get_datetime(self))
+        print self.dates[-1]
         ####################################################################
         # Get the prices and do some calculations
         for sym in sym_list:
             etf = sym_list[sym]
-            print str(self.dates[-1]) + ': ' + str(self.portfolio['positions'][sym]) #[1][sym]['position'])
-            print str(self.dates[-1]) + ': ' + str(self.portfolio['positions'][etf]) #[1][sym]['position'])
+            #print str(self.dates[-1]) + ': ' + str(self.portfolio['positions'][sym]) #[1][sym]['position'])
+            #print str(self.dates[-1]) + ': ' + str(self.portfolio['positions'][etf]) #[1][sym]['position'])
             sym_price = data[sym].price
             etf_price = data[etf].price
             ratio = sym_price / etf_price
@@ -210,17 +212,45 @@ if __name__ == '__main__':
     
     pairtrade = Pairtrade()
     results = pairtrade.run(data)
-    #print str((results.portfolio_value[-1] - 100000)/1000) + ' %'
     
-    from zipline.finance import trading
-    from zipline.utils.factory import create_returns_from_list
-    from zipline.finance.risk import RiskMetricsBase
+    ###########################################################################
+    # Generate metrics
+    print 'Generating Risk Report...........'
+    print 'Using S&P500 as benchmark........'
+
     start = results.first_valid_index().replace(tzinfo=pytz.utc)
     end = results.last_valid_index().replace(tzinfo=pytz.utc)
     env = trading.SimulationParameters(start, end)
     returns_risk = create_returns_from_list(results.returns, env)
-    risk = RiskMetricsBase(start, end, returns_risk)
-    print risk
+    
+    algo_returns = RiskMetricsBase(start, end, returns_risk).algorithm_period_returns
+    benchmark_returns = RiskMetricsBase(start, end, returns_risk).benchmark_period_returns
+    excess_return = RiskMetricsBase(start, end, returns_risk).excess_return
+    algo_volatility = RiskMetricsBase(start, end, returns_risk).algorithm_volatility
+    benchmark_volatility = RiskMetricsBase(start, end, returns_risk).benchmark_volatility
+    sharpe = RiskMetricsBase(start, end, returns_risk).sharpe
+    sortino = RiskMetricsBase(start, end, returns_risk).sortino
+    information = RiskMetricsBase(start, end, returns_risk).information
+    beta = RiskMetricsBase(start, end, returns_risk).beta
+    alpha = RiskMetricsBase(start, end, returns_risk).alpha
+    max_drawdown = RiskMetricsBase(start, end, returns_risk).max_drawdown
+    
+    print '---------Risk Metrics---------'
+    print 'Algorithm Returns: ' + str(round(algo_returns * 100,4)) + '%'
+    print 'Benchmark Returns: ' + str(round(benchmark_returns * 100,4)) + '%'
+    print 'Excess Return: ' + str(excess_return * 100) + '%'
+    print '------------------------------'
+    print 'Algorithm Volatility: ' + str(round(algo_volatility,4))
+    print 'Benchmark Volatility: ' + str(round(benchmark_volatility,4))
+    print '------------------------------'
+    print 'Sharpe Ratio: ' + str(round(sharpe,4))
+    print 'Sortino Ratio: ' + str(round(sortino,4))
+    print 'Information Ratio: ' + str(round(information,4))
+    print '------------------------------'
+    print 'Beta: ' + str(round(beta,4))
+    print 'Alpha: ' + str(round(alpha,4))
+    print 'Max Drawdown: ' + str(round(max_drawdown*100,4)) + '%'
+    print '------------------------------'
     
     for sym in sym_list:
         print str(sym)+": "+str((pairtrade.returns[sym][1][-1])*100)
