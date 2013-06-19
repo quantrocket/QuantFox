@@ -3,6 +3,8 @@ import numpy as np
 import statsmodels.api as sm
 from datetime import datetime
 import pytz
+import csv
+import os
 
 
 from zipline.algorithm import TradingAlgorithm
@@ -33,9 +35,20 @@ def ols_transform(data, sid1, sid2):
     slope, intercept = sm.OLS(p0, p1).fit().params
     return slope, intercept
 
+def clearOrders():
+    orders_file = 'orders.csv'
+    orders_file = open(orders_file, "w")
+    orders_file.truncate()
+    writer = csv.writer(open('orders.csv', 'ab'), delimiter = ',')
+    header = ['DATE', 'SYMBOL', 'Z-SCORE', 'PRICE', 'AMOUNT', 'TYPE', 'Gain', 'PAIR GAIN']
+    writer.writerow(header)
+    orders_file.close()
+    return
+    
 class Pairtrade(TradingAlgorithm):
     
     def initialize(self, window_length=100):
+        clearOrders()
         self.day_count = 0
         self.dates = []
         self.spreads = {sym:[] for sym in sym_list}
@@ -51,10 +64,14 @@ class Pairtrade(TradingAlgorithm):
         #####################################################
         # Calculate gain since last opened position
         if self.day_count < 1:
+            symReturn = 0
+            etfReturn = 0
             net_gain = 0
             self.returns[sym][0].append(net_gain)
         else:
             if self.invested[sym][0] == 0:
+                symReturn = 0
+                etfReturn = 0
                 net_gain = 0
                 self.returns[sym][0].append(net_gain)
             else:
@@ -81,8 +98,14 @@ class Pairtrade(TradingAlgorithm):
             else:
                 delta = self.returns[sym][0][-1] - self.returns[sym][0][-2]
                 self.returns[sym][1].append(self.returns[sym][1][-1] + delta)
-        return
+        return symReturn, etfReturn
 
+    def orderWriter(self, *args):
+        writer = csv.writer(open('orders.csv', 'ab'), delimiter = ',')
+        #data_to_write = [*args]
+        writer.writerow(args)
+        return
+    
     def handle_data(self, data):
         ####################################################################
         # Keep track of days
@@ -92,17 +115,23 @@ class Pairtrade(TradingAlgorithm):
         # Get the prices and do some calculations
         for sym in sym_list:
             etf = sym_list[sym]
-            print self.portfolio
-            ratio = data[sym].price / data[etf].price
+            print str(self.dates[-1]) + ': ' + str(self.portfolio['positions'][sym]) #[1][sym]['position'])
+            sym_price = data[sym].price
+            etf_price = data[etf].price
+            ratio = sym_price / etf_price
             self.ratios[sym] = np.append(self.ratios[sym], ratio)
         ####################################################################
         # Calculate the trade return for analysis purposes
-            self.trade_return(sym, etf, data[sym].price, data[etf].price)
+            gains = self.trade_return(sym, etf, sym_price, data[etf].price)
+            sym_gain = gains[0]
+            etf_gain = gains[1]
         ####################################################################
         # Trade related calculations loop
         self.day_count += 1
         for sym in sym_list:
             etf = sym_list[sym]
+            sym_price = data[sym].price
+            etf_price = data[etf].price
             ################################################################
             # 1. Compute regression coefficients between the two instruments
             params = self.ols_transform.handle_data(data, sym, etf)
@@ -111,44 +140,48 @@ class Pairtrade(TradingAlgorithm):
             intercept, slope = params
             ################################################################
             # 2. Compute spread and z-score
-            zscore = self.compute_zscore(data, sym, etf, slope, intercept)
+            zscore = self.compute_zscore(data, sym, etf, sym_price, etf_price, slope, intercept)
             #self.record(zscores[sym]=zscore)
             ################################################################
             # 3. Place orders
-            self.place_orders(data, sym, etf, zscore)
+            self.place_orders(data, sym, etf, sym_price, etf_price, sym_gain, etf_gain, zscore)
         
 
-    def compute_zscore(self, data, sym, etf, slope, intercept):
+    def compute_zscore(self, data, sym, etf, sym_price, etf_price, slope, intercept):
         ####################################################################
         # 1. Compute the spread given slope and intercept.
         # 2. z-score the spread.
-        spread = (data[sym].price - (slope * data[etf].price + intercept))
+        spread = (sym_price - (slope * etf_price + intercept))
         self.spreads[sym].append(spread)
         spread_wind = self.spreads[sym][-self.window_length:]
         zscore = (spread - np.mean(spread_wind)) / np.std(spread_wind)
         self.zscores[sym] = np.append(self.zscores[sym], zscore)
         return zscore
 
-    def place_orders(self, data, sym, etf, zscore):
+    def place_orders(self, data, sym, etf, sym_price, etf_price, sym_gain, etf_gain, zscore):
         ####################################################################
         # Buy spread if z-score is > 2, sell if z-score < .5.
         if zscore >= 2.0 and self.invested[sym][0] == 0:
-            sym_quantity = -int(10000 / data[sym].price)
-            etf_quantity = int(10000 / data[etf].price)
+            sym_quantity = -int(10000 / sym_price)
+            etf_quantity = int(10000 / etf_price)
             self.order(sym, sym_quantity)
             self.order(etf, etf_quantity)
             self.invested[sym] = [sym_quantity, etf_quantity]
+            self.orderWriter(str(self.dates[-1])[:10], sym, zscore, sym_price, sym_quantity, 'Short')
+            self.orderWriter(str(self.dates[-1])[:10], etf, zscore, etf_price, etf_quantity, 'Long')
         elif zscore <= -2.0 and self.invested[sym][0] == 0:
-            sym_quantity = int(10000 / data[sym].price)
-            etf_quantity = -int(10000 / data[etf].price)
+            sym_quantity = int(10000 / sym_price)
+            etf_quantity = -int(10000 / etf_price)
             self.order(sym, sym_quantity)
             self.order(etf, etf_quantity)
             self.invested[sym] = [sym_quantity, etf_quantity]
+            self.orderWriter(str(self.dates[-1])[:10], sym, zscore, sym_price, sym_quantity, 'Long')
+            self.orderWriter(str(self.dates[-1])[:10], etf, zscore, etf_price, etf_quantity, 'Short')
         elif abs(zscore) < .5 and self.invested[sym][0] != 0:
-            self.sell_spread(sym, etf)
+            self.sell_spread(sym, etf, sym_price, etf_price, sym_gain, etf_gain, zscore)
             self.invested[sym] = [0,0]
 
-    def sell_spread(self, sym, etf):
+    def sell_spread(self, sym, etf, sym_price, etf_price, sym_gain, etf_gain, zscore):
         #####################################################################
         # decrease exposure, regardless of position long/short.
         # buy for a short position, sell for a long.
@@ -156,6 +189,8 @@ class Pairtrade(TradingAlgorithm):
         self.order(etf, -1 * etf_amount)
         sym_amount = self.portfolio.positions[sym].amount
         self.order(sym, -1 * sym_amount)
+        self.orderWriter(str(self.dates[-1])[:10], sym, zscore, sym_price, sym_amount, 'Exit', sym_gain, self.returns[sym][0][-1])
+        self.orderWriter(str(self.dates[-1])[:10], etf, zscore, etf_price, etf_amount, 'Exit', etf_gain, self.returns[sym][0][-1])
 
 if __name__ == '__main__':
     start = datetime(2012, 1, 1, 0, 0, 0, 0, pytz.utc)
