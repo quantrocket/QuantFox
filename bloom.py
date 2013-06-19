@@ -3,6 +3,7 @@ from pythoncom import PumpWaitingMessages, Empty, Missing
 from time import time
 from datetime import datetime
 import os, csv
+import pandas as pd
 
 list = ["IBM US Equity", "AAPL US Equity"]
 frames = {sym:{} for sym in list}
@@ -23,8 +24,18 @@ def clearCSV(csv_file):
     writer.writerow(header)
     csv_file.close()
     return
-
 clearCSV(csv_file)
+
+def writeCSV(csv_file):
+    write = [str(date)]
+    write.append(str(close))
+    self.dataWriter(write)
+    return
+
+def toPandas(frames):
+    df = pd.DataFrame(frames)
+    print df
+    return
 
 class get_historical_data:
 
@@ -41,12 +52,9 @@ class get_historical_data:
     def OnData(self, Security, cookie, Fields, Data, Status):
         #sym = 0
         for i in range(0, bars):
-            date = Data[i][-2]
-            write = [str(date)]
+            date = str(Data[i][-2])[:8]
             close = Data[i][-1]
-            print 'Date: ' + str(date) + " " + str(tick) + "  Close: " + str(close)
-            write.append(str(close))
-            self.dataWriter(write)
+            frames[tick].update({date:close})
     
     def OnStatus(self, Status, SubStatus, StatusDescription):
         print 'OnStatus'
@@ -80,9 +88,12 @@ class TestAsync:
         while 1:
             PumpWaitingMessages()
             if end_time < time():
-                print 'timed out'
+                print 'completed symbol...'
                 break
   
 if __name__ == "__main__":
     ta = TestAsync()
+
+print ""    
+toPandas(frames)
 
