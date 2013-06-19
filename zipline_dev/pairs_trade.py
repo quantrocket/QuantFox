@@ -15,6 +15,7 @@ from zipline.finance import performance, slippage, risk
 from zipline.finance import trading
 from zipline.finance.risk import RiskMetricsBase
 from zipline.finance.performance import PerformanceTracker
+from matplotlib.backends.backend_pdf import PdfPages
 
 #sym_list = {'GLD':'IAU'}
 #sym_list = {'KO':'PEP'}
@@ -288,6 +289,10 @@ if __name__ == '__main__':
         plt.grid(b=True, which='major', color='k')
         
         plt.gcf().set_size_inches(30, 20)
-        plt.savefig(str(sym)+":"+str(etf), format='pdf')
+        
+        """pp = PdfPages('charts.pdf')    
+        pp.savefig(plt)"""
+        
+        plt.savefig(str(sym)+'.pdf')
         #plt.show()
         plt.clf()
