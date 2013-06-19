@@ -14,11 +14,13 @@ from zipline.utils.factory import load_from_yahoo
 from zipline.finance import performance, slippage, risk
 from zipline.finance import trading
 from zipline.finance.risk import RiskMetricsBase
+from zipline.finance.performance import PerformanceTracker
 
 #sym_list = {'GLD':'IAU'}
 #sym_list = {'KO':'PEP'}
 #sym_list = {'VALE':'RIO'}
-sym_list = {'CH':'ECH'}
+#sym_list = {'CH':'ECH'}
+sym_list = {'TAL':'TGH','CH':'ECH'}
 #sym_list = {'XOM':'COP'}
 #sym_list = {'GLD':'IAU','KO':'PEP'}
 
@@ -120,12 +122,14 @@ class Pairtrade(TradingAlgorithm):
         #print self.day_count
         self.dates = np.append(self.dates, TradingAlgorithm.get_datetime(self))
         print self.dates[-1]
+        #print 'Progress: ' + str(PerformanceTracker.to_dict(self))
         ####################################################################
         # Get the prices and do some calculations
         for sym in sym_list:
             etf = sym_list[sym]
             #print str(self.dates[-1]) + ': ' + str(self.portfolio['positions'][sym]) #[1][sym]['position'])
             #print str(self.dates[-1]) + ': ' + str(self.portfolio['positions'][etf]) #[1][sym]['position'])
+            #print self.portfolio
             sym_price = data[sym].price
             etf_price = data[etf].price
             ratio = sym_price / etf_price
@@ -253,7 +257,7 @@ if __name__ == '__main__':
     print '------------------------------'
     
     for sym in sym_list:
-        print str(sym)+": "+str((pairtrade.returns[sym][1][-1])*100)
+        print str(sym)+":"+str(sym_list[sym])+': '+str((round(pairtrade.returns[sym][1][-1]*100,4)))+'%'
     data['spreads'] = np.nan
 
     for sym in sym_list:
