@@ -11,9 +11,9 @@ tick = []
 
 
 entity = 'PX_LAST'
-start = datetime(2011, 1, 1)
+start = datetime(2007, 1, 1)
 end = datetime(2012, 12, 31)
-bars = 10
+bars = 250
 csv_file = 'same_test.csv'
 
 def clearCSV(csv_file):
@@ -32,6 +32,7 @@ def writeCSV(csv_file):
 
 def toPandas(frames):
     df = pd.DataFrame(frames)
+    df.reindex()
     print df
     print ""
     print "exporting..."
