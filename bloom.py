@@ -5,7 +5,7 @@ from datetime import datetime
 import os, csv
 import pandas as pd
 
-list = ["IBM US Equity", "AAPL US Equity"]
+list = ["IBM US Equity", "AAPL US Equity", 'FICO US Equity', 'CPSI US Equity']
 frames = {sym:{} for sym in list}
 tick = []
 
@@ -13,18 +13,16 @@ tick = []
 entity = 'PX_LAST'
 start = datetime(2011, 1, 1)
 end = datetime(2012, 12, 31)
-bars = 2
+bars = 10
 csv_file = 'same_test.csv'
 
 def clearCSV(csv_file):
     csv_file = open(csv_file, "w")
     csv_file.truncate()
     writer = csv.writer(open('same_test.csv', 'ab'), delimiter = ',')
-    header = ['DATE', 'AAPL_Close', 'IBM_Close']
-    writer.writerow(header)
     csv_file.close()
     return
-clearCSV(csv_file)
+#clearCSV(csv_file)
 
 def writeCSV(csv_file):
     write = [str(date)]
@@ -35,6 +33,10 @@ def writeCSV(csv_file):
 def toPandas(frames):
     df = pd.DataFrame(frames)
     print df
+    print ""
+    print "exporting..."
+    df.to_csv(csv_file)
+    print 'exported to '+csv_file 
     return
 
 class get_historical_data:
@@ -42,9 +44,7 @@ class get_historical_data:
     #def set_sym(self, sym):
         #self.__sym = sym
     tick = 0
-        
-    
-        
+
     def dataWriter(self, write):
         writer = csv.writer(open('same_test.csv', 'ab'), delimiter = ',')
         writer.writerow(write)
@@ -96,4 +96,5 @@ if __name__ == "__main__":
 
 print ""    
 toPandas(frames)
+
 
