@@ -74,6 +74,14 @@ class Pairtrade(TradingAlgorithm):
         return
     
     def toPandas(frames):
+        for sym in sym_list:
+            spreads = pd.DataFrame(pairtrade.ratios[sym], index=pairtrade.dates)
+            zscores = pd.DataFrame(pairtrade.zscores[sym], index=pairtrade.dates)
+            actions = pd.DataFrame(pairtrade.actions[sym], index=pairtrade.dates)
+            df = spreads.join(zscores)
+            df = df.join(actions)
+            pairtrade.buyplot[sym] = df
+            #df.to_csv('test.csv')
         orders_log = 'results/orders_log.xlsx'
         writer = pd.ExcelWriter(orders_log)
         for sym in sym_list:
@@ -140,9 +148,6 @@ class Pairtrade(TradingAlgorithm):
         # Get the prices and do some calculations
         for sym in sym_list:
             etf = sym_list[sym]
-            #print str(self.dates[-1]) + ': ' + str(self.portfolio['positions'][sym]) #[1][sym]['position'])
-            #print str(self.dates[-1]) + ': ' + str(self.portfolio['positions'][etf]) #[1][sym]['position'])
-            #print self.portfolio
             sym_price = data[sym].price
             etf_price = data[etf].price
             ratio = sym_price - etf_price
@@ -279,43 +284,12 @@ if __name__ == '__main__':
     for sym in sym_list:
         print str(sym)+":"+str(sym_list[sym])+': '+str((round(pairtrade.returns[sym][1][-1]*100,4)))+'%'
     data['spreads'] = np.nan
-    
-    trade_log = pd.Series(pairtrade.trade_log)
-    print trade_log
-    
-    print pairtrade.actions
-    for sym in sym_list:
-        print 'action: ' + str(len(pairtrade.actions[sym]['ACTION']))
-        print 'zscores: ' + str(len(pairtrade.zscores[sym]['ZSCORE']))
 
-    for sym in sym_list:
-        spreads = pd.DataFrame(pairtrade.ratios[sym], index=pairtrade.dates)
-        zscores = pd.DataFrame(pairtrade.zscores[sym], index=pairtrade.dates)
-        actions = pd.DataFrame(pairtrade.actions[sym], index=pairtrade.dates)
-        df = spreads.join(zscores)
-        df = df.join(actions)
-        pairtrade.buyplot[sym] = df
-        #df.to_csv('test.csv')
     # Frame log in pandas, export to CSV
     pairtrade.toPandas()
-    #for sym in sym_list:
-        #print 'LOOK HERE: ' + str(pairtrade.buyplot[sym])
-
     
-    #print pairtrade.portfolio.end_date
-    
-    #print results.head('cumulative_capital_used')
-    """
-    print PerformancePeriod(
-                            100000,
-                            period_open=results.first_valid_index().replace(tzinfo=pytz.utc),
-                            period_close=results.last_valid_index().replace(tzinfo=pytz.utc),
-                            keep_transactions=True,
-                            keep_orders=False,
-                            serialize_positions=False).cumulative_capital_used
-
-    """
-    
+    ################################################################3##########
+    # Plot
     for sym in sym_list:
         etf = sym_list[sym]
 
@@ -340,13 +314,6 @@ if __name__ == '__main__':
         plt.setp(ax2.get_xticklabels(), visible=True)
         plt.xticks(rotation=45)
         plt.grid(b=True, which='major', color='k')
-        
-        """
-        ax2 = plt.subplot(412, ylabel='z-scored spread')
-        plt.plot(pairtrade.dates, pairtrade.zscores[sym], color='r')
-        plt.setp(ax2.get_xticklabels(), visible=True)
-        plt.xticks(rotation=45)
-        plt.grid(b=True, which='major', color='k')"""
         
         ax3 = plt.subplot(413, ylabel=(str(sym)+":"+str(etf))+' Return')
         plt.plot(pairtrade.dates, pairtrade.returns[sym][1])
