@@ -3,8 +3,6 @@ import numpy as np
 import statsmodels.api as sm
 from datetime import datetime
 import pytz
-import csv
-import os
 import pandas as pd
 
 
@@ -43,20 +41,10 @@ def ols_transform(data, sid1, sid2):
     p1 = sm.add_constant(data.price[sid2], prepend=True)
     slope, intercept = sm.OLS(p0, p1).fit().params
     return slope, intercept
-"""
-def clearOrders():
-    orders_file = 'orders.csv'
-    orders_file = open(orders_file, "w")
-    orders_file.truncate()
-    orders_file.close()
-    return
-"""
-
 
 class Pairtrade(TradingAlgorithm):
     
     def initialize(self, window_length=100):
-        #clearOrders()
         """ Slippage was messing up orders, setting to fixed corrected revisit this
         """    
         self.set_slippage(slippage.FixedSlippage())
@@ -65,12 +53,13 @@ class Pairtrade(TradingAlgorithm):
         self.log = {sym:{'PAIR':[],'ZSCORE':[],'ACTION':[],'SPREAD':[]} for sym in sym_list}
         self.day_count = 0
         self.dates = []
+        self.actions = {sym:{'ACTION':[]} for sym in sym_list}
         self.spreads = {sym:[] for sym in sym_list}
         self.ratios = {sym:np.array([]) for sym in sym_list}
         self.invested = {sym:[0,0] for sym in sym_list}              # invested[sym,etf]
         self.returns = {sym:[[],[]] for sym in sym_list}             # returns[sym][netReturn,cumReturn]
         self.cumReturns = {sym:[] for sym in sym_list}
-        self.zscores = {sym:np.array([0]*(window_length-1)) for sym in sym_list}
+        self.zscores = {sym:{'ZSCORE':[]} for sym in sym_list}
         self.window_length = window_length
         self.ols_transform = ols_transform(refresh_period=self.window_length,window_length=self.window_length)
         
@@ -96,8 +85,6 @@ class Pairtrade(TradingAlgorithm):
         print 'exported to /results/orders_log.xlsx'
         return
         
-
-    
     def trade_return(self, sym, etf, currentSym, currentEtf):
         #####################################################
         # Calculate gain since last opened position
@@ -138,18 +125,12 @@ class Pairtrade(TradingAlgorithm):
                 self.returns[sym][1].append(self.returns[sym][1][-1] + delta)
         return symReturn, etfReturn
 
-    def orderWriter(self, *args):
-        writer = csv.writer(open('orders.csv', 'ab'), delimiter = ',')
-        #data_to_write = [*args]
-        writer.writerow(args)
-        return
-    
     def handle_data(self, data):
         ####################################################################
         # Keep track of days
         #print self.day_count
         day = TradingAlgorithm.get_datetime(self)
-        self.dates = np.append(self.dates, day)
+        self.dates.append(day)
         print self.dates[-1]
         #print 'Progress: ' + str(PerformanceTracker.to_dict(self))
         ####################################################################
@@ -178,18 +159,20 @@ class Pairtrade(TradingAlgorithm):
             ################################################################
             # 1. Compute regression coefficients between the two instruments
             params = self.ols_transform.handle_data(data, sym, etf)
-            if params is None:
+            if params is None:                                # Exits before
+                for sym in sym_list:                          # place_orders
+                    self.zscores[sym]['ZSCORE'].append(0)
+                    action = '---'
+                    self.actions[sym]['ACTION'].append(action)
                 return
             intercept, slope = params
             ################################################################
             # 2. Compute spread and z-score
             zscore = self.compute_zscore(data, sym, etf, sym_price, etf_price, slope, intercept)
-            #self.record(zscores[sym]=zscore)
             ################################################################
             # 3. Place orders
             self.place_orders(data, sym, etf, sym_price, etf_price, sym_gain, etf_gain, zscore)
         
-
     def compute_zscore(self, data, sym, etf, sym_price, etf_price, slope, intercept):
         ####################################################################
         # 1. Compute the spread given slope and intercept.
@@ -198,7 +181,7 @@ class Pairtrade(TradingAlgorithm):
         self.spreads[sym].append(spread)
         spread_wind = self.spreads[sym][-self.window_length:]
         zscore = (spread - np.mean(spread_wind)) / np.std(spread_wind)
-        self.zscores[sym] = np.append(self.zscores[sym], zscore)
+        self.zscores[sym]['ZSCORE'].append(zscore)
         return zscore
 
     def place_orders(self, data, sym, etf, sym_price, etf_price, sym_gain, etf_gain, zscore):
@@ -214,27 +197,32 @@ class Pairtrade(TradingAlgorithm):
             self.order(sym, sym_quantity)
             self.order(etf, etf_quantity)
             self.trade_log[sym] = self.trade_log[sym] + 1
-            self.set_log(day, sym, etf, zscore, 'SELL', (sym_price-etf_price))
-            
+            action = 'SELL'
+            self.set_log(day, sym, etf, zscore, action, (sym_price-etf_price))
         elif zscore <= -2 and self.portfolio.positions[sym].amount == 0:
             sym_quantity = int(10000 / sym_price)
             etf_quantity = -int(10000 / etf_price)
             self.order(sym, sym_quantity)
             self.order(etf, etf_quantity)
             self.trade_log[sym] = self.trade_log[sym] + 1
-            self.set_log(day, sym, etf, zscore, 'BUY', (sym_price-etf_price))
+            action = 'BUY'
+            self.set_log(day, sym, etf, zscore, action, (sym_price-etf_price))
         elif abs(zscore) < .5 and self.portfolio.positions[sym].amount != 0:
-            self.sell_spread(sym, etf, sym_price, etf_price, sym_gain, etf_gain, zscore)
+            etf_amount = self.portfolio.positions[etf].amount
+            self.order(etf, -1 * etf_amount)
+            sym_amount = self.portfolio.positions[sym].amount
+            self.order(sym, -1 * sym_amount)
+            if sym_amount > 0:
+                action = 'SELL'
+                self.set_log(day, sym, etf, zscore, action, (sym_price-etf_price))
+            else:
+                action = 'BUY'
+                self.set_log(day, sym, etf, zscore, action, (sym_price-etf_price))
+        else:
+            action = '---'
+        self.actions[sym]['ACTION'].append(action)
+        return
 
-    def sell_spread(self, sym, etf, sym_price, etf_price, sym_gain, etf_gain, zscore):
-        #####################################################################
-        # decrease exposure, regardless of position long/short.
-        # buy for a short position, sell for a long.
-        etf = sym_list[sym]
-        etf_amount = self.portfolio.positions[etf].amount
-        self.order(etf, -1 * etf_amount)
-        sym_amount = self.portfolio.positions[sym].amount
-        self.order(sym, -1 * sym_amount)
 
 if __name__ == '__main__':
     start = datetime(2011, 1, 1, 0, 0, 0, 0, pytz.utc)
@@ -292,6 +280,16 @@ if __name__ == '__main__':
     trade_log = pd.Series(pairtrade.trade_log)
     print trade_log
     
+    print pairtrade.actions
+    for sym in sym_list:
+        print 'action: ' + str(len(pairtrade.actions[sym]['ACTION']))
+        print 'zscores: ' + str(len(pairtrade.zscores[sym]['ZSCORE']))
+
+    for sym in sym_list:
+        spreads = pd.DataFrame(pairtrade.zscores[sym], index=pairtrade.dates)
+        actions = pd.DataFrame( pairtrade.actions[sym], index=pairtrade.dates)
+        df = spreads.append(actions)
+        df.to_csv('test.csv')
     # Frame log in pandas, export to CSV
     pairtrade.toPandas()
 
@@ -315,15 +313,17 @@ if __name__ == '__main__':
 
         ax1 = plt.subplot(411, ylabel=(str(sym)+":"+str(etf))+' Adjusted Close')
         plt.plot(pairtrade.dates, pairtrade.ratios[sym])
+        #ax2.plot(x=, results.short_mavg[results.buy],'^', markersize=10, color='m')
+        #ax2.plot(results.ix[results.sell].index, results.short_mavg[results.sell],'v', markersize=10, color='k')
         plt.setp(ax1.get_xticklabels(), visible=True)
         plt.xticks(rotation=45)
         plt.grid(b=True, which='major', color='k')
-    
+        """
         ax2 = plt.subplot(412, ylabel='z-scored spread')
         plt.plot(pairtrade.dates, pairtrade.zscores[sym], color='r')
         plt.setp(ax2.get_xticklabels(), visible=True)
         plt.xticks(rotation=45)
-        plt.grid(b=True, which='major', color='k')
+        plt.grid(b=True, which='major', color='k')"""
         
         ax3 = plt.subplot(413, ylabel=(str(sym)+":"+str(etf))+' Return')
         plt.plot(pairtrade.dates, pairtrade.returns[sym][1])
