@@ -57,7 +57,7 @@ class Pairtrade(TradingAlgorithm):
         self.dates = []
         self.actions = {sym:{'ACTION':[]} for sym in sym_list}
         self.spreads = {sym:[] for sym in sym_list}
-        self.ratios = {sym:np.array([]) for sym in sym_list}
+        self.ratios = {sym:{'SPREAD':[]} for sym in sym_list}
         self.invested = {sym:[0,0] for sym in sym_list}              # invested[sym,etf]
         self.returns = {sym:[[],[]] for sym in sym_list}             # returns[sym][netReturn,cumReturn]
         self.cumReturns = {sym:[] for sym in sym_list}
@@ -145,8 +145,8 @@ class Pairtrade(TradingAlgorithm):
             #print self.portfolio
             sym_price = data[sym].price
             etf_price = data[etf].price
-            ratio = sym_price / etf_price
-            self.ratios[sym] = np.append(self.ratios[sym], ratio)
+            ratio = sym_price - etf_price
+            self.ratios[sym]['SPREAD'].append(ratio)
         ####################################################################
         # Calculate the trade return for analysis purposes
             gains = self.trade_return(sym, etf, sym_price, data[etf].price)
@@ -289,9 +289,11 @@ if __name__ == '__main__':
         print 'zscores: ' + str(len(pairtrade.zscores[sym]['ZSCORE']))
 
     for sym in sym_list:
-        spreads = pd.DataFrame(pairtrade.zscores[sym], index=pairtrade.dates)
-        actions = pd.DataFrame( pairtrade.actions[sym], index=pairtrade.dates)
-        df = spreads.join(actions)
+        spreads = pd.DataFrame(pairtrade.ratios[sym], index=pairtrade.dates)
+        zscores = pd.DataFrame(pairtrade.zscores[sym], index=pairtrade.dates)
+        actions = pd.DataFrame(pairtrade.actions[sym], index=pairtrade.dates)
+        df = spreads.join(zscores)
+        df = df.join(actions)
         pairtrade.buyplot[sym] = df
         #df.to_csv('test.csv')
     # Frame log in pandas, export to CSV
@@ -318,12 +320,6 @@ if __name__ == '__main__':
         etf = sym_list[sym]
 
         ax1 = plt.subplot(411, ylabel=(str(sym)+":"+str(etf))+' Adjusted Close')
-        plt.plot(pairtrade.dates, pairtrade.ratios[sym])
-        plt.setp(ax1.get_xticklabels(), visible=True)
-        plt.xticks(rotation=45)
-        plt.grid(b=True, which='major', color='k')
-        
-        ax2 = plt.subplot(412, ylabel='z-scored spread')
         markers = {'buy':[],'sell':[]}
         row_count = 0
         for idx, row in pairtrade.plotmarks[sym].iterrows():
@@ -332,9 +328,15 @@ if __name__ == '__main__':
             elif 'SELL' in row['ACTION']:
                 markers['sell'].append(idx)
             row_count += 1
+        ax1.plot(pairtrade.buyplot[sym].index, pairtrade.buyplot[sym]['SPREAD'])
+        ax1.plot(markers['buy'], pairtrade.buyplot[sym]['SPREAD'][markers['buy']],'^', markersize=10, color='g' )
+        ax1.plot(markers['sell'], pairtrade.buyplot[sym]['SPREAD'][markers['sell']],'v', markersize=10, color='r')
+        plt.setp(ax1.get_xticklabels(), visible=True)
+        plt.xticks(rotation=45)
+        plt.grid(b=True, which='major', color='k')
+        
+        ax2 = plt.subplot(412, ylabel='z-scored spread')
         ax2.plot(pairtrade.buyplot[sym].index, pairtrade.buyplot[sym]['ZSCORE'])
-        ax2.plot(markers['buy'], pairtrade.buyplot[sym]['ZSCORE'][markers['buy']],'^', markersize=10, color='m' )
-        ax2.plot(markers['sell'], pairtrade.buyplot[sym]['ZSCORE'][markers['sell']],'v', markersize=10, color='k')
         plt.setp(ax2.get_xticklabels(), visible=True)
         plt.xticks(rotation=45)
         plt.grid(b=True, which='major', color='k')
