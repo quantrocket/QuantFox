@@ -5,6 +5,7 @@ from datetime import datetime
 import pytz
 import csv
 import os
+import pandas as pd
 
 
 from zipline.algorithm import TradingAlgorithm
@@ -14,7 +15,7 @@ from zipline.utils.factory import load_from_yahoo
 from zipline.finance import performance, slippage, risk
 from zipline.finance import trading
 from zipline.finance.risk import RiskMetricsBase
-from zipline.finance.performance import PerformanceTracker
+from zipline.finance.performance import PerformanceTracker, PerformancePeriod
 from matplotlib.backends.backend_pdf import PdfPages
 
 #sym_list = {'GLD':'IAU'}
@@ -52,7 +53,9 @@ def clearOrders():
     writer.writerow(header)
     orders_file.close()
     return
-    
+
+
+
 class Pairtrade(TradingAlgorithm):
     
     def initialize(self, window_length=100):
@@ -60,6 +63,9 @@ class Pairtrade(TradingAlgorithm):
         """ Slippage was messing up orders, setting to fixed corrected revisit this
         """    
         self.set_slippage(slippage.FixedSlippage())
+        self.trade_log = {sym:0 for sym in sym_list}
+        self.trade_dates = {sym:{'DATE':[]} for sym in sym_list}
+        self.log = {sym:{'PAIR':[],'ZSCORE':[],'ACTION':[],'SPREAD':[]} for sym in sym_list}
         self.day_count = 0
         self.dates = []
         self.spreads = {sym:[] for sym in sym_list}
@@ -71,6 +77,14 @@ class Pairtrade(TradingAlgorithm):
         self.window_length = window_length
         self.ols_transform = ols_transform(refresh_period=self.window_length,window_length=self.window_length)
         
+    def set_log(self,day,sym,etf,zscore,action,spread):
+        self.trade_dates[sym]['DATE'].append(day)
+        self.log[sym]['PAIR'].append(sym+":"+etf)
+        self.log[sym]['ZSCORE'].append(zscore)
+        self.log[sym]['ACTION'].append(action)
+        self.log[sym]['SPREAD'].append(spread)
+        return
+    
     def trade_return(self, sym, etf, currentSym, currentEtf):
         #####################################################
         # Calculate gain since last opened position
@@ -121,7 +135,8 @@ class Pairtrade(TradingAlgorithm):
         ####################################################################
         # Keep track of days
         #print self.day_count
-        self.dates = np.append(self.dates, TradingAlgorithm.get_datetime(self))
+        day = TradingAlgorithm.get_datetime(self)
+        self.dates = np.append(self.dates, day)
         print self.dates[-1]
         #print 'Progress: ' + str(PerformanceTracker.to_dict(self))
         ####################################################################
@@ -175,6 +190,7 @@ class Pairtrade(TradingAlgorithm):
 
     def place_orders(self, data, sym, etf, sym_price, etf_price, sym_gain, etf_gain, zscore):
         ####################################################################
+        day = TradingAlgorithm.get_datetime(self)
         # Buy spread if z-score is > 2, sell if z-score < .5.
         etf = sym_list[sym]
         sym_price = data[sym].price
@@ -186,6 +202,9 @@ class Pairtrade(TradingAlgorithm):
             self.order(etf, etf_quantity)
             self.orderWriter(str(self.dates[-1])[:10], sym, zscore, sym_price, sym_quantity, 'Short')
             self.orderWriter(str(self.dates[-1])[:10], etf, zscore, etf_price, etf_quantity, 'Long')
+            self.trade_log[sym] = self.trade_log[sym] + 1
+            self.set_log(day, sym, etf, zscore, 'sell', (sym_price-etf_price))
+            
         elif zscore <= -2 and self.portfolio.positions[sym].amount == 0:
             sym_quantity = int(10000 / sym_price)
             etf_quantity = -int(10000 / etf_price)
@@ -193,6 +212,8 @@ class Pairtrade(TradingAlgorithm):
             self.order(etf, etf_quantity)
             self.orderWriter(str(self.dates[-1])[:10], sym, zscore, sym_price, sym_quantity, 'Long')
             self.orderWriter(str(self.dates[-1])[:10], etf, zscore, etf_price, etf_quantity, 'Short')
+            self.trade_log[sym] = self.trade_log[sym] + 1
+            self.set_log(day, sym, etf, zscore, 'buy', (sym_price-etf_price))
         elif abs(zscore) < .5 and self.portfolio.positions[sym].amount != 0:
             self.sell_spread(sym, etf, sym_price, etf_price, sym_gain, etf_gain, zscore)
 
@@ -209,7 +230,7 @@ class Pairtrade(TradingAlgorithm):
         self.orderWriter(str(self.dates[-1])[:10], etf, zscore, etf_price, etf_amount, 'Exit', etf_gain, self.returns[sym][0][-1])
 
 if __name__ == '__main__':
-    start = datetime(2008, 1, 1, 0, 0, 0, 0, pytz.utc)
+    start = datetime(2011, 1, 1, 0, 0, 0, 0, pytz.utc)
     end = datetime(2012, 12, 31, 0, 0, 0, 0, pytz.utc)
     feed = build_feed()
     data = load_from_yahoo(stocks=feed, indexes={},
@@ -260,7 +281,28 @@ if __name__ == '__main__':
     for sym in sym_list:
         print str(sym)+":"+str(sym_list[sym])+': '+str((round(pairtrade.returns[sym][1][-1]*100,4)))+'%'
     data['spreads'] = np.nan
+    
+    trade_log = pd.Series(pairtrade.trade_log)
+    print trade_log
+    
+    for sym in sym_list:
+        log = pd.DataFrame(pairtrade.log[sym], index=pairtrade.trade_dates[sym]['DATE'])
+        print log
+    
+    #print pairtrade.portfolio.end_date
+    
+    #print results.head('cumulative_capital_used')
+    """
+    print PerformancePeriod(
+                            100000,
+                            period_open=results.first_valid_index().replace(tzinfo=pytz.utc),
+                            period_close=results.last_valid_index().replace(tzinfo=pytz.utc),
+                            keep_transactions=True,
+                            keep_orders=False,
+                            serialize_positions=False).cumulative_capital_used
 
+    """
+    
     for sym in sym_list:
         etf = sym_list[sym]
 
