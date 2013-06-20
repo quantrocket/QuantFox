@@ -288,7 +288,7 @@ if __name__ == '__main__':
     for sym in sym_list:
         spreads = pd.DataFrame(pairtrade.zscores[sym], index=pairtrade.dates)
         actions = pd.DataFrame( pairtrade.actions[sym], index=pairtrade.dates)
-        df = spreads.append(actions)
+        df = spreads.join(actions)
         df.to_csv('test.csv')
     # Frame log in pandas, export to CSV
     pairtrade.toPandas()
