@@ -43,23 +43,20 @@ def ols_transform(data, sid1, sid2):
     p1 = sm.add_constant(data.price[sid2], prepend=True)
     slope, intercept = sm.OLS(p0, p1).fit().params
     return slope, intercept
-
+"""
 def clearOrders():
     orders_file = 'orders.csv'
     orders_file = open(orders_file, "w")
     orders_file.truncate()
-    writer = csv.writer(open('orders.csv', 'ab'), delimiter = ',')
-    header = ['DATE', 'SYMBOL', 'Z-SCORE', 'PRICE', 'AMOUNT', 'TYPE', 'Gain', 'PAIR GAIN']
-    writer.writerow(header)
     orders_file.close()
     return
-
+"""
 
 
 class Pairtrade(TradingAlgorithm):
     
     def initialize(self, window_length=100):
-        clearOrders()
+        #clearOrders()
         """ Slippage was messing up orders, setting to fixed corrected revisit this
         """    
         self.set_slippage(slippage.FixedSlippage())
@@ -84,6 +81,22 @@ class Pairtrade(TradingAlgorithm):
         self.log[sym]['ACTION'].append(action)
         self.log[sym]['SPREAD'].append(spread)
         return
+    
+    def toPandas(frames):
+        orders_log = 'results/orders_log.xlsx'
+        writer = pd.ExcelWriter(orders_log)
+        for sym in sym_list:
+            etf = sym_list[sym]
+            log = pd.DataFrame(pairtrade.log[sym], index=pairtrade.trade_dates[sym]['DATE'])
+            print log
+            print ""
+            print "exporting..."
+            log.to_excel(writer, sheet_name = sym +'-'+ etf)
+        writer.save()
+        print 'exported to /results/orders_log.xlsx'
+        return
+        
+
     
     def trade_return(self, sym, etf, currentSym, currentEtf):
         #####################################################
@@ -200,20 +213,16 @@ class Pairtrade(TradingAlgorithm):
             etf_quantity = int(10000 / etf_price)
             self.order(sym, sym_quantity)
             self.order(etf, etf_quantity)
-            self.orderWriter(str(self.dates[-1])[:10], sym, zscore, sym_price, sym_quantity, 'Short')
-            self.orderWriter(str(self.dates[-1])[:10], etf, zscore, etf_price, etf_quantity, 'Long')
             self.trade_log[sym] = self.trade_log[sym] + 1
-            self.set_log(day, sym, etf, zscore, 'sell', (sym_price-etf_price))
+            self.set_log(day, sym, etf, zscore, 'SELL', (sym_price-etf_price))
             
         elif zscore <= -2 and self.portfolio.positions[sym].amount == 0:
             sym_quantity = int(10000 / sym_price)
             etf_quantity = -int(10000 / etf_price)
             self.order(sym, sym_quantity)
             self.order(etf, etf_quantity)
-            self.orderWriter(str(self.dates[-1])[:10], sym, zscore, sym_price, sym_quantity, 'Long')
-            self.orderWriter(str(self.dates[-1])[:10], etf, zscore, etf_price, etf_quantity, 'Short')
             self.trade_log[sym] = self.trade_log[sym] + 1
-            self.set_log(day, sym, etf, zscore, 'buy', (sym_price-etf_price))
+            self.set_log(day, sym, etf, zscore, 'BUY', (sym_price-etf_price))
         elif abs(zscore) < .5 and self.portfolio.positions[sym].amount != 0:
             self.sell_spread(sym, etf, sym_price, etf_price, sym_gain, etf_gain, zscore)
 
@@ -226,8 +235,6 @@ class Pairtrade(TradingAlgorithm):
         self.order(etf, -1 * etf_amount)
         sym_amount = self.portfolio.positions[sym].amount
         self.order(sym, -1 * sym_amount)
-        self.orderWriter(str(self.dates[-1])[:10], sym, zscore, sym_price, sym_amount, 'Exit', sym_gain, self.returns[sym][0][-1])
-        self.orderWriter(str(self.dates[-1])[:10], etf, zscore, etf_price, etf_amount, 'Exit', etf_gain, self.returns[sym][0][-1])
 
 if __name__ == '__main__':
     start = datetime(2011, 1, 1, 0, 0, 0, 0, pytz.utc)
@@ -285,9 +292,9 @@ if __name__ == '__main__':
     trade_log = pd.Series(pairtrade.trade_log)
     print trade_log
     
-    for sym in sym_list:
-        log = pd.DataFrame(pairtrade.log[sym], index=pairtrade.trade_dates[sym]['DATE'])
-        print log
+    # Frame log in pandas, export to CSV
+    pairtrade.toPandas()
+
     
     #print pairtrade.portfolio.end_date
     
