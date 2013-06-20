@@ -62,6 +62,7 @@ class Pairtrade(TradingAlgorithm):
         self.returns = {sym:[[],[]] for sym in sym_list}             # returns[sym][netReturn,cumReturn]
         self.cumReturns = {sym:[] for sym in sym_list}
         self.zscores = {sym:{'ZSCORE':[]} for sym in sym_list}
+        self.gain_plot = {sym:{'GAIN':[]} for sym in sym_list}
         self.window_length = window_length
         self.ols_transform = ols_transform(refresh_period=self.window_length,window_length=self.window_length)
         
@@ -74,14 +75,20 @@ class Pairtrade(TradingAlgorithm):
         return
     
     def toPandas(frames):
+        writer = pd.ExcelWriter('test.xlsx')
         for sym in sym_list:
+            print 'lens'
+            print len(pairtrade.gain_plot[sym]['GAIN'])
             spreads = pd.DataFrame(pairtrade.ratios[sym], index=pairtrade.dates)
             zscores = pd.DataFrame(pairtrade.zscores[sym], index=pairtrade.dates)
             actions = pd.DataFrame(pairtrade.actions[sym], index=pairtrade.dates)
+            returns = pd.DataFrame(pairtrade.gain_plot[sym], index=pairtrade.dates)
             df = spreads.join(zscores)
             df = df.join(actions)
+            df = df.join(returns)
             pairtrade.buyplot[sym] = df
-            #df.to_csv('test.csv')
+            df.to_excel(writer, sheet_name = sym)
+        writer.save()
         orders_log = 'results/orders_log.xlsx'
         writer = pd.ExcelWriter(orders_log)
         for sym in sym_list:
@@ -96,45 +103,28 @@ class Pairtrade(TradingAlgorithm):
         print 'exported to /results/orders_log.xlsx'
         return
         
-    def trade_return(self, sym, etf, currentSym, currentEtf):
+    def trade_return(self, sym, spread):
         #####################################################
         # Calculate gain since last opened position
-        if self.day_count < 1:
-            symReturn = 0
-            etfReturn = 0
-            net_gain = 0
-            self.returns[sym][0].append(net_gain)
+        if len(self.dates) == 1:
+            self.gain_plot[sym]['GAIN'].append(0)
         else:
+            basis = self.ratios[sym]['SPREAD'][-1]
+            size = 20000
             if self.portfolio.positions[sym].amount == 0:
-                symReturn = 0
-                etfReturn = 0
-                net_gain = 0
-                self.returns[sym][0].append(net_gain)
-            else:
-                sym_cost_basis = self.portfolio['positions'][sym]['cost_basis']
-                etf_cost_basis = self.portfolio['positions'][etf]['cost_basis']
-                if self.portfolio.positions[sym].amount > 0:
-                    symReturn = (currentSym-sym_cost_basis)/sym_cost_basis
-                    etfReturn = (etf_cost_basis-currentEtf)/etf_cost_basis
-                    net_gain = symReturn + etfReturn
-                    self.returns[sym][0].append(net_gain)
-                elif self.portfolio.positions[sym].amount < 0:
-                    symReturn = (sym_cost_basis-currentSym)/sym_cost_basis
-                    etfReturn = (currentEtf-etf_cost_basis)/etf_cost_basis
-                    net_gain = symReturn + etfReturn
-                    self.returns[sym][0].append(net_gain)
-        ######################################################
-        # Calculate the gain change, keep rolling sum
-        if self.day_count < 1:
-            self.returns[sym][1].append(0)
-        else:
-            if self.portfolio.positions[sym].amount == 0:
-                delta = 0
-                self.returns[sym][1].append(self.returns[sym][1][-1] + delta)
-            else:
-                delta = self.returns[sym][0][-1] - self.returns[sym][0][-2]
-                self.returns[sym][1].append(self.returns[sym][1][-1] + delta)
-        return symReturn, etfReturn
+                net = 0
+                cum = (self.gain_plot[sym]['GAIN'][-1] + net)
+                self.gain_plot[sym]['GAIN'].append(cum)
+            elif self.portfolio.positions[sym].amount > 0:
+                net = (spread - basis) / size
+                cum = (self.gain_plot[sym]['GAIN'][-1] + net)
+                self.gain_plot[sym]['GAIN'].append(cum)
+            elif self.portfolio.positions[sym].amount < 0:
+                net = (basis - spread) / size
+                cum = (self.gain_plot[sym]['GAIN'][-1] + net)
+                self.gain_plot[sym]['GAIN'].append(cum)
+                
+
 
     def handle_data(self, data):
         ####################################################################
@@ -151,12 +141,11 @@ class Pairtrade(TradingAlgorithm):
             sym_price = data[sym].price
             etf_price = data[etf].price
             ratio = sym_price - etf_price
+            self.trade_return(sym, ratio)
             self.ratios[sym]['SPREAD'].append(ratio)
         ####################################################################
         # Calculate the trade return for analysis purposes
-            gains = self.trade_return(sym, etf, sym_price, data[etf].price)
-            sym_gain = gains[0]
-            etf_gain = gains[1]
+            
         ####################################################################
         # Trade related calculations loop
         self.day_count += 1
@@ -179,7 +168,7 @@ class Pairtrade(TradingAlgorithm):
             zscore = self.compute_zscore(data, sym, etf, sym_price, etf_price, slope, intercept)
             ################################################################
             # 3. Place orders
-            self.place_orders(data, sym, etf, sym_price, etf_price, sym_gain, etf_gain, zscore)
+            self.place_orders(data, sym, etf, sym_price, etf_price, zscore)
         
     def compute_zscore(self, data, sym, etf, sym_price, etf_price, slope, intercept):
         ####################################################################
@@ -192,7 +181,7 @@ class Pairtrade(TradingAlgorithm):
         self.zscores[sym]['ZSCORE'].append(zscore)
         return zscore
 
-    def place_orders(self, data, sym, etf, sym_price, etf_price, sym_gain, etf_gain, zscore):
+    def place_orders(self, data, sym, etf, sym_price, etf_price, zscore):
         ####################################################################
         day = TradingAlgorithm.get_datetime(self)
         # Buy spread if z-score is > 2, sell if z-score < .5.
@@ -282,7 +271,8 @@ if __name__ == '__main__':
     print '------------------------------'
     
     for sym in sym_list:
-        print str(sym)+":"+str(sym_list[sym])+': '+str((round(pairtrade.returns[sym][1][-1]*100,4)))+'%'
+        print pairtrade.gain_plot[sym]['GAIN']
+        print str(sym)+":"+str(sym_list[sym])+': '+str((round(pairtrade.gain_plot[sym]['GAIN'][-1]*100,4)))+'%'
     data['spreads'] = np.nan
 
     # Frame log in pandas, export to CSV
@@ -316,7 +306,7 @@ if __name__ == '__main__':
         plt.grid(b=True, which='major', color='k')
         
         ax3 = plt.subplot(413, ylabel=(str(sym)+":"+str(etf))+' Return')
-        plt.plot(pairtrade.dates, pairtrade.returns[sym][1])
+        ax3.plot(pairtrade.buyplot[sym].index, pairtrade.buyplot[sym]['GAIN'])
         plt.setp(ax3.get_xticklabels(), visible=True)
         plt.xticks(rotation=45)
         plt.grid(b=True, which='major', color='k')
