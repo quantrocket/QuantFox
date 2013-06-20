@@ -48,6 +48,8 @@ class Pairtrade(TradingAlgorithm):
         """ Slippage was messing up orders, setting to fixed corrected revisit this
         """    
         self.set_slippage(slippage.FixedSlippage())
+        self.buyplot = {sym:[pd.DataFrame()] for sym in sym_list}
+        self.plotmarks = {sym:[pd.DataFrame()] for sym in sym_list}
         self.trade_log = {sym:0 for sym in sym_list}
         self.trade_dates = {sym:{'DATE':[]} for sym in sym_list}
         self.log = {sym:{'PAIR':[],'ZSCORE':[],'ACTION':[],'SPREAD':[]} for sym in sym_list}
@@ -77,6 +79,7 @@ class Pairtrade(TradingAlgorithm):
         for sym in sym_list:
             etf = sym_list[sym]
             log = pd.DataFrame(pairtrade.log[sym], index=pairtrade.trade_dates[sym]['DATE'])
+            pairtrade.plotmarks[sym] = log
             print log
             print ""
             print "exporting..."
@@ -289,9 +292,12 @@ if __name__ == '__main__':
         spreads = pd.DataFrame(pairtrade.zscores[sym], index=pairtrade.dates)
         actions = pd.DataFrame( pairtrade.actions[sym], index=pairtrade.dates)
         df = spreads.join(actions)
-        df.to_csv('test.csv')
+        pairtrade.buyplot[sym] = df
+        #df.to_csv('test.csv')
     # Frame log in pandas, export to CSV
     pairtrade.toPandas()
+    #for sym in sym_list:
+        #print 'LOOK HERE: ' + str(pairtrade.buyplot[sym])
 
     
     #print pairtrade.portfolio.end_date
@@ -313,11 +319,26 @@ if __name__ == '__main__':
 
         ax1 = plt.subplot(411, ylabel=(str(sym)+":"+str(etf))+' Adjusted Close')
         plt.plot(pairtrade.dates, pairtrade.ratios[sym])
-        #ax2.plot(x=, results.short_mavg[results.buy],'^', markersize=10, color='m')
-        #ax2.plot(results.ix[results.sell].index, results.short_mavg[results.sell],'v', markersize=10, color='k')
         plt.setp(ax1.get_xticklabels(), visible=True)
         plt.xticks(rotation=45)
         plt.grid(b=True, which='major', color='k')
+        
+        ax2 = plt.subplot(412, ylabel='z-scored spread')
+        markers = {'buy':[],'sell':[]}
+        row_count = 0
+        for idx, row in pairtrade.plotmarks[sym].iterrows():
+            if 'BUY' in row['ACTION']:
+                markers['buy'].append(idx)
+            elif 'SELL' in row['ACTION']:
+                markers['sell'].append(idx)
+            row_count += 1
+        ax2.plot(pairtrade.buyplot[sym].index, pairtrade.buyplot[sym]['ZSCORE'])
+        ax2.plot(markers['buy'], pairtrade.buyplot[sym]['ZSCORE'][markers['buy']],'^', markersize=10, color='m' )
+        ax2.plot(markers['sell'], pairtrade.buyplot[sym]['ZSCORE'][markers['sell']],'v', markersize=10, color='k')
+        plt.setp(ax2.get_xticklabels(), visible=True)
+        plt.xticks(rotation=45)
+        plt.grid(b=True, which='major', color='k')
+        
         """
         ax2 = plt.subplot(412, ylabel='z-scored spread')
         plt.plot(pairtrade.dates, pairtrade.zscores[sym], color='r')
