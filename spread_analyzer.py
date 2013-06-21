@@ -29,18 +29,24 @@ from urllib import urlopen
 import statsmodels.api as sm
 import statsmodels.tsa.stattools as ts
 
-results = {'Random Walk I[1]':[],'Random Walk I[2]':[],'Cointegration Level':[],'Pearson Correlation':[],
-       'Beta':[],'Current Spread':[],'Price-Ratio':[],'Average Price-Ratio':[],
-       'Beta 1':[],'Beta 2':[],'Spread Mean':[],'Spread Median':[],
-       'Spread Maximum':[],'Spread Minimum':[],'Half-life':[],'Current z-score':[]}
+results = {'Results':{'Random Walk I[1]':[],'Random Walk I[2]':[],'Cointegration Level':[],
+                      'Pearson Correlation':[],'Beta':[],'Current Spread':[],'Price-Ratio':[],
+                      'Average Price-Ratio':[],'Beta 1':[],'Beta 2':[],'Spread Mean':[],
+                      'Spread Median':[],'Spread Maximum':[],'Spread Minimum':[],
+                      'Half-life':[],'Current z-score':[]}}
 
 def run(sym1,sym2,t):
     index = '^GSPC'
     df = get_data(sym1,sym2,t)
     index = get_index(index,t)
-    cointegration(df,index,sym1,sym2)
-    
-    #sresults = pd.DataFrame(results)
+    results = operators(df,index,sym1,sym2)
+    df = pd.DataFrame(results)
+    results = df.reindex(index=['Random Walk I[1]','Random Walk I[2]','Cointegration Level',
+                               'Pearson Correlation','Beta','Current Spread','Price-Ratio',
+                               'Average Price-Ratio','Beta 1','Beta 2','Spread Mean',
+                               'Spread Median','Spread Maximum','Spread Minimum',
+                               'Half-life','Current z-score'])
+    print ""
     print results
     
 ##############################################################
@@ -76,7 +82,7 @@ def ols_transform(df,sym1,sym2):
     slope, intercept = sm.OLS(p0, p1).fit().params
     return slope, intercept
 
-def cointegration(df,index,sym1,sym2):
+def operators(df,index,sym1,sym2):
     # Arrange data
     sym_array = df.values
     index_array = index.values
@@ -110,8 +116,8 @@ def cointegration(df,index,sym1,sym2):
         result2 = False
     else:
         result2 = True
-    results['Random Walk I[1]'].append(result1)
-    results['Random Walk I[2]'].append(result2)
+    results['Results']['Random Walk I[1]'].append(result1)
+    results['Results']['Random Walk I[2]'].append(result2)
 
     print 'Calculating cointegration...'    
     # Step 1: regress one variable on the other
@@ -121,56 +127,56 @@ def cointegration(df,index,sym1,sym2):
     # the residual is unit root    
     result = ts.adfuller(ols_result.resid)
     pvalue = round(1-result[1],4)*100
-    results['Cointegration Level'].append(str(pvalue)+'%')
+    results['Results']['Cointegration Level'].append(str(pvalue)+'%')
     
     print 'Calculating Pearson Correlation...'
     r = round(pearsonr(sym1_p,sym2_p)[0],4)*100
-    results['Pearson Correlation'].append(str(r)+'%')
+    results['Results']['Pearson Correlation'].append(str(r)+'%')
     
     print 'Calculating Beta...'
-    beta = np.around(np.cov(sym2_returns,sym1_returns)[0,1] / np.var(sym2_returns), decimals = 2)
-    results['Beta'].append(beta)
+    beta = np.around(np.cov(sym2_returns,sym1_returns)[0,1] / np.var(sym1_returns), decimals = 2)
+    results['Results']['Beta'].append(beta)
     
     print 'Calculating Current Spread'
     spread = round((sym1_p[0]-sym2_p[0]),4)
-    results['Current Spread'].append(spread)
+    results['Results']['Current Spread'].append(spread)
     
     print 'Calculating Current Price-Ratio...'
     ratio = round((sym1_p[0]/sym2_p[0]),2)
-    results['Price-Ratio'].append(ratio)
+    results['Results']['Price-Ratio'].append(ratio)
     
     print 'Calculating Average Price-Ratio...'
     array = sym1_p / sym2_p
     ratio = round(np.mean(array),2)
-    results['Average Price-Ratio'].append(ratio)
+    results['Results']['Average Price-Ratio'].append(ratio)
     
     print 'Calculating Spread Mean...'
     array = sym1_p - sym2_p
     mean = round(np.mean(array),2)
-    results['Spread Mean'].append(mean)
+    results['Results']['Spread Mean'].append(mean)
     
     print 'Calculating Spread Median...'
     array = sym1_p - sym2_p
     median = round(np.median(array),2)
-    results['Spread Median'].append(median)
+    results['Results']['Spread Median'].append(median)
     
     print 'Calculating Spread Maximum...'
     array = sym1_p - sym2_p
     max = round(np.max(array),2)
-    results['Spread Maximum'].append(max)
+    results['Results']['Spread Maximum'].append(max)
     
     print 'Calculating Spread Minimum...'
     array = sym1_p - sym2_p
     min = round(np.min(array),2)
-    results['Spread Minimum'].append(min)
+    results['Results']['Spread Minimum'].append(min)
     
     print 'Calculating Beta 1...'
     beta = np.around(np.cov(sym1_returns,index_returns)[0,1] / np.var(index_returns), decimals = 2)
-    results['Beta 1'].append(beta)
+    results['Results']['Beta 1'].append(beta)
 
     print 'Calculating Beta 2...'
     beta = np.around(np.cov(sym2_returns,index_returns)[0,1] / np.var(index_returns), decimals = 2)
-    results['Beta 2'].append(beta)
+    results['Results']['Beta 2'].append(beta)
     
     print 'Calculating Half-life...'
     array = sym1_p - sym2_p
@@ -178,7 +184,7 @@ def cointegration(df,index,sym1,sym2):
     y = array[:-1]
     k = np.polyfit(y,x,1)
     half_life = ceil(-np.log(2)/k[0])
-    results['Half-life'].append(half_life)
+    results['Results']['Half-life'].append(half_life)
     
     print 'Calculating Current z-score...'
     # 1. Calculate slop and intercept
@@ -186,8 +192,11 @@ def cointegration(df,index,sym1,sym2):
     sym1_p = sym1_p[::-1][-window:]
     sym2_p = sym2_p[::-1][-window:]
     spreads = sym1_p - sym2_p
-    current_zscore = zscore(spreads)[-1]
-    results['Current z-score'].append(current_zscore) 
-
-print run('CAT','JOY',1)
-
+    current_zscore = round(zscore(spreads)[-1],2)
+    results['Results']['Current z-score'].append(current_zscore)
+    
+    #################################################
+    return results 
+    #################################################  
+run('CAT','JOY',1)
+#####################################################
