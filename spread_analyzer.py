@@ -6,12 +6,12 @@ Function                        Output
 Random Walk?                    True/False
 Cointegration Level:            0-100%            DONE
 Pearson Correlation (Price):    0-100%            DONE
-Beta (each other):              Beta              DONE
+Beta (each other):              Beta              FIX
 Current Spread:                 Current Spread    DONE
 Price-Ratio:                    Current Ratio     DONE
 Average Price Ratio:            Average Ratio     DONE
-Beta 1                          Beta
-Beta 2                          Beta
+Beta 1                          Beta              DONE
+Beta 2                          Beta              DONE
 Spread Mean:                    Spread Mean       DONE
 Spread Median:                  Spread Maximum    DONE
 Spread Maximum:                 Spread Maximum    DONE 
@@ -22,7 +22,7 @@ Current z-score                 Current z-score
 
 import pandas as pd
 import numpy as np
-from scipy.stats import pearsonr
+from scipy.stats import pearsonr, beta
 from urllib import urlopen
 import statsmodels.api as sm
 import statsmodels.tsa.stattools as ts
@@ -33,11 +33,10 @@ results = {'Random Walk':[],'Cointegration Level':[],'Pearson Correlation':[],
        'Spread Maximum':[],'Spread Minimum':[],'Half-life':[],'Current zscore':[]}
 
 def run(sym1,sym2,t):
-    
-
-    
+    index = 'SPY'
     df = get_data(sym1,sym2,t)
-    cointegration(df,sym1,sym2)
+    index = get_index(index,t)
+    cointegration(df,index,sym1,sym2)
     
     #sresults = pd.DataFrame(results)
     print results
@@ -59,17 +58,33 @@ def get_data(sym1,sym2,t):
     df2 = data_handler(sym2,t)
     df = pd.concat((df1,df2),axis=1)
     return df
-
-def cointegration(df,sym1,sym2):
+def get_index(index,t):
+    t = int(t*250)
+    index = data_handler(index,t)
+    return index
+def cointegration(df,index,sym1,sym2):
     # Arrange data
     sym_array = df.values
+    index_array = index.values
     sym1 = np.array([])
+    sym1_returns = np.array([])
     sym2 = np.array([])
+    sym2_returns = np.array([])
+    index = np.array([])
+    index_returns = np.array([])
     y = len(sym_array)
     for x in range(y):
         sym1 = np.append(sym1, sym_array[x][0])
         sym2 = np.append(sym2, sym_array[x][1])
-    
+        index = np.append(index, index_array[x])
+    for x in range(y-1):
+        return1 = (sym1[x+1] / sym1[x])-1
+        sym1_returns = np.append(sym1_returns, return1)
+        return2 = (sym2[x+1] / sym2[x])-1
+        sym2_returns = np.append(sym2_returns, return2)
+        returnI = (index[x+1] / index[x])-1
+        index_returns = np.append(index_returns, returnI)
+
     print 'Calculating cointegration...'    
     # Step 1: regress one variable on the other
     ols_result = sm.OLS(sym1,sym2).fit()
@@ -85,7 +100,7 @@ def cointegration(df,sym1,sym2):
     results['Pearson Correlation'].append(str(r)+'%')
     
     print 'Calculating Beta...'
-    beta = round(ols_result.params[0],2)
+    beta = np.around(np.cov(sym2_returns,sym1_returns)[0,1] / np.var(sym1_returns), decimals = 2)
     results['Beta'].append(beta)
     
     print 'Calculating Current Spread'
@@ -120,11 +135,20 @@ def cointegration(df,sym1,sym2):
     array = sym1 - sym2
     min = round(np.min(array),2)
     results['Spread Minimum'].append(min)
+    
+    print 'Calculating Beta 1...'
+    beta = np.around(np.cov(sym1_returns,index_returns)[0,1] / np.var(index_returns), decimals = 2)
+    results['Beta 1'].append(beta)
+
+    print 'Calculating Beta 2...'
+    beta = np.around(np.cov(sym2_returns,index_returns)[0,1] / np.var(index_returns), decimals = 2)
+    results['Beta 2'].append(beta)
+    
                                           
                                           
     
     return result
 
 
-print run('SEE','XLB',1)
+print run('JOY','CAT',1)
 
