@@ -3,7 +3,7 @@ This will be used for testing pairs
 
 Function                        Output
 ----------------------------------------------
-Random Walk?                    True/False
+Random Walk?                    True/False        DONE
 Cointegration Level:            0-100%            DONE
 Pearson Correlation (Price):    0-100%            DONE
 Beta (each other):              Beta              FIX
@@ -21,19 +21,20 @@ Current z-score                 Current z-score
 """
 
 import pandas as pd
+from vratio import vratio
 import numpy as np
 from scipy.stats import pearsonr, beta
 from urllib import urlopen
 import statsmodels.api as sm
 import statsmodels.tsa.stattools as ts
 
-results = {'Random Walk':[],'Cointegration Level':[],'Pearson Correlation':[],
+results = {'Random Walk I[1]':[],'Random Walk I[2]':[],'Cointegration Level':[],'Pearson Correlation':[],
        'Beta':[],'Current Spread':[],'Price-Ratio':[],'Average Price-Ratio':[],
        'Beta 1':[],'Beta 2':[],'Spread Mean':[],'Spread Median':[],
        'Spread Maximum':[],'Spread Minimum':[],'Half-life':[],'Current zscore':[]}
 
 def run(sym1,sym2,t):
-    index = 'SPY'
+    index = '^GSPC'
     df = get_data(sym1,sym2,t)
     index = get_index(index,t)
     cointegration(df,index,sym1,sym2)
@@ -84,6 +85,21 @@ def cointegration(df,index,sym1,sym2):
         sym2_returns = np.append(sym2_returns, return2)
         returnI = (index[x+1] / index[x])-1
         index_returns = np.append(index_returns, returnI)
+    
+    print 'Testing Random Walk Hypothesis...'
+    v1 = vratio(sym1, cor = 'het')
+    v2 = vratio(sym1, cor = 'het')
+    print v1
+    if v1[2] < 0.05:
+        result1 = False
+    else:
+        result1 = True
+    if v2[2] < 0.05:
+        result2 = False
+    else:
+        result2 = True
+    results['Random Walk I[1]'].append(result1)
+    results['Random Walk I[2]'].append(result2)
 
     print 'Calculating cointegration...'    
     # Step 1: regress one variable on the other
@@ -100,7 +116,7 @@ def cointegration(df,index,sym1,sym2):
     results['Pearson Correlation'].append(str(r)+'%')
     
     print 'Calculating Beta...'
-    beta = np.around(np.cov(sym2_returns,sym1_returns)[0,1] / np.var(sym1_returns), decimals = 2)
+    beta = np.around(np.cov(sym2_returns,sym1_returns)[0,1] / np.var(sym2_returns), decimals = 2)
     results['Beta'].append(beta)
     
     print 'Calculating Current Spread'
