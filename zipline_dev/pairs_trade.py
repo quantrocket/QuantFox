@@ -77,8 +77,6 @@ class Pairtrade(TradingAlgorithm):
     def toPandas(frames):
         writer = pd.ExcelWriter('test.xlsx')
         for sym in sym_list:
-            print 'lens'
-            print len(pairtrade.gain_plot[sym]['GAIN'])
             spreads = pd.DataFrame(pairtrade.ratios[sym], index=pairtrade.dates)
             zscores = pd.DataFrame(pairtrade.zscores[sym], index=pairtrade.dates)
             actions = pd.DataFrame(pairtrade.actions[sym], index=pairtrade.dates)
@@ -87,8 +85,8 @@ class Pairtrade(TradingAlgorithm):
             df = df.join(actions)
             df = df.join(returns)
             pairtrade.buyplot[sym] = df
-            df.to_excel(writer, sheet_name = sym)
-        writer.save()
+            #df.to_excel(writer, sheet_name = sym)
+        #writer.save()
         orders_log = 'results/orders_log.xlsx'
         writer = pd.ExcelWriter(orders_log)
         for sym in sym_list:
@@ -124,8 +122,6 @@ class Pairtrade(TradingAlgorithm):
                 cum = (self.gain_plot[sym]['GAIN'][-1] + net)
                 self.gain_plot[sym]['GAIN'].append(cum)
                 
-
-
     def handle_data(self, data):
         ####################################################################
         # Keep track of days
@@ -222,7 +218,7 @@ class Pairtrade(TradingAlgorithm):
 
 
 if __name__ == '__main__':
-    start = datetime(2011, 1, 1, 0, 0, 0, 0, pytz.utc)
+    start = datetime(2008, 1, 1, 0, 0, 0, 0, pytz.utc)
     end = datetime(2012, 12, 31, 0, 0, 0, 0, pytz.utc)
     feed = build_feed()
     data = load_from_yahoo(stocks=feed, indexes={},
