@@ -1,30 +1,30 @@
 """
 This will be used for testing pairs
 
-Function                        Output
-----------------------------------------------
-Random Walk?                    True/False        DONE
-Cointegration Level:            0-100%            DONE
-Pearson Correlation (Price):    0-100%            DONE
-Beta (each other):              Beta              FIX
-Current Spread:                 Current Spread    DONE
-Price-Ratio:                    Current Ratio     DONE
-Average Price Ratio:            Average Ratio     DONE
-Beta 1                          Beta              DONE
-Beta 2                          Beta              DONE
-Spread Mean:                    Spread Mean       DONE
-Spread Median:                  Spread Maximum    DONE
-Spread Maximum:                 Spread Maximum    DONE 
-Spread Minimum:                 Spread Minimum    DONE
-Half-life:                      Half-life         DONE
-Current z-score                 Current z-score
+Function                        Output            Status
+--------------------------------------------------------
+Random Walk?                    True/False         DONE
+Cointegration Level:            0-100%             DONE
+Pearson Correlation (Price):    0-100%             DONE
+Beta (each other):              Beta               FIX
+Current Spread:                 Current Spread     DONE
+Price-Ratio:                    Current Ratio      DONE
+Average Price Ratio:            Average Ratio      DONE
+Beta 1                          Beta               DONE
+Beta 2                          Beta               DONE
+Spread Mean:                    Spread Mean        DONE
+Spread Median:                  Spread Maximum     DONE
+Spread Maximum:                 Spread Maximum     DONE 
+Spread Minimum:                 Spread Minimum     DONE
+Half-life:                      Half-life          DONE
+Current z-score                 Current z-score    DONE
 """
 
 import pandas as pd
 from math import ceil
 from vratio import vratio
 import numpy as np
-from scipy.stats import pearsonr, beta
+from scipy.stats import pearsonr, beta, zscore
 from urllib import urlopen
 import statsmodels.api as sm
 import statsmodels.tsa.stattools as ts
@@ -32,7 +32,7 @@ import statsmodels.tsa.stattools as ts
 results = {'Random Walk I[1]':[],'Random Walk I[2]':[],'Cointegration Level':[],'Pearson Correlation':[],
        'Beta':[],'Current Spread':[],'Price-Ratio':[],'Average Price-Ratio':[],
        'Beta 1':[],'Beta 2':[],'Spread Mean':[],'Spread Median':[],
-       'Spread Maximum':[],'Spread Minimum':[],'Half-life':[],'Current zscore':[]}
+       'Spread Maximum':[],'Spread Minimum':[],'Half-life':[],'Current z-score':[]}
 
 def run(sym1,sym2,t):
     index = '^GSPC'
@@ -43,7 +43,9 @@ def run(sym1,sym2,t):
     #sresults = pd.DataFrame(results)
     print results
     
-    
+##############################################################
+#                Run calls these functions                   #
+##############################################################
 def make_url(symbol):
     base_url = "http://ichart.finance.yahoo.com/table.csv?s="
     return base_url + symbol
@@ -64,32 +66,42 @@ def get_index(index,t):
     t = int(t*250)
     index = data_handler(index,t)
     return index
+def ols_transform(df,sym1,sym2):
+    """
+    Computes regression coefficient (slope and intercept)
+    via Ordinary Least Squares between two instruments.
+    """
+    p0 = df[sym1]
+    p1 = sm.add_constant(df[sym2], prepend=True)
+    slope, intercept = sm.OLS(p0, p1).fit().params
+    return slope, intercept
+
 def cointegration(df,index,sym1,sym2):
     # Arrange data
     sym_array = df.values
     index_array = index.values
-    sym1 = np.array([])
+    sym1_p = np.array([])
     sym1_returns = np.array([])
-    sym2 = np.array([])
+    sym2_p = np.array([])
     sym2_returns = np.array([])
     index = np.array([])
     index_returns = np.array([])
     y = len(sym_array)
     for x in range(y):
-        sym1 = np.append(sym1, sym_array[x][0])
-        sym2 = np.append(sym2, sym_array[x][1])
+        sym1_p = np.append(sym1_p, sym_array[x][0])
+        sym2_p = np.append(sym2_p, sym_array[x][1])
         index = np.append(index, index_array[x])
     for x in range(y-1):
-        return1 = (sym1[x+1] / sym1[x])-1
+        return1 = (sym1_p[x+1] / sym1_p[x])-1
         sym1_returns = np.append(sym1_returns, return1)
-        return2 = (sym2[x+1] / sym2[x])-1
+        return2 = (sym2_p[x+1] / sym2_p[x])-1
         sym2_returns = np.append(sym2_returns, return2)
         returnI = (index[x+1] / index[x])-1
         index_returns = np.append(index_returns, returnI)
     
     print 'Testing Random Walk Hypothesis...'
-    v1 = vratio(sym1, cor = 'het')
-    v2 = vratio(sym1, cor = 'het')
+    v1 = vratio(sym1_p, cor = 'het')
+    v2 = vratio(sym1_p, cor = 'het')
     if v1[2] < 0.05:
         result1 = False
     else:
@@ -103,7 +115,7 @@ def cointegration(df,index,sym1,sym2):
 
     print 'Calculating cointegration...'    
     # Step 1: regress one variable on the other
-    ols_result = sm.OLS(sym1,sym2).fit()
+    ols_result = sm.OLS(sym1_p,sym2_p).fit()
     # Step 2: obtain the residual (ols_resuld.resid)
     # Step 3: apply Augmented Dickey-Fuller test to see whether 
     # the residual is unit root    
@@ -112,7 +124,7 @@ def cointegration(df,index,sym1,sym2):
     results['Cointegration Level'].append(str(pvalue)+'%')
     
     print 'Calculating Pearson Correlation...'
-    r = round(pearsonr(sym1,sym2)[0],4)*100
+    r = round(pearsonr(sym1_p,sym2_p)[0],4)*100
     results['Pearson Correlation'].append(str(r)+'%')
     
     print 'Calculating Beta...'
@@ -120,35 +132,35 @@ def cointegration(df,index,sym1,sym2):
     results['Beta'].append(beta)
     
     print 'Calculating Current Spread'
-    spread = round((sym1[0]-sym2[0]),4)
+    spread = round((sym1_p[0]-sym2_p[0]),4)
     results['Current Spread'].append(spread)
     
     print 'Calculating Current Price-Ratio...'
-    ratio = round((sym1[0]/sym2[0]),2)
+    ratio = round((sym1_p[0]/sym2_p[0]),2)
     results['Price-Ratio'].append(ratio)
     
     print 'Calculating Average Price-Ratio...'
-    array = sym1 / sym2
+    array = sym1_p / sym2_p
     ratio = round(np.mean(array),2)
     results['Average Price-Ratio'].append(ratio)
     
     print 'Calculating Spread Mean...'
-    array = sym1 - sym2
+    array = sym1_p - sym2_p
     mean = round(np.mean(array),2)
     results['Spread Mean'].append(mean)
     
     print 'Calculating Spread Median...'
-    array = sym1 - sym2
+    array = sym1_p - sym2_p
     median = round(np.median(array),2)
     results['Spread Median'].append(median)
     
     print 'Calculating Spread Maximum...'
-    array = sym1 - sym2
+    array = sym1_p - sym2_p
     max = round(np.max(array),2)
     results['Spread Maximum'].append(max)
     
     print 'Calculating Spread Minimum...'
-    array = sym1 - sym2
+    array = sym1_p - sym2_p
     min = round(np.min(array),2)
     results['Spread Minimum'].append(min)
     
@@ -161,18 +173,21 @@ def cointegration(df,index,sym1,sym2):
     results['Beta 2'].append(beta)
     
     print 'Calculating Half-life...'
-    array = sym1 - sym2
+    array = sym1_p - sym2_p
     x = np.subtract(array[1:],array[:-1])
     y = array[:-1]
     k = np.polyfit(y,x,1)
     half_life = ceil(-np.log(2)/k[0])
     results['Half-life'].append(half_life)
     
-                                          
-                                          
-    
-    return result
+    print 'Calculating Current z-score...'
+    # 1. Calculate slop and intercept
+    window = 100
+    sym1_p = sym1_p[::-1][-window:]
+    sym2_p = sym2_p[::-1][-window:]
+    spreads = sym1_p - sym2_p
+    current_zscore = zscore(spreads)[-1]
+    results['Current z-score'].append(current_zscore) 
 
-
-print run('JOY','CAT',1)
+print run('CAT','JOY',1)
 
