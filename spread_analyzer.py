@@ -4,7 +4,7 @@ This will be used for testing pairs
 Function                        Output            Status
 --------------------------------------------------------
 Random Walk?                    True/False         DONE
-Cointegration Level:            0-100%             DONE
+Cointegration Level:            0-100%             CHECK
 Pearson Correlation (Price):    0-100%             DONE
 Beta (each other):              Beta               FIX
 Current Spread:                 Current Spread     DONE
@@ -16,8 +16,8 @@ Spread Mean:                    Spread Mean        DONE
 Spread Median:                  Spread Maximum     DONE
 Spread Maximum:                 Spread Maximum     DONE 
 Spread Minimum:                 Spread Minimum     DONE
-Half-life:                      Half-life          DONE
-Current z-score                 Current z-score    DONE
+Half-life:                      Half-life          CHECK
+Current z-score                 Current z-score    CHECK
 """
 
 import pandas as pd
@@ -198,5 +198,5 @@ def operators(df,index,sym1,sym2):
     #################################################
     return results 
     #################################################  
-run('CAT','JOY',1)
+run('CH','ECH',1)
 #####################################################
