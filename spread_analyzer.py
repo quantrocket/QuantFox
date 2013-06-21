@@ -16,11 +16,12 @@ Spread Mean:                    Spread Mean       DONE
 Spread Median:                  Spread Maximum    DONE
 Spread Maximum:                 Spread Maximum    DONE 
 Spread Minimum:                 Spread Minimum    DONE
-Half-life:                      Half-life
+Half-life:                      Half-life         DONE
 Current z-score                 Current z-score
 """
 
 import pandas as pd
+from math import ceil
 from vratio import vratio
 import numpy as np
 from scipy.stats import pearsonr, beta
@@ -89,7 +90,6 @@ def cointegration(df,index,sym1,sym2):
     print 'Testing Random Walk Hypothesis...'
     v1 = vratio(sym1, cor = 'het')
     v2 = vratio(sym1, cor = 'het')
-    print v1
     if v1[2] < 0.05:
         result1 = False
     else:
@@ -159,6 +159,14 @@ def cointegration(df,index,sym1,sym2):
     print 'Calculating Beta 2...'
     beta = np.around(np.cov(sym2_returns,index_returns)[0,1] / np.var(index_returns), decimals = 2)
     results['Beta 2'].append(beta)
+    
+    print 'Calculating Half-life...'
+    array = sym1 - sym2
+    x = np.subtract(array[1:],array[:-1])
+    y = array[:-1]
+    k = np.polyfit(y,x,1)
+    half_life = ceil(-np.log(2)/k[0])
+    results['Half-life'].append(half_life)
     
                                           
                                           
