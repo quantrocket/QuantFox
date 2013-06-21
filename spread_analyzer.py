@@ -5,7 +5,7 @@ Function                        Output
 ------------------------------------------
 Random Walk?                    True/False
 Cointegration Level:            0-100%            DONE
-Pearson Correlation (Price):    0-100%
+Pearson Correlation (Price):    0-100%            DONE
 Beta (each other):              Beta
 Current Spread:                 Current Spread
 Price-Ratio:                    Current Ratio
@@ -21,6 +21,7 @@ Current z-score                 Current z-score
 """
 
 import pandas as pd
+from scipy.stats import pearsonr
 from urllib import urlopen
 import statsmodels.api as sm
 import statsmodels.tsa.stattools as ts
@@ -76,8 +77,15 @@ def cointegration(df,sym1,sym2):
     result = ts.adfuller(ols_result.resid)
     pvalue = round(1-result[1],4)*100
     results['Cointegration Level'].append(str(pvalue)+'%')
+    print 'Calculating Pearson Correlation...'
+    r = round(pearsonr(sym1,sym2)[0],4)*100
+    results['Pearson Correlation'].append(str(r)+'%')
+    
+                                          
+                                          
+    
     return result
 
 
-print run('CH','ECH',1)
+print run('SEE','XLB',1)
 
