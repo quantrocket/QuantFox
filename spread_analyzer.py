@@ -6,7 +6,7 @@ Function                        Output
 Random Walk?                    True/False
 Cointegration Level:            0-100%            DONE
 Pearson Correlation (Price):    0-100%            DONE
-Beta (each other):              Beta
+Beta (each other):              Beta              DONE
 Current Spread:                 Current Spread
 Price-Ratio:                    Current Ratio
 Average Price Ratio:            Average Ratio
@@ -80,7 +80,9 @@ def cointegration(df,sym1,sym2):
     print 'Calculating Pearson Correlation...'
     r = round(pearsonr(sym1,sym2)[0],4)*100
     results['Pearson Correlation'].append(str(r)+'%')
-    
+    print 'Calculating Beta'
+    beta = round(ols_result.params[0],2)
+    results['Beta'].append(beta)
                                           
                                           
     
