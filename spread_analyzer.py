@@ -35,7 +35,12 @@ results = {'Results':{'Random Walk I[1]':[],'Random Walk I[2]':[],'Cointegration
                       'Spread Median':[],'Spread Maximum':[],'Spread Minimum':[],
                       'Half-life':[],'Current z-score':[]}}
 
-def run(sym1,sym2,t):
+def run(*args):
+    print ""
+    sym1 = raw_input("Leg 1: ")
+    sym2 = raw_input("Leg 2: ")
+    t = float(raw_input("Years: "))
+    print ""
     index = '^GSPC'
     df = get_data(sym1,sym2,t)
     index = get_index(index,t)
@@ -198,5 +203,5 @@ def operators(df,index,sym1,sym2):
     #################################################
     return results 
     #################################################  
-run('CH','ECH',1)
+run()
 #####################################################
