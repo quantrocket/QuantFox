@@ -58,7 +58,6 @@ def get_data(sym):
                 data[current_date][key] = value
             
     data = pd.DataFrame(data)
-    data.to_csv('ibm.csv')
+    data.to_csv('/home/vin/git/QuantFox/data/FUND/'+sym+'_FUND-Q.csv')
     print data
         
-get_data('IBM') 
