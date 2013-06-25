@@ -5,7 +5,6 @@ from datetime import datetime
 import pytz
 import pandas as pd
 
-
 from zipline.algorithm import TradingAlgorithm
 from zipline.transforms import batch_transform
 from zipline.utils.factory import create_returns_from_list, load_from_yahoo
@@ -15,6 +14,9 @@ from zipline.finance.performance import PerformanceTracker, PerformancePeriod
 
 sym_list = {'TAL':'TGH','CH':'ECH'}
 trade_size = 10000
+start = datetime(2008, 1, 1, 0, 0, 0, 0, pytz.utc)
+end = datetime(2012, 12, 31, 0, 0, 0, 0, pytz.utc)
+
 
 def build_feed():
     feed = []
@@ -48,12 +50,9 @@ class Pairtrade(TradingAlgorithm):
         self.day_count = 0
         self.dates = []
         self.actions = {sym:{'ACTION':[]} for sym in sym_list}
-        self.spreads = {sym:[] for sym in sym_list}
         self.ratios = {sym:{'SPREAD':[]} for sym in sym_list}
-        self.invested = {sym:[0,0] for sym in sym_list}              # invested[sym,etf]
-        self.returns = {sym:[[],[]] for sym in sym_list}             # returns[sym][netReturn,cumReturn]
-        self.cumReturns = {sym:[] for sym in sym_list}
         self.zscores = {sym:{'ZSCORE':[]} for sym in sym_list}
+        self.spreads = {sym:[] for sym in sym_list}
         self.gain_plot = {sym:{'GAIN':[]} for sym in sym_list}
         self.window_length = window_length
         self.ols_transform = ols_transform(refresh_period=self.window_length,window_length=self.window_length)
@@ -67,7 +66,7 @@ class Pairtrade(TradingAlgorithm):
         return
     
     def toPandas(frames):
-        writer = pd.ExcelWriter('test.xlsx')
+        #writer = pd.ExcelWriter('test.xlsx')
         for sym in sym_list:
             spreads = pd.DataFrame(pairtrade.ratios[sym], index=pairtrade.dates)
             zscores = pd.DataFrame(pairtrade.zscores[sym], index=pairtrade.dates)
@@ -85,7 +84,7 @@ class Pairtrade(TradingAlgorithm):
             etf = sym_list[sym]
             log = pd.DataFrame(pairtrade.log[sym], index=pairtrade.trade_dates[sym]['DATE'])
             pairtrade.plotmarks[sym] = log
-            print log
+            #print log
             print ""
             print "exporting..."
             log.to_excel(writer, sheet_name = sym +'-'+ etf)
@@ -116,8 +115,6 @@ class Pairtrade(TradingAlgorithm):
                 
     def handle_data(self, data):
         ####################################################################
-        # Keep track of days
-        #print self.day_count
         day = TradingAlgorithm.get_datetime(self)
         self.dates.append(day)
         print self.dates[-1]
@@ -210,8 +207,6 @@ class Pairtrade(TradingAlgorithm):
 
 
 if __name__ == '__main__':
-    start = datetime(2008, 1, 1, 0, 0, 0, 0, pytz.utc)
-    end = datetime(2012, 12, 31, 0, 0, 0, 0, pytz.utc)
     feed = build_feed()
     data = load_from_yahoo(stocks=feed, indexes={},
                            start=start, end=end, adjusted=True)
@@ -259,7 +254,7 @@ if __name__ == '__main__':
     print '------------------------------'
     
     for sym in sym_list:
-        print pairtrade.gain_plot[sym]['GAIN']
+        #print pairtrade.gain_plot[sym]['GAIN']
         print str(sym)+":"+str(sym_list[sym])+': '+str((round(pairtrade.gain_plot[sym]['GAIN'][-1]*100,4)))+'%'
     data['spreads'] = np.nan
 
