@@ -5,7 +5,7 @@ import pandas as pd
 
 reader = csv.reader(open('advfn_dictionary.csv', "rb"), delimiter = "\t")
 dictionary = [key for line in reader for key in line]
-print dictionary
+#print dictionary
 
 def get_dates(sym):
     dates = {}
@@ -23,7 +23,7 @@ def get_dates(sym):
     return dates
 
 
-def get_data(sym):
+def get_data(sym,progress):
     
     base_url = 'http://www.advfn.com/p.php?pid=financials&btn=istart_date&mode=quarterly_reports&symbol='
     dates = get_dates(sym)
@@ -33,7 +33,7 @@ def get_data(sym):
     years = len(dates)   
     for i in range(years):
         url = base_url + sym + '&istart_date=' + str(i)
-        print url
+        #print url
         page = urllib2.urlopen(url)
         soup = bs(page.read())
         
@@ -50,7 +50,7 @@ def get_data(sym):
             key = data_list[i]
             if key == 'quarter end date':
                 current_date = str(data_list[i+1])
-                print current_date
+                print str(progress)+'%... ' + sym + ': ' + current_date
         for i in range(n):
             key = data_list[i]
             if key in dictionary:
@@ -59,5 +59,5 @@ def get_data(sym):
             
     data = pd.DataFrame(data)
     data.to_csv('/home/vin/git/QuantFox/data/FUND/'+sym+'_FUND-Q.csv')
-    print data
+    #print data
         
