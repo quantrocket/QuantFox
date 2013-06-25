@@ -39,11 +39,12 @@ def run(*args):
     print ""
     sym1 = raw_input("Leg 1: ")
     sym2 = raw_input("Leg 2: ")
-    t = float(raw_input("Years: "))
+    e = float(raw_input("End Years Back: "))
+    t = float(raw_input("Start Years Back: "))
     print ""
     index = '^GSPC'
-    df = get_data(sym1,sym2,t)
-    index = get_index(index,t)
+    df = get_data(sym1,sym2,t,e)
+    index = get_index(index,t,e)
     results = operators(df,index,sym1,sym2)
     df = pd.DataFrame(results)
     results = df.reindex(index=['Random Walk I[1]','Random Walk I[2]','Cointegration Level',
@@ -60,22 +61,25 @@ def run(*args):
 def make_url(symbol):
     base_url = "http://ichart.finance.yahoo.com/table.csv?s="
     return base_url + symbol
-def data_handler(sym,t):
+def data_handler(sym,t,e):
     url = make_url(sym)
     page = urlopen(url)
-    df = pd.read_csv(page)['Adj Close'][:t]
+    df = pd.read_csv(page)['Adj Close'][e:(e+t)]
+    print df
     df = pd.DataFrame({sym:df})
     return df
-def get_data(sym1,sym2,t):
+def get_data(sym1,sym2,t,e):
     print 'Getting data...'
     t = int(t*250)
-    df1 = data_handler(sym1,t)
-    df2 = data_handler(sym2,t)
+    e = int(e*250)
+    df1 = data_handler(sym1,t,e)
+    df2 = data_handler(sym2,t,e)
     df = pd.concat((df1,df2),axis=1)
     return df
-def get_index(index,t):
+def get_index(index,t,e):
     t = int(t*250)
-    index = data_handler(index,t)
+    e = int(e*250)
+    index = data_handler(index,t,e)
     return index
 def ols_transform(df,sym1,sym2):
     """
@@ -112,7 +116,7 @@ def operators(df,index,sym1,sym2):
     
     print 'Testing Random Walk Hypothesis...'
     v1 = vratio(sym1_p, cor = 'het')
-    v2 = vratio(sym1_p, cor = 'het')
+    v2 = vratio(sym2_p, cor = 'het')
     if v1[2] < 0.05:
         result1 = False
     else:
