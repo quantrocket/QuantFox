@@ -8,21 +8,13 @@ import pandas as pd
 
 from zipline.algorithm import TradingAlgorithm
 from zipline.transforms import batch_transform
-from zipline.utils.factory import create_returns_from_list
-from zipline.utils.factory import load_from_yahoo
-from zipline.finance import performance, slippage, risk
-from zipline.finance import trading
+from zipline.utils.factory import create_returns_from_list, load_from_yahoo
+from zipline.finance import performance, slippage, risk, trading
 from zipline.finance.risk import RiskMetricsBase
 from zipline.finance.performance import PerformanceTracker, PerformancePeriod
-from matplotlib.backends.backend_pdf import PdfPages
 
-#sym_list = {'GLD':'IAU'}
-#sym_list = {'KO':'PEP'}
-#sym_list = {'VALE':'RIO'}
-#sym_list = {'CH':'ECH'}
 sym_list = {'TAL':'TGH','CH':'ECH'}
-#sym_list = {'XOM':'COP'}
-#sym_list = {'GLD':'IAU','KO':'PEP'}
+trade_size = 10000
 
 def build_feed():
     feed = []
@@ -108,7 +100,7 @@ class Pairtrade(TradingAlgorithm):
             self.gain_plot[sym]['GAIN'].append(0)
         else:
             basis = self.ratios[sym]['SPREAD'][-1]
-            size = 20000
+            size = 2*trade_size
             if self.portfolio.positions[sym].amount == 0:
                 net = 0
                 cum = (self.gain_plot[sym]['GAIN'][-1] + net)
@@ -185,16 +177,16 @@ class Pairtrade(TradingAlgorithm):
         sym_price = data[sym].price
         etf_price = data[etf].price
         if zscore >= 2 and self.portfolio.positions[sym].amount == 0:
-            sym_quantity = -int(10000 / sym_price)
-            etf_quantity = int(10000 / etf_price)
+            sym_quantity = -int(trade_size / sym_price)
+            etf_quantity = int(trade_size / etf_price)
             self.order(sym, sym_quantity)
             self.order(etf, etf_quantity)
             self.trade_log[sym] = self.trade_log[sym] + 1
             action = 'SELL'
             self.set_log(day, sym, etf, zscore, action, (sym_price-etf_price))
         elif zscore <= -2 and self.portfolio.positions[sym].amount == 0:
-            sym_quantity = int(10000 / sym_price)
-            etf_quantity = -int(10000 / etf_price)
+            sym_quantity = int(trade_size / sym_price)
+            etf_quantity = -int(trade_size / etf_price)
             self.order(sym, sym_quantity)
             self.order(etf, etf_quantity)
             self.trade_log[sym] = self.trade_log[sym] + 1
