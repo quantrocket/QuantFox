@@ -31,12 +31,12 @@ import statsmodels.tsa.stattools as ts
 
 
 
-def run(*args):
+def run(sym1,sym2,e,t):
     print ""
-    sym1 = raw_input("Leg 1: ")
-    sym2 = raw_input("Leg 2: ")
-    e = float(raw_input("End Years Back: "))
-    t = float(raw_input("Start Years Back: "))
+    #sym1 = raw_input("Leg 1: ")
+    #sym2 = raw_input("Leg 2: ")
+    #e = float(raw_input("End Years Back: "))
+    #t = float(raw_input("Start Years Back: "))
     
     pair_string = sym1+':'+sym2
     global results
@@ -58,6 +58,7 @@ def run(*args):
                                'Half-life','Current z-score'])
     print ""
     print results
+    return results
     
 ##############################################################
 #                Run calls these functions                   #
@@ -210,5 +211,5 @@ def operators(pair_string,df,index,sym1,sym2):
     #################################################
     return results 
     #################################################  
-run()
+#run()
 #####################################################
