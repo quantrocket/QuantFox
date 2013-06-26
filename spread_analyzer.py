@@ -29,11 +29,7 @@ from urllib import urlopen
 import statsmodels.api as sm
 import statsmodels.tsa.stattools as ts
 
-results = {'Results':{'Random Walk I[1]':[],'Random Walk I[2]':[],'Cointegration Level':[],
-                      'Pearson Correlation':[],'Beta':[],'Current Spread':[],'Price-Ratio':[],
-                      'Average Price-Ratio':[],'Beta 1':[],'Beta 2':[],'Spread Mean':[],
-                      'Spread Median':[],'Spread Maximum':[],'Spread Minimum':[],
-                      'Half-life':[],'Current z-score':[]}}
+
 
 def run(*args):
     print ""
@@ -41,11 +37,19 @@ def run(*args):
     sym2 = raw_input("Leg 2: ")
     e = float(raw_input("End Years Back: "))
     t = float(raw_input("Start Years Back: "))
+    
+    pair_string = sym1+':'+sym2
+    global results
+    results = {pair_string:{'Random Walk I[1]':[],'Random Walk I[2]':[],'Cointegration Level':[],
+              'Pearson Correlation':[],'Beta':[],'Current Spread':[],'Price-Ratio':[],
+              'Average Price-Ratio':[],'Beta 1':[],'Beta 2':[],'Spread Mean':[],
+              'Spread Median':[],'Spread Maximum':[],'Spread Minimum':[],
+              'Half-life':[],'Current z-score':[]}}
     print ""
     index = '^GSPC'
     df = get_data(sym1,sym2,t,e)
     index = get_index(index,t,e)
-    results = operators(df,index,sym1,sym2)
+    results = operators(pair_string,df,index,sym1,sym2)
     df = pd.DataFrame(results)
     results = df.reindex(index=['Random Walk I[1]','Random Walk I[2]','Cointegration Level',
                                'Pearson Correlation','Beta','Current Spread','Price-Ratio',
@@ -65,7 +69,6 @@ def data_handler(sym,t,e):
     url = make_url(sym)
     page = urlopen(url)
     df = pd.read_csv(page)['Adj Close'][e:(e+t)]
-    print df
     df = pd.DataFrame({sym:df})
     return df
 def get_data(sym1,sym2,t,e):
@@ -91,7 +94,7 @@ def ols_transform(df,sym1,sym2):
     slope, intercept = sm.OLS(p0, p1).fit().params
     return slope, intercept
 
-def operators(df,index,sym1,sym2):
+def operators(pair_string,df,index,sym1,sym2):
     # Arrange data
     sym_array = df.values
     index_array = index.values
@@ -125,8 +128,8 @@ def operators(df,index,sym1,sym2):
         result2 = False
     else:
         result2 = True
-    results['Results']['Random Walk I[1]'].append(result1)
-    results['Results']['Random Walk I[2]'].append(result2)
+    results[pair_string]['Random Walk I[1]'].append(result1)
+    results[pair_string]['Random Walk I[2]'].append(result2)
 
     print 'Calculating cointegration...'    
     # Step 1: regress one variable on the other
@@ -136,56 +139,56 @@ def operators(df,index,sym1,sym2):
     # the residual is unit root    
     result = ts.adfuller(ols_result.resid)
     pvalue = round(1-result[1],4)*100
-    results['Results']['Cointegration Level'].append(str(pvalue)+'%')
+    results[pair_string]['Cointegration Level'].append(str(pvalue)+'%')
     
     print 'Calculating Pearson Correlation...'
     r = round(pearsonr(sym1_p,sym2_p)[0],4)*100
-    results['Results']['Pearson Correlation'].append(str(r)+'%')
+    results[pair_string]['Pearson Correlation'].append(str(r)+'%')
     
     print 'Calculating Beta...'
     beta = np.around(np.cov(sym2_returns,sym1_returns)[0,1] / np.var(sym1_returns), decimals = 2)
-    results['Results']['Beta'].append(beta)
+    results[pair_string]['Beta'].append(beta)
     
     print 'Calculating Current Spread'
     spread = round((sym1_p[0]-sym2_p[0]),4)
-    results['Results']['Current Spread'].append(spread)
+    results[pair_string]['Current Spread'].append(spread)
     
     print 'Calculating Current Price-Ratio...'
     ratio = round((sym1_p[0]/sym2_p[0]),2)
-    results['Results']['Price-Ratio'].append(ratio)
+    results[pair_string]['Price-Ratio'].append(ratio)
     
     print 'Calculating Average Price-Ratio...'
     array = sym1_p / sym2_p
     ratio = round(np.mean(array),2)
-    results['Results']['Average Price-Ratio'].append(ratio)
+    results[pair_string]['Average Price-Ratio'].append(ratio)
     
     print 'Calculating Spread Mean...'
     array = sym1_p - sym2_p
     mean = round(np.mean(array),2)
-    results['Results']['Spread Mean'].append(mean)
+    results[pair_string]['Spread Mean'].append(mean)
     
     print 'Calculating Spread Median...'
     array = sym1_p - sym2_p
     median = round(np.median(array),2)
-    results['Results']['Spread Median'].append(median)
+    results[pair_string]['Spread Median'].append(median)
     
     print 'Calculating Spread Maximum...'
     array = sym1_p - sym2_p
     max = round(np.max(array),2)
-    results['Results']['Spread Maximum'].append(max)
+    results[pair_string]['Spread Maximum'].append(max)
     
     print 'Calculating Spread Minimum...'
     array = sym1_p - sym2_p
     min = round(np.min(array),2)
-    results['Results']['Spread Minimum'].append(min)
+    results[pair_string]['Spread Minimum'].append(min)
     
     print 'Calculating Beta 1...'
     beta = np.around(np.cov(sym1_returns,index_returns)[0,1] / np.var(index_returns), decimals = 2)
-    results['Results']['Beta 1'].append(beta)
+    results[pair_string]['Beta 1'].append(beta)
 
     print 'Calculating Beta 2...'
     beta = np.around(np.cov(sym2_returns,index_returns)[0,1] / np.var(index_returns), decimals = 2)
-    results['Results']['Beta 2'].append(beta)
+    results[pair_string]['Beta 2'].append(beta)
     
     print 'Calculating Half-life...'
     array = sym1_p - sym2_p
@@ -193,7 +196,7 @@ def operators(df,index,sym1,sym2):
     y = array[:-1]
     k = np.polyfit(y,x,1)
     half_life = ceil(-np.log(2)/k[0])
-    results['Results']['Half-life'].append(half_life)
+    results[pair_string]['Half-life'].append(half_life)
     
     print 'Calculating Current z-score...'
     # 1. Calculate slop and intercept
@@ -202,7 +205,7 @@ def operators(df,index,sym1,sym2):
     sym2_p = sym2_p[::-1][-window:]
     spreads = sym1_p - sym2_p
     current_zscore = round(zscore(spreads)[-1],2)
-    results['Results']['Current z-score'].append(current_zscore)
+    results[pair_string]['Current z-score'].append(current_zscore)
     
     #################################################
     return results 
