@@ -19,4 +19,3 @@ for pair in df[results]:
     print string[0],string[2]
           
 print df[results]
-#     
