@@ -1,0 +1,4566 @@
+TICKER	NAME	EXCHANGE
+XOM	Exxon Mobil Corp.	NYSE
+IBM	International Business Machines Corp.	NYSE
+CVX	Chevron Corp.	NYSE
+GE	General Electric Co.	NYSE
+PG	Procter +ACY- Gamble Co.	NYSE
+T	AT+ACY-T Inc.	NYSE
+JNJ	Johnson +ACY- Johnson	NYSE
+PFE	Pfizer Inc.	NYSE
+HBC	HSBC Holdings PLC	NYSE
+WFC	Wells Fargo +ACY- Co.	NYSE
+NVS	Novartis AG	NYSE
+BP	BP PLC	NYSE
+PM	Philip Morris International Inc.	NYSE
+JPM	JPMorgan Chase +ACY- Co.	NYSE
+KO	Coca+AC0-Cola Co.	NYSE
+RDS.A	Royal Dutch Shell PLC Cl A	NYSE
+TM	Toyota Motor Corp.	NYSE
+TOT	Total S.A.	NYSE
+BHP	BHP Billiton Ltd.	NYSE
+MRK	Merck +ACY- Co. Inc.	NYSE
+GSK	GlaxoSmithKline PLC	NYSE
+VZ	Verizon Communications Inc.	NYSE
+SLB	Schlumberger Ltd.	NYSE
+WMT	Wal+AC0-Mart Stores Inc.	NYSE
+MCD	McDonald's Corp.	NYSE
+RDS.B	Royal Dutch Shell PLC B	NYSE
+PEP	PepsiCo Inc.	NYSE
+COP	ConocoPhillips	NYSE
+C	Citigroup Inc.	NYSE
+ABT	Abbott Laboratories	NYSE
+SI	Siemens AG	NYSE
+SNY	Sanofi	NYSE
+OXY	Occidental Petroleum Corp.	NYSE
+RIO	Rio Tinto PLC	NYSE
+BAC	Bank of America Corp.	NYSE
+RY	Royal Bank of Canada	NYSE
+BRK.B	Berkshire Hathaway Inc. Cl B	NYSE
+MTU	Mitsubishi UFJ Financial Group Inc.	NYSE
+BRK.A	Berkshire Hathaway Inc. Cl A	NYSE
+HD	Home Depot Inc.	NYSE
+TD	Toronto+AC0-Dominion Bank	NYSE
+DIS	Walt Disney Co.	NYSE
+STD	Banco Santander S.A.	NYSE
+BBL	BHP Billiton PLC	NYSE
+TSM	Taiwan Semiconductor Manufacturing Co.	NYSE
+HMC	Honda Motor Co. Ltd.	NYSE
+TEF	Telefonica S.A.	NYSE
+CAT	Caterpillar Inc.	NYSE
+WBK	Westpac Banking Corp.	NYSE
+UTX	United Technologies Corp.	NYSE
+SAP	SAP AG	NYSE
+MO	Altria Group Inc.	NYSE
+E	ENI S.p.A.	NYSE
+KFT	Kraft Foods Inc. Cl A	NYSE
+V	VISA Inc. Cl A	NYSE
+AZN	AstraZeneca PLC	NYSE
+UNH	UnitedHealth Group Inc.	NYSE
+CVS	CVS Caremark Corp.	NYSE
+DEO	Diageo PLC	NYSE
+SU	Suncor Energy Inc.	NYSE
+BNS	Bank of Nova Scotia	NYSE
+NVO	Novo Nordisk A.S	NYSE
+MMM	3M Co.	NYSE
+UPS	United Parcel Service Inc. Cl B	NYSE
+EMC	EMC Corp.	NYSE
+BMY	Bristol+AC0-Myers Squibb Co.	NYSE
+USB	U.S. Bancorp	NYSE
+AXP	American Express Co.	NYSE
+CHL	China Mobile Ltd.	NYSE
+UNP	Union Pacific Corp.	NYSE
+HPQ	Hewlett+AC0-Packard Co.	NYSE
+UN	Unilever N.V.	NYSE
+UBS	UBS AG	NYSE
+CAJ	Canon Inc.	NYSE
+BA	Boeing Co.	NYSE
+PBR	Petroleo Brasileiro S/A	NYSE
+GS	Goldman Sachs Group Inc.	NYSE
+BUD	Anheuser+AC0-Busch InBev N.V.	NYSE
+ABX	Barrick Gold Corp.	NYSE
+ABB	ABB Ltd.	NYSE
+SMFG	Sumitomo Mitsui Financial Group Inc.	NYSE
+BCS	Barclays PLC	NYSE
+DD	E.I. DuPont de Nemours +ACY- Co.	NYSE
+AMX	America Movil S.A.B. de C.V.	NYSE
+F	Ford Motor Co.	NYSE
+MA	MasterCard Inc. Cl A	NYSE
+DB	Deutsche Bank AG	NYSE
+APC	Anadarko Petroleum Corp.	NYSE
+UL	Unilever PLC	NYSE
+APA	Apache Corp.	NYSE
+MON	Monsanto Co.	NYSE
+BBVA	Banco Bilbao Vizcaya Argentaria S.A.	NYSE
+HON	Honeywell International Inc.	NYSE
+CL	Colgate+AC0-Palmolive Co.	NYSE
+FCX	Freeport+AC0-McMoRan Copper +ACY- Gold Inc.	NYSE
+CNQ	Canadian Natural Resources Ltd.	NYSE
+MDT	Medtronic Inc.	NYSE
+NKE	Nike Inc. Cl B	NYSE
+SPG	Simon Property Group Inc.	NYSE
+POT	Potash Corp. of Saskatchewan Inc.	NYSE
+DOW	Dow Chemical Co.	NYSE
+MFG	Mizuho Financial Group Inc.	NYSE
+GG	Goldcorp Inc.	NYSE
+LLY	Eli Lilly +ACY- Co.	NYSE
+ACN	Accenture PLC Cl A	NYSE
+SO	Southern Co.	NYSE
+NGG	National Grid PLC	NYSE
+EMR	Emerson Electric Co.	NYSE
+TWX	Time Warner Inc.	NYSE
+BMO	Bank of Montreal	NYSE
+NOV	National Oilwell Varco Inc.	NYSE
+HAL	Halliburton Co.	NYSE
+DE	Deere +ACY- Co.	NYSE
+ING	ING Groep N.V.	NYSE
+LOW	Lowe's Cos.	NYSE
+CNI	Canadian National Railway Co.	NYSE
+CEO	CNOOC Ltd.	NYSE
+TGT	Target Corp.	NYSE
+VALE	Vale S.A.	NYSE
+PX	Praxair Inc.	NYSE
+BAX	Baxter International Inc.	NYSE
+PTR	PetroChina Co. Ltd.	NYSE
+EOG	EOG Resources Inc.	NYSE
+SYT	Syngenta AG	NYSE
+PNC	PNC Financial Services Group Inc.	NYSE
+MET	MetLife Inc.	NYSE
+YUM	Yum+ACE- Brands Inc.	NYSE
+CM	Canadian Imperial Bank of Commerce	NYSE
+CS	Credit Suisse Group	NYSE
+DHR	Danaher Corp.	NYSE
+FTE	France Telecom	NYSE
+NEM	Newmont Mining Corp.	NYSE
+STO	Statoil ASA	NYSE
+WAG	Walgreen Co.	NYSE
+DVN	Devon Energy Corp.	NYSE
+PRU	Prudential Financial Inc.	NYSE
+CVE	Cenovus Energy Inc.	NYSE
+PUK	Prudential PLC	NYSE
+TRP	TransCanada Corp.	NYSE
+D	Dominion Resources Inc. (Virginia)	NYSE
+KMB	Kimberly+AC0-Clark Corp.	NYSE
+BT	BT Group PLC	NYSE
+DUK	Duke Energy Corp.	NYSE
+DCM	NTT DOCOMO Inc.	NYSE
+TJX	TJX Cos.	NYSE
+AGN	Allergan Inc.	NYSE
+BK	Bank of New York Mellon Corp.	NYSE
+ENB	Enbridge Inc.	NYSE
+FDX	FedEx Corp.	NYSE
+COV	Covidien PLC	NYSE
+SSL	Sasol Ltd.	NYSE
+EXC	Exelon Corp.	NYSE
+HIT	Hitachi Ltd.	NYSE
+NEE	NextEra Energy Inc.	NYSE
+AMT	American Tower REIT	NYSE
+TWC	Time Warner Cable Inc.	NYSE
+PKX	POSCO	NYSE
+MRO	Marathon Oil Corp.	NYSE
+ACE	ACE Ltd.	NYSE
+MHS	Medco Health Solutions Inc.	NYSE
+MS	Morgan Stanley	NYSE
+CTL	CenturyLink Inc.	NYSE
+PCP	Precision Castparts Corp.	NYSE
+TRV	Travelers Cos. Inc.	NYSE
+TYC	Tyco International Ltd.	NYSE
+NSC	Norfolk Southern Corp.	NYSE
+ITW	Illinois Tool Works Inc.	NYSE
+LFC	China Life Insurance Co. Ltd.	NYSE
+GIS	General Mills Inc.	NYSE
+LMT	Lockheed Martin Corp.	NYSE
+WLP	WellPoint Inc.	NYSE
+CSX	CSX Corp.	NYSE
+BHI	Baker Hughes Inc.	NYSE
+JCI	Johnson Controls Inc.	NYSE
+COF	Capital One Financial Corp.	NYSE
+LYG	Lloyds Banking Group PLC	NYSE
+MFC	Manulife Financial Corp.	NYSE
+AFL	AFLAC Inc.	NYSE
+COH	Coach Inc.	NYSE
+NOK	Nokia Corp.	NYSE
+TMO	Thermo Fisher Scientific Inc.	NYSE
+SNE	Sony Corp.	NYSE
+GD	General Dynamics Corp.	NYSE
+GLW	Corning Inc.	NYSE
+PHG	Koninklijke Philips Electronics N.V.	NYSE
+PC	Panasonic Corp.	NYSE
+CMI	Cummins Inc.	NYSE
+LVS	Las Vegas Sands Corp.	NYSE
+EP	El Paso Corp.	NYSE
+SE	Spectra Energy Corp.	NYSE
+HES	Hess Corp.	NYSE
+BBT	BB+ACY-T Corp.	NYSE
+MCK	McKesson Corp.	NYSE
+STT	State Street Corp.	NYSE
+BLK	BlackRock Inc.	NYSE
+MT	ArcelorMittal	NYSE
+HDB	HDFC Bank Ltd.	NYSE
+ADM	Archer Daniels Midland Co.	NYSE
+NTT	Nippon Telegraph +ACY- Telephone Corp.	NYSE
+TCK	Teck Resources Ltd.	NYSE
+PSA	Public Storage	NYSE
+CB	Chubb Corp.	NYSE
+SNP	China Petroleum +ACY- Chemical Corp.	NYSE
+CBS	CBS Corp. Cl B	NYSE
+NBL	Noble Energy Inc.	NYSE
+FE	FirstEnergy Corp.	NYSE
+APD	Air Products +ACY- Chemicals Inc.	NYSE
+AEP	American Electric Power Co. Inc.	NYSE
+MOS	Mosaic Co.	NYSE
+BEN	Franklin Resources Inc.	NYSE
+BAM	Brookfield Asset Management Inc. Cl A	NYSE
+RTN	Raytheon Co.	NYSE
+CRM	Salesforce.com Inc.	NYSE
+LO	Lorillard Inc.	NYSE
+SHG	Shinhan Financial Group Co. Ltd.	NYSE
+ETN	Eaton Corp.	NYSE
+NMR	Nomura Holdings Inc.	NYSE
+SYY	Sysco Corp.	NYSE
+MMC	Marsh +ACY- McLennan Cos.	NYSE
+HNZ	H.J. Heinz Co.	NYSE
+WMB	Williams Cos.	NYSE
+ED	Consolidated Edison Inc.	NYSE
+EQR	Equity Residential	NYSE
+AET	Aetna Inc.	NYSE
+ECL	Ecolab Inc.	NYSE
+PCG	PG+ACY-E Corp.	NYSE
+CHK	Chesapeake Energy Corp.	NYSE
+PPL	PPL Corp.	NYSE
+AU	AngloGold Ashanti Ltd.	NYSE
+DFS	Discover Financial Services	NYSE
+RIG	Transocean Ltd.	NYSE
+AV	Aviva PLC	NYSE
+VTR	Ventas Inc.	NYSE
+NLY	Annaly Capital Management Inc.	NYSE
+SYK	Stryker Corp.	NYSE
+PSO	Pearson PLC	NYSE
+IBN	ICICI Bank Ltd.	NYSE
+MJN	Mead Johnson Nutrition Co.	NYSE
+BDX	Becton Dickinson +ACY- Co.	NYSE
+HCP	HCP Inc.	NYSE
+KYO	Kyocera Corp.	NYSE
+M	Macy's Inc.	NYSE
+CRH	CRH PLC	NYSE
+PGN	Progress Energy Inc.	NYSE
+GR	Goodrich Corp.	NYSE
+VNO	Vornado Realty Trust	NYSE
+TEL	TE Connectivity Ltd.	NYSE
+PLD	ProLogis Inc.	NYSE
+AON	AON Corp.	NYSE
+PEG	Public Service Enterprise Group Inc.	NYSE
+MPC	Marathon Petroleum Corp.	NYSE
+GM	General Motors Co.	NYSE
+FMS	Fresenius Medical Care AG +ACY- Co. KGaA	NYSE
+LYB	LyondellBasell Industries N.V. Cl A	NYSE
+BXP	Boston Properties Inc.	NYSE
+ALL	Allstate Corp.	NYSE
+A	Agilent Technologies Inc.	NYSE
+RCI	Rogers Communications Inc. Cl B	NYSE
+TLM	Talisman Energy Inc.	NYSE
+ECA	EnCana Corp.	NYSE
+NOC	Northrop Grumman Corp.	NYSE
+HUM	Humana Inc.	NYSE
+CAH	Cardinal Health Inc.	NYSE
+WM	Waste Management Inc.	NYSE
+KB	KB Financial Group Inc.	NYSE
+PXD	Pioneer Natural Resources Co.	NYSE
+MSI	Motorola Solutions Inc.	NYSE
+PPG	PPG Industries Inc.	NYSE
+STJ	St. Jude Medical Inc.	NYSE
+RAI	Reynolds American Inc.	NYSE
+SCHW	Charles Schwab Corp.	NYSE
+VLO	Valero Energy Corp.	NYSE
+CAM	Cameron International Corp.	NYSE
+BRFS	BRF+AC0-Brazil Foods S/A	NYSE
+SLW	Silver Wheaton Corp.	NYSE
+PH	Parker Hannifin Corp.	NYSE
+L	Loews Corp.	NYSE
+MHP	McGraw+AC0-Hill Cos.	NYSE
+EL	Estee Lauder Cos. Inc.	NYSE
+ESV	ENSCO PLC	NYSE
+OMC	Omnicom Group Inc.	NYSE
+IP	International Paper Co.	NYSE
+AGU	Agrium Inc.	NYSE
+AUY	Yamana Gold Inc.	NYSE
+KR	Kroger Co.	NYSE
+CF	CF Industries Holdings Inc.	NYSE
+SDRL	SeaDrill Ltd.	NYSE
+K	Kellogg Co.	NYSE
+SRE	Sempra Energy	NYSE
+CI	Cigna Corp.	NYSE
+PGR	Progressive Corp.	NYSE
+VRX	Valeant Pharmaceuticals International Inc.	NYSE
+XEL	Xcel Energy Inc.	NYSE
+CCI	Crown Castle International Corp.	NYSE
+AMP	Ameriprise Financial Inc.	NYSE
+CP	Canadian Pacific Railway Ltd.	NYSE
+VFC	VF Corp.	NYSE
+KGC	Kinross Gold Corp.	NYSE
+IR	Ingersoll+AC0-Rand Co. Ltd.	NYSE
+EIX	Edison International	NYSE
+KSS	Kohl's Corp.	NYSE
+FTI	FMC Technologies Inc.	NYSE
+JNPR	Juniper Networks Inc.	NYSE
+MUR	Murphy Oil Corp.	NYSE
+SWK	Stanley Black +ACY- Decker Inc.	NYSE
+AVB	Avalonbay Communities Inc.	NYSE
+NUE	Nucor Corp.	NYSE
+SLF	Sun Life Financial Inc.	NYSE
+WFT	Weatherford International Ltd.	NYSE
+AIG	American International Group Inc.	NYSE
+GWW	W.W. Grainger Inc.	NYSE
+DOV	Dover Corp.	NYSE
+SWN	Southwestern Energy Co.	NYSE
+CMG	Chipotle Mexican Grill Inc.	NYSE
+TI	Telecom Italia S.p.A.	NYSE
+CCL	Carnival Corp.	NYSE
+ZMH	Zimmer Holdings Inc.	NYSE
+STI	SunTrust Banks Inc.	NYSE
+ETR	Entergy Corp.	NYSE
+SLE	Sara Lee Corp.	NYSE
+ROK	Rockwell Automation Corp.	NYSE
+NJ	Nidec Corp.	NYSE
+LTD	Limited Brands Inc.	NYSE
+CXO	Concho Resources Inc.	NYSE
+EC	Ecopetrol S.A.	NYSE
+MMI	Motorola Mobility Holdings Inc.	NYSE
+KUB	Kubota Corp.	NYSE
+TV	Grupo Televisa S.A. de C.V.	NYSE
+XRX	Xerox Corp.	NYSE
+ADI	Analog Devices Inc.	NYSE
+GFI	Gold Fields Ltd.	NYSE
+CHT	Chunghwa Telecom Co. Ltd.	NYSE
+HST	Host Hotels +ACY- Resorts Inc.	NYSE
+WY	Weyerhaeuser Co.	NYSE
+IVZ	INVESCO Ltd.	NYSE
+CAG	ConAgra Foods Inc.	NYSE
+HOG	Harley+AC0-Davidson Inc.	NYSE
+NXY	Nexen Inc.	NYSE
+AA	Alcoa Inc.	NYSE
+WU	Western Union Co.	NYSE
+TDC	Teradata Corp.	NYSE
+FLR	Fluor Corp.	NYSE
+AZO	AutoZone Inc.	NYSE
+RUK	Reed Elsevier PLC	NYSE
+HOT	Starwood Hotels +ACY- Resorts Worldwide Inc.	NYSE
+RL	Ralph Lauren Corp. Cl A	NYSE
+RRC	Range Resources Corp.	NYSE
+AES	AES Corp.	NYSE
+TRI	Thomson Reuters Corp.	NYSE
+IX	Orix Corp.	NYSE
+MGA	Magna International Inc.	NYSE
+BCE	BCE Inc.	NYSE
+HCN	Health Care REIT Inc.	NYSE
+MTB	M+ACY-T Bank Corp.	NYSE
+MAR	Marriott International Inc. Cl A	NYSE
+NE	Noble Corp.	NYSE
+ABC	AmerisourceBergen Corp.	NYSE
+ICE	IntercontinentalExchange Inc.	NYSE
+BG	Bunge Ltd.	NYSE
+CBE	Cooper Industries PLC Cl A	NYSE
+CCJ	Cameco Corp.	NYSE
+BTU	Peabody Energy Corp.	NYSE
+CLF	Cliffs Natural Resources Inc.	NYSE
+GPC	Genuine Parts Co.	NYSE
+RHT	Red Hat Inc.	NYSE
+PWE	Penn West Petroleum Ltd.	NYSE
+JOY	Joy Global Inc.	NYSE
+MBT	Mobile Telesystems	NYSE
+HSY	Hershey Co.	NYSE
+TS	Tenaris S.A.	NYSE
+TTM	Tata Motors Ltd.	NYSE
+APH	Amphenol Corp. Cl A	NYSE
+COL	Rockwell Collins Inc.	NYSE
+BSX	Boston Scientific Corp.	NYSE
+DTE	DTE Energy Co.	NYSE
+WDC	Western Digital Corp.	NYSE
+HIG	Hartford Financial Services Group Inc.	NYSE
+ENL	Reed Elsevier N.V.	NYSE
+ROP	Roper Industries Inc.	NYSE
+RSG	Republic Services Inc.	NYSE
+CLX	Clorox Co.	NYSE
+LH	Laboratory Corp. of America Holdings	NYSE
+BWA	BorgWarner Inc.	NYSE
+DGX	Quest Diagnostics Inc.	NYSE
+CCE	Coca+AC0-Cola Enterprises Inc.	NYSE
+AEG	Aegon N.V.	NYSE
+SHW	Sherwin+AC0-Williams Co.	NYSE
+SNN	Smith +ACY- Nephew PLC	NYSE
+JWN	Nordstrom Inc.	NYSE
+CHU	China Unicom (Hong Kong) Ltd.	NYSE
+SJM	J.M. Smucker Co.	NYSE
+BEAM	Beam Inc.	NYSE
+EW	Edwards Lifesciences Corp.	NYSE
+TU	TELUS Corp. Non Voting shares	NYSE
+VMW	VMware Inc.	NYSE
+DNR	Denbury Resources Inc.	NYSE
+THI	Tim Hortons Inc.	NYSE
+DPS	Dr Pepper Snapple Group Inc.	NYSE
+TIF	Tiffany +ACY- Co.	NYSE
+FRX	Forest Laboratories Inc.	NYSE
+EGO	Eldorado Gold Corp.	NYSE
+PFG	Principal Financial Group Inc.	NYSE
+CHA	China Telecom Corp. Ltd.	NYSE
+CNX	Consol Energy Inc.	NYSE
+AVP	Avon Products Inc.	NYSE
+BCR	C.R. Bard Inc.	NYSE
+SID	Companhia Siderurgica Nacional	NYSE
+OKE	ONEOK Inc.	NYSE
+DVA	DaVita Inc.	NYSE
+FIS	Fidelity National Information Services Inc.	NYSE
+WAT	Waters Corp.	NYSE
+NYX	NYSE Euronext	NYSE
+CIT	CIT Group Inc.	NYSE
+EQT	EQT Corp.	NYSE
+DAL	Delta Air Lines Inc.	NYSE
+RBS	Royal Bank of Scotland Group PLC	NYSE
+WEC	Wisconsin Energy Corp.	NYSE
+SJR	Shaw Communications Inc. Cl B NV	NYSE
+ABV.C	Companhia de Bebidas das Americas	NYSE
+VAR	Varian Medical Systems Inc.	NYSE
+AME	Ametek Inc.	NYSE
+AEE	Ameren Corp.	NYSE
+HLF	Herbalife Ltd.	NYSE
+LNC	Lincoln National Corp.	NYSE
+KEY	KeyCorp	NYSE
+TXT	Textron Inc.	NYSE
+CE	Celanese Corp. Series A	NYSE
+KIM	Kimco Realty Corp.	NYSE
+KSU	Kansas City Southern	NYSE
+TLK	Telekomunikasi Indonesia	NYSE
+CX	Cemex S.A.B. de C.V.	NYSE
+LLL	L+AC0-3 Communications Holdings Inc.	NYSE
+DLR	Digital Realty Trust Inc.	NYSE
+CNP	CenterPoint Energy Inc.	NYSE
+COG	Cabot Oil +ACY- Gas Corp.	NYSE
+MCO	Moody's Corp.	NYSE
+S	Sprint Nextel Corp.	NYSE
+WPI	Watson Pharmaceuticals Inc.	NYSE
+XEC	Cimarex Energy Co.	NYSE
+BBY	Best Buy Co. Inc.	NYSE
+PLL	Pall Corp.	NYSE
+WLL	Whiting Petroleum Corp.	NYSE
+RF	Regions Financial Corp.	NYSE
+BF.B	Brown+AC0-Forman Corp. Cl B	NYSE
+MAC	Macerich Co.	NYSE
+SWY	Safeway Inc.	NYSE
+EMN	Eastman Chemical Co.	NYSE
+FMC	FMC Corp.	NYSE
+CHD	Church +ACY- Dwight Co.	NYSE
+TAP	Molson Coors Brewing Co. Cl B	NYSE
+KMX	CarMax Inc.	NYSE
+UMC	United Microelectronics Corp.	NYSE
+UNM	Unum Group	NYSE
+WYN	Wyndham Worldwide Corp.	NYSE
+LUV	Southwest Airlines Co.	NYSE
+BTE	Baytex Energy Corp.	NYSE
+UAL	United Continental Holdings Inc.	NYSE
+CPB	Campbell Soup Co.	NYSE
+BVN	Compania de Minas Buenaventura S.A.	NYSE
+FLS	Flowserve Corp.	NYSE
+NI	NiSource Inc.	NYSE
+CEG	Constellation Energy Group Inc.	NYSE
+HFC	HollyFrontier Corp.	NYSE
+PXP	Plains Exploration +ACY- Production Co.	NYSE
+BLL	Ball Corp.	NYSE
+DRI	Darden Restaurants Inc.	NYSE
+BAP	Credicorp Ltd.	NYSE
+SLG	SL Green Realty Corp.	NYSE
+GGP	General Growth Properties Inc.	NYSE
+XL	XL Group PLC	NYSE
+NBR	Nabors Industries Ltd.	NYSE
+IHG	InterContinental Hotels Group PLC	NYSE
+PCL	Plum Creek Timber Co. Inc. REIT	NYSE
+AEM	Agnico+AC0-Eagle Mines Ltd.	NYSE
+NU	Northeast Utilities	NYSE
+AAP	Advance Auto Parts Inc.	NYSE
+JCP	J.C. Penney Co. Inc.	NYSE
+ADS	Alliance Data Systems Corp.	NYSE
+HP	Helmerich +ACY- Payne Inc.	NYSE
+ALV	Autoliv Inc.	NYSE
+OII	Oceaneering International Inc.	NYSE
+QEP	QEP Resources Inc.	NYSE
+WSH	Willis Group Holdings PLC	NYSE
+FRT	Federal Realty Investment Trust	NYSE
+ELN	Elan Corp. PLC	NYSE
+FDO	Family Dollar Stores Inc.	NYSE
+JEC	Jacobs Engineering Group Inc.	NYSE
+MKC	McCormick +ACY- Co. Inc.	NYSE
+CPN	Calpine Corp.	NYSE
+ALU	Alcatel+AC0-Lucent	NYSE
+FNV	Franco+AC0-Nevada Corp.	NYSE
+HSP	Hospira Inc.	NYSE
+CLB	Core Laboratories N.V.	NYSE
+DOX	Amdocs Ltd.	NYSE
+IAG	IAMGOLD Corp.	NYSE
+KEP	Korea Electric Power Corp.	NYSE
+AWK	American Water Works Co.	NYSE
+CMA	Comerica Inc.	NYSE
+ALB	Albemarle Corp.	NYSE
+TSN	Tyson Foods Inc. Cl A	NYSE
+CFN	CareFusion Corp.	NYSE
+GPS	Gap Inc.	NYSE
+MTD	Mettler+AC0-Toledo International Inc.	NYSE
+RAX	Rackspace Hosting Inc.	NYSE
+SCCO	Southern Copper Corp.	NYSE
+EOC	Empresa Nacional de Electricidad S.A.	NYSE
+NYB	New York Community Bancorp Inc.	NYSE
+PHI	Philippine Long Distance Telephone Co.	NYSE
+UDR	UDR Inc.	NYSE
+AMG	Affiliated Managers Group Inc.	NYSE
+DEG	Delhaize Group	NYSE
+LUK	Leucadia National Corp.	NYSE
+CCK	Crown Holdings Inc.	NYSE
+CMS	CMS Energy Corp.	NYSE
+CLR	Continental Resources Inc.	NYSE
+CBG	CBRE Group Inc. Cl A	NYSE
+KBR	KBR Inc.	NYSE
+RYN	Rayonier Inc. REIT	NYSE
+WHR	Whirlpool Corp.	NYSE
+NWL	Newell Rubbermaid Inc.	NYSE
+AVT	Avnet Inc.	NYSE
+VMC	Vulcan Materials Co.	NYSE
+ENR	Energizer Holdings Inc.	NYSE
+IPG	Interpublic Group of Cos.	NYSE
+ARG	Airgas Inc.	NYSE
+IRM	Iron Mountain Inc.	NYSE
+TDG	TransDigm Group Inc.	NYSE
+SQM	Sociedad Quimica y Minera De Chile S.A.	NYSE
+SM	SM Energy Co.	NYSE
+SCG	Scana Corp.	NYSE
+ASX	Advanced Semiconductor Engineering Inc.	NYSE
+LPL	LG Display Co. Ltd.	NYSE
+MWV	MeadWestvaco Corp.	NYSE
+OGE	OGE Energy Corp.	NYSE
+WIT	Wipro Ltd.	NYSE
+PNW	Pinnacle West Capital Corp.	NYSE
+CUK	Carnival PLC	NYSE
+EFX	Equifax Inc.	NYSE
+TMK	Torchmark Corp.	NYSE
+LUX	Luxottica Group S.p.A.	NYSE
+SUG	Southern Union Co.	NYSE
+DG	Dollar General Corp.	NYSE
+TPX	Tempur+AC0-Pedic International Inc.	NYSE
+AGCO	AGCO Corp.	NYSE
+DCI	Donaldson Co. Inc.	NYSE
+PVH	PVH Corp.	NYSE
+ENI	Enersis S.A.	NYSE
+XYL	Xylem Inc.	NYSE
+HRB	H+ACY-R Block Inc.	NYSE
+HRS	Harris Corp.	NYSE
+JBL	Jabil Circuit Inc.	NYSE
+O	Realty Income Corp.	NYSE
+CSC	Computer Sciences Corp.	NYSE
+RDC	Rowan Cos. Inc.	NYSE
+NFX	Newfield Exploration Co.	NYSE
+LSI	LSI Corp.	NYSE
+PAY	VeriFone Systems Inc.	NYSE
+NST	NSTAR	NYSE
+YZC	Yanzhou Coal Mining Co. Ltd.	NYSE
+RKT	Rock+AC0-Tenn Co. Cl A	NYSE
+CVH	Coventry Health Care Inc.	NYSE
+STM	STMicroelectronics N.V.	NYSE
+IVN	Ivanhoe Mines Ltd.	NYSE
+LEA	Lear Corp.	NYSE
+ESS	Essex Property Trust Inc.	NYSE
+GIB	CGI Group Inc. Cl A	NYSE
+LNT	Alliant Energy Corp.	NYSE
+HMY	Harmony Gold Mining Co. Ltd.	NYSE
+TRW	TRW Automotive Holdings Corp.	NYSE
+VE	Veolia Environnement S.A.	NYSE
+ATI	Allegheny Technologies Inc.	NYSE
+BCH	Banco de Chile	NYSE
+GAS	AGL Resources Inc.	NYSE
+TAC	Transalta Corp.	NYSE
+CIE	Cobalt International Energy Inc.	NYSE
+SPN	Superior Energy Services Inc.	NYSE
+IFF	International Flavors +ACY- Fragrances Inc.	NYSE
+ANR	Alpha Natural Resources Inc.	NYSE
+IGT	International Game Technology	NYSE
+ARW	Arrow Electronics Inc.	NYSE
+BPO	Brookfield Office Properties Inc.	NYSE
+MGM	MGM Resorts International	NYSE
+CPT	Camden Property Trust	NYSE
+ASH	Ashland Inc.	NYSE
+CBI	Chicago Bridge +ACY- Iron Co. N.V.	NYSE
+GNW	Genworth Financial Inc. Cl A	NYSE
+IHS	IHS Inc. Cl A	NYSE
+POM	Pepco Holdings Inc.	NYSE
+HCA	HCA Holdings Inc.	NYSE
+CGV	CGG Veritas	NYSE
+LFL	LAN Airlines S.A.	NYSE
+FL	Foot Locker Inc.	NYSE
+DO	Diamond Offshore Drilling Inc.	NYSE
+ARE	Alexandria Real Estate Equities Inc.	NYSE
+OIS	Oil States International Inc.	NYSE
+SKM	SK Telecom Co. Ltd.	NYSE
+PRE	PartnerRe Ltd.	NYSE
+PWR	Quanta Services Inc.	NYSE
+PII	Polaris Industries Inc.	NYSE
+RMD	ResMed Inc.	NYSE
+CPO	Corn Products International Inc.	NYSE
+DKS	Dick's Sporting Goods Inc.	NYSE
+NRG	NRG Energy Inc.	NYSE
+SAI	SAIC Inc.	NYSE
+AMD	Advanced Micro Devices Inc.	NYSE
+TSS	Total System Services Inc.	NYSE
+ANF	Abercrombie +ACY- Fitch Co.	NYSE
+RGA	Reinsurance Group of America Inc.	NYSE
+TEG	Integrys Energy Group Inc.	NYSE
+AUO	AU Optronics Corp.	NYSE
+SUN	Sunoco Inc.	NYSE
+RHI	Robert Half International Inc.	NYSE
+ERJ	Embraer S/A	NYSE
+RDY	Dr. Reddy's Laboratories Ltd.	NYSE
+SIG	Signet Jewelers Ltd.	NYSE
+TKR	Timken Co.	NYSE
+HRL	Hormel Foods Corp.	NYSE
+MAS	Masco Corp.	NYSE
+MSCI	MSCI Inc. Cl A	NYSE
+WLT	Walter Energy Inc.	NYSE
+AXS	Axis Capital Holdings Ltd.	NYSE
+RAH	Ralcorp Holdings Inc.	NYSE
+WRB	W.R. Berkley Corp.	NYSE
+GPN	Global Payments Inc.	NYSE
+AIZ	Assurant Inc.	NYSE
+DRC	Dresser+AC0-Rand Group Inc.	NYSE
+RS	Reliance Steel +ACY- Aluminum Co.	NYSE
+DNB	Dun +ACY- Bradstreet Corp.	NYSE
+STZ	Constellation Brands Inc. Cl A	NYSE
+OI	Owens+AC0-Illinois Inc.	NYSE
+X	United States Steel Corp.	NYSE
+VAL	Valspar Corp.	NYSE
+HUB.B	Hubbell Inc. Cl B	NYSE
+TCO	Taubman Centers Inc.	NYSE
+WBC	WABCO Holdings Inc.	NYSE
+EGN	Energen Corp.	NYSE
+MKL	Markel Corp.	NYSE
+MLM	Martin Marietta Materials Inc.	NYSE
+OCR	Omnicare Inc.	NYSE
+RE	Everest Re Group Ltd.	NYSE
+TSO	Tesoro Corp.	NYSE
+SBS	Companhia de Saneamento Basico do Estado de Sao Paul	NYSE
+SNI	Scripps Networks Interactive Inc. Cl A	NYSE
+UHS	Universal Health Services Inc. Cl B	NYSE
+NFG	National Fuel Gas Co.	NYSE
+VIP	VimpelCom Ltd.	NYSE
+RCL	Royal Caribbean Cruises Ltd.	NYSE
+TKC	Turkcell Iletisim Hizmetleri A.S.	NYSE
+DHI	D.R. Horton Inc.	NYSE
+LRY	Liberty Property Trust	NYSE
+AJG	Arthur J. Gallagher +ACY- Co.	NYSE
+REG	Regency Centers Corp.	NYSE
+FNF	Fidelity National Financial Inc.	NYSE
+ITC	ITC Holdings Corp.	NYSE
+SPW	SPX Corp.	NYSE
+PCS	MetroPCS Communications Inc.	NYSE
+MDU	MDU Resources Group Inc.	NYSE
+PNR	Pentair Inc.	NYSE
+KEX	Kirby Corp.	NYSE
+SEE	Sealed Air Corp.	NYSE
+TNB	Thomas +ACY- Betts Corp.	NYSE
+RNR	RenaissanceRe Holdings Ltd.	NYSE
+TUP	Tupperware Brands Corp.	NYSE
+ROC	Rockwood Holdings Inc.	NYSE
+NVE	NV Energy Inc.	NYSE
+COO	Cooper Cos.	NYSE
+LVLT	Level 3 Communications Inc.	NYSE
+TRH	TransAtlantic Holdings Inc.	NYSE
+BRE	BRE Properties Inc.	NYSE
+MAN	ManpowerGroup	NYSE
+URS	URS Corp.	NYSE
+LM	Legg Mason Inc.	NYSE
+MSM	MSC Industrial Direct Co.	NYSE
+MD	Mednax Inc.	NYSE
+KMI	Kinder Morgan Inc.	NYSE
+WF	Woori Finance Holdings Co. Ltd.	NYSE
+FDS	FactSet Research Systems Inc.	NYSE
+WPX	WPX Energy	NYSE
+WSM	Williams+AC0-Sonoma Inc.	NYSE
+CCH	Coca+AC0-Cola Hellenic Bottling Co. S.A.	NYSE
+GCI	Gannett Co. Inc.	NYSE
+TE	Teco Energy Inc.	NYSE
+GDI	Gardner Denver Inc.	NYSE
+KMT	Kennametal Inc.	NYSE
+SLT	Sterlite Industries (India) Ltd.	NYSE
+UPL	Ultra Petroleum Corp.	NYSE
+CVC	Cablevision Systems Corp.	NYSE
+PT	Portugal Telecom SGPS S/A	NYSE
+SFD	Smithfield Foods Inc.	NYSE
+IT	Gartner Inc.	NYSE
+RJF	Raymond James Financial Inc.	NYSE
+WCN	Waste Connections Inc.	NYSE
+SNH	Senior Housing Properties Trust	NYSE
+IEX	IDEX Corp.	NYSE
+JLL	Jones Lang LaSalle Inc.	NYSE
+SNA	Snap+AC0-On Inc.	NYSE
+WAB	Wabtec	NYSE
+DRE	Duke Realty Corp.	NYSE
+STR	Questar Corp.	NYSE
+HAR	Harman International Industries Inc.	NYSE
+OC	Owens Corning	NYSE
+LEN	Lennar Corp. Cl A	NYSE
+GRA	W.R. Grace +ACY- Co.	NYSE
+SLH	Solera Holdings Inc.	NYSE
+UFS	Domtar Corp.	NYSE
+KT	KT Corp.	NYSE
+HTZ	Hertz Global Holdings Inc.	NYSE
+MHK	Mohawk Industries Inc.	NYSE
+HNT	Health Net Inc.	NYSE
+LAZ	Lazard Ltd.	NYSE
+NCR	NCR Corp.	NYSE
+NZT	Telecom Corp. of New Zealand Ltd.	NYSE
+SOA	Solutia Inc.	NYSE
+TW	Towers Watson +ACY- Co. Cl A	NYSE
+EV	Eaton Vance Corp.	NYSE
+NVR	NVR Inc.	NYSE
+TOL	Toll Brothers Inc.	NYSE
+SD	SandRidge Energy Inc.	NYSE
+UA	Under Armour Inc. Cl A	NYSE
+EDU	New Oriental Education +ACY- Technology Group Inc.	NYSE
+PBI	Pitney Bowes Inc.	NYSE
+AGP	AMERIGROUP Corp.	NYSE
+PDS	Precision Drilling Corp.	NYSE
+HCC	HCC Insurance Holdings Inc.	NYSE
+AFG	American Financial Group Inc.	NYSE
+ATR	Aptargroup Inc.	NYSE
+AVY	Avery Dennison Corp.	NYSE
+CFR	Cullen/Frost Bankers Inc.	NYSE
+SBH	Sally Beauty Holdings Inc.	NYSE
+MDR	McDermott International Inc.	NYSE
+RPM	RPM International Inc.	NYSE
+JAH	Jarden Corp.	NYSE
+PVX	Provident Energy Ltd.	NYSE
+SON	Sonoco Products Co.	NYSE
+CLH	Clean Harbors Inc.	NYSE
+AWC	Alumina Ltd.	NYSE
+WR	Westar Energy Inc.	NYSE
+BMS	Bemis Co. Inc.	NYSE
+LEG	Leggett +ACY- Platt Inc.	NYSE
+SAN	Banco Santander+AC0-Chile	NYSE
+DDR	DDR Corp.	NYSE
+GT	Goodyear Tire +ACY- Rubber Co.	NYSE
+UGI	UGI Corp.	NYSE
+GME	GameStop Corp. Cl A	NYSE
+NAV	Navistar International Corp.	NYSE
+NBG	National Bank of Greece S.A.	NYSE
+NUS	Nu Skin Enterprises Inc. Cl A	NYSE
+TDW	Tidewater Inc.	NYSE
+CIM	Chimera Investment Corp.	NYSE
+HPT	Hospitality Properties Trust	NYSE
+WTR	Aqua America Inc.	NYSE
+WTM	White Mountains Insurance Group Ltd.	NYSE
+GGG	Graco Inc.	NYSE
+INT	World Fuel Services Corp.	NYSE
+PKI	PerkinElmer Inc.	NYSE
+PDM	Piedmont Office Realty Trust Inc. Cl A	NYSE
+AIV	Apartment Investment +ACY- Management Co.	NYSE
+BR	Broadridge Financial Solutions Inc.	NYSE
+BWC	Babcock +ACY- Wilcox Co.	NYSE
+ACI	Arch Coal Inc.	NYSE
+CSL	Carlisle Cos.	NYSE
+GIL	Gildan Activewear Inc.	NYSE
+TER	Teradyne Inc.	NYSE
+WCG	WellCare Health Plans Inc.	NYSE
+EBR	Centrais Eletricas Brasileiras S/A	NYSE
+WRI	Weingarten Realty Investors	NYSE
+AGO	Assured Guaranty Ltd.	NYSE
+IM	Ingram Micro Inc. Cl A	NYSE
+FBHS	Fortune Brands Home +ACY- Security Inc.	NYSE
+KRC	Kilroy Realty Corp.	NYSE
+LXK	Lexmark International Inc.	NYSE
+PKG	Packaging Corp. of America	NYSE
+CVD	Covance Inc.	NYSE
+CYT	Cytec Industries Inc.	NYSE
+BMR	BioMed Realty Trust Inc.	NYSE
+ACC	American Campus Communities Inc.	NYSE
+ATO	Atmos Energy Corp.	NYSE
+BIG	Big Lots Inc.	NYSE
+PHM	PulteGroup Inc.	NYSE
+HME	Home Properties Inc.	NYSE
+GXP	Great Plains Energy Inc.	NYSE
+SPR	Spirit AeroSystems Hldgs Inc. Cl A	NYSE
+TEX	Terex Corp.	NYSE
+TRN	Trinity Industries Inc.	NYSE
+BRO	Brown +ACY- Brown Inc.	NYSE
+WCC	Wesco International Inc.	NYSE
+AEO	American Eagle Outfitters Inc.	NYSE
+TDS	Telephone +ACY- Data Systems Inc.	NYSE
+SMS	Sims Metal Management Ltd.	NYSE
+CAE	CAE Inc.	NYSE
+DRQ	Dril+AC0-Quip Inc.	NYSE
+VC	Visteon Corp.	NYSE
+BRY	Berry Petroleum Co. Cl A	NYSE
+IRE	Governor +ACY- Co. of the Bank of Ireland	NYSE
+KNM	Konami Corp.	NYSE
+KOF	Coca+AC0-Cola Femsa S.A.B. de C.V.	NYSE
+ARCO	Arcos Dorados Holdings Inc. Cl A	NYSE
+HBI	Hanesbrands Inc.	NYSE
+BID	Sotheby's	NYSE
+DEI	Douglas Emmett Inc.	NYSE
+AUQ	AuRico Gold Inc.	NYSE
+WDR	Waddell +ACY- Reed Financial Inc.	NYSE
+AYI	Acuity Brands Inc.	NYSE
+KEG	Key Energy Services Inc.	NYSE
+FLO	Flowers Foods Inc.	NYSE
+R	Ryder System Inc.	NYSE
+URI	United Rentals Inc.	NYSE
+KOG	Kodiak Oil +ACY- Gas Corp.	NYSE
+RBC	Regal+AC0-Beloit Corp.	NYSE
+HUN	Huntsman Corp.	NYSE
+ATW	Atwood Oceanics Inc.	NYSE
+MFA	MFA Financial Inc.	NYSE
+ELS	Equity Lifestyle Properties Inc.	NYSE
+PRA	ProAssurance Corp.	NYSE
+ORI	Old Republic International Corp.	NYSE
+BIN	Progressive Waste Solutions Ltd.	NYSE
+AWH	Allied World Assurance Co. Holdings Ltd.	NYSE
+CLC	Clarcor Inc.	NYSE
+Y	Alleghany Corp.	NYSE
+NNN	National Retail Properties Inc.	NYSE
+CVI	CVR Energy Inc.	NYSE
+CHS	Chico's Fas Inc.	NYSE
+SCI	Service Corp. International	NYSE
+CDE	Coeur d'Alene Mines Corp.	NYSE
+SIX	Six Flags Entertainment Corp.	NYSE
+WRC	Warnaco Group Inc.	NYSE
+TGI	Triumph Group Inc.	NYSE
+CBL	CBL +ACY- Associates Properties Inc.	NYSE
+CR	Crane Co.	NYSE
+EXR	Extra Space Storage Inc.	NYSE
+HXL	Hexcel Corp.	NYSE
+THC	Tenet Healthcare Corp.	NYSE
+SKT	Tanger Factory Outlet Centers Inc.	NYSE
+CLI	Mack+AC0-Cali Realty Corp.	NYSE
+FRC	First Republic Bank	NYSE
+VMI	Valmont Industries Inc.	NYSE
+MR	Mindray Medical International Ltd.	NYSE
+ACM	AECOM Technology Corp.	NYSE
+CBT	Cabot Corp.	NYSE
+FHN	First Horizon National Corp.	NYSE
+TFX	Teleflex Inc.	NYSE
+WXS	Wright Express Corp.	NYSE
+ALK	Alaska Air Group Inc.	NYSE
+CNC	Centene Corp.	NYSE
+OAS	Oasis Petroleum Inc.	NYSE
+CNL	Cleco Corp.	NYSE
+HE	Hawaiian Electric Industries Inc.	NYSE
+UNT	Unit Corp.	NYSE
+CMP	Compass Minerals International Inc.	NYSE
+DBD	Diebold Inc.	NYSE
+GWR	Genesee +ACY- Wyoming Inc. Cl A	NYSE
+VVC	Vectren Corp.	NYSE
+WTW	Weight Watchers International Inc.	NYSE
+PL	Protective Life Corp.	NYSE
+PNY	Piedmont Natural Gas Co.	NYSE
+DAN	Dana Holding Corp.	NYSE
+JW.A	John Wiley +ACY- Sons Inc. Cl A	NYSE
+CXW	Corrections Corp. of America	NYSE
+TEN	Tenneco Inc.	NYSE
+MAA	Mid+AC0-America Apartment Communities Inc.	NYSE
+HIW	Highwoods Properties Inc.	NYSE
+NSR	NeuStar Inc. Cl A	NYSE
+CYN	City National Corp.	NYSE
+RBA	Ritchie Bros. Auctioneers Inc.	NYSE
+VLY	Valley National Bancorp	NYSE
+CYH	Community Health Systems Inc.	NYSE
+LHO	LaSalle Hotel Properties	NYSE
+CPA	Copa Holdings S.A. Cl A	NYSE
+CRS	Carpenter Technology Corp.	NYSE
+JEF	Jefferies Group Inc.	NYSE
+PPS	Post Properties Inc.	NYSE
+DF	Dean Foods Co.	NYSE
+HRC	Hill+AC0-Rom Holdings Inc.	NYSE
+ALR	Alere Inc.	NYSE
+TDY	Teledyne Technologies Inc.	NYSE
+SWI	SolarWinds Inc.	NYSE
+CRI	Carters Inc.	NYSE
+DTG	Dollar Thrifty Automotive Group Inc.	NYSE
+OSK	Oshkosh Corp.	NYSE
+BOH	Bank of Hawaii Corp.	NYSE
+DFG	Delphi Financial Group Inc. Cl A	NYSE
+GES	Guess? Inc.	NYSE
+OHI	Omega Healthcare Investors Inc.	NYSE
+SHAW	Shaw Group Inc.	NYSE
+VR	Validus Holdings Ltd.	NYSE
+DV	DeVry Inc.	NYSE
+ITT	ITT Corp.	NYSE
+AG	First Majestic Silver Corp.	NYSE
+ACH	Aluminum Corp. of China Ltd.	NYSE
+ATE	Advantest Corp.	NYSE
+BC	Brunswick Corp.	NYSE
+CKH	SEACOR Holding Inc.	NYSE
+EAT	Brinker International Inc.	NYSE
+MRX	Medicis Pharmaceutical Corp.	NYSE
+HTS	Hatteras Financial Corp.	NYSE
+WGL	WGL Holdings Inc.	NYSE
+HBM	HudBay Minerals Inc.	NYSE
+AXE	Anixter International Inc.	NYSE
+MTW	Manitowoc Co.	NYSE
+CPL	CPFL Energia S.A.	NYSE
+EPR	Entertainment Properties Trust	NYSE
+FII	Federated Investors Inc.	NYSE
+LTM	Life Time Fitness Inc.	NYSE
+THS	TreeHouse Foods Inc.	NYSE
+CNK	Cinemark Holdings Inc.	NYSE
+YPF	YPF S.A.	NYSE
+DDS	Dillard's Inc.	NYSE
+DLB	Dolby Laboratories Inc. Cl A	NYSE
+CZZ	Cosan  Cl A	NYSE
+IDA	IDACORP Inc.	NYSE
+SF	Stifel Financial Corp.	NYSE
+ESL	Esterline Technologies Corp.	NYSE
+SMG	Scotts Miracle+AC0-Gro Co.	NYSE
+MW	Men's Wearhouse Inc.	NYSE
+ATK	Alliant Techsystems Inc.	NYSE
+ESI	ITT Educational Services Inc.	NYSE
+GMT	GATX Corp.	NYSE
+HLS	HealthSouth Corp.	NYSE
+TTC	Toro Co.	NYSE
+NLSN	Nielsen Holdings N.V.	NYSE
+ATU	Actuant Corp. Cl A	NYSE
+DST	DST Systems Inc.	NYSE
+NJR	New Jersey Resources Corp.	NYSE
+XLS	Exelis Inc.	NYSE
+WRE	Washington Real Estate Investment Trust	NYSE
+BIO	Bio+AC0-Rad Laboratories Inc. Cl A	NYSE
+FCE.A	Forest City Enterprises Inc. Cl A	NYSE
+SWX	Southwest Gas Corp.	NYSE
+IVR	Invesco Mortgage Capital Inc.	NYSE
+AHL	Aspen Insurance Holdings Ltd.	NYSE
+HLX	Helix Energy Solutions Group Inc.	NYSE
+HNP	Huaneng Power International Inc.	NYSE
+OMI	Owens +ACY- Minor Inc.	NYSE
+RBN	Robbins +ACY- Myers Inc.	NYSE
+AAN	Aaron's Inc.	NYSE
+WPO	Washington Post Co. Cl B	NYSE
+DAR	Darling International Inc.	NYSE
+PB	Prosperity Bancshares Inc.	NYSE
+BYI	Bally Technologies Inc.	NYSE
+BKD	Brookdale Senior Living Inc.	NYSE
+BDC	Belden Inc.	NYSE
+CVA	Covanta Holding Corp.	NYSE
+FCS	Fairchild Semiconductor International Inc.	NYSE
+GEN	GenOn Energy Inc.	NYSE
+LPS	Lender Processing Services Inc.	NYSE
+LII	Lennox International Inc.	NYSE
+CLS	Celestica Inc.	NYSE
+CRL	Charles River Laboratories International Inc.	NYSE
+MOG.A	Moog Inc. Cl A	NYSE
+STWD	Starwood Property Trust Inc.	NYSE
+SXT	Sensient Technologies Corp.	NYSE
+CRR	CARBO Ceramics Inc.	NYSE
+HMA	Health Management Associates Inc. Cl A	NYSE
+POR	Portland General Electric Co.	NYSE
+THG	Hanover Insurance Group Inc.	NYSE
+EME	EMCOR Group Inc.	NYSE
+DPZ	Domino's Pizza Inc.	NYSE
+GNC	GNC Holdings Inc. Cl A	NYSE
+WSO	Watsco Inc.	NYSE
+WWW	Wolverine World Wide Inc.	NYSE
+ALEX	Alexander +ACY- Baldwin Inc.	NYSE
+CLP	Colonial Properties Trust	NYSE
+HSC	Harsco Corp.	NYSE
+SFG	StanCorp Financial Group Inc.	NYSE
+UIL	UIL Holdings Corp.	NYSE
+VSH	Vishay Intertechnology Inc.	NYSE
+AOS	A.O. Smith Corp.	NYSE
+CSE	CapitalSource Inc.	NYSE
+PIR	Pier 1 Imports Inc.	NYSE
+RDK	Ruddick Corp.	NYSE
+TWO	Two Harbors Investment Corp.	NYSE
+AL	Air Lease Corp.	NYSE
+AOL	AOL Inc.	NYSE
+CAB	Cabela's Inc.	NYSE
+CW	Curtiss+AC0-Wright Corp.	NYSE
+HAE	Haemonetics Corp.	NYSE
+MLI	Mueller Industries Inc.	NYSE
+PLT	Plantronics Inc.	NYSE
+OFC	Corporate Office Properties Trust	NYSE
+KORS	Michael Kors Holdings Ltd.	NYSE
+JE	Just Energy Group Inc.	NYSE
+DRH	Diamondrock Hospitality Co.	NYSE
+NEU	NewMarket Corp.	NYSE
+MIM	MI Developments Inc.	NYSE
+SGY	Stone Energy Corp.	NYSE
+STE	Steris Corp.	NYSE
+FCN	FTI Consulting Inc.	NYSE
+MBI	MBIA Inc.	NYSE
+SWC	Stillwater Mining Co.	NYSE
+ENS	EnerSys Inc.	NYSE
+G	Genpact Ltd.	NYSE
+EXPR	Express Inc.	NYSE
+FBR	Fibria Celulose S.A.	NYSE
+BCA	CorpBanca S.A.	NYSE
+CNO	CNO Financial Group Inc.	NYSE
+BRS	Bristow Group Inc.	NYSE
+H	Hyatt Hotels Corp.	NYSE
+GTI	GrafTech International Ltd.	NYSE
+FNB	F.N.B. Corp.	NYSE
+TCB	TCF Financial Corp.	NYSE
+HII	Huntington Ingalls Industries Inc.	NYSE
+WBS	Webster Financial Corp.	NYSE
+JNS	Janus Capital Group Inc.	NYSE
+ABVT	AboveNet Inc.	NYSE
+MCP	Molycorp Inc.	NYSE
+LNKD	LinkedIn Corp. Cl A	NYSE
+HR	Healthcare Realty Trust Inc.	NYSE
+SJI	South Jersey Industries Inc.	NYSE
+FAF	First American Financial Corp.	NYSE
+BRC	Brady Corp. Cl A	NYSE
+CNW	Con+AC0-way Inc.	NYSE
+ENH	Endurance Specialty Holdings Ltd.	NYSE
+CWH	CommonWealth REIT	NYSE
+IRF	International Rectifier Corp.	NYSE
+PPO	Polypore International Inc.	NYSE
+CACI	CACI International Inc. Cl A	NYSE
+CMC	Commercial Metals Co.	NYSE
+GCO	Genesco Inc.	NYSE
+LYV	Live Nation Entertainment Inc.	NYSE
+ROL	Rollins Inc.	NYSE
+CFX	Colfax Corp.	NYSE
+AIT	Applied Industrial Technologies Inc.	NYSE
+FICO	Fair Isaac Corp.	NYSE
+BGC	General Cable Corp.	NYSE
+MMR	McMoRan Exploration Co.	NYSE
+TEO	Telecom Argentina S.A.	NYSE
+CCU	Compania Cervecerias Unidas S.A.	NYSE
+MTN	Vail Resorts Inc.	NYSE
+OCN	Ocwen Financial Corp.	NYSE
+OLN	Olin Corp.	NYSE
+THO	Thor Industries Inc.	NYSE
+FST	Forest Oil Corp.	NYSE
+FUL	H.B. Fuller Co.	NYSE
+HL	Hecla Mining Co.	NYSE
+YOKU	Youku Inc.	NYSE
+KOS	Kosmos Energy Ltd.	NYSE
+TRGP	Targa Resources Corp.	NYSE
+JOE	St. Joe Co.	NYSE
+SNV	Synovus Financial Corp.	NYSE
+AVA	Avista Corp.	NYSE
+BDN	Brandywine Realty Trust	NYSE
+BF.A	Brown+AC0-Forman Corp. Cl A	NYSE
+CLGX	CoreLogic Inc.	NYSE
+GLF	Gulfmark Offshore Inc. (Cl A)	NYSE
+MMS	Maximus Inc.	NYSE
+N	NetSuite Inc.	NYSE
+HI	Hillenbrand Inc.	NYSE
+CYS	CYS Investments Inc.	NYSE
+SPP	Sappi Ltd.	NYSE
+EXP	Eagle Materials Inc.	NYSE
+EXBD	Corporate Executive Board Co.	NYSE
+IMAX	Imax Corp.	NYSE
+PNM	PNM Resources Inc.	NYSE
+RRR	RSC Holdings Inc.	NYSE
+WST	West Pharmaceutical Services Inc.	NYSE
+ARO	Aeropostale Inc.	NYSE
+DSW	DSW Inc. Cl A	NYSE
+SVU	Supervalu Inc.	NYSE
+DFT	Dupont Fabros Technology Inc.	NYSE
+DCT	DCT Industrial Trust Inc.	NYSE
+HHC	Howard Hughes Corp.	NYSE
+CHMT	Chemtura Corp.	NYSE
+CVG	Convergys Corp.	NYSE
+EE	El Paso Electric Co.	NYSE
+CSH	Cash America International Inc.	NYSE
+SFY	Swift Energy Co.	NYSE
+STN	Stantec Inc.	NYSE
+UNS	UniSource Energy Corp.	NYSE
+ASR	Grupo Aeroportuario del Sureste S.A.B. de C.V.	NYSE
+ALE	Allete Inc.	NYSE
+TC	Thompson Creek Metals Co. Inc.	NYSE
+IPI	Intrepid Potash Inc.	NYSE
+AT	Atlantic Power Corp.	NYSE
+B	Barnes Group Inc.	NYSE
+BKH	Black Hills Corp.	NYSE
+BKI	Buckeye Technologies Inc.	NYSE
+HOS	Hornbeck Offshore Services Inc.	NYSE
+PRX	Par Pharmaceutical Cos. Inc.	NYSE
+PTP	Platinum Underwriters Holdings Ltd.	NYSE
+SSS	Sovran Self Storage Inc.	NYSE
+CHE	Chemed Corp.	NYSE
+EGP	EastGroup Properties Inc.	NYSE
+GHL	Greenhill +ACY- Co. Inc.	NYSE
+KCG	Knight Capital Group Inc. Cl A	NYSE
+SKS	Saks Inc.	NYSE
+SVM	Silvercorp Metals Inc.	NYSE
+CUBE	CubeSmart	NYSE
+DLX	Deluxe Corp.	NYSE
+MPW	Medical Properties Trust Inc.	NYSE
+TX	TERNIUM S.A.	NYSE
+GFA	Gafisa S/A	NYSE
+POL	PolyOne Corp.	NYSE
+NWN	Northwest Natural Gas Co.	NYSE
+KMPR	Kemper Corp.	NYSE
+WMS	WMS Industries Inc.	NYSE
+ANN	Ann Inc.	NYSE
+NWE	NorthWestern Corp.	NYSE
+PAC	Grupo Aeroportuario del Pacifico S.A.B. de C.V.	NYSE
+RLI	RLI Corp.	NYSE
+TIE	Titanium Metals Corp.	NYSE
+GEF	Greif Inc. Cl A	NYSE
+GET	Gaylord Entertainment Co.	NYSE
+MDP	Meredith Corp.	NYSE
+SSD	Simpson Manufacturing Co.	NYSE
+CHH	Choice Hotels International Inc.	NYSE
+KDN	Kaydon Corp.	NYSE
+PRI	Primerica Inc.	NYSE
+AER	AerCap Holdings N.V.	NYSE
+BBG	Bill Barrett Corp.	NYSE
+LXP	Lexington Realty Trust	NYSE
+MSA	Mine Safety Appliances Co.	NYSE
+PSB	PS Business Parks Inc.	NYSE
+AN	AutoNation Inc.	NYSE
+TK	Teekay Corp.	NYSE
+VSI	Vitamin Shoppe Inc.	NYSE
+FLT	FleetCor Technologies Inc.	NYSE
+BKE	Buckle Inc.	NYSE
+EQY	Equity One Inc.	NYSE
+VCI	Valassis Communications Inc.	NYSE
+WTS	Watts Water Technologies Inc. Cl A	NYSE
+GPI	Group 1 Automotive Inc.	NYSE
+ICA	Empresas ICA S.A.B. de C.V.	NYSE
+MTX	Minerals Technologies Inc.	NYSE
+ONB	Old National Bancorp	NYSE
+BCO	Brink's Co.	NYSE
+RLJ	RLJ Lodging Trust	NYSE
+CNH	CNH Global N.V.	NYSE
+MCY	Mercury General Corp.	NYSE
+MTZ	MasTec Inc.	NYSE
+TYL	Tyler Technologies Inc.	NYSE
+CMO	Capstead Mortgage Corp.	NYSE
+LCC	US Airways Group Inc.	NYSE
+SWM	Schweitzer+AC0-Mauduit International Inc.	NYSE
+ABH	AbitibiBowater Inc.	NYSE
+WLK	Westlake Chemical Corp.	NYSE
+MRH	Montpelier Re Holdings Ltd.	NYSE
+NHI	National Health Investors Inc.	NYSE
+CLD	Cloud Peak Energy Inc.	NYSE
+PEB	Pebblebrook Hotel Trust	NYSE
+UVV	Universal Corp.	NYSE
+GEO	Geo Group Inc.	NYSE
+XCO	EXCO Resources Inc.	NYSE
+GGC	Georgia Gulf Corp.	NYSE
+BGS	B+ACY-G Foods Inc.	NYSE
+RATE	Bankrate Inc.	NYSE
+MUX	McEwen Mining Inc.	NYSE
+ALX	Alexander's Inc.	NYSE
+GRT	Glimcher Realty Trust	NYSE
+RGC	Regal Entertainment Group Cl A	NYSE
+SHO	Sunstone Hotel Investors Inc.	NYSE
+PAG	Penske Automotive Group Inc.	NYSE
+AWI	Armstrong World Industries Inc.	NYSE
+PSS	Collective Brands Inc.	NYSE
+TWI	Titan International Inc.	NYSE
+HWD	Harry Winston Diamond Corp.	NYSE
+ABM	ABM Industries Inc.	NYSE
+HPY	Heartland Payment Systems Inc.	NYSE
+LPX	Louisiana+AC0-Pacific Corp.	NYSE
+MOH	Molina Healthcare Inc.	NYSE
+RGS	Regis Corp.	NYSE
+CBU	Community Bank System Inc.	NYSE
+CHG	CH Energy Group Inc. (Holding Co.)	NYSE
+GVA	Granite Construction Inc.	NYSE
+DDD	3D Systems Corp.	NYSE
+PVG	Pretium Resources Inc.	NYSE
+BHE	Benchmark Electronics Inc.	NYSE
+SXC	SunCoke Energy Inc.	NYSE
+WNR	Western Refining Inc.	NYSE
+SNX	SYNNEX Corp.	NYSE
+AH	Accretive Health Inc.	NYSE
+SEMG	Semgroup Corp. Cl A	NYSE
+CTB	Cooper Tire +ACY- Rubber Co.	NYSE
+KNX	Knight Transportation Inc.	NYSE
+LGF	Lions Gate Entertainment Corp.	NYSE
+BZ	Boise Inc.	NYSE
+WTI	W+ACY-T Offshore Inc.	NYSE
+ESE	ESCO Technologies Inc.	NYSE
+FDP	Fresh Del Monte Produce Inc.	NYSE
+FR	First Industrial Realty Trust Inc.	NYSE
+HNI	HNI Corp.	NYSE
+LIZ	Liz Claiborne Inc.	NYSE
+OMG	OM Group Inc.	NYSE
+SMI	Semiconductor Manufacturing International Corp.	NYSE
+WFR	MEMC Electronic Materials Inc.	NYSE
+ARB	Arbitron Inc.	NYSE
+HEI.A	Heico Corp. Cl A	NYSE
+OEH	Orient Express Hotels Ltd.	NYSE
+MHR	Magnum Hunter Resources Corp.	NYSE
+BEE	Strategic Hotels +ACY- Resorts Inc.	NYSE
+SSW	Seaspan Corp.	NYSE
+SUI	Sun Communities Inc.	NYSE
+SWFT	Swift Transportation Co. Cl A	NYSE
+WOR	Worthington Industries Inc.	NYSE
+AKO.B	Embotelladora Andina S.A. (Series B)	NYSE
+BXS	BancorpSouth Inc.	NYSE
+EDR	Education Realty Trust Inc.	NYSE
+LTC	LTC Properties Inc.	NYSE
+RAD	Rite Aid Corp.	NYSE
+CIG.C	Companhia Energetica de Minas Gerais+AC0-Cemig	NYSE
+EXK	Endeavour Silver Corp.	NYSE
+VCO	Vina Concha y Toro S.A.	NYSE
+AIR	AAR Corp.	NYSE
+AKR	Acadia Realty Trust	NYSE
+KAMN	Kaman Corp.	NYSE
+NYT	New York Times Co. Cl A	NYSE
+WX	WuXi Pharmatech (Cayman) Inc.	NYSE
+KRA	Kraton Performance Polymers Inc.	NYSE
+BKU	BankUnited Inc.	NYSE
+EXH	Exterran Holdings Inc.	NYSE
+UNF	UniFirst Corp.	NYSE
+ELX	Emulex Corp.	NYSE
+IO	ION Geophysical Corp.	NYSE
+SHI	SINOPEC Shanghai Petrochemical Co. Ltd.	NYSE
+TAL	TAL International Group Inc.	NYSE
+USG	USG Corp.	NYSE
+ZNH	China Southern Airlines Co. Ltd.	NYSE
+AKS	AK Steel Holding Corp.	NYSE
+BGG	Briggs +ACY- Stratton Corp.	NYSE
+EDE	Empire District Electric Co.	NYSE
+LG	Laclede Group Inc.	NYSE
+MDC	M.D.C. Holdings Inc.	NYSE
+MTG	MGIC Investment Corp.	NYSE
+MWW	Monster Worldwide Inc.	NYSE
+GOV	Government Properties Income Trust	NYSE
+ANH	Anworth Mortgage Asset Corp.	NYSE
+CCC	Calgon Carbon Corp.	NYSE
+RWT	Redwood Trust Inc.	NYSE
+KS	KapStone Paper +ACY- Packaging Corp.	NYSE
+POST	Post Holdings Inc.	NYSE
+BLT	Blount International Inc.	NYSE
+CNA	CNA Financial Corp.	NYSE
+DEL	Deltic Timber Corp.	NYSE
+DIN	DineEquity Inc.	NYSE
+SAM	Boston Beer Co. Cl A	NYSE
+ARR	Armour Residential REIT Inc.	NYSE
+FSM	Fortuna Silver Mines Inc.	NYSE
+ABG	Asbury Automotive Group Inc.	NYSE
+JNY	Jones Group Inc.	NYSE
+PBH	Prestige Brands Holdings Inc.	NYSE
+RGR	Sturm Ruger +ACY- Co.	NYSE
+TXI	Texas Industries Inc.	NYSE
+DLPH	Delphi Automotive PLC	NYSE
+AF	Astoria Financial Corp.	NYSE
+AXL	American Axle +ACY- Manufacturing Holdings Inc.	NYSE
+GEF.B	Greif Inc. Cl B	NYSE
+ODP	Office Depot Inc.	NYSE
+ORB	Orbital Sciences Corp.	NYSE
+RES	RPC Inc.	NYSE
+CLW	Clearwater Paper Corp.	NYSE
+LRN	K12 Inc.	NYSE
+ACO	AMCOL International Corp.	NYSE
+CUB	Cubic Corp.	NYSE
+HT	Hersha Hospitality Trust Cl A	NYSE
+LNN	Lindsay Corp.	NYSE
+PFS	Provident Financial Services Inc.	NYSE
+RYL	Ryland Group Inc.	NYSE
+SCS	Steelcase Inc. Cl A	NYSE
+TTI	Tetra Technologies Inc.	NYSE
+P	Pandora Media Inc.	NYSE
+CEA	China Eastern Airlines Corp. Ltd.	NYSE
+CWT	California Water Service Group	NYSE
+KFY	Korn/Ferry International	NYSE
+KOP	Koppers Holdings Inc.	NYSE
+NPO	EnPro Industries Inc.	NYSE
+PBY	Pep Boys+AC0-Manny Moe +ACY- Jack	NYSE
+PHH	PHH Corp.	NYSE
+SYA	Symetra Financial Corp.	NYSE
+CATO	Cato Corp. Cl A	NYSE
+DY	Dycom Industries Inc.	NYSE
+KBH	KB Home	NYSE
+NAT	Nordic American Tankers Ltd.	NYSE
+PKD	Parker Drilling Co.	NYSE
+PVD	A.F.P. Provida S.A.	NYSE
+CXS	Crexus Investment Corp.	NYSE
+BMA	Banco Macro S.A.	NYSE
+CBB	Cincinnati Bell Inc.	NYSE
+EVR	Evercore Partners Inc. Cl A	NYSE
+KNL	Knoll Inc.	NYSE
+LZB	La+AC0-Z+AC0-Boy Inc.	NYSE
+OPK	Opko Health Inc.	NYSE
+PCX	Patriot Coal Corp.	NYSE
+GNRC	Generac Holdings Inc.	NYSE
+UIS	Unisys Corp.	NYSE
+WNC	Wabash National Corp.	NYSE
+AEL	American Equity Investment Life Holding Co.	NYSE
+MTOR	Meritor Inc.	NYSE
+VGR	Vector Group Ltd.	NYSE
+CEC	CEC Entertainment Inc.	NYSE
+CRK	Comstock Resources Inc.	NYSE
+HEI	Heico Corp.	NYSE
+KWK	Quicksilver Resources Inc.	NYSE
+NCI	Navigant Consulting Inc.	NYSE
+NR	Newpark Resources Inc.	NYSE
+OXM	Oxford Industries Inc.	NYSE
+PEI	Pennsylvania Real Estate Investment Trust	NYSE
+SPB	Spectrum Brands Holdings Inc.	NYSE
+TNC	Tennant Co.	NYSE
+FSL	Freescale Semiconductor Holdings I Ltd.	NYSE
+VAC	Marriott Vacations Worldwide Corp.	NYSE
+NSP	Insperity Inc.	NYSE
+CEL	Cellcom Israel Ltd.	NYSE
+GLT	Glatfelter	NYSE
+NNI	Nelnet Inc. Cl A	NYSE
+RTI	RTI International Metals Inc.	NYSE
+RSH	RadioShack Corp.	NYSE
+RENN	Renren Inc. Cl A	NYSE
+AWR	American States Water Co.	NYSE
+BLC	Belo Corp. Series A	NYSE
+CNS	Cohen +ACY- Steers Inc.	NYSE
+FPO	First Potomac Realty Trust	NYSE
+GPK	Graphic Packaging Holding Co.	NYSE
+PNK	Pinnacle Entertainment Inc.	NYSE
+AGRO	Adecoagro S.A.	NYSE
+ABD	ACCO Brands Corp.	NYSE
+AVX	AVX Corp.	NYSE
+AYR	Aircastle Ltd.	NYSE
+EIG	Employers Holdings Inc.	NYSE
+HGR	Hanger Orthopedic Group Inc.	NYSE
+HMN	Horace Mann Educators Corp.	NYSE
+HXM	Desarrolladora Homex S.A.B. de C.V.	NYSE
+IRC	Inland Real Estate Corp.	NYSE
+KNXA	Kenexa Corp.	NYSE
+TBI	TrueBlue Inc.	NYSE
+MTH	Meritage Homes Corp.	NYSE
+SCL	Stepan Co.	NYSE
+USM	U.S. Cellular Corp.	NYSE
+AAV	Advantage Oil +ACY- Gas Ltd.	NYSE
+ETH	Ethan Allen Interiors Inc.	NYSE
+IIT	Indosat	NYSE
+MTL	Mechel OAO	NYSE
+TR	Tootsie Roll Industries Inc.	NYSE
+NX	Quanex Building Products Corp.	NYSE
+AAT	American Assets Trust Inc.	NYSE
+AIN	Albany International Corp. Cl A	NYSE
+MTRN	Materion Corp.	NYSE
+IBI	Interline Brands Inc.	NYSE
+LXU	LSB Industries Inc.	NYSE
+NFP	National Financial Partners Corp.	NYSE
+GDOT	Green Dot Corp. Cl A	NYSE
+LPR	Lone Pine Resources Inc.	NYSE
+WAL	Western Alliance Bancorp.	NYSE
+AEC	Associated Estates Realty Corp.	NYSE
+AZZ	AZZ Inc.	NYSE
+CUZ	Cousins Properties Inc.	NYSE
+QTM	Quantum Corp.	NYSE
+FCF	First Commonwealth Financial Corp. (Pennsylvania)	NYSE
+ROG	Rogers Corp.	NYSE
+TISI	Team Inc.	NYSE
+TGH	Textainer Group Holdings Ltd.	NYSE
+FIO	Fusion+AC0-io Inc.	NYSE
+CIR	Circor International Inc.	NYSE
+REN	Resolute Energy Corp.	NYSE
+TMH	Team Health Holding Inc.	NYSE
+CODE	Spansion Inc. Cl A	NYSE
+ZQK	Quiksilver Inc.	NYSE
+AHT	Ashford Hospitality Trust Inc.	NYSE
+BAS	Basic Energy Services Inc.	NYSE
+DSX	Diana Shipping Inc.	NYSE
+FOE	Ferro Corp.	NYSE
+NCT	Newcastle Investment Corp.	NYSE
+SAH	Sonic Automotive Inc. Cl A	NYSE
+SHS	Sauer+AC0-Danfoss Inc.	NYSE
+FOR	Forestar Group Inc.	NYSE
+GZT	Gazit+AC0-Globe Ltd.	NYSE
+AKO.A	Embotelladora Andina S.A. (Series A)	NYSE
+GB	Greatbatch Inc.	NYSE
+GBX	Greenbrier Cos.	NYSE
+NC	NACCO Industries Inc. Cl A	NYSE
+SFL	Ship Finance International Ltd.	NYSE
+ESC	Emeritus Corp.	NYSE
+FTK	Flotek Industries Inc.	NYSE
+GFF	Griffon Corp.	NYSE
+GSH	Guangshen Railway Co. Ltd.	NYSE
+PKE	Park Electrochemical Corp.	NYSE
+TSL	Trina Solar Ltd.	NYSE
+DGI	DigitalGlobe Inc.	NYSE
+CLNY	Colony Financial Inc.	NYSE
+CHSP	Chesapeake Lodging Trust	NYSE
+AM	American Greetings Corp. Cl A	NYSE
+BLX	Banco Latinoamericano de Comercio Exterior S.A. Cl E	NYSE
+COT	Cott Corp.	NYSE
+DW	Drew Industries Inc.	NYSE
+HF	HFF Inc. Cl A	NYSE
+IVC	Invacare Corp.	NYSE
+KND	Kindred Healthcare Inc.	NYSE
+KWR	Quaker Chemical Corp.	NYSE
+NDZ	Nordion Inc.	NYSE
+TG	Tredegar Corp.	NYSE
+JAG	Jaguar Mining Inc.	NYSE
+AEA	Advance America Cash Advance Centers Inc.	NYSE
+SFI	iStar Financial Inc.	NYSE
+LAD	Lithia Motors Inc. Cl A	NYSE
+LDR	Landauer Inc.	NYSE
+TPC	Tutor Perini Corp.	NYSE
+SMP	Standard Motor Products Inc.	NYSE
+VIT	Vanceinfo Technologies Inc.	NYSE
+BKS	Barnes +ACY- Noble Inc.	NYSE
+EPL	Energy Partners Ltd.	NYSE
+MIG	Meadowbrook Insurance Group Inc.	NYSE
+NRF	Northstar Realty Finance Corp.	NYSE
+OFG	Oriental Financial Group Inc.	NYSE
+SXI	Standex International Corp.	NYSE
+JBT	John Bean Technologies Corp.	NYSE
+ONE	Higher One Holdings Inc.	NYSE
+BMI	Badger Meter Inc.	NYSE
+CASC	Cascade Corp.	NYSE
+BH	Biglari Holdings Inc.	NYSE
+DX	Dynex Capital Inc.	NYSE
+FCH	Felcor Lodging Trust Inc.	NYSE
+KBW	KBW Inc.	NYSE
+MFB	Maidenform Brands Inc.	NYSE
+RT	Ruby Tuesday Inc.	NYSE
+LL	Lumber Liquidators Holdings Inc.	NYSE
+PMT	PennyMac Mortgage Investment Trust	NYSE
+KAR	KAR Auction Services Inc.	NYSE
+RLD	RealD Inc.	NYSE
+ELT	Elster Group SE	NYSE
+OMX	OfficeMax Inc.	NYSE
+CCO	Clear Channel Outdoor Holdings Inc.	NYSE
+GTY	Getty Realty Corp.	NYSE
+ITG	Investment Technology Group Inc.	NYSE
+KKD	Krispy Kreme Doughnuts Inc.	NYSE
+NPK	National Presto Industries Inc.	NYSE
+PZE	Petrobras Argentina S.A.	NYSE
+PGI	Premiere Global Services Inc.	NYSE
+RDN	Radian Group Inc.	NYSE
+SKX	Skechers USA Inc. Cl A	NYSE
+GTS	Triple+AC0-S Management Corp. Cl B	NYSE
+BPI	Bridgepoint Education Inc.	NYSE
+PAM	Pampa Energia S.A.	NYSE
+LPI	Laredo Petroleum Holdings Inc.	NYSE
+EGY	Vaalco Energy Inc.	NYSE
+WMK	Weis Markets Inc.	NYSE
+WPP	Wausau Paper Corp.	NYSE
+BWS	Brown Shoe Co. Inc.	NYSE
+BYD	Boyd Gaming Corp.	NYSE
+CQB	Chiquita Brands International Inc.	NYSE
+FIX	Comfort Systems USA Inc.	NYSE
+MWA	Mueller Water Products Inc.	NYSE
+PJC	Piper Jaffray Cos.	NYSE
+SPF	Standard Pacific Corp.	NYSE
+SSI	Stage Stores Inc.	NYSE
+TNS	TNS Inc.	NYSE
+LDK	LDK Solar Co. Ltd.	NYSE
+DHX	Dice Holdings Inc.	NYSE
+GA	Giant Interactive Group Inc.	NYSE
+SEM	Select Medical Holdings Corp.	NYSE
+KW	Kennedy+AC0-Wilson Holdings Inc.	NYSE
+PRIS.B	Promotora de Informaciones S.A. Cl B	NYSE
+UHT	Universal Health Realty Income Trust	NYSE
+CIA	Citizens Inc. Cl A	NYSE
+CKP	Checkpoint Systems Inc.	NYSE
+CMN	Cantel Medical Corp.	NYSE
+END	Endeavour International Corp.	NYSE
+FFG	FBL Financial Group Inc.	NYSE
+GDP	Goodrich Petroleum Corp.	NYSE
+KRO	Kronos Worldwide Inc.	NYSE
+MOD	Modine Manufacturing Co.	NYSE
+MYE	Myers Industries Inc.	NYSE
+RA	RailAmerica Inc.	NYSE
+INXN	InterXion Holding N.V.	NYSE
+UAM	Universal American Corp.	NYSE
+CGX	Consolidated Graphics Inc.	NYSE
+EBF	Ennis Inc.	NYSE
+ELY	Callaway Golf Co.	NYSE
+KEM	Kemet Corp.	NYSE
+MKC.V	McCormick +ACY- Co. Inc. Com. Vtg.	NYSE
+PTI	Patni Computer Systems Ltd.	NYSE
+RPT	Ramco+AC0-Gershenson Properties Trust	NYSE
+RSO	Resource Capital Corp.	NYSE
+SRZ	Sunrise Senior Living Inc.	NYSE
+SUP	Superior Industries International Inc.	NYSE
+COR	CoreSite Realty Corp.	NYSE
+AVD	American Vanguard Corp.	NYSE
+CPK	Chesapeake Utilities Corp.	NYSE
+CV	Central Vermont Public Service Corp.	NYSE
+VVI	Viad Corp.	NYSE
+HHS	Harte+AC0-Hanks Inc.	NYSE
+NP	Neenah Paper Inc.	NYSE
+TPL	Texas Pacific Land Trust Sub Share Ctf	NYSE
+TRC	Tejon Ranch Co.	NYSE
+FSR	Flagstone Reinsurance Holdings Ltd.	NYSE
+DUF	Duff +ACY- Phelps Corp. Cl A	NYSE
+ISS	iSoftStone Holdings Ltd.	NYSE
+YGE	Yingli Green Energy Holding Co. Ltd.	NYSE
+VHS	Vanguard Health Systems Inc.	NYSE
+UBA	Urstadt Biddle Properties Inc. Cl A	NYSE
+IN	Intermec Inc.	NYSE
+MOV	Movado Group Inc.	NYSE
+PQ	PetroQuest Energy Inc.	NYSE
+STP	Suntech Power Holdings Co. Ltd.	NYSE
+EXAM	ExamWorks Group Inc.	NYSE
+ACW	Accuride Corp.	NYSE
+BPZ	BPZ Resources Inc.	NYSE
+CTS	CTS Corp.	NYSE
+EBS	Emergent Biosolutions Inc.	NYSE
+MEI	Methode Electronics Inc.	NYSE
+ORA	Ormat Technologies Inc.	NYSE
+TREX	Trex Co. Inc.	NYSE
+MIL	MFC Industrial Ltd.	NYSE
+PRO	Pros Holdings Inc.	NYSE
+PMC	PharMerica Corp.	NYSE
+EJ	E+AC0-House (China) Holdings Ltd.	NYSE
+ES	EnergySolutions Inc.	NYSE
+DOLE	Dole Food Co. Inc.	NYSE
+MG	Mistras Group Inc.	NYSE
+CALX	Calix Inc.	NYSE
+EXL	Excel Trust Inc.	NYSE
+HPP	Hudson Pacific Properties Inc.	NYSE
+KH	China Kanghui Holdings	NYSE
+VG	Vonage Holdings Corp.	NYSE
+HTH	Hilltop Holdings Inc.	NYSE
+BTH	BLYTH Inc.	NYSE
+CGI	Celadon Group Inc.	NYSE
+GMK	Gruma S.A.B. de C.V.	NYSE
+LF	LeapFrog Enterprises Inc. Cl A	NYSE
+MDF	Metropolitan Health Networks Inc.	NYSE
+MNR	Monmouth Real Estate Investment Corp. Cl A	NYSE
+OB	OneBeacon Insurance Group Ltd. Cl A	NYSE
+PBNY	Provident New York Bancorp	NYSE
+FLY	Fly Leasing Ltd.	NYSE
+ZEP	Zep Inc.	NYSE
+FN	Fabrinet	NYSE
+WNS	WNS (Holdings) Ltd.	NYSE
+ALC	Assisted Living Concepts Inc. Cl A	NYSE
+BRP	Brookfield Residential Properties Inc.	NYSE
+CYD	China Yuchai International Ltd.	NYSE
+SFE	Safeguard Scientifics Inc.	NYSE
+STRI	STR Holdings Inc.	NYSE
+CCG	Campus Crest Communities Inc.	NYSE
+DANG	E+AC0-Commerce China Dangdang Inc.	NYSE
+VHI	Valhi Inc.	NYSE
+TCL	Tata Communications Ltd.	NYSE
+DVR	Cal Dive International Inc.	NYSE
+GY	GenCorp Inc.	NYSE
+KRG	Kite Realty Group Trust	NYSE
+SJW	SJW Corp.	NYSE
+ARI	Apollo Commercial Real Estate Finance Inc.	NYSE
+PPC	Pilgrim's Pride Corp.	NYSE
+WAIR	Wesco Aircraft Holdings Inc.	NYSE
+BFS	Saul Centers Inc.	NYSE
+CBZ	CBIZ Inc	NYSE
+CPE	Callon Petroleum Co.	NYSE
+AOI	Alliance One International Inc.	NYSE
+DRD	DRDGOLD Ltd.	NYSE
+FSS	Federal Signal Corp.	NYSE
+FUR	Winthrop Realty Trust	NYSE
+HVB	Hudson Valley Holding Corp.	NYSE
+NM	Navios Maritime Holdings Inc.	NYSE
+SSP	E.W. Scripps Co. Cl A	NYSE
+SVN	7 Days Group Holdings Ltd.	NYSE
+QUAD	Quad/Graphics Inc.	NYSE
+PRIS	Promotora de Informaciones S.A. Cl A	NYSE
+USNA	USANA Health Sciences Inc.	NYSE
+UTI	Universal Technical Institute Inc.	NYSE
+UTL	Unitil Corp.	NYSE
+VQ	Venoco Inc.	NYSE
+CBR	Ciber Inc.	NYSE
+FRO	Frontline Ltd.	NYSE
+FRM	Furmanite Corp.	NYSE
+XOXO	XO Group Inc.	NYSE
+LSE	CapLease Inc.	NYSE
+SMA	Symmetry Medical Inc.	NYSE
+STL	Sterling Bancorp	NYSE
+KAI	Kadant Inc.	NYSE
+DM	The Dolan Co.	NYSE
+BTM.C	Brasil Telecom S/A	NYSE
+PLOW	Douglas Dynamics Inc.	NYSE
+NOR	Noranda Aluminum Holding Corp.	NYSE
+ENV	Envestnet Inc.	NYSE
+IPHI	Inphi Corp.	NYSE
+BAH	Booz Allen +ACY- Hamilton Inc.	NYSE
+THR	Thermon Group Holdings Inc.	NYSE
+WGO	Winnebago Industries Inc.	NYSE
+CDR	Cedar Realty Trust Inc.	NYSE
+GCA	Global Cash Access Holdings Inc.	NYSE
+GFIG	GFI Group Inc.	NYSE
+MCS	Marcus Corp.	NYSE
+OSG	Overseas Shipholding Group Inc.	NYSE
+CAP	CAI International Inc.	NYSE
+HGG	HHGregg Inc.	NYSE
+INN	Summit Hotel Properties Inc.	NYSE
+CBS.A	CBS Corp. Cl A	NYSE
+WHG	Westwood Holdings Group Inc.	NYSE
+ADC	Agree Realty Corp.	NYSE
+BZH	Beazer Homes USA Inc.	NYSE
+CSU	Capital Senior Living Corp.	NYSE
+GPX	GP Strategies Corp.	NYSE
+HUB.A	Hubbell Inc. Cl A	NYSE
+MED	Medifast Inc.	NYSE
+CVO	Cenveo Inc.	NYSE
+OMN	OMNOVA Solutions Inc.	NYSE
+SRI	Stoneridge Inc.	NYSE
+STC	Stewart Information Services Corp.	NYSE
+TNK	Teekay Tankers Ltd.	NYSE
+GGS	Global Geophysical Services Inc.	NYSE
+AMRC	Ameresco Inc. Cl A	NYSE
+CJES	C+ACY-J Energy Services Inc.	NYSE
+WWE	World Wrestling Entertainment Inc. Cl A	NYSE
+ALG	Alamo Group Inc.	NYSE
+ANW	Aegean Marine Petroleum Network Inc.	NYSE
+BFR	BBVA Banco Frances S.A.	NYSE
+HNR	Harvest Natural Resources Inc.	NYSE
+HVT	Haverty Furniture Cos. Inc.	NYSE
+MHO	M/I Homes Inc.	NYSE
+NCS	NCI Building Systems Inc.	NYSE
+PHX	Panhandle Oil +ACY- Gas Inc.	NYSE
+PNX	Phoenix Cos. Inc.	NYSE
+REX	Rex American Resources Corp.	NYSE
+SYX	Systemax Inc.	NYSE
+IL	IntraLinks Holdings Inc.	NYSE
+DMD	Demand Media Inc.	NYSE
+QIHU	Qihoo 360 Technology Co. Ltd.	NYSE
+SN	Sanchez Energy Corp.	NYSE
+CPAC	Cementos Pacasmayo S.A.A.	NYSE
+WG	Willbros Group Inc.	NYSE
+AHS	AMN Healthcare Services Inc.	NYSE
+ARC	American Reprographics Co.	NYSE
+CAS	A.M. Castle +ACY- Co.	NYSE
+CBM	Cambrex Corp.	NYSE
+STZ.B	Constellation Brands Inc. Cl B	NYSE
+CDI	CDI Corp.	NYSE
+CSA	Cogdell Spencer Inc.	NYSE
+GNK	Genco Shipping +ACY- Trading Ltd.	NYSE
+IRS	IRSA+AC0-Inversiones y Representaciones S.A. GDS	NYSE
+OLP	One Liberty Properties Inc.	NYSE
+PKY	Parkway Properties Inc.	NYSE
+PVA	Penn Virginia Corp.	NYSE
+RAS	RAIT Financial Trust	NYSE
+TLB	Talbots Inc.	NYSE
+TRK	Speedway Motorsports Inc.	NYSE
+MX	MagnaChip Semiconductor Corp.	NYSE
+SFUN	SouFun Holdings Ltd.	NYSE
+MITT	AG Mortgage Investment Trust Inc.	NYSE
+FENG	Phoenix New Media Ltd. Cl A	NYSE
+RSE	Rouse Properties Inc.	NYSE
+SLCA	U.S. Silica Holdings Inc.	NYSE
+DK	Delek US Holdings Inc.	NYSE
+ETM	Entercom Communications Corp. Cl A	NYSE
+GBL	GAMCO Investors Inc. Cl A	NYSE
+HZO	MarineMax Inc.	NYSE
+IMN	Imation Corp.	NYSE
+JRN	Journal Communications Inc. Cl A	NYSE
+LEN.B	Lennar Corp. Cl B	NYSE
+LVB	Steinway Musical Instruments Inc.	NYSE
+MGI	MoneyGram International Inc.	NYSE
+MLR	Miller Industries Inc.	NYSE
+SWS	SWS Group Inc.	NYSE
+TGS	Transportadora de Gas del Sur S.A.	NYSE
+STV	China Digital TV Holding Co. Ltd.	NYSE
+ORN	Orion Marine Group Inc.	NYSE
+TRNO	Terreno Realty Corp.	NYSE
+STNG	Scorpio Tankers Inc.	NYSE
+RRTS	Roadrunner Transportation Systems Inc.	NYSE
+BOX	SeaCube Container Leasing Ltd.	NYSE
+CMRE	Costamare Inc.	NYSE
+ARX	Aeroflex Holding Corp.	NYSE
+BCEI	Bonanza Creek Energy Inc.	NYSE
+ASI	American Safety Insurance Holdings Ltd.	NYSE
+AGM	Federal Agricultural Mortgage Corp. Cl C	NYSE
+AP	Ampco+AC0-Pittsburgh Corp.	NYSE
+CSS	CSS Industries Inc.	NYSE
+HW	Headwaters Inc.	NYSE
+DRL	Doral Financial Corp.	NYSE
+FVE	Five Star Quality Care Inc.	NYSE
+OPY	Oppenheimer Holdings Inc.	NYSE
+HOV	Hovnanian Enterprises Inc. Cl A	NYSE
+IBA	Industrias Bachoco S.A.B. de C.V.	NYSE
+NOA	North American Energy Partners Inc.	NYSE
+OME	Omega Protein Corp.	NYSE
+REV	Revlon Inc. Cl A	NYSE
+SBX	SeaBright Holdings Inc.	NYSE
+SEH	Spartech Corp.	NYSE
+TNP	Tsakos Energy Navigation Ltd.	NYSE
+SCR	Simcere Pharmaceutical Group	NYSE
+SOL	ReneSola Ltd.	NYSE
+SB	Safe Bulkers Inc.	NYSE
+MUSA	Metals USA Holdings Corp.	NYSE
+ACTV	Active Network Inc.	NYSE
+AMTG	Apollo Residential Mortgage Inc.	NYSE
+TEA	Teavana Holdings Inc.	NYSE
+INVN	InvenSense Inc.	NYSE
+IMPV	Imperva Inc.	NYSE
+GWRE	Guidewire Software Inc.	NYSE
+RNDY	Roundy's Inc.	NYSE
+USU	USEC Inc.	NYSE
+VPG	Vishay Precision Group Inc.	NYSE
+AI	Arlington Asset Investment Corp. Cl A	NYSE
+HDY	Hyperdynamics Corp.	NYSE
+KCP	Kenneth Cole Productions Inc. Cl A	NYSE
+LDL	Lydall Inc.	NYSE
+MTE	Mahanagar Telephone Nigam Ltd.	NYSE
+NGS	Natural Gas Services Group Inc.	NYSE
+NTE	Nam Tai Electronics Inc.	NYSE
+PIKE	Pike Electric Corp.	NYSE
+TUC	Mac+AC0-Gray Corp.	NYSE
+ART	Artio Global Investors Inc. Cl A	NYSE
+CLDT	Chatham Lodging Trust	NYSE
+MY	China Ming Yang Wind Power Group Ltd.	NYSE
+FXCM	FXCM Inc.	NYSE
+FF	FutureFuel Corp.	NYSE
+TMS	TMS International Corp. Cl A	NYSE
+PPP	Primero Mining Corp.	NYSE
+GNE	Genie Energy Ltd. Cl B	NYSE
+MN	Manning +ACY- Napier Inc.	NYSE
+MTDR	Matador Resources Co.	NYSE
+WNI	Schiff Nutrition International Inc. Cl A	NYSE
+CRY	CryoLife Inc.	NYSE
+DCO	Ducommun Inc.	NYSE
+FBC	Flagstar Bancorp Inc.	NYSE
+HIL	Hill International Inc.	NYSE
+DYN	Dynegy Inc.	NYSE
+MILL	Miller Energy Resources Inc.	NYSE
+MPR	Met+AC0-Pro Corp.	NYSE
+TVL	Lin TV Corp.	NYSE
+XRS	TAL Education Group	NYSE
+NOAH	Noah Holdings Ltd.	NYSE
+WD	Walker +ACY- Dunlop Inc.	NYSE
+PTGI	Primus Telecommunications Group Inc.	NYSE
+UFI	Unifi Inc.	NYSE
+ALJ	Alon USA Energy Inc.	NYSE
+FC	Franklin Covey Co.	NYSE
+GMXR	GMX Resources Inc.	NYSE
+IDT	IDT Corp. Cl B	NYSE
+ISH	International Shipholding Corp.	NYSE
+MDS	Midas Inc.	NYSE
+MNI	McClatchy Co. Cl A	NYSE
+MSO	Martha Stewart Living Omnimedia Inc.	NYSE
+SGK	Schawk Inc.	NYSE
+PULS	Pulse Electronics Corp.	NYSE
+TRR	TRC Cos. Inc.	NYSE
+JMP	JMP Group Corp.	NYSE
+SKH	Skilled Healthcare Group Inc. Cl A	NYSE
+AMBO	Ambow Education Holding Ltd.	NYSE
+CCSC	Country Style Cooking Restaurant Chain Co. Ltd.	NYSE
+PRLB	Proto Labs Inc.	NYSE
+RLH	Red Lion Hotels Corp.	NYSE
+EQU	Equal Energy Ltd.	NYSE
+ENZ	Enzo Biochem Inc.	NYSE
+GKK	Gramercy Capital Corp.	NYSE
+GTN	Gray Television Inc.	NYSE
+MPG	MPG Office Trust Inc.	NYSE
+NL	NL Industries Inc.	NYSE
+EDN	Empresa Distribuidora y Comercializadora Norte S.A.	NYSE
+RST	Rosetta Stone Inc.	NYSE
+XRM	Xerium Technologies Inc.	NYSE
+ABR	Arbor Realty Trust Inc.	NYSE
+BBW	Build+AC0-A+AC0-Bear Workshop Inc.	NYSE
+CFI	Culp Inc.	NYSE
+CSV	Carriage Services Inc.	NYSE
+DAC	Danaos Corp.	NYSE
+EXM	Excel Maritime Carriers Ltd.	NYSE
+LUB	Luby's Inc.	NYSE
+MPX	Marine Products Corp.	NYSE
+NTZ	Natuzzi S.p.A.	NYSE
+ODC	Oil+AC0-Dri Corp. of America	NYSE
+AHC	A. H. Belo Corp. Series A	NYSE
+CO	China Cord Blood Corp.	NYSE
+JKS	JinkoSolar Holding Co. Ltd.	NYSE
+MXL	MaxLinear Inc.	NYSE
+XUE	Xueda Education Group	NYSE
+TEU	Box Ships Inc.	NYSE
+STAG	STAG Industrial Inc.	NYSE
+AVG	AVG Technologies N.V.	NYSE
+GWAY	Greenway Medical Technologies Inc.	NYSE
+EPAM	EPAM Systems Inc.	NYSE
+CBK	Christopher +ACY- Banks Corp.	NYSE
+NLS	Nautilus Inc.	NYSE
+DHT	DHT Holdings Inc.	NYSE
+EVC	Entravision Communications Corp.	NYSE
+FBN	Furniture Brands International Inc.	NYSE
+FBP	First BanCorp (Puerto Rico)	NYSE
+FMD	First Marblehead Corp.	NYSE
+IHC	Independence Holding Co.	NYSE
+RC	Grupo Radio Centro S.A.B. de C.V.	NYSE
+SPA	Sparton Corp.	NYSE
+OWW	Orbitz Worldwide Inc.	NYSE
+XIN	Xinyuan Real Estate Co. Ltd.	NYSE
+CGA	China Green Agriculture Inc.	NYSE
+CCM	Concord Medical Services Holdings Ltd.	NYSE
+DEXO	Dex One Corp.	NYSE
+BALT	Baltic Trading Ltd.	NYSE
+CSFS	Cash Store Financial Services Inc.	NYSE
+CIS	Camelot Information Systems Inc.	NYSE
+TOWR	Tower International Inc.	NYSE
+BITA	Bitauto Holdings Ltd.	NYSE
+GCAP	GAIN Capital Holdings Inc.	NYSE
+NPTN	NeoPhotonics Corp.	NYSE
+TAOM	Taomee Holdings Ltd.	NYSE
+GSE	GSE Holding Inc.	NYSE
+ZLC	Zale Corp.	NYSE
+ZZ	Sealy Corp.	NYSE
+BIO.B	Bio+AC0-Rad Laboratories Inc. Cl B	NYSE
+BRT	BRT Realty Trust	NYSE
+BXC	BlueLinx Holdings Inc.	NYSE
+CRD.A	Crawford +ACY- Co. Cl A	NYSE
+JW.B	John Wiley +ACY- Sons Inc. Cl B	NYSE
+KV.A	K+AC0-V Pharmaceutical Co. Cl A	NYSE
+MEG	Media General Inc. Cl A	NYSE
+NWY	New York +ACY- Co. Inc.	NYSE
+SCX	L.S. Starrett Co. Cl A	NYSE
+NPD	China Nepstar Chain Drugstore Ltd.	NYSE
+SQNS	Sequans Communications S.A.	NYSE
+PACD	Pacific Drilling S.A.	NYSE
+FX	FX Alliance Inc.	NYSE
+UBP	Urstadt Biddle Properties Inc.	NYSE
+ADY	Feihe International Inc.	NYSE
+AIQ	Alliance HealthCare Services Inc.	NYSE
+AOB	American Oriental Bioengineering Inc.	NYSE
+BSI	Alon Holdings+AC0-Blue Square+AC0-Israel Ltd.	NYSE
+BXG	Bluegreen Corp.	NYSE
+CRD.B	Crawford +ACY- Co. Cl B	NYSE
+CT	Capital Trust Inc. Cl A	NYSE
+PAR	Par Technology Corp.	NYSE
+KID	Kid Brands Inc.	NYSE
+SKY	Skyline Corp.	NYSE
+TGX	Theragenics Corp.	NYSE
+PRGN	Paragon Shipping Inc. Cl A	NYSE
+PZN	Pzena Investment Management Inc.	NYSE
+UTA	Universal Travel Group	NYSE
+CHC	China Hydroelectric Corp.	NYSE
+DQ	Daqo New Energy Corp.	NYSE
+SHP	ShangPharma Corp.	NYSE
+LAS	Lentuo International Inc.	NYSE
+FRF	Fortegra Financial Corp.	NYSE
+IFT	Imperial Holdings Inc.	NYSE
+NQ	NetQin Mobile Inc.	NYSE
+ZX	China Zenix Auto International Ltd.	NYSE
+HRG	Harbinger Group Inc.	NYSE
+SAB	Grupo Casa Saba S.A.B. de C.V.	NYSE
+BBX	BankAtlantic Bancorp Inc. Cl A	NYSE
+DDE	Dover Downs Gaming +ACY- Entertainment Inc.	NYSE
+FCE.B	Forest City Enterprises Inc. Cl B	NYSE
+KFS	Kingsway Financial Services Inc.	NYSE
+FAC	First Acceptance Corp.	NYSE
+MLP	Maui Land +ACY- Pineapple Co. Inc.	NYSE
+MOG.B	Moog Inc. Cl B	NYSE
+SR	Standard Register Co.	NYSE
+ATV	Acorn International Inc.	NYSE
+MXT	Maxcom Telecomunicaciones S.A.B. de C.V.	NYSE
+GRO	AGRIA Corp.	NYSE
+GSL	Global Ship Lease Inc. Cl A	NYSE
+GSI	General Steel Holdings Inc.	NYSE
+DL	China Distance Education Holdings Ltd.	NYSE
+XNY	China Xiniya Fashion Ltd.	NYSE
+ZA	Zuoan Fashion Ltd.	NYSE
+DDMG	Digital Domain Media Group Inc.	NYSE
+AXR	Amrep Corp.	NYSE
+CPF	Central Pacific Financial Corp.	NYSE
+DVD	Dover Motorsports Inc.	NYSE
+HVT.A	Haverty Furniture Cos. Inc. Cl A	NYSE
+KV.B	K+AC0-V Pharmaceutical Co. Cl B	NYSE
+SRT	Startek Inc.	NYSE
+TAP.A	Molson Coors Brewing Co. Cl A	NYSE
+TMM	Grupo TMM S.A.B.	NYSE
+QXM	Qiao Xing Mobile Communication Co. Ltd.	NYSE
+NED	Noah Education Holdings Ltd.	NYSE
+WH	WSP Holdings Ltd.	NYSE
+GU	Gushan Environmental Energy Ltd.	NYSE
+VRS	Verso Paper Corp.	NYSE
+CTC	IFM Investments Ltd.	NYSE
+BORN	China New Borun Corp.	NYSE
+SYSW	Syswin Inc.	NYSE
+ARL	American Realty Investors Inc.	NYSE
+GTN.A	Gray Television Inc. Cl A	NYSE
+TCI	Transcontinental Realty Investors	NYSE
+CMM	China Mass Media Corp.	NYSE
+FLWS	1+AC0-800 FLOWERS.COM	NASDAQ
+FCTY	1st Century Bancshares	NASDAQ
+FCCY	1st Constitution Bancorp (NJ)	NASDAQ
+SRCE	1st Source Corporation	NASDAQ
+FUBC	1st United Bancorp	NASDAQ
+VNET	21Vianet Group	NASDAQ
+JOBS	51job	NASDAQ
+EGHT	8x8 Inc	NASDAQ
+AVHI	A V Homes	NASDAQ
+SHLM	A. Schulman	NASDAQ
+AAON	AAON	NASDAQ
+ASTM	Aastrom Biosciences	NASDAQ
+ABAX	ABAXIS	NASDAQ
+ABMD	ABIOMED	NASDAQ
+AXAS	Abraxas Petroleum Corporation	NASDAQ
+ACTG	Acacia Research Corporation	NASDAQ
+ACHC	Acadia Healthcare Company	NASDAQ
+ACAD	ACADIA Pharmaceuticals Inc.	NASDAQ
+ACST	Acasti Pharma	NASDAQ
+AXDX	Accelerate Diagnostics	NASDAQ
+ACCL	Accelrys	NASDAQ
+ANCX	Access National Corporation	NASDAQ
+ARAY	Accuray Incorporated	NASDAQ
+ACRX	AcelRx Pharmaceuticals	NASDAQ
+ACET	Aceto Corporation	NASDAQ
+ACHN	Achillion Pharmaceuticals	NASDAQ
+ACIW	ACI Worldwide	NASDAQ
+ACNB	ACNB Corporation	NASDAQ
+ACOR	Acorda Therapeutics	NASDAQ
+ACFN	Acorn Energy	NASDAQ
+ACTS	Actions Semiconductor Co.	NASDAQ
+ACPW	Active Power	NASDAQ
+ATVI	Activision Blizzard	NASDAQ
+BIRT	Actuate Corporation	NASDAQ
+ACUR	Acura Pharmaceuticals	NASDAQ
+ACXM	Acxiom Corporation	NASDAQ
+ADES	ADA+AC0-ES	NASDAQ
+ADUS	Addus HomeCare Corporation	NASDAQ
+AEY	ADDvantage Technologies Group	NASDAQ
+ADEP	Adept Technology	NASDAQ
+ADBE	Adobe Systems Incorporated	NASDAQ
+ADTN	ADTRAN	NASDAQ
+AEIS	Advanced Energy Industries	NASDAQ
+ADVS	Advent Software	NASDAQ
+AEGR	Aegerion Pharmaceuticals	NASDAQ
+AEGN	Aegion Corp	NASDAQ
+AEHR	Aehr Test Systems	NASDAQ
+AEPI	AEP Industries Inc.	NASDAQ
+AVAV	AeroVironment	NASDAQ
+AEZS	AEterna Zentaris Inc.	NASDAQ
+ATRM	Aetrium Incorporated	NASDAQ
+AFCE	AFC Enterprises	NASDAQ
+AFFX	Affymetrix	NASDAQ
+AGEN	Agenus Inc.	NASDAQ
+AGYS	Agilysys	NASDAQ
+AIRM	Air Methods Corporation	NASDAQ
+AIRT	Air T	NASDAQ
+ATSG	Air Transport Services Group	NASDAQ
+AMCN	AirMedia Group Inc	NASDAQ
+AIXG	Aixtron SE	NASDAQ
+AKAM	Akamai Technologies	NASDAQ
+AKRX	Akorn	NASDAQ
+ALSK	Alaska Communications Systems Group	NASDAQ
+AMRI	Albany Molecular Research	NASDAQ
+ALCS	ALCO Stores	NASDAQ
+ADHD	Alcobra Ltd.	NASDAQ
+ALXN	Alexion Pharmaceuticals	NASDAQ
+ALXA	Alexza Pharmaceuticals	NASDAQ
+ALCO	Alico	NASDAQ
+ALGN	Align Technology	NASDAQ
+ALIM	Alimera Sciences	NASDAQ
+ALKS	Alkermes plc	NASDAQ
+ALGT	Allegiant Travel Company	NASDAQ
+ALLB	Alliance Bancorp	NASDAQ
+AFOP	Alliance Fiber Optic Products	NASDAQ
+AIQ	Alliance HealthCare Services	NASDAQ
+AHGP	Alliance Holdings GP	NASDAQ
+ARLP	Alliance Resource Partners	NASDAQ
+AHPI	Allied Healthcare Products	NASDAQ
+AMOT	Allied Motion Technologies	NASDAQ
+ALLT	Allot Communications Ltd.	NASDAQ
+MDRX	Allscripts Healthcare Solutions	NASDAQ
+AFAM	Almost Family Inc	NASDAQ
+ALNY	Alnylam Pharmaceuticals	NASDAQ
+AOSL	Alpha and Omega Semiconductor Limited	NASDAQ
+ATEC	Alphatec Holdings	NASDAQ
+ASDR	ALPS ETF Trust VelocityShares Emerging Asia DR ETF	NASDAQ
+EMDR	ALPS ETF Trust VelocityShares Emerging Markets DR ETF	NASDAQ
+RUDR	ALPS ETF Trust VelocityShares Russia Select DR ETF	NASDAQ
+ALTI	Altair Nanotechnologies Inc.	NASDAQ
+ALTR	Altera Corporation	NASDAQ
+ASPS	Altisource Portfolio Solutions S.A.	NASDAQ
+APSA	Alto Palermo S.A.	NASDAQ
+AIMC	Altra Holdings	NASDAQ
+ALVR	Alvarion Ltd.	NASDAQ
+AMAG	AMAG Pharmaceuticals	NASDAQ
+AMRN	Amarin Corporation PLC	NASDAQ
+AMZN	Amazon.com	NASDAQ
+AMBC	Ambac Financial Group	NASDAQ
+AMBCW	Ambac Financial Group	NASDAQ
+AMBA	Ambarella	NASDAQ
+EPAX	Ambassadors Group	NASDAQ
+AMBT	Ambient Corporation	NASDAQ
+AMBI	Ambit Biosciences Corporation	NASDAQ
+AMCX	AMC Networks Inc.	NASDAQ
+AMED	Amedisys Inc	NASDAQ
+UHAL	Amerco	NASDAQ
+ASBI	Ameriana Bancorp	NASDAQ
+ATAX	America First Tax Exempt Investors	NASDAQ
+AMOV	America Movil	NASDAQ
+AGNC	American Capital Agency Corp.	NASDAQ
+AGNCP	American Capital Agency Corp.	NASDAQ
+MTGE	American Capital Mortgage Investment Corp.	NASDAQ
+ACAS	American Capital	NASDAQ
+ANCI	American Caresource Holdings Inc	NASDAQ
+AETI	American Electric Technologies	NASDAQ
+AMIC	American Independence Corp.	NASDAQ
+AMNB	American National Bankshares	NASDAQ
+ANAT	American National Insurance Company	NASDAQ
+APFC	American Pacific Corporation	NASDAQ
+APEI	American Public Education	NASDAQ
+ARII	American Railcar Industries	NASDAQ
+ARCP	American Realty Capital Properties	NASDAQ
+AMRB	American River Bankshares	NASDAQ
+ASEI	American Science and Engineering	NASDAQ
+AMSWA	American Software	NASDAQ
+AMSC	American Superconductor Corporation	NASDAQ
+AMWD	American Woodmark Corporation	NASDAQ
+CRMT	America+ACYAIw-39	NASDAQ
+ABCB	Ameris Bancorp	NASDAQ
+AMSF	AMERISAFE	NASDAQ
+ASRV	AmeriServ Financial Inc.	NASDAQ
+ASRVP	AmeriServ Financial Inc.	NASDAQ
+ASCA	Ameristar Casinos	NASDAQ
+ATLO	Ames National Corporation	NASDAQ
+AMGN	Amgen Inc.	NASDAQ
+FOLD	Amicus Therapeutics	NASDAQ
+AMKR	Amkor Technology	NASDAQ
+AMSG	Amsurg Corp.	NASDAQ
+ASYS	Amtech Systems	NASDAQ
+AFSI	AmTrust Financial Services	NASDAQ
+AMRS	Amyris	NASDAQ
+ANAC	Anacor Pharmaceuticals	NASDAQ
+ANAD	ANADIGICS	NASDAQ
+ADI	Analog Devices	NASDAQ
+ALOG	Analogic Corporation	NASDAQ
+ANLY	Analysts International Corporation	NASDAQ
+ANEN	Anaren	NASDAQ
+ANCB	Anchor Bancorp	NASDAQ
+AMCF	Andatee China Marine Fuel Services Corporation	NASDAQ
+ANDA	Andina Acquisition Corporation	NASDAQ
+ANDAU	Andina Acquisition Corporation	NASDAQ
+ANDAW	Andina Acquisition Corporation	NASDAQ
+ANGI	Angie+ACYAIw-39	NASDAQ
+ANGO	AngioDynamics	NASDAQ
+ANIK	Anika Therapeutics Inc.	NASDAQ
+ANSS	ANSYS	NASDAQ
+ATRS	Antares Pharma	NASDAQ
+ANTH	Anthera Pharmaceuticals	NASDAQ
+APAGF	Apco Oil and Gas International Inc.	NASDAQ
+ATNY	API Technologies Corp.	NASDAQ
+APOG	Apogee Enterprises	NASDAQ
+APOL	Apollo Group	NASDAQ
+AINV	Apollo Investment Corporation	NASDAQ
+AAPL	Apple Inc.	NASDAQ
+ARCI	Appliance Recycling Centers of America	NASDAQ
+AMAT	Applied Materials	NASDAQ
+AMCC	Applied Micro Circuits Corporation	NASDAQ
+AREX	Approach Resources Inc.	NASDAQ
+APRI	Apricus Biosciences	NASDAQ
+AQU	Aquasition Corp.	NASDAQ
+AQUUU	Aquasition Corp.	NASDAQ
+AQUUW	Aquasition Corp.	NASDAQ
+PETX	Aratana Therapeutics	NASDAQ
+ARCW	ARC Group Worldwide	NASDAQ
+ABIO	ARCA biopharma	NASDAQ
+ACGL	Arch Capital Group Ltd.	NASDAQ
+ACAT	Arctic Cat Inc.	NASDAQ
+ARDNA	Arden Group	NASDAQ
+ARNA	Arena Pharmaceuticals	NASDAQ
+ARCC	Ares Capital Corporation	NASDAQ
+AGII	Argo Group International Holdings	NASDAQ
+AGIIL	Argo Group International Holdings	NASDAQ
+ARIA	ARIAD Pharmaceuticals	NASDAQ
+ARKR	Ark Restaurants Corp.	NASDAQ
+ABFS	Arkansas Best Corporation	NASDAQ
+ARMH	ARM Holdings plc	NASDAQ
+ARTX	Arotech Corporation	NASDAQ
+ARQL	ArQule	NASDAQ
+ARRY	Array BioPharma Inc.	NASDAQ
+ARRS	ARRIS Group	NASDAQ
+AROW	Arrow Financial Corporation	NASDAQ
+ARWR	Arrowhead Research Corporation	NASDAQ
+ARTNA	Artesian Resources Corporation	NASDAQ
+ARTC	ArthroCare Corporation	NASDAQ
+ARTW	Art+ACYAIw-39	NASDAQ
+ARUN	Aruba Networks	NASDAQ
+ASBB	ASB Bancorp	NASDAQ
+ASNA	Ascena Retail Group	NASDAQ
+ASCMA	Ascent Capital Group	NASDAQ
+ASTI	Ascent Solar Technologies	NASDAQ
+AERL	Asia Entertainment +ACY- Resources Ltd	NASDAQ
+APWC	Asia Pacific Wire +ACY- Cable Corporation Limited	NASDAQ
+ASIA	AsiaInfo+AC0-Linkage	NASDAQ
+ASMI	ASM International N.V.	NASDAQ
+ASML	ASML Holding N.V.	NASDAQ
+AZPN	Aspen Technology	NASDAQ
+ASBC	Associated Banc+AC0-Corp	NASDAQ
+ASBCW	Associated Banc+AC0-Corp	NASDAQ
+ASFI	Asta Funding	NASDAQ
+ATEA	Astea International	NASDAQ
+ASTE	Astec Industries	NASDAQ
+ASTX	Astex Pharmaceuticals	NASDAQ
+ALOT	Astro+AC0-Med	NASDAQ
+ATRO	Astronics Corporation	NASDAQ
+ASTC	Astrotech Corporation	NASDAQ
+ASUR	Asure Software Inc	NASDAQ
+ATAI	ATA Inc.	NASDAQ
+ATHN	athenahealth	NASDAQ
+AFCB	Athens Bancshares Corporation	NASDAQ
+ATHX	Athersys	NASDAQ
+AAME	Atlantic American Corporation	NASDAQ
+ACFC	Atlantic Coast Federal Corporation	NASDAQ
+ATNI	Atlantic Tele+AC0-Network	NASDAQ
+ATLC	Atlanticus Holdings Corporation	NASDAQ
+AAWW	Atlas Air Worldwide Holdings	NASDAQ
+AFH	Atlas Financial Holdings	NASDAQ
+ATML	Atmel Corporation	NASDAQ
+ATMI	ATMI Inc.	NASDAQ
+ATOS	Atossa Genetics Inc.	NASDAQ
+ATRC	AtriCure	NASDAQ
+ATRI	ATRION Corporation	NASDAQ
+ATTU	Attunity Ltd.	NASDAQ
+AUBN	Auburn National Bancorporation	NASDAQ
+ADNC	Audience	NASDAQ
+AUDC	AudioCodes Ltd.	NASDAQ
+ADAT	Authentidate Holding Corp.	NASDAQ
+ABTL	Autobytel Inc.	NASDAQ
+ADSK	Autodesk	NASDAQ
+ADP	Automatic Data Processing	NASDAQ
+AMAP	AutoNavi Holdings Limited	NASDAQ
+AUXL	Auxilium Pharmaceuticals	NASDAQ
+AVGO	Avago Technologies Limited	NASDAQ
+AVNR	Avanir Pharmaceuticals	NASDAQ
+AVEO	AVEO Pharmaceuticals	NASDAQ
+AVNW	Aviat Networks	NASDAQ
+AVID	Avid Technology	NASDAQ
+CAR	Avis Budget Group	NASDAQ
+AWRE	Aware	NASDAQ
+ACLS	Axcelis Technologies	NASDAQ
+AXTI	AXT Inc	NASDAQ
+BCOM	B Communications Ltd.	NASDAQ
+BOSC	B.O.S. Better Online Solutions	NASDAQ
+BEAV	B/E Aerospace	NASDAQ
+BIDU	Baidu	NASDAQ
+BCPC	Balchem Corporation	NASDAQ
+BWINA	Baldwin +ACY- Lyons	NASDAQ
+BWINB	Baldwin +ACY- Lyons	NASDAQ
+BLDP	Ballard Power Systems	NASDAQ
+BANF	BancFirst Corporation	NASDAQ
+BANFP	BancFirst Corporation	NASDAQ
+BKMU	Bank Mutual Corporation	NASDAQ
+BOCH	Bank of Commerce Holdings (CA)	NASDAQ
+BMRC	Bank of Marin Bancorp	NASDAQ
+BKSC	Bank of South Carolina Corp.	NASDAQ
+BOTJ	Bank of the James Financial Group	NASDAQ
+OZRK	Bank of the Ozarks	NASDAQ
+BFIN	BankFinancial Corporation	NASDAQ
+BANR	Banner Corporation	NASDAQ
+BBSI	Barrett Business Services	NASDAQ
+BSET	Bassett Furniture Industries	NASDAQ
+BAXS	Baxano Surgical	NASDAQ
+BV	Bazaarvoice	NASDAQ
+BBCN	BBCN Bancorp	NASDAQ
+BCBP	BCB Bancorp	NASDAQ
+BCSB	BCSB Bancorp	NASDAQ
+BECN	Beacon Roofing Supply	NASDAQ
+BBGI	Beasley Broadcast Group	NASDAQ
+BEBE	bebe stores	NASDAQ
+BBBY	Bed Bath +ACY- Beyond Inc.	NASDAQ
+BELFA	Bel Fuse Inc.	NASDAQ
+BELFB	Bel Fuse Inc.	NASDAQ
+BNCL	Beneficial Mutual Bancorp	NASDAQ
+BERK	Berkshire Bancorp	NASDAQ
+BGMD	BG Medicine	NASDAQ
+BGCP	BGC Partners	NASDAQ
+BGSC	BGS Acquisition Corp.	NASDAQ
+BGSCU	BGS Acquisition Corp.	NASDAQ
+BGSCW	BGS Acquisition Corp.	NASDAQ
+BGFV	Big 5 Sporting Goods Corporation	NASDAQ
+BASI	Bioanalytical Systems	NASDAQ
+BCRX	BioCryst Pharmaceuticals	NASDAQ
+BIOD	Biodel Inc.	NASDAQ
+BDSI	BioDelivery Sciences International	NASDAQ
+BIOF	BioFuel Energy Corp.	NASDAQ
+BIIB	Biogen Idec Inc.	NASDAQ
+BIOL	Biolase	NASDAQ
+BLRX	BioLineRx Ltd.	NASDAQ
+BMRN	BioMarin Pharmaceutical Inc.	NASDAQ
+BRLI	Bio+AC0-Reference Laboratories	NASDAQ
+BPAX	Biosante Pharmaceuticals	NASDAQ
+BIOS	BioScrip	NASDAQ
+BSTC	BioSpecifics Technologies Corp	NASDAQ
+BSPM	Biostar Pharmaceuticals	NASDAQ
+BOTA	Biota Pharmaceuticals	NASDAQ
+BDMS	Birner Dental Management Services	NASDAQ
+BJRI	BJ+ACYAIw-39	NASDAQ
+BBOX	Black Box Corporation	NASDAQ
+BDE	Black Diamond	NASDAQ
+BLKB	Blackbaud	NASDAQ
+HAWK	Blackhawk Network Holdings	NASDAQ
+BKCC	BlackRock Kelso Capital Corporation	NASDAQ
+ADRA	BLDRS Asia 50 ADR Index Fund	NASDAQ
+ADRD	BLDRS Developed Markets 100 ADR Index Fund	NASDAQ
+ADRE	BLDRS Emerging Markets 50 ADR Index Fund	NASDAQ
+ADRU	BLDRS Europe 100 ADR Index Fund	NASDAQ
+BLMN	Bloomin+ACYAIw-39	NASDAQ
+BCOR	Blucora	NASDAQ
+NILE	Blue Nile	NASDAQ
+MNGL	Blue Wolf Mongolia Holdings Corp.	NASDAQ
+MNGLU	Blue Wolf Mongolia Holdings Corp.	NASDAQ
+MNGLW	Blue Wolf Mongolia Holdings Corp.	NASDAQ
+BLUE	bluebird bio	NASDAQ
+BKEP	Blueknight Energy Partners L.P.	NASDAQ
+BKEPP	Blueknight Energy Partners L.P.	NASDAQ
+BPHX	BluePhoenix Solutions	NASDAQ
+BMC	BMC Software	NASDAQ
+BNCN	BNC Bancorp	NASDAQ
+BOBE	Bob Evans Farms	NASDAQ
+BODY	Body Central Corp.	NASDAQ
+BOFI	BofI Holding	NASDAQ
+WIFI	Boingo Wireless	NASDAQ
+BOKF	BOK Financial Corporation	NASDAQ
+BOLT	Bolt Technology Corporation	NASDAQ
+BONA	Bona Film Group Limited	NASDAQ
+BNSO	Bonso Electronics International	NASDAQ
+BAMM	Books+AC0-A+AC0-Million	NASDAQ
+BPFH	Boston Private Financial Holdings	NASDAQ
+BPFHP	Boston Private Financial Holdings	NASDAQ
+BPFHW	Boston Private Financial Holdings	NASDAQ
+EPAY	Bottomline Technologies	NASDAQ
+BDBD	Boulder Brands	NASDAQ
+BBRG	Bravo Brio Restaurant Group	NASDAQ
+BBEP	BreitBurn Energy Partners	NASDAQ
+BDGE	Bridge Bancorp	NASDAQ
+BBNK	Bridge Capital Holdings	NASDAQ
+BLIN          	Bridgeline Digital	NASDAQ
+BRID	Bridgford Foods Corporation	NASDAQ
+BCOV	Brightcove Inc.	NASDAQ
+BRCM	Broadcom Corporation	NASDAQ
+BSFT	BroadSoft	NASDAQ
+BVSN	BroadVision	NASDAQ
+BYFC	Broadway Financial Corporation	NASDAQ
+BWEN	Broadwind Energy	NASDAQ
+BRCD	Brocade Communications Systems	NASDAQ
+BRKL	Brookline Bancorp	NASDAQ
+BRKS	Brooks Automation	NASDAQ
+BRKR	Bruker Corporation	NASDAQ
+BMTC	Bryn Mawr Bank Corporation	NASDAQ
+BLMT	BSB Bancorp	NASDAQ
+BSDM	BSD Medical Corporation	NASDAQ
+BSQR	BSQUARE Corporation	NASDAQ
+BTUI	BTU International	NASDAQ
+BWLD	Buffalo Wild Wings	NASDAQ
+BLDR	Builders FirstSource	NASDAQ
+BUR	Burcon Nutrascience Corp	NASDAQ
+CFFI	C+ACY-F Financial Corporation	NASDAQ
+CHRW	C.H. Robinson Worldwide	NASDAQ
+CA	CA Inc.	NASDAQ
+CCMP	Cabot Microelectronics Corporation	NASDAQ
+CACH	Cache	NASDAQ
+CDNS	Cadence Design Systems	NASDAQ
+CADX	Cadence Pharmaceuticals	NASDAQ
+CDZI	Cadiz	NASDAQ
+CZR	Caesars Entertainment Corporation	NASDAQ
+CSTE	CaesarStone Sdot+AC0-Yam Ltd.	NASDAQ
+PRSS	CafePress Inc.	NASDAQ
+CLMS	Calamos Asset Management	NASDAQ
+CHY	Calamos Convertible and High Income Fund	NASDAQ
+CHI	Calamos Convertible Opportunities and Income Fund	NASDAQ
+CHW	Calamos Global Dynamic Income Fund	NASDAQ
+CGO	Calamos Global Total Return Fund	NASDAQ
+CSQ	Calamos Strategic Total Return Fund	NASDAQ
+CAMP	CalAmp Corp.	NASDAQ
+CVGW	Calavo Growers	NASDAQ
+CFNB	California First National Bancorp	NASDAQ
+CALD	Callidus Software	NASDAQ
+CALM	Cal+AC0-Maine Foods	NASDAQ
+CLMT	Calumet Specialty Products Partners	NASDAQ
+ABCD	Cambium Learning Group	NASDAQ
+CAFI	Camco Financial Corporation	NASDAQ
+CAC	Camden National Corporation	NASDAQ
+CAMT	Camtek Ltd.	NASDAQ
+CSIQ	Canadian Solar Inc.	NASDAQ
+CPHC	Canterbury Park Holding Corporation	NASDAQ
+CBNJ	Cape Bancorp	NASDAQ
+CPLA	Capella Education Company	NASDAQ
+CBF	Capital Bank Financial Corp.	NASDAQ
+CCBG	Capital City Bank Group	NASDAQ
+CPLP	Capital Product Partners L.P.	NASDAQ
+CSWC	Capital Southwest Corporation	NASDAQ
+CLACU	Capitol Acquisition Corp. II	NASDAQ
+CFFN	Capitol Federal Financial	NASDAQ
+CPST	Capstone Turbine Corporation	NASDAQ
+CARB	Carbonite	NASDAQ
+CRDC	Cardica	NASDAQ
+CFNL	Cardinal Financial Corporation	NASDAQ
+CRME	Cardiome Pharma Corporation	NASDAQ
+BEAT	CardioNet	NASDAQ
+CSII	Cardiovascular Systems	NASDAQ
+CATM	Cardtronics	NASDAQ
+CECO	Career Education Corporation	NASDAQ
+CKEC	Carmike Cinemas	NASDAQ
+CLBH	Carolina Bank Holdings Inc.	NASDAQ
+CART	Carolina Trust Bank	NASDAQ
+CRZO	Carrizo Oil +ACY- Gas	NASDAQ
+CRRB	Carrollton Bancorp	NASDAQ
+TAST	Carrols Restaurant Group	NASDAQ
+CARV	Carver Bancorp	NASDAQ
+CASM	CAS Medical Systems	NASDAQ
+CACB	Cascade Bancorp	NASDAQ
+CSCD	Cascade Microtech	NASDAQ
+CWST	Casella Waste Systems	NASDAQ
+CASY	Caseys General Stores	NASDAQ
+CASS	Cass Information Systems	NASDAQ
+CPRX	Catalyst Pharmaceutical Partners	NASDAQ
+CTRX	Catamaran Corporation	NASDAQ
+CATY	Cathay General Bancorp	NASDAQ
+CVCO	Cavco Industries	NASDAQ
+CAVM	Cavium	NASDAQ
+CBEY	Cbeyond	NASDAQ
+CBOE	CBOE Holdings	NASDAQ
+CECE	CECO Environmental Corp.	NASDAQ
+CELG	Celgene Corporation	NASDAQ
+CELGZ	Celgene Corporation	NASDAQ
+CTIC	Cell Therapeutics	NASDAQ
+CLDX	Celldex Therapeutics	NASDAQ
+CLSN	Celsion Corporation	NASDAQ
+CEMP	Cempra	NASDAQ
+CNBC	Center Bancorp	NASDAQ
+CSFL	CenterState Banks	NASDAQ
+CETV	Central European Media Enterprises Ltd.	NASDAQ
+CFBK	Central Federal Corporation	NASDAQ
+CENT	Central Garden +ACY- Pet Company	NASDAQ
+CENTA	Central Garden +ACY- Pet Company	NASDAQ
+CVCY	Central Valley Community Bancorp	NASDAQ
+CENX	Century Aluminum Company	NASDAQ
+CNBKA	Century Bancorp	NASDAQ
+CNTY	Century Casinos	NASDAQ
+CPHD	CEPHEID	NASDAQ
+CRNT	Ceragon Networks Ltd.	NASDAQ
+CERE	Ceres	NASDAQ
+CERN	Cerner Corporation	NASDAQ
+CERS	Cerus Corporation	NASDAQ
+CEVA	CEVA	NASDAQ
+CITZ	CFS Bancorp	NASDAQ
+CYOU	Changyou.com Limited	NASDAQ
+HOTR	Chanticleer Holdings	NASDAQ
+HOTRW	Chanticleer Holdings	NASDAQ
+CTHR	Charles +ACY- Colvard Ltd	NASDAQ
+CHRM	Charm Communications Inc.	NASDAQ
+CACG	Chart Acquisition Corp.	NASDAQ
+CACGU	Chart Acquisition Corp.	NASDAQ
+CACGW	Chart Acquisition Corp.	NASDAQ
+GTLS	Chart Industries	NASDAQ
+CHTR	Charter Communications	NASDAQ
+CHFN	Charter Financial Corp.	NASDAQ
+CHKP	Check Point Software Technologies Ltd.	NASDAQ
+CHTP	Chelsea Therapeutics International	NASDAQ
+CEMI	Chembio Diagnostics	NASDAQ
+CHFC	Chemical Financial Corporation	NASDAQ
+CCXI	ChemoCentryx	NASDAQ
+CHMG	Chemung Financial Corp	NASDAQ
+CHKE	Cherokee Inc.	NASDAQ
+CHEV	Cheviot Financial Corp	NASDAQ
+CBNK	Chicopee Bancorp	NASDAQ
+CMRX	Chimerix	NASDAQ
+CADC	China Advanced Construction Materials Group	NASDAQ
+CALI	China Auto Logistics Inc.	NASDAQ
+CAAS	China Automotive Systems	NASDAQ
+CBAK	China BAK Battery	NASDAQ
+CBPO	China Biologic Products	NASDAQ
+CCCL	China Ceramics Co.	NASDAQ
+JRJC	China Finance Online Co. Limited	NASDAQ
+CHOP	China Gerui Advanced Materials Group Limited	NASDAQ
+HGSH	China HGS Real Estate	NASDAQ
+CHLN	China Housing +ACY- Land Development	NASDAQ
+CNIT	China Information Technology	NASDAQ
+CJJD	China Jo+AC0-Jo Drugstores	NASDAQ
+HTHT	China Lodging Group	NASDAQ
+CMGE	China Mobile Games and Entertainment Group Limited	NASDAQ
+CHNR	China Natural Resources	NASDAQ
+CPSL	China Precision Steel	NASDAQ
+CREG	China Recycling Energy Corporation	NASDAQ
+CPGI	China Shengda Packaging Group	NASDAQ
+CSUN	China Sunergy Co.	NASDAQ
+CNTF	China TechFaith Wireless Communication Technology Limited	NASDAQ
+CXDC	China XD Plastics Company Limited	NASDAQ
+CNYD	China Yida Holding	NASDAQ
+CCIH	ChinaCache International Holdings Ltd.	NASDAQ
+CEDU	ChinaEdu Corporation	NASDAQ
+CNET	ChinaNet Online Holdings	NASDAQ
+CHDX	Chindex International	NASDAQ
+IMOS	ChipMOS TECHNOLOGIES (Bermuda) LTD.	NASDAQ
+CHSCP	CHS Inc	NASDAQ
+CHDN	Churchill Downs	NASDAQ
+CHUY	Chuy+ACYAIw-39	NASDAQ
+CHYR	ChyronHego Corporation	NASDAQ
+CIEN	CIENA Corporation	NASDAQ
+CIFC	CIFC Corp.	NASDAQ
+CIMT	Cimatron	NASDAQ
+CINF	Cincinnati Financial Corporation	NASDAQ
+CIDM	Cinedigm Digital Cinema Corp	NASDAQ
+CTAS	Cintas Corporation	NASDAQ
+CRUS	Cirrus Logic	NASDAQ
+CISAA	CIS Acquisition Ltd.	NASDAQ
+CISAU	CIS Acquisition Ltd.	NASDAQ
+CISAW	CIS Acquisition Ltd.	NASDAQ
+CSCO	Cisco Systems	NASDAQ
+CTRN	Citi Trends	NASDAQ
+CZNC	Citizens +ACY- Northern Corp	NASDAQ
+CZWI	Citizens Community Bancorp	NASDAQ
+CZFC	Citizens First Corporation	NASDAQ
+CIZN	Citizens Holding Company	NASDAQ
+CTXS	Citrix Systems	NASDAQ
+CHCO	City Holding Company	NASDAQ
+CWEI	Clayton Williams Energy	NASDAQ
+CDTI	Clean Diesel Technologies	NASDAQ
+CLNE	Clean Energy Fuels Corp.	NASDAQ
+CLNT	Cleantech Solutions International	NASDAQ
+CLFD	Clearfield	NASDAQ
+CLRO	ClearOne	NASDAQ
+CLIR	ClearSign Combustion Corporation	NASDAQ
+CLWR	Clearwire Corporation	NASDAQ
+CBLI	Cleveland BioLabs	NASDAQ
+CKSW	ClickSoftware Technologies Ltd.	NASDAQ
+CSBK	Clifton Savings Bancorp	NASDAQ
+CLVS	Clovis Oncology	NASDAQ
+CME	CME Group Inc.	NASDAQ
+CMSB	CMS Bancorp	NASDAQ
+CCNE	CNB Financial Corporation	NASDAQ
+CISG	CNinsure Inc.	NASDAQ
+COA           	Coastal Contacts Inc                    	NASDAQ
+COBZ	CoBiz Financial Inc.	NASDAQ
+COBR	Cobra Electronics Corporation	NASDAQ
+COKE	Coca+AC0-Cola Bottling Co. Consolidated	NASDAQ
+CDXS	Codexis	NASDAQ
+CVLY	Codorus Valley Bancorp	NASDAQ
+JVA	Coffee Holding Co.	NASDAQ
+CCOI	Cogent Communications Group	NASDAQ
+CGNX	Cognex Corporation	NASDAQ
+CTSH	Cognizant Technology Solutions Corporation	NASDAQ
+COGO	Cogo Group	NASDAQ
+COHR	Coherent	NASDAQ
+COHU	Cohu	NASDAQ
+CSTR	Coinstar	NASDAQ
+CWTR	Coldwater Creek	NASDAQ
+CCIX	Coleman Cable	NASDAQ
+JACQ	COLLABRIUM JAPAN ACQUISITION CORPORATION	NASDAQ
+JACQU	COLLABRIUM JAPAN ACQUISITION CORPORATION	NASDAQ
+JACQW	COLLABRIUM JAPAN ACQUISITION CORPORATION	NASDAQ
+CLRX	CollabRx	NASDAQ
+CLCT	Collectors Universe	NASDAQ
+COBK	Colonial Financial Services	NASDAQ
+CBAN	Colony Bankcorp	NASDAQ
+COLB	Columbia Banking System	NASDAQ
+CBRX	Columbia Laboratories	NASDAQ
+COLM	Columbia Sportswear Company	NASDAQ
+CMCO	Columbus McKinnon Corporation	NASDAQ
+CBMX	CombiMatrix Corporation	NASDAQ
+CBMXW	CombiMatrix Corporation	NASDAQ
+CMCSA	Comcast Corporation	NASDAQ
+CMCSK	Comcast Corporation	NASDAQ
+CBSH	Commerce Bancshares	NASDAQ
+CVGI	Commercial Vehicle Group	NASDAQ
+CTCH	Commtouch Software Ltd.	NASDAQ
+JCS	Communications Systems	NASDAQ
+CBIN	Community Bank Shares of Indiana	NASDAQ
+ESXB	Community Bankers Trust Corporation.	NASDAQ
+CPBC	Community Partners Bancorp	NASDAQ
+CTBI	Community Trust Bancorp	NASDAQ
+CWBC	Community West Bancshares	NASDAQ
+CVLT	CommVault Systems	NASDAQ
+GSJK	Compressco Partners	NASDAQ
+CGEN	Compugen Ltd.	NASDAQ
+CPSI	Computer Programs and Systems	NASDAQ
+CTGX	Computer Task Group	NASDAQ
+CPWR	Compuware Corporation	NASDAQ
+SCOR	comScore	NASDAQ
+CHCI	Comstock Holding Companies	NASDAQ
+CMTL	Comtech Telecommunications Corp.	NASDAQ
+CNSI	Comverse Inc.	NASDAQ
+CNQR	Concur Technologies	NASDAQ
+CCUR	Concurrent Computer Corporation	NASDAQ
+CNMD	CONMED Corporation	NASDAQ
+CTWS	Connecticut Water Service	NASDAQ
+CNOB	ConnectOne Bancorp	NASDAQ
+CONN	Conn+ACYAIw-39	NASDAQ
+CNSL	Consolidated Communications Holdings	NASDAQ
+CWCO	Consolidated Water Co. Ltd.	NASDAQ
+CTCT	Constant Contact	NASDAQ
+CPSS	Consumer Portfolio Services	NASDAQ
+CPRT	Copart	NASDAQ
+CORT	Corcept Therapeutics Incorporated	NASDAQ
+BVA	Cordia Bancorp Inc.	NASDAQ
+CORE	Core+AC0-Mark Holding Company	NASDAQ
+COCO	Corinthian Colleges	NASDAQ
+CSOD	Cornerstone OnDemand	NASDAQ
+CRTX	Cornerstone Therapeutics Inc.	NASDAQ
+CNDO	Coronado Biosciences	NASDAQ
+CRVL	CorVel Corp.	NASDAQ
+COSI	Cosi	NASDAQ
+CSGP	CoStar Group	NASDAQ
+COST	Costco Wholesale Corporation	NASDAQ
+CPAH	CounterPath Corporation	NASDAQ
+CRRC	Courier Corporation	NASDAQ
+CVTI	Covenant Transportation Group	NASDAQ
+COWN	Cowen Group	NASDAQ
+CRAI	CRA International	NASDAQ
+CBRL	Cracker Barrel Old Country Store	NASDAQ
+BREW	Craft Brew Alliance	NASDAQ
+CRAY	Cray Inc	NASDAQ
+CACC	Credit Acceptance Corporation	NASDAQ
+GLDI	Credit Suisse Gold Shares Covered Calls ETN	NASDAQ
+SLVO	Credit Suisse Silver Shares Covered Call ETN	NASDAQ
+CREE	Cree	NASDAQ
+CRFN	Crescent Financial Bancshares	NASDAQ
+CRESW	Cresud S.A.C.I.F. y A.	NASDAQ
+CRESY	Cresud S.A.C.I.F. y A.	NASDAQ
+CXPO	Crimson Exploration Inc.	NASDAQ
+CROX	Crocs	NASDAQ
+ATX	Cross (A.T.) Company	NASDAQ
+CCRN	Cross Country Healthcare	NASDAQ
+CRDS	Crossroads Systems	NASDAQ
+XTXI	Crosstex Energy	NASDAQ
+XTEX	Crosstex Energy	NASDAQ
+CRWS	Crown Crafts	NASDAQ
+CRWN	Crown Media Holdings	NASDAQ
+CRMB	Crumbs Bake Shop	NASDAQ
+CRMBU	Crumbs Bake Shop	NASDAQ
+CRMBW	Crumbs Bake Shop	NASDAQ
+CSGS	CSG Systems International	NASDAQ
+CSPI	CSP Inc.	NASDAQ
+CSRE	CSR plc	NASDAQ
+CTCM	CTC Media	NASDAQ
+CTIB	CTI Industries Corporation	NASDAQ
+CTRP	Ctrip.com International	NASDAQ
+CUNB	CU Bancorp (CA)	NASDAQ
+CBST	Cubist Pharmaceuticals	NASDAQ
+CUI	CUI Global	NASDAQ
+CPIX	Cumberland Pharmaceuticals Inc.	NASDAQ
+CMLS	Cumulus Media Inc.	NASDAQ
+CRIS	Curis	NASDAQ
+CUBI	Customers Bancorp	NASDAQ
+CUTR	Cutera	NASDAQ
+CVBF	CVB Financial Corporation	NASDAQ
+CVV	CVD Equipment Corporation	NASDAQ
+CYAN	Cyanotech Corporation	NASDAQ
+CYBX	Cyberonics	NASDAQ
+CYBE	CyberOptics Corporation	NASDAQ
+CYCC	Cyclacel Pharmaceuticals	NASDAQ
+CYCCP	Cyclacel Pharmaceuticals	NASDAQ
+CYNO	Cynosure	NASDAQ
+CY	Cypress Semiconductor Corporation	NASDAQ
+CONE	CyrusOne Inc	NASDAQ
+CYTK	Cytokinetics	NASDAQ
+CYTX	Cytori Therapeutics Inc	NASDAQ
+CYTXW	Cytori Therapeutics Inc	NASDAQ
+CYTR	CytRx Corporation	NASDAQ
+DAEG	Daegis Inc	NASDAQ
+DJCO	Daily Journal Corp. (S.C.)	NASDAQ
+DAKT	Daktronics	NASDAQ
+DARA	DARA Biosciences	NASDAQ
+DAIO	Data I/O Corporation	NASDAQ
+DTLK	Datalink Corporation	NASDAQ
+DRAM	Dataram Corporation	NASDAQ
+DWCH	Datawatch Corporation	NASDAQ
+DWSN	Dawson Geophysical Company	NASDAQ
+TRAK	Dealertrack Technologies	NASDAQ
+DECK	Deckers Outdoor Corporation	NASDAQ
+DHRM	Dehaier Medical Systems Limited	NASDAQ
+DFRG	Del Frisco+ACYAIw-39	NASDAQ
+DCTH	Delcath Systems	NASDAQ
+DLIA	dELIA+ACo-s Inc.	NASDAQ
+DELL	Dell Inc.	NASDAQ
+DGAS	Delta Natural Gas Company	NASDAQ
+DNDN	Dendreon Corporation	NASDAQ
+DENN	Denny+ACYAIw-39	NASDAQ
+XRAY	DENTSPLY International Inc.	NASDAQ
+DEPO	Depomed	NASDAQ
+DSCI	Derma Sciences	NASDAQ
+DEST	Destination Maternity Corporation	NASDAQ
+DXLG	Destination XL Group	NASDAQ
+DSWL	Deswell Industries	NASDAQ
+DXM	Dex Media	NASDAQ
+DXCM	DexCom	NASDAQ
+DLLR	DFC Global Corp	NASDAQ
+DMND	Diamond Foods	NASDAQ
+DHIL	Diamond Hill Investment Group	NASDAQ
+FANG	Diamondback Energy	NASDAQ
+DCIX	Diana Containerships Inc.	NASDAQ
+DGII	Digi International Inc.	NASDAQ
+DMRC	Digimarc Corporation	NASDAQ
+DRAD	Digirad Corporation	NASDAQ
+DGLY	Digital Ally	NASDAQ
+DCIN	Digital Cinema Destinations Corp.	NASDAQ
+DGIT	Digital Generation	NASDAQ
+DRIV	Digital River	NASDAQ
+DCOM	Dime Community Bancshares	NASDAQ
+DIOD	Diodes Incorporated	NASDAQ
+DTV	DIRECTV	NASDAQ
+DISCA	Discovery Communications	NASDAQ
+DISCB	Discovery Communications	NASDAQ
+DISCK	Discovery Communications	NASDAQ
+DSCO	Discovery Laboratories	NASDAQ
+DISH	DISH Network Corporation	NASDAQ
+DVCR	Diversicare Healthcare Services Inc.	NASDAQ
+BAGR	Diversified Restaurant Holdings	NASDAQ
+DLHC	DLH Holdings Corp.	NASDAQ
+DNBF	DNB Financial Corp	NASDAQ
+DLTR	Dollar Tree	NASDAQ
+DGICA	Donegal Group	NASDAQ
+DGICB	Donegal Group	NASDAQ
+DMLP	Dorchester Minerals	NASDAQ
+DORM	Dorman Products	NASDAQ
+HILL	Dot Hill Systems Corporation	NASDAQ
+DBLE	Double Eagle Petroleum Company	NASDAQ
+DBLEP	Double Eagle Petroleum Company	NASDAQ
+DOVR	Dover Saddlery	NASDAQ
+DRWI	DragonWave Inc	NASDAQ
+DWA	Dreamworks Animation SKG	NASDAQ
+DRYS	DryShips Inc.	NASDAQ
+DSKX	DS Healthcare Group	NASDAQ
+DSPG	DSP Group	NASDAQ
+DTSI	DTS	NASDAQ
+DNKN	Dunkin+ACYAIw-39	NASDAQ
+DRTX	Durata Therapeutics	NASDAQ
+DRRX	Durect Corporation	NASDAQ
+DXPE	DXP Enterprises	NASDAQ
+DYAX	Dyax Corp.	NASDAQ
+BOOM	Dynamic Materials Corporation	NASDAQ
+DRCO	Dynamics Research Corporation	NASDAQ
+DYSL	Dynasil Corporation of America	NASDAQ
+DYNT	Dynatronics Corporation	NASDAQ
+DVAX	Dynavax Technologies Corporation	NASDAQ
+ETFC	E+ACo-TRADE Financial Corporation	NASDAQ
+EOPN	E2open	NASDAQ
+EBMT	Eagle Bancorp Montana	NASDAQ
+EGBN	Eagle Bancorp	NASDAQ
+EGLE	Eagle Bulk Shipping Inc.	NASDAQ
+EROC	Eagle Rock Energy Partners	NASDAQ
+ELNK	EarthLink	NASDAQ
+EWBC	East West Bancorp	NASDAQ
+EML	Eastern Company (The)	NASDAQ
+EIHI	Eastern Insurance Holdings	NASDAQ
+EVBS	Eastern Virginia Bankshares	NASDAQ
+EBAY	eBay Inc.	NASDAQ
+EBIX	Ebix Inc	NASDAQ
+ELON	Echelon Corporation	NASDAQ
+ECHO	Echo Global Logistics	NASDAQ
+ECTE	Echo Therapeutics	NASDAQ
+SATS	EchoStar Corporation	NASDAQ
+EEI	Ecology and Environment	NASDAQ
+ECTY	Ecotality	NASDAQ
+EDAP	EDAP TMS S.A.	NASDAQ
+EDGW	Edgewater Technology	NASDAQ
+EDMC	Education Management Corporation	NASDAQ
+EDUC	Educational Development Corporation	NASDAQ
+EVAC	Edwards Group Limited	NASDAQ
+EFUT	eFuture Information Technology Inc.	NASDAQ
+EGAN	eGain Corporation	NASDAQ
+EHTH	eHealth	NASDAQ
+BAGL	Einstein Noah Restaurant Group	NASDAQ
+EMITF	Elbit Imaging Ltd.	NASDAQ
+ESLT	Elbit Systems Ltd.	NASDAQ
+ESYS	Elecsys Corporation	NASDAQ
+ELRC	Electro Rent Corporation	NASDAQ
+ESIO	Electro Scientific Industries	NASDAQ
+EA	Electronic Arts Inc.	NASDAQ
+EFII	Electronics for Imaging	NASDAQ
+ELSE	Electro+AC0-Sensors	NASDAQ
+RDEN	Elizabeth Arden	NASDAQ
+ESBK	Elmira Savings Bank NY (The)	NASDAQ
+LONG	eLong	NASDAQ
+ELTK	Eltek Ltd.	NASDAQ
+EMCI	EMC Insurance Group	NASDAQ
+EMCF	Emclaire Financial Corp	NASDAQ
+EMKR	EMCORE Corporation	NASDAQ
+EMMS	Emmis Communications Corporation	NASDAQ
+EMMSP	Emmis Communications Corporation	NASDAQ
+NYNY	Empire Resorts	NASDAQ
+ERS	Empire Resources	NASDAQ
+ENTA	Enanta Pharmaceuticals	NASDAQ
+ECPG	Encore Capital Group Inc	NASDAQ
+WIRE	Encore Wire Corporation	NASDAQ
+ENDP	Endo Health Solutions Inc.	NASDAQ
+ECYT	Endocyte	NASDAQ
+ELGX	Endologix	NASDAQ
+ERII	Energy Recovery	NASDAQ
+EXXI	Energy XXI (Bermuda) Limited	NASDAQ
+ENOC	EnerNOC	NASDAQ
+ENG	ENGlobal Corporation	NASDAQ
+ENPH	Enphase Energy	NASDAQ
+ESGR	Enstar Group Limited	NASDAQ
+ENTG	Entegris	NASDAQ
+ETRM	EnteroMedics Inc.	NASDAQ
+EBTC	Enterprise Bancorp Inc	NASDAQ
+EFSC	Enterprise Financial Services Corporation	NASDAQ
+EGT	Entertainment Gaming Asia Incorporated	NASDAQ
+ENMD	EntreMed	NASDAQ
+ENTR	Entropic Communications	NASDAQ
+ENVI	Envivio	NASDAQ
+ENZN	Enzon Pharmaceuticals	NASDAQ
+EONC	eOn Communications Corporation	NASDAQ
+EPIQ	EPIQ Systems	NASDAQ
+EPZM	Epizyme	NASDAQ
+PLUS	ePlus inc.	NASDAQ
+EQIX	Equinix	NASDAQ
+EAC           	Erickson Air+AC0-Crane Incorporated	NASDAQ
+ERIC	Ericsson	NASDAQ
+ERIE	Erie Indemnity Company	NASDAQ
+ESBF	ESB Financial Corporation	NASDAQ
+ESCA	Escalade	NASDAQ
+ESMC	Escalon Medical Corp.	NASDAQ
+ESSA	ESSA Bancorp	NASDAQ
+ESSX	Essex Rental Corporation	NASDAQ
+CLWT	Euro Tech Holdings Company Limited	NASDAQ
+EEFT	Euronet Worldwide	NASDAQ
+ESEA	Euroseas Ltd.	NASDAQ
+EVEP	EV Energy Partners	NASDAQ
+EVRY	EveryWare Global	NASDAQ
+EVOL	Evolving Systems	NASDAQ
+EXA	Exa Corporation	NASDAQ
+EXAS	EXACT Sciences Corporation	NASDAQ
+EXAC	Exactech	NASDAQ
+EXAR	Exar Corporation	NASDAQ
+EDS	Exceed Company Ltd.	NASDAQ
+EXEL	Exelixis	NASDAQ
+EXFO	EXFO Inc	NASDAQ
+EXLS	ExlService Holdings	NASDAQ
+EXPE	Expedia	NASDAQ
+EXPD	Expeditors International of Washington	NASDAQ
+EXPO	Exponent	NASDAQ
+ESRX	Express Scripts Holding Company	NASDAQ
+EXLP	Exterran Partners	NASDAQ
+EXTR	Extreme Networks	NASDAQ
+EZCH	EZchip Semiconductor Limited	NASDAQ
+EZPW	EZCORP	NASDAQ
+FFIV	F5 Networks	NASDAQ
+FB	Facebook	NASDAQ
+FRP	FairPoint Communications	NASDAQ
+FWM	Fairway Group Holdings Corp.	NASDAQ
+FALC	FalconStor Software	NASDAQ
+DAVE	Famous Dave+ACYAIw-39	NASDAQ
+FARM	Farmer Brothers Company	NASDAQ
+FFKT	Farmers Capital Bank Corporation	NASDAQ
+FMNB	Farmers National Banc Corp.	NASDAQ
+FARO	FARO Technologies	NASDAQ
+FAST	Fastenal Company	NASDAQ
+FBSS	Fauquier Bankshares	NASDAQ
+FBRC	FBR +ACY- Co	NASDAQ
+FDML	Federal+AC0-Mogul Corporation	NASDAQ
+FNHC	Federated National Holding Company	NASDAQ
+FFCO	FedFirst Financial Corporation	NASDAQ
+FEIC	FEI Company	NASDAQ
+FHCO	Female Health Company (The)	NASDAQ
+ONEQ	Fidelity Nasdaq Composite Index Tracking Stock	NASDAQ
+LION	Fidelity Southern Corporation	NASDAQ
+FDUS	Fidus Investment Corporation	NASDAQ
+FRGI	Fiesta Restaurant Group	NASDAQ
+FSC	Fifth Street Finance Corp.	NASDAQ
+FSCFL	Fifth Street Finance Corp.	NASDAQ
+FITB	Fifth Third Bancorp	NASDAQ
+FITBP	Fifth Third Bancorp	NASDAQ
+FNGN	Financial Engines	NASDAQ
+FISI	Financial Institutions	NASDAQ
+FNSR	Finisar Corporation	NASDAQ
+FBNC	First Bancorp	NASDAQ
+FNLC	First Bancorp	NASDAQ
+BUSE	First Busey Corporation	NASDAQ
+FBIZ	First Business Financial Services	NASDAQ
+FCVA	First Capital Bancorp	NASDAQ
+FCAP	First Capital	NASDAQ
+FCFS	First Cash Financial Services	NASDAQ
+FCZA	First Citizens Banc Corp.	NASDAQ
+FCNCA	First Citizens BancShares	NASDAQ
+FCLF	First Clover Leaf Financial Corp.	NASDAQ
+FCBC	First Community Bancshares	NASDAQ
+FCCO	First Community Corporation	NASDAQ
+FBNK	First Connecticut Bancorp	NASDAQ
+FDEF	First Defiance Financial Corp.	NASDAQ
+FFBH	First Federal Bancshares of Arkansas	NASDAQ
+FFNM	First Federal of Northern Michigan Bancorp	NASDAQ
+FFBC	First Financial Bancorp.	NASDAQ
+FFBCW	First Financial Bancorp.	NASDAQ
+FFIN	First Financial Bankshares	NASDAQ
+THFF	First Financial Corporation Indiana	NASDAQ
+FFCH	First Financial Holdings	NASDAQ
+FFNW	First Financial Northwest	NASDAQ
+FFKY	First Financial Service Corporation	NASDAQ
+INBK	First Internet Bancorp	NASDAQ
+FIBK	First Interstate BancSystem	NASDAQ
+FMFC	First M +ACY- F Corporation	NASDAQ
+FRME	First Merchants Corporation	NASDAQ
+FMBI	First Midwest Bancorp	NASDAQ
+NBCB	First NBC Bank Holding Company	NASDAQ
+FNFG	First Niagara Financial Group Inc.	NASDAQ
+BANC	First PacTrust Bancorp	NASDAQ
+BANCL	First PacTrust Bancorp	NASDAQ
+BANCP	First PacTrust Bancorp	NASDAQ
+FSFG	First Savings Financial Group	NASDAQ
+FSGI	First Security Group	NASDAQ
+FSLR	First Solar	NASDAQ
+FSBK	First South Bancorp Inc	NASDAQ
+FTCS	First Trust Capital Strength ETF	NASDAQ
+BICK	First Trust Exchange+AC0-Traded Fund II First Trust BICK Index Fun	NASDAQ
+CU	First Trust Exchange+AC0-Traded Fund II First Trust ISE Global Cop	NASDAQ
+PLTM	First Trust Exchange+AC0-Traded Fund II First Trust ISE Global Pla	NASDAQ
+CARZ	First Trust Exchange+AC0-Traded Fund II First Trust NASDAQ Global 	NASDAQ
+HYLS	First Trust Exchange+AC0-Traded Fund IV First Trust High Yield Lon	NASDAQ
+FTSL	First Trust Exchange+AC0-Traded Fund IV First Trust Senior Loan Fu	NASDAQ
+TDIV	First Trust Exchange+AC0-Traded Fund VI First Trust NASDAQ Technol	NASDAQ
+MDIV	First Trust Exchange+AC0-Traded Fund VI Multi+AC0-Asset Diversified In	NASDAQ
+SKYY	First Trust ISE Cloud Computing Index Fund	NASDAQ
+QABA	First Trust NASDAQ ABA Community Bank Index Fund	NASDAQ
+FONE	First Trust NASDAQ CEA Smartphone Index Fund	NASDAQ
+GRID	First Trust NASDAQ Clean Edge Smart Grid Infrastructure Index 	NASDAQ
+QCLN	First Trust NASDAQ Clean Edge U.S. Liquid Series Index Fund	NASDAQ
+QQEW	First Trust NASDAQ+AC0-100 Equal Weighted Index Fund	NASDAQ
+QQXT	First Trust NASDAQ+AC0-100 Ex+AC0-Technology Sector Index Fund	NASDAQ
+QTEC	First Trust NASDAQ+AC0-100+AC0-Technology Sector Index Fund	NASDAQ
+FUNC	First United Corporation	NASDAQ
+FBMI	Firstbank Corporation	NASDAQ
+SVVC	Firsthand Technology Value Fund	NASDAQ
+FMER	FirstMerit Corporation	NASDAQ
+FSRV	FirstService Corporation	NASDAQ
+FISV	Fiserv	NASDAQ
+FSCI	Fisher Communications	NASDAQ
+FIVE	Five Below	NASDAQ
+FLML	Flamel Technologies S.A.	NASDAQ
+FLXS	Flexsteel Industries	NASDAQ
+FLEX	Flextronics International Ltd.	NASDAQ
+FLIR	FLIR Systems	NASDAQ
+FLOW	Flow International Corporation	NASDAQ
+FLDM	Fluidigm Corporation	NASDAQ
+FFIC	Flushing Financial Corporation	NASDAQ
+FNBN	FNB United Corp.	NASDAQ
+FONR	Fonar Corporation	NASDAQ
+VIFL	Food Technology Service	NASDAQ
+FES	Forbes Energy Services Ltd	NASDAQ
+FORM	FormFactor	NASDAQ
+FORTY	Formula Systems (1985) Ltd.	NASDAQ
+FORR	Forrester Research	NASDAQ
+FTNT	Fortinet	NASDAQ
+FWRD	Forward Air Corporation	NASDAQ
+FORD	Forward Industries	NASDAQ
+FOSL	Fossil Group	NASDAQ
+FWLT	Foster Wheeler AG.	NASDAQ
+FXCB	Fox Chase Bancorp	NASDAQ
+FRAN	Francesca+ACYAIw-39	NASDAQ
+FELE	Franklin Electric Co.	NASDAQ
+FRNK	Franklin Financial Corporation	NASDAQ
+FRED	Fred+ACYAIw-39	NASDAQ
+FREE	FreeSeas Inc.	NASDAQ
+RAIL	Freightcar America	NASDAQ
+FEIM	Frequency Electronics	NASDAQ
+FFN	FriendFinder Networks Inc.	NASDAQ
+FTR	Frontier Communications Corporation	NASDAQ
+FFEX	Frozen Food Express Industries	NASDAQ
+FSBW	FS Bancorp	NASDAQ
+FSYS	Fuel Systems Solutions	NASDAQ
+FTEK	Fuel Tech	NASDAQ
+FCEL	FuelCell Energy	NASDAQ
+FULL	Full Circle Capital Corporation	NASDAQ
+FLL	Full House Resorts	NASDAQ
+FULT	Fulton Financial Corporation	NASDAQ
+FURX	Furiex Pharmaceuticals	NASDAQ
+FFHL	Fuwei Films (Holdings) Co.	NASDAQ
+FXEN	FX Energy	NASDAQ
+GK	G+ACY-K Services	NASDAQ
+WILC	G. Willi+AC0-Food International	NASDAQ
+GAIA	Gaiam	NASDAQ
+GALT	Galectin Therapeutics Inc.	NASDAQ
+GALTU	Galectin Therapeutics Inc.	NASDAQ
+GALTW	Galectin Therapeutics Inc.	NASDAQ
+GALE	Galena Biopharma	NASDAQ
+GPIC	Gaming Partners International Corporation	NASDAQ
+GRMN	Garmin Ltd.	NASDAQ
+GARS	Garrison Capital Inc.	NASDAQ
+GKNT	Geeknet	NASDAQ
+GENC	Gencor Industries Inc.	NASDAQ
+GNCMA	General Communication	NASDAQ
+GFN	General Finance Corporation	NASDAQ
+GFNCL	General Finance Corporation	NASDAQ
+GFNCP	General Finance Corporation	NASDAQ
+GFNCZ	General Finance Corporation	NASDAQ
+GENE	Genetic Technologies Ltd	NASDAQ
+GNMK	GenMark Diagnostics	NASDAQ
+GHDX	Genomic Health	NASDAQ
+GNTX	Gentex Corporation	NASDAQ
+THRM	Gentherm Inc	NASDAQ
+GENT	Gentium SpA	NASDAQ
+GTIV	Gentiva Health Services	NASDAQ
+GNVC	GenVec	NASDAQ
+GMETP	GeoMet	NASDAQ
+GTWN	Georgetown Bancorp	NASDAQ
+GEOS	Geospace Technologies Corporation	NASDAQ
+GABC	German American Bancorp	NASDAQ
+GERN	Geron Corporation	NASDAQ
+GEVO	Gevo	NASDAQ
+ROCK	Gibraltar Industries	NASDAQ
+GIGM	GigaMedia Limited	NASDAQ
+GIGA	Giga+AC0-tronics Incorporated	NASDAQ
+GIII	G+AC0-III Apparel Group	NASDAQ
+GILT	Gilat Satellite Networks Ltd.	NASDAQ
+GILD	Gilead Sciences	NASDAQ
+GIVN	Given Imaging Ltd.	NASDAQ
+GBCI	Glacier Bancorp	NASDAQ
+GLAD	Gladstone Capital Corporation	NASDAQ
+GLADP	Gladstone Capital Corporation	NASDAQ
+GOOD	Gladstone Commercial Corporation	NASDAQ
+GOODN	Gladstone Commercial Corporation	NASDAQ
+GOODO	Gladstone Commercial Corporation	NASDAQ
+GOODP	Gladstone Commercial Corporation	NASDAQ
+GAIN	Gladstone Investment Corporation	NASDAQ
+GAINP	Gladstone Investment Corporation	NASDAQ
+LAND	Gladstone Land Corporation	NASDAQ
+GLCH	Gleacher +ACY- Company	NASDAQ
+GLBZ	Glen Burnie Bancorp	NASDAQ
+ENT	Global Eagle Entertainment Inc.	NASDAQ
+GBLI	Global Indemnity plc	NASDAQ
+GLPW	Global Power Equipment Group Inc	NASDAQ
+GSOL	Global Sources Ltd.	NASDAQ
+SOCL	Global X Funds Global X Social Media Index ETF	NASDAQ
+QQQC	Global X NASDAQ China Technology ETF	NASDAQ
+GAI	Global+AC0-Tech Advanced Innovations Inc.	NASDAQ
+GSM	Globe Specialty Metals Inc.	NASDAQ
+GCOM	Globecomm Systems Inc.	NASDAQ
+GLBS	Globus Maritime Limited	NASDAQ
+GLUU	Glu Mobile Inc.	NASDAQ
+GOGO	Gogo Inc.	NASDAQ
+GLNG	Golar LNG Limited	NASDAQ
+GMLP	Golar LNG Partners LP	NASDAQ
+GLDC	Golden Enterprises	NASDAQ
+GBDC	Golub Capital BDC	NASDAQ
+GTIM	Good Times Restaurants Inc.	NASDAQ
+GOOG	Google Inc.	NASDAQ
+GMAN	Gordmans Stores	NASDAQ
+LOPE	Grand Canyon Education	NASDAQ
+GRVY	GRAVITY Co.	NASDAQ
+GLDD	Great Lakes Dredge +ACY- Dock Corporation	NASDAQ
+GSBC	Great Southern Bancorp	NASDAQ
+GMCR	Green Mountain Coffee Roasters	NASDAQ
+GPRE	Green Plains Renewable Energy	NASDAQ
+GCBC	Greene County Bancorp	NASDAQ
+GLRE	Greenlight Reinsurance	NASDAQ
+GRIF	Griffin Land +ACY- Nurseries	NASDAQ
+GRFS	Grifols	NASDAQ
+GRPN	Groupon	NASDAQ
+OMAB	Grupo Aeroportuario del Centro Norte S.A.B. de C.V.	NASDAQ
+GGAL	Grupo Financiero Galicia S.A.	NASDAQ
+GSIG	GSI Group	NASDAQ
+GSIT	GSI Technology	NASDAQ
+GSVC	GSV Capital Corp	NASDAQ
+GTAT	GT Advanced Technologies	NASDAQ
+GTXI	GTx	NASDAQ
+GPRC	Guanwei Recycling Corp.	NASDAQ
+GBNK	Guaranty Bancorp	NASDAQ
+GFED	Guaranty Federal Bancshares	NASDAQ
+GUID	Guidance Software	NASDAQ
+GIFI	Gulf Island Fabrication	NASDAQ
+GURE	Gulf Resources	NASDAQ
+GPOR	Gulfport Energy Corporation	NASDAQ
+GWPH	GW Pharmaceuticals Plc	NASDAQ
+GYRO	Gyrodyne Company of America	NASDAQ
+HEES	H+ACY-E Equipment Services	NASDAQ
+HNRG	Hallador Energy Company	NASDAQ
+HALL	Hallmark Financial Services	NASDAQ
+HALO	Halozyme Therapeutics	NASDAQ
+HBK	Hamilton Bancorp	NASDAQ
+HBNK	Hampden Bancorp	NASDAQ
+HMPR	Hampton Roads Bankshares Inc	NASDAQ
+HBHC	Hancock Holding Company	NASDAQ
+HNH	Handy +ACY- Harman Ltd.	NASDAQ
+HAFC	Hanmi Financial Corporation	NASDAQ
+HNSN	Hansen Medical	NASDAQ
+HSOL	Hanwha SolarOne Co.	NASDAQ
+HDNG	Hardinge	NASDAQ
+HLIT	Harmonic Inc.	NASDAQ
+TINY	Harris +ACY- Harris Group	NASDAQ
+HPOL	Harris Interactive	NASDAQ
+HBIO	Harvard Bioscience	NASDAQ
+HCAP	Harvest Capital Credit Corporation	NASDAQ
+HAS	Hasbro	NASDAQ
+HAST	Hastings Entertainment	NASDAQ
+HAUP	Hauppauge Digital	NASDAQ
+HA	Hawaiian Holdings	NASDAQ
+HCOM	Hawaiian Telcom Holdco	NASDAQ
+HWKN	Hawkins	NASDAQ
+HWBK	Hawthorn Bancshares	NASDAQ
+HAYN	Haynes International	NASDAQ
+HCIIP	HCI Group	NASDAQ
+HIIQ	Health Insurance Innovations	NASDAQ
+HCSG	Healthcare Services Group	NASDAQ
+HSTM	HealthStream	NASDAQ
+HWAY	Healthways	NASDAQ
+HTLD	Heartland Express	NASDAQ
+HTLF	Heartland Financial USA	NASDAQ
+HTWR	Heartware International	NASDAQ
+HSII	Heidrick +ACY- Struggles International	NASDAQ
+HELE	Helen of Troy Limited	NASDAQ
+HMNY	Helios and Matheson Analytics Inc	NASDAQ
+HMTV	Hemisphere Media Group	NASDAQ
+HSIC	Henry Schein	NASDAQ
+HERO	Hercules Offshore	NASDAQ
+HTBK	Heritage Commerce Corp	NASDAQ
+HFWA	Heritage Financial Corporation	NASDAQ
+HBOS	Heritage Financial Group	NASDAQ
+HEOP	Heritage Oaks Bancorp	NASDAQ
+HCCI	Heritage+AC0-Crystal Clean	NASDAQ
+MLHR	Herman Miller	NASDAQ
+HSKA	Heska Corporation	NASDAQ
+HFFC	HF Financial Corp.	NASDAQ
+HTWO	HF2 Financial Management Inc.	NASDAQ
+HIBB	Hibbett Sports	NASDAQ
+HTCO	Hickory Tech Corporation	NASDAQ
+HIHO	Highway Holdings Limited	NASDAQ
+HIMX	Himax Technologies	NASDAQ
+HIFS	Hingham Institution for Savings	NASDAQ
+HITK	Hi+AC0-Tech Pharmacal Co.	NASDAQ
+HITT	Hittite Microwave Corporation	NASDAQ
+HMNF	HMN Financial	NASDAQ
+HMSY	HMS Holdings Corp	NASDAQ
+HOLI	Hollysys Automation Technologies	NASDAQ
+HOLL	Hollywood Media Corp.	NASDAQ
+HOLX	Hologic	NASDAQ
+HBCP	Home Bancorp	NASDAQ
+HOMB	Home BancShares	NASDAQ
+HOME	Home Federal Bancorp	NASDAQ
+HFBL	Home Federal Bancorp	NASDAQ
+HMIN	Home Inns +ACY- Hotels Management Inc.	NASDAQ
+HLSS	Home Loan Servicing Solutions	NASDAQ
+AWAY	HomeAway	NASDAQ
+HMST	HomeStreet	NASDAQ
+HTBI	HomeTrust Bancshares	NASDAQ
+HPJ	Hong Kong Highpower Technology	NASDAQ
+HKTV	Hong Kong Television Network Limited	NASDAQ
+HOFT	Hooker Furniture Corporation	NASDAQ
+HFBC	HopFed Bancorp	NASDAQ
+HBNC	Horizon Bancorp (IN)	NASDAQ
+HZNP	Horizon Pharma	NASDAQ
+HRZN	Horizon Technology Finance Corporation	NASDAQ
+ZINC	Horsehead Holding Corp.	NASDAQ
+HWCC	Houston Wire +ACY- Cable Company	NASDAQ
+HOVNP	Hovnanian Enterprises Inc	NASDAQ
+HBMD	Howard Bancorp	NASDAQ
+HSNI	HSN	NASDAQ
+HUBG	Hub Group	NASDAQ
+HCBK	Hudson City Bancorp	NASDAQ
+HSON	Hudson Global	NASDAQ
+HDSN	Hudson Technologies	NASDAQ
+HBAN	Huntington Bancshares Incorporated	NASDAQ
+HBANP	Huntington Bancshares Incorporated	NASDAQ
+HPCCP	Huntington Preferred Capital	NASDAQ
+HURC	Hurco Companies	NASDAQ
+HURN	Huron Consulting Group Inc.	NASDAQ
+HTCH	Hutchinson Technology Incorporated	NASDAQ
+HPAC	Hyde Park Acquisition Corp. II	NASDAQ
+HYGS	Hydrogenics Corporation	NASDAQ
+HPTX	Hyperion Therapeutics	NASDAQ
+IDSY	I.D. Systems	NASDAQ
+IACI	IAC/InterActiveCorp	NASDAQ
+IBKC	IBERIABANK Corporation	NASDAQ
+ICAD	icad inc.	NASDAQ
+IEP	Icahn Enterprises L.P.	NASDAQ
+ICFI	ICF International	NASDAQ
+ICGE	ICG Group	NASDAQ
+ICLR	ICON plc	NASDAQ
+ICON	Iconix Brand Group	NASDAQ
+ICUI	ICU Medical	NASDAQ
+IDIX	Idenix Pharmaceuticals	NASDAQ
+INVE	Identive Group	NASDAQ
+IDRA	Idera Pharmaceuticals	NASDAQ
+IDXX	IDEXX Laboratories	NASDAQ
+IROQ	IF Bancorp	NASDAQ
+IGTE	iGATE Corporation	NASDAQ
+IRG	Ignite Restaurant Group	NASDAQ
+IGOI	iGo	NASDAQ
+IIVI	II+AC0-VI Incorporated	NASDAQ
+IKAN	Ikanos Communications	NASDAQ
+IKNX	Ikonics Corporation	NASDAQ
+ILMN	Illumina	NASDAQ
+ISNS	Image Sensing Systems	NASDAQ
+IMMR	Immersion Corporation	NASDAQ
+ICCC	ImmuCell Corporation	NASDAQ
+IMGN	ImmunoGen	NASDAQ
+IMMU	Immunomedics	NASDAQ
+IPXL	Impax Laboratories	NASDAQ
+IMMY	Imprimis Pharmaceuticals	NASDAQ
+IMRS	Imris Inc	NASDAQ
+SAAS	inContact	NASDAQ
+INCY	Incyte Corporation	NASDAQ
+INDB	Independent Bank Corp.	NASDAQ
+IBCP	Independent Bank Corporation	NASDAQ
+IBCPO	Independent Bank Corporation	NASDAQ
+IBTX	Independent Bank Group	NASDAQ
+IDSA	Industrial Services of America	NASDAQ
+INFN	Infinera Corporation	NASDAQ
+INXB	Infinity Cross Border Acquisition Corporation	NASDAQ
+INXBU	Infinity Cross Border Acquisition Corporation	NASDAQ
+INXBW	Infinity Cross Border Acquisition Corporation	NASDAQ
+INFI	Infinity Pharmaceuticals	NASDAQ
+IPCC	Infinity Property and Casualty Corporation	NASDAQ
+INFA	Informatica Corporation	NASDAQ
+III	Information Services Group	NASDAQ
+IFON	InfoSonics Corp	NASDAQ
+IMKTA	Ingles Markets	NASDAQ
+INWK	InnerWorkings	NASDAQ
+INOD	Innodata Inc.	NASDAQ
+IPHS	Innophos Holdings	NASDAQ
+IOSP	Innospec Inc.	NASDAQ
+INOC	Innotrac Corporation	NASDAQ
+ISSC	Innovative Solutions and Support	NASDAQ
+NSIT	Insight Enterprises	NASDAQ
+ISIG	Insignia Systems	NASDAQ
+INSM	Insmed	NASDAQ
+IIIN	Insteel Industries	NASDAQ
+PODD	Insulet Corporation	NASDAQ
+INSY	Insys Therapeutics	NASDAQ
+IART	Integra LifeSciences Holdings Corporation	NASDAQ
+IDTI	Integrated Device Technology	NASDAQ
+IESC	Integrated Electrical Services	NASDAQ
+ISSI	Integrated Silicon Solution	NASDAQ
+INTC	Intel Corporation	NASDAQ
+IPCI	Intellipharmaceutics International Inc.	NASDAQ
+IPAR	Inter Parfums	NASDAQ
+IBKR	Interactive Brokers Group	NASDAQ
+ININ	Interactive Intelligence Group	NASDAQ
+ICPT	Intercept Pharmaceuticals	NASDAQ
+IDCC	InterDigital	NASDAQ
+TILE	Interface	NASDAQ
+IMI	Intermolecular	NASDAQ
+IMCB	Intermountain Community Bancorp	NASDAQ
+ITMN	InterMune	NASDAQ
+INAP	Internap Network Services Corporation	NASDAQ
+IBOC	International Bancshares Corporation	NASDAQ
+ISCA	International Speedway Corporation	NASDAQ
+IGLD	Internet Gold Golden Lines Ltd.	NASDAQ
+IIJI	Internet Initiative Japan	NASDAQ
+PTNT	Internet Patents Corporation	NASDAQ
+INPH	Interphase Corporation	NASDAQ
+INTX	Intersections	NASDAQ
+ISIL	Intersil Corporation	NASDAQ
+IILG	Interval Leisure Group	NASDAQ
+IBCA	Intervest Bancshares Corp.	NASDAQ
+INTT	inTest Corporation	NASDAQ
+IVAC	Intevac	NASDAQ
+INTL	INTL FCStone Inc.	NASDAQ
+IIN	IntriCon Corporation	NASDAQ
+INTU	Intuit Inc.	NASDAQ
+ISRG	Intuitive Surgical	NASDAQ
+SNAK	Inventure Foods	NASDAQ
+ISBC	Investors Bancorp	NASDAQ
+ITIC	Investors Title Company	NASDAQ
+IPAS	iPass Inc.	NASDAQ
+IPCM	IPC The Hospitalist Company	NASDAQ
+IPGP	IPG Photonics Corporation	NASDAQ
+IRIX	IRIDEX Corporation	NASDAQ
+IRDM	Iridium Communications Inc	NASDAQ
+IRDMZ	Iridium Communications Inc	NASDAQ
+IRBT	iRobot Corporation	NASDAQ
+IRWD	Ironwood Pharmaceuticals	NASDAQ
+FCHI	iShares FTSE China (HK Listed) Index Fund	NASDAQ
+IFSM	iShares FTSE Developed Small Cap ex+AC0-North America Index Fund	NASDAQ
+IFAS	iShares FTSE EPRA/NAREIT Asia Index Fund	NASDAQ
+IFEU	iShares FTSE EPRA/NAREIT Europe Index Fund	NASDAQ
+IFGL	iShares FTSE EPRA/NAREIT Global Real Estate ex+AC0-U.S. Index Fund	NASDAQ
+IFNA	iShares FTSE EPRA/NAREIT North America Index Fund	NASDAQ
+SOXX	iShares Goldman Sachs Semiconductor Index Fund	NASDAQ
+INDY	iShares India 50 ETF	NASDAQ
+AXFN	iShares MSCI ACWI ex US Financials Sector Index Fund	NASDAQ
+ACWX	iShares MSCI ACWI ex US Index Fund	NASDAQ
+ACWI	iShares MSCI ACWI Index Fund	NASDAQ
+AAXJ	iShares MSCI All Country Asia ex Japan Index Fund	NASDAQ
+EMFN	iShares MSCI Emerging Markets Financials Sector Index Fund	NASDAQ
+EMMT	iShares MSCI Emerging Markets Materials Sector Index Fund	NASDAQ
+EUFN	iShares MSCI Europe Financials Sector Index Fund	NASDAQ
+FEFN	iShares MSCI Far East Financials Sector Index Fund	NASDAQ
+IBB	iShares NASDAQ Biotechnology Index Fund	NASDAQ
+EMIF	iShares S+ACY-P Emerging Markets Infrastructure Index Fund	NASDAQ
+ICLN	iShares S+ACY-P Global Clean Energy Index Fund	NASDAQ
+NUCL	iShares S+ACY-P Global Nuclear Index Fund	NASDAQ
+WOOD	iShares S+ACY-P Global Timber +ACY-Forestry Index Fund	NASDAQ
+ISHG	iShares S+ACY-P/Citigroup 1+AC0-3 Year International Treasury Bond Fun	NASDAQ
+IGOV	iShares S+ACY-P/Citigroup International Treasury Bond Fund	NASDAQ
+GNMA	iShares Trust iShares Barclays GNMA Bond Fund	NASDAQ
+AXJS	iShares Trust iShares MSCI All Country Asia ex Japan Small Cap	NASDAQ
+AAIT	iShares Trust iShares MSCI All Country Asia Information Techno	NASDAQ
+EEML	iShares Trust iShares MSCI Emerging Markets Latin America Inde	NASDAQ
+EEMA	iShares	NASDAQ
+EMDI	iShares	NASDAQ
+EEME	iShares	NASDAQ
+EMEY	iShares	NASDAQ
+EGRW	iShares	NASDAQ
+EVAL	iShares	NASDAQ
+ISIS	Isis Pharmaceuticals	NASDAQ
+ISLE	Isle of Capri Casinos	NASDAQ
+ISRL	Isramco	NASDAQ
+ITRI	Itron	NASDAQ
+ITRN	Ituran Location and Control Ltd.	NASDAQ
+IVAN	Ivanhoe Energy	NASDAQ
+XXIA	Ixia	NASDAQ
+IXYS	IXYS Corporation	NASDAQ
+JJSF	J +ACY- J Snack Foods Corp.	NASDAQ
+MAYS	J. W. Mays	NASDAQ
+JBHT	J.B. Hunt Transport Services	NASDAQ
+JCOM	j2 Global	NASDAQ
+JASO	JA Solar Holdings	NASDAQ
+JKHY	Jack Henry +ACY- Associates	NASDAQ
+JACK	Jack In The Box Inc.	NASDAQ
+JXSB	Jacksonville Bancorp Inc.	NASDAQ
+JAXB	Jacksonville Bancorp	NASDAQ
+JAKK	JAKKS Pacific	NASDAQ
+JMBA	Jamba	NASDAQ
+JRCC	James River Coal Company	NASDAQ
+JAZZ	Jazz Pharmaceuticals plc	NASDAQ
+JDSU	JDS Uniphase Corporation	NASDAQ
+JFBI	Jefferson Bancshares	NASDAQ
+JBLU	JetBlue Airways Corporation	NASDAQ
+JCTCF	Jewett+AC0-Cameron Trading Company	NASDAQ
+DATE	Jiayuan.com International Ltd.	NASDAQ
+JST	Jinpan International Limited	NASDAQ
+JIVE	Jive Software	NASDAQ
+JOEZ	Joe+ACYAIw-39	NASDAQ
+JBSS	John B. Sanfilippo +ACY- Son	NASDAQ
+JOUT	Johnson Outdoors Inc.	NASDAQ
+JOSB	Jos. A. Bank Clothiers	NASDAQ
+TAX	JTH Holding Inc. D/B/A Liberty Tax Service	NASDAQ
+KALU	Kaiser Aluminum Corporation	NASDAQ
+KBIO	KaloBios Pharmaceuticals	NASDAQ
+KMDA	Kamada Ltd.	NASDAQ
+KNDI	Kandi Technologies Group	NASDAQ
+KCLI	Kansas City Life Insurance Company	NASDAQ
+KCAP	KCAP Financial	NASDAQ
+KRNY	Kearny Financial	NASDAQ
+KIPO	Keating Capital	NASDAQ
+KELYA	Kelly Services	NASDAQ
+KELYB	Kelly Services	NASDAQ
+KFFB	Kentucky First Federal Bancorp	NASDAQ
+KERX	Keryx Biopharmaceuticals	NASDAQ
+KEQU	Kewaunee Scientific Corporation	NASDAQ
+KTEC	Key Technology	NASDAQ
+KTCC	Key Tronic Corporation	NASDAQ
+KEYN	Keynote Systems	NASDAQ
+KFRC	Kforce	NASDAQ
+KBALB	Kimball International	NASDAQ
+KGJI	Kingold Jewelry Inc.	NASDAQ
+KINS	Kingstone Companies	NASDAQ
+KONE	Kingtone Wirelessinfo Solution Holding Ltd	NASDAQ
+KIOR	KiOR	NASDAQ
+KIPS	Kips Bay Medical	NASDAQ
+KIRK	Kirkland+ACYAIw-39	NASDAQ
+KLAC	KLA+AC0-Tencor Corporation	NASDAQ
+VLCCF	Knightsbridge Tankers Limited	NASDAQ
+KONA	Kona Grill	NASDAQ
+KONG	KongZhong Corporation	NASDAQ
+KOPN	Kopin Corporation	NASDAQ
+KOSS	Koss Corporation	NASDAQ
+KRFT	Kraft Foods Group	NASDAQ
+KTOS	Kratos Defense +ACY- Security Solutions	NASDAQ
+KUTV	Ku6 Media Co.	NASDAQ
+KLIC	Kulicke and Soffa Industries	NASDAQ
+KVHI	KVH Industries	NASDAQ
+KYTH	Kythera Biopharmaceuticals	NASDAQ
+LLEN	L+ACY-L Energy	NASDAQ
+FSTR	L.B. Foster Company	NASDAQ
+LSBK	Lake Shore Bancorp	NASDAQ
+LBAI	Lakeland Bancorp	NASDAQ
+LKFN	Lakeland Financial Corporation	NASDAQ
+LAKE	Lakeland Industries	NASDAQ
+LACO	Lakes Entertainment	NASDAQ
+LRCX	Lam Research Corporation	NASDAQ
+LAMR	Lamar Advertising Company	NASDAQ
+LANC	Lancaster Colony Corporation	NASDAQ
+LNDC	Landec Corporation	NASDAQ
+LARK	Landmark Bancorp Inc.	NASDAQ
+LSTR	Landstar System	NASDAQ
+LTRX	Lantronix	NASDAQ
+LPSB	LaPorte Bancorp	NASDAQ
+LSCC	Lattice Semiconductor Corporation	NASDAQ
+LAWS	Lawson Products	NASDAQ
+LAYN	Layne Christensen Company	NASDAQ
+LCAV	LCA+AC0-Vision Inc.	NASDAQ
+LCNB	LCNB Corporation	NASDAQ
+GAGA	Le Gaga Holdings Limited	NASDAQ
+LBIX	Leading Brands Inc	NASDAQ
+LEAP	Leap Wireless International	NASDAQ
+LTRE	Learning Tree International	NASDAQ
+LGCY	Legacy Reserves LP	NASDAQ
+LMAT	LeMaitre Vascular	NASDAQ
+LXRX	Lexicon Pharmaceuticals	NASDAQ
+LHCG	LHC Group	NASDAQ
+LBTYA	Liberty Global plc	NASDAQ
+LBTYB	Liberty Global plc	NASDAQ
+LBTYK	Liberty Global plc	NASDAQ
+LINTA	Liberty Interactive Corporation	NASDAQ
+LINTB	Liberty Interactive Corporation	NASDAQ
+LVNTA	Liberty Interactive Corporation	NASDAQ
+LVNTB	Liberty Interactive Corporation	NASDAQ
+LMCA	Liberty Media Corporation	NASDAQ
+LMCB	Liberty Media Corporation	NASDAQ
+LPHI	Life Partners Holdings Inc	NASDAQ
+LIFE	Life Technologies Corporation	NASDAQ
+LPNT	LifePoint Hospitals	NASDAQ
+LCUT	Lifetime Brands	NASDAQ
+LFVN	Lifevantage Corporation	NASDAQ
+LWAY	Lifeway Foods	NASDAQ
+LGND	Ligand Pharmaceuticals Incorporated	NASDAQ
+LTBR	Lightbridge Corporation	NASDAQ
+LPTH	LightPath Technologies	NASDAQ
+LIWA	Lihua International	NASDAQ
+LIME	Lime Energy Co.	NASDAQ
+LLNW	Limelight Networks	NASDAQ
+LMNR	Limoneira Co	NASDAQ
+LINC	Lincoln Educational Services Corporation	NASDAQ
+LECO	Lincoln Electric Holdings	NASDAQ
+LLTC	Linear Technology Corporation	NASDAQ
+LTON	Linktone Ltd.	NASDAQ
+LNCO	Linn Co	NASDAQ
+LINE	Linn Energy	NASDAQ
+LIOX	Lionbridge Technologies	NASDAQ
+LPDX	LipoScience	NASDAQ
+LQDT	Liquidity Services	NASDAQ
+LFUS	Littelfuse	NASDAQ
+LIVE	LiveDeal	NASDAQ
+LPSN	LivePerson	NASDAQ
+JADE	LJ International	NASDAQ
+LKQ	LKQ Corporation	NASDAQ
+LMIA	LMI Aerospace	NASDAQ
+LNBB	LNB Bancorp	NASDAQ
+LOCM	Local Corporation	NASDAQ
+LOGI	Logitech International S.A.	NASDAQ
+LOGM	LogMein	NASDAQ
+LOJN	LoJack Corporation	NASDAQ
+LOOK	LookSmart	NASDAQ
+LORL	Loral Space and Communications	NASDAQ
+LABC	Louisiana Bancorp	NASDAQ
+LPTN	Lpath	NASDAQ
+LPLA	LPL Financial Holdings Inc.	NASDAQ
+LRAD	LRAD Corporation	NASDAQ
+LSBI	LSB Financial Corp.	NASDAQ
+LSI	LSI Corporation	NASDAQ
+LYTS	LSI Industries Inc.	NASDAQ
+LTXC	LTX+AC0-Credence Corporation	NASDAQ
+LUFK	Lufkin Industries	NASDAQ
+LULU	lululemon athletica inc.	NASDAQ
+LMNX	Luminex Corporation	NASDAQ
+LMOS	Lumos Networks Corp.	NASDAQ
+LUNA	Luna Innovations Incorporated	NASDAQ
+MBTF	M B T Financial Corp	NASDAQ
+MTSI	M/A+AC0-COM Technology Solutions Holdings	NASDAQ
+MCBC	Macatawa Bank Corporation	NASDAQ
+MFNC	Mackinac Financial Corporation	NASDAQ
+MCBK	Madison County Financial	NASDAQ
+MAGS	Magal Security Systems Ltd.	NASDAQ
+MGLN	Magellan Health Services	NASDAQ
+MPET	Magellan Petroleum Corporation	NASDAQ
+MGIC	Magic Software Enterprises Ltd.	NASDAQ
+CALL	magicJack VocalTec Ltd	NASDAQ
+MNGA	MagneGas Corporation	NASDAQ
+MAG	Magnetek	NASDAQ
+MGYR	Magyar Bancorp	NASDAQ
+MHLD	Maiden Holdings	NASDAQ
+MSFG	MainSource Financial Group	NASDAQ
+COOL	Majesco Entertainment Company	NASDAQ
+MMYT	MakeMyTrip Limited	NASDAQ
+MAKO	MAKO Surgical Corp.	NASDAQ
+MLVF	Malvern Bancorp	NASDAQ
+MAMS	MAM Software Group	NASDAQ
+MNDL	Mandalay Digital Group	NASDAQ
+MANH	Manhattan Associates	NASDAQ
+LOAN	Manhattan Bridge Capital	NASDAQ
+MNTX	Manitex International	NASDAQ
+MTEX	Mannatech	NASDAQ
+MNKD	MannKind Corporation	NASDAQ
+MANT	ManTech International Corporation	NASDAQ
+MCHX	Marchex	NASDAQ
+MARPS	Marine Petroleum Trust	NASDAQ
+LEDR	Market Leader	NASDAQ
+MKTX	MarketAxess Holdings	NASDAQ
+MKTO	Marketo	NASDAQ
+MRLN	Marlin Business Services Corp.	NASDAQ
+MRTN	Marten Transport	NASDAQ
+MMLP	Martin Midstream Partners L.P.	NASDAQ
+MRVL	Marvell Technology Group Ltd.	NASDAQ
+MASI	Masimo Corporation	NASDAQ
+MASC	Material Sciences Corporation	NASDAQ
+MTRX	Matrix Service Company	NASDAQ
+MAT	Mattel	NASDAQ
+MATR	Mattersight Corporation	NASDAQ
+MATW	Matthews International Corporation	NASDAQ
+MFRM	Mattress Firm Holding Corp.	NASDAQ
+MTSN	Mattson Technology	NASDAQ
+MXIM	Maxim Integrated Products	NASDAQ
+MXWL	Maxwell Technologies	NASDAQ
+MAXY	Maxygen	NASDAQ
+MFLR	Mayflower Bancorp	NASDAQ
+MZOR	Mazor Robotics Ltd.	NASDAQ
+MBFI	MB Financial Inc.	NASDAQ
+MCGC	MCG Capital Corporation	NASDAQ
+MGRC	McGrath RentCorp	NASDAQ
+MDCA	MDC Partners Inc.	NASDAQ
+MEAD	Meade Instruments Corp.	NASDAQ
+MEAS	Measurement Specialties	NASDAQ
+MCOX	Mecox Lane Limited	NASDAQ
+TAXI	Medallion Financial Corp.	NASDAQ
+MDAS	MedAssets	NASDAQ
+MBIS	Mediabistro Inc.	NASDAQ
+MDCI	Medical Action Industries Inc.	NASDAQ
+MNOV	MediciNova	NASDAQ
+MDSO	Medidata Solutions	NASDAQ
+MDVN	Medivation	NASDAQ
+MEIP	MEI Pharma	NASDAQ
+MELA	MELA Sciences	NASDAQ
+MPEL	Melco Crown Entertainment Limited	NASDAQ
+MLNX	Mellanox Technologies	NASDAQ
+MEMP	Memorial Production Partners LP	NASDAQ
+MEMS	MEMSIC	NASDAQ
+MENT	Mentor Graphics Corporation	NASDAQ
+MTSL	MER Telemanagement Solutions Ltd.	NASDAQ
+MELI	MercadoLibre	NASDAQ
+MBWM	Mercantile Bank Corporation	NASDAQ
+MERC	Mercer International Inc.	NASDAQ
+MBVT	Merchants Bancshares	NASDAQ
+MRCY	Mercury Systems Inc	NASDAQ
+MRGE	Merge Healthcare Incorporated.	NASDAQ
+VIVO	Meridian Bioscience Inc.	NASDAQ
+EBSB	Meridian Interstate Bancorp	NASDAQ
+MMSI	Merit Medical Systems	NASDAQ
+MACK	Merrimack Pharmaceuticals	NASDAQ
+MERU	Meru Networks	NASDAQ
+MSLI	Merus Labs International Inc.	NASDAQ
+MLAB	Mesa Laboratories	NASDAQ
+CASH	Meta Financial Group	NASDAQ
+MBLX	Metabolix	NASDAQ
+MEOH	Methanex Corporation	NASDAQ
+MEIL	METHES ENERGIES INTERNATIONAL LTD	NASDAQ
+MEILW	METHES ENERGIES INTERNATIONAL LTD	NASDAQ
+MEILZ	METHES ENERGIES INTERNATIONAL LTD	NASDAQ
+METR	Metro Bancorp	NASDAQ
+MCBI	MetroCorp Bancshares	NASDAQ
+MFRI	MFRI	NASDAQ
+MGCD	MGC Diagnostics Corporation	NASDAQ
+MGEE	MGE Energy Inc.	NASDAQ
+MGPI	MGP Ingredients	NASDAQ
+MCRL	Micrel	NASDAQ
+MCHP	Microchip Technology Incorporated	NASDAQ
+MFI	MicroFinancial Incorporated	NASDAQ
+MU	Micron Technology	NASDAQ
+MICT	Micronet Enertec Technologies	NASDAQ
+MICTW	Micronet Enertec Technologies	NASDAQ
+MCRS	MICROS Systems	NASDAQ
+MSCC	Microsemi Corporation	NASDAQ
+MSFT	Microsoft Corporation	NASDAQ
+MSTR	MicroStrategy Incorporated	NASDAQ
+MVIS	Microvision	NASDAQ
+MVISW	Microvision	NASDAQ
+MPB	Mid Penn Bancorp	NASDAQ
+MCEP	Mid+AC0-Con Energy Partners	NASDAQ
+MBRG	Middleburg Financial Corporation	NASDAQ
+MSEX	Middlesex Water Company	NASDAQ
+MOFG	MidWestOne Financial Group	NASDAQ
+MDXG	MiMedx Group	NASDAQ
+MNDO	MIND C.T.I. Ltd.	NASDAQ
+MSPD	Mindspeed Technologies	NASDAQ
+MSON	MISONIX	NASDAQ
+MIND	Mitcham Industries	NASDAQ
+MITK	Mitek Systems	NASDAQ
+MITL	Mitel Networks Corporation	NASDAQ
+MKSI	MKS Instruments	NASDAQ
+MINI	Mobile Mini	NASDAQ
+MOCO	MOCON	NASDAQ
+MPAC	MOD+AC0-PAC CORP.	NASDAQ
+MLNK	ModusLink Global Solutions	NASDAQ
+MOLX	Molex Incorporated	NASDAQ
+MOLXA	Molex Incorporated	NASDAQ
+MNTA	Momenta Pharmaceuticals	NASDAQ
+MCRI	Monarch Casino +ACY- Resort	NASDAQ
+MNRK	Monarch Financial Holdings	NASDAQ
+MDLZ	Mondelez International	NASDAQ
+MGI	Moneygram International	NASDAQ
+MPWR	Monolithic Power Systems	NASDAQ
+TYPE	Monotype Imaging Holdings Inc.	NASDAQ
+MNRO	Monro Muffler Brake	NASDAQ
+MRCC	Monroe Capital Corporation	NASDAQ
+MNST	Monster Beverage Corporation	NASDAQ
+MHGC	Morgans Hotel Group Co.	NASDAQ
+MORN	Morningstar	NASDAQ
+MOSY	MoSys	NASDAQ
+MPAA	Motorcar Parts of America	NASDAQ
+MOVE	Move	NASDAQ
+MSBF	MSB Financial Corp.	NASDAQ
+MNTG	MTR Gaming Group	NASDAQ
+MTSC	MTS Systems Corporation	NASDAQ
+MBND	Multiband Corporation	NASDAQ
+LABL	Multi+AC0-Color Corporation	NASDAQ
+MFLX	Multi+AC0-Fineline Electronix	NASDAQ
+MGAM	Multimedia Games Holding Company	NASDAQ
+MFSF	MutualFirst Financial Inc.	NASDAQ
+MWIV	MWI Veterinary Supply	NASDAQ
+MYL	Mylan Inc.	NASDAQ
+MYRG	MYR Group	NASDAQ
+MYGN	Myriad Genetics	NASDAQ
+NANO	Nanometrics Incorporated	NASDAQ
+NSPH	Nanosphere	NASDAQ
+NSSC	NAPCO Security Technologies	NASDAQ
+NASB	NASB Financial Inc.	NASDAQ
+QQQX	NASDAQ Premium Income and Growth Fund Inc.	NASDAQ
+NAFC	Nash+AC0-Finch Company	NASDAQ
+NATH	Nathan+ACYAIw-39	NASDAQ
+NAUH	National American University Holdings	NASDAQ
+NKSH	National Bankshares	NASDAQ
+FIZZ	National Beverage Corp.	NASDAQ
+NCMI	National CineMedia	NASDAQ
+NATI	National Instruments Corporation	NASDAQ
+NATL	National Interstate Corporation	NASDAQ
+NPBC	National Penn Bancshares	NASDAQ
+NRCIA	National Research Corporation	NASDAQ
+NRCIB	National Research Corporation	NASDAQ
+NSEC	National Security Group	NASDAQ
+NTSC	National Technical Systems	NASDAQ
+NWLI	National Western Life Insurance Company	NASDAQ
+NAII	Natural Alternatives International	NASDAQ
+NATR	Nature+ACYAIw-39	NASDAQ
+BABY	Natus Medical Incorporated	NASDAQ
+NVSL	Naugatuck Valley Financial Corporation	NASDAQ
+NAVR	Navarre Corporation	NASDAQ
+NBTF	NB+ACY-T FINANCIAL GROUP INC	NASDAQ
+NBTB	NBT Bancorp Inc.	NASDAQ
+NCIT	NCI	NASDAQ
+NKTR	Nektar Therapeutics	NASDAQ
+NEOG	Neogen Corporation	NASDAQ
+NEO	NeoGenomics	NASDAQ
+NEON	Neonode Inc.	NASDAQ
+NEPT	Neptune Technologies +ACY- Bioresources Inc	NASDAQ
+UEPS	Net 1 UEPS Technologies	NASDAQ
+NETE	Net Element International	NASDAQ
+NETC	NET Servicos de Comunicacao S.A.	NASDAQ
+NTAP	NetApp	NASDAQ
+NTES	NetEase	NASDAQ
+NFLX	Netflix	NASDAQ
+NTGR	NETGEAR	NASDAQ
+NLST	Netlist	NASDAQ
+NTCT	NetScout Systems	NASDAQ
+NTWK	NetSol Technologies Inc.	NASDAQ
+NTSP	NetSpend Holdings	NASDAQ
+NBIX	Neurocrine Biosciences	NASDAQ
+NURO	NeuroMetrix	NASDAQ
+IQNT	Neutral Tandem	NASDAQ
+NCBC	New Century Bancorp	NASDAQ
+NHTB	New Hampshire Thrift Bancshares	NASDAQ
+NYMT	New York Mortgage Trust	NASDAQ
+NYMTP	New York Mortgage Trust	NASDAQ
+NBBC	NewBridge Bancorp	NASDAQ
+NEWL	NewLead Holdings Ltd.	NASDAQ
+NLNK	NewLink Genetics Corporation	NASDAQ
+NFSB	Newport Bancorp	NASDAQ
+NEWP	Newport Corporation	NASDAQ
+FOXAV	News Corporation	NASDAQ
+FOXVV	News Corporation	NASDAQ
+NWS	News Corporation	NASDAQ
+NWSA	News Corporation	NASDAQ
+NWSAV	News Corporation	NASDAQ
+NWSVV	News Corporation	NASDAQ
+NEWS	NewStar Financial	NASDAQ
+NEWT	Newtek Business Services Inc.	NASDAQ
+NXST	Nexstar Broadcasting Group	NASDAQ
+NFEC	NF Energy Saving Corporation	NASDAQ
+NGPC	NGP Capital Resources Company	NASDAQ
+EGOV	NIC Inc.	NASDAQ
+NICE	NICE+AC0-Systems Limited	NASDAQ
+NICK	Nicholas Financial	NASDAQ
+NIHD	NII Holdings	NASDAQ
+NINE	Ninetowns Internet Technology Group Company Limited	NASDAQ
+NNBR	NN	NASDAQ
+NDSN	Nordson Corporation	NASDAQ
+NSYS	Nortech Systems Incorporated	NASDAQ
+NTK	Nortek Inc.	NASDAQ
+NOVB	North Valley Bancorp	NASDAQ
+NBN	Northeast Bancorp	NASDAQ
+NECB	Northeast Community Bancorp	NASDAQ
+NTIC	Northern Technologies International Corporation	NASDAQ
+NTRS	Northern Trust Corporation	NASDAQ
+NFBK	Northfield Bancorp	NASDAQ
+NRIM	Northrim BanCorp Inc	NASDAQ
+NWBI	Northwest Bancshares	NASDAQ
+NWBO	Northwest Biotherapeutics	NASDAQ
+NWBOW	Northwest Biotherapeutics	NASDAQ
+NWPX	Northwest Pipe Company	NASDAQ
+NCLH	Norwegian Cruise Line Holdings Ltd.	NASDAQ
+NWFL	Norwood Financial Corp.	NASDAQ
+NVMI	Nova Measuring Instruments Ltd.	NASDAQ
+NVDQ	Novadaq Technologies Inc	NASDAQ
+NVTL	Novatel Wireless	NASDAQ
+NVAX	Novavax	NASDAQ
+NVGN	Novogen Limited	NASDAQ
+NPSP	NPS Pharmaceuticals	NASDAQ
+NTLS	NTELOS Holdings Corp.	NASDAQ
+NUAN	Nuance Communications	NASDAQ
+NMRX	Numerex Corp.	NASDAQ
+PATH	NuPathe Inc.	NASDAQ
+NUTR	Nutraceutical International Corporation	NASDAQ
+NTRI	NutriSystem Inc	NASDAQ
+NUVA	NuVasive	NASDAQ
+NVEEU	NV5 Holdings	NASDAQ
+NVEC	NVE Corporation	NASDAQ
+NVDA	NVIDIA Corporation	NASDAQ
+NXPI	NXP Semiconductors N.V.	NASDAQ
+NXTM	NxStage Medical	NASDAQ
+NYMX	Nymox Pharmaceutical Corporation	NASDAQ
+OIIM	O2Micro International Limited	NASDAQ
+BKOR	Oak Ridge Financial Services	NASDAQ
+OVLY	Oak Valley Bancorp (CA)	NASDAQ
+OBAF	OBA Financial Services	NASDAQ
+OBCI	Ocean Bio+AC0-Chem	NASDAQ
+OPTT	Ocean Power Technologies	NASDAQ
+ORIG	Ocean Rig UDW Inc.	NASDAQ
+OSHC	Ocean Shore Holding Co.	NASDAQ
+OCFC	OceanFirst Financial Corp.	NASDAQ
+OCLR	Oclaro	NASDAQ
+OFED	Oconee Federal Financial Corp.	NASDAQ
+OCLS	Oculus Innovative Sciences	NASDAQ
+OCZ	OCZ Technology Group Inc	NASDAQ
+OMEX	Odyssey Marine Exploration	NASDAQ
+OPAY	Official Payments Holdings	NASDAQ
+OFS	OFS Capital Corporation	NASDAQ
+OVBC	Ohio Valley Banc Corp.	NASDAQ
+OHRP	Ohr Pharmaceuticals	NASDAQ
+ODFL	Old Dominion Freight Line	NASDAQ
+OLBK	Old Line Bancshares	NASDAQ
+OPOF	Old Point Financial Corporation	NASDAQ
+OSBC	Old Second Bancorp	NASDAQ
+OSBCP	Old Second Bancorp	NASDAQ
+ZEUS	Olympic Steel	NASDAQ
+OFLX	Omega Flex	NASDAQ
+OMER	Omeros Corporation	NASDAQ
+OABC	OmniAmerican Bancorp	NASDAQ
+OMCL	Omnicell	NASDAQ
+OVTI	OmniVision Technologies	NASDAQ
+OMTH	Omthera Pharmaceuticals	NASDAQ
+ONNN	ON Semiconductor Corporation	NASDAQ
+OTIV	On Track Innovations Ltd	NASDAQ
+OGXI	OncoGenex Pharmaceuticals Inc.	NASDAQ
+ONCY	Oncolytics Biotech	NASDAQ
+ONTY	Oncothyreon Inc.	NASDAQ
+ONFC	Oneida Financial Corp.	NASDAQ
+ONVI	Onvia	NASDAQ
+ONXX	ONYX Pharmaceuticals	NASDAQ
+OTEX	Open Text Corporation	NASDAQ
+OPEN	OpenTable	NASDAQ
+OPXA	Opexa Therapeutics	NASDAQ
+OPLK	Oplink Communications	NASDAQ
+OBAS	Optibase Ltd.	NASDAQ
+OCC	Optical Cable Corporation	NASDAQ
+OPTR	Optimer Pharmaceuticals	NASDAQ
+OPHC	OptimumBank Holdings	NASDAQ
+ORCL	Oracle Corporation	NASDAQ
+ORMP	Oramed Pharmaceuticals Inc.	NASDAQ
+OSUR	OraSure Technologies	NASDAQ
+ORBC	ORBCOMM Inc.	NASDAQ
+ORBT	Orbit International Corporation	NASDAQ
+ORBK	Orbotech Ltd.	NASDAQ
+OSH	Orchard Supply Hardware Stores Corporation	NASDAQ
+ORLY	O+ACYAIw-39	NASDAQ
+OREX	Orexigen Therapeutics	NASDAQ
+SEED	Origin Agritech Limited	NASDAQ
+ORIT	Oritani Financial Corp.	NASDAQ
+ORRF	Orrstown Financial Services Inc	NASDAQ
+OFIX	Orthofix International N.V.	NASDAQ
+OSIS	OSI Systems	NASDAQ
+OSIR	Osiris Therapeutics	NASDAQ
+OSN	Ossen Innovation Co.	NASDAQ
+OTEL	Otelco Inc.	NASDAQ
+OTTR	Otter Tail Corporation	NASDAQ
+OVAS	Ovascience Inc.	NASDAQ
+OVRL	Overland Storage	NASDAQ
+OSTK	Overstock.com	NASDAQ
+OXLC	Oxford Lane Capital Corp.	NASDAQ
+OXLCP	Oxford Lane Capital Corp.	NASDAQ
+OXGN	OXiGENE	NASDAQ
+OXBT	Oxygen Biotherapeutics	NASDAQ
+PFIN	P +ACY- F Industries	NASDAQ
+PTSI	P.A.M. Transportation Services	NASDAQ
+PCAR	PACCAR Inc.	NASDAQ
+PACR	Pacer International	NASDAQ
+PACB	Pacific Biosciences of California	NASDAQ
+PCBK	Pacific Continental Corporation (Ore)	NASDAQ
+PEIX	Pacific Ethanol	NASDAQ
+PMBC	Pacific Mercantile Bancorp	NASDAQ
+PPBI	Pacific Premier Bancorp Inc	NASDAQ
+PSUN	Pacific Sunwear of California	NASDAQ
+PCRX	Pacira Pharmaceuticals	NASDAQ
+PACT          	Pactera Technology International Ltd	NASDAQ
+PACW	PacWest Bancorp	NASDAQ
+PTIE	Pain Therapeutics	NASDAQ
+PLMT	Palmetto Bancshares	NASDAQ
+PMTI	Palomar Medical Technologies	NASDAQ
+PAAS	Pan American Silver Corp.	NASDAQ
+PNRA	Panera Bread Company	NASDAQ
+PZZA	Papa John+ACYAIw-39	NASDAQ
+PRGN	Paragon Shipping Inc.	NASDAQ
+PAMT	Parametric Sound Corp.	NASDAQ
+PRXL	PAREXEL International Corporation	NASDAQ
+PSTB	Park Sterling Corporation	NASDAQ
+PKBK	Parke Bancorp	NASDAQ
+PRKR	ParkerVision	NASDAQ
+PKOH	Park+AC0-Ohio Holdings Corp.	NASDAQ
+PTNR	Partner Communications Company Ltd.	NASDAQ
+PBHC	Pathfinder Bancorp	NASDAQ
+PATK	Patrick Industries	NASDAQ
+PNBK	Patriot National Bancorp Inc.	NASDAQ
+PATR	Patriot Transportation Holding	NASDAQ
+PDCO	Patterson Companies	NASDAQ
+PTEN	Patterson+AC0-UTI Energy	NASDAQ
+PLCC	Paulson Capital Corp.	NASDAQ
+PAYX	Paychex	NASDAQ
+PCCC	PC Connection	NASDAQ
+PCMI	PCM	NASDAQ
+PCTI	PC+AC0-Tel	NASDAQ
+PDCE	PDC Energy	NASDAQ
+PDFS	PDF Solutions	NASDAQ
+PDII	PDI	NASDAQ
+PDLI	PDL BioPharma	NASDAQ
+PGC	Peapack+AC0-Gladstone Financial Corporation	NASDAQ
+PRLS	Peerless Systems Corporation	NASDAQ
+PEGA	Pegasystems Inc.	NASDAQ
+PCO	Pendrell Corporation	NASDAQ
+PENX	Penford Corporation	NASDAQ
+PENN	Penn National Gaming	NASDAQ
+PFLT	PennantPark Floating Rate Capital Ltd.	NASDAQ
+PNNT	PennantPark Investment Corporation	NASDAQ
+PWOD	Penns Woods Bancorp	NASDAQ
+PEBO	Peoples Bancorp Inc.	NASDAQ
+PEBK	Peoples Bancorp of North Carolina	NASDAQ
+PEOP	Peoples Federal Bancshares	NASDAQ
+PFBX	Peoples Financial Corporation	NASDAQ
+PBCT	People+ACYAIw-39	NASDAQ
+PRCP	Perceptron	NASDAQ
+PPHM	Peregrine Pharmaceuticals Inc.	NASDAQ
+PSMI	Peregrine Semiconductor Corp.	NASDAQ
+PWRD	Perfect World Co.	NASDAQ
+PRFT	Perficient	NASDAQ
+PTIX	Performance Technologies	NASDAQ
+PFMT	Performant Financial Corporation	NASDAQ
+PERF	Perfumania Holdings	NASDAQ
+PSEM	Pericom Semiconductor Corporation	NASDAQ
+PERI	Perion Network Ltd	NASDAQ
+PESI	Perma+AC0-Fix Environmental Services	NASDAQ
+PTX	Pernix Therapeutics Holdings	NASDAQ
+PERY	Perry Ellis International Inc.	NASDAQ
+PETS	PetMed Express	NASDAQ
+PETM	PetSmart	NASDAQ
+PFSW	PFSweb	NASDAQ
+PGTI	PGT	NASDAQ
+PCYC	Pharmacyclics	NASDAQ
+ANTP	PHAZAR CORP	NASDAQ
+PHII	PHI	NASDAQ
+PHIIK	PHI	NASDAQ
+PHMD	PhotoMedex	NASDAQ
+PLAB	Photronics	NASDAQ
+PICO	PICO Holdings Inc.	NASDAQ
+PPC	Pilgrim+ACYAIw-39	NASDAQ
+PME	Pingtan Marine Enterprise Ltd.	NASDAQ
+PNFP	Pinnacle Financial Partners	NASDAQ
+PXLW	Pixelworks	NASDAQ
+PZZI	Pizza Inn Holdings	NASDAQ
+PLNR	Planar Systems	NASDAQ
+PLPM	Planet Payment	NASDAQ
+PLXS	Plexus Corp.	NASDAQ
+PLUG	Plug Power	NASDAQ
+PLBC	Plumas Bancorp	NASDAQ
+PSTI	Pluristem Therapeutics	NASDAQ
+PLXT	PLX Technology	NASDAQ
+PMCS	PMC +AC0- Sierra	NASDAQ
+PMFG	PMFG	NASDAQ
+PBSK	Poage Bankshares	NASDAQ
+PTSX	Point.360	NASDAQ
+PNTR	Pointer Telocation Ltd.	NASDAQ
+PCOM	Points International	NASDAQ
+PTEK	PokerTek	NASDAQ
+PBCP	Polonia Bancorp	NASDAQ
+PLCM	Polycom	NASDAQ
+POOL	Pool Corporation	NASDAQ
+POPE	Pope Resources	NASDAQ
+BPOP	Popular	NASDAQ
+BPOPM	Popular	NASDAQ
+BPOPN	Popular	NASDAQ
+PBIB	Porter Bancorp	NASDAQ
+PRAA	Portfolio Recovery Associates	NASDAQ
+PTLA	Portola Pharmaceuticals	NASDAQ
+PSTR	PostRock Energy Corporation	NASDAQ
+PCH	Potlatch Corporation	NASDAQ
+POWL	Powell Industries	NASDAQ
+POWI	Power Integrations	NASDAQ
+PSIX	Power Solutions International	NASDAQ
+PWER	Power+AC0-One	NASDAQ
+POWR	PowerSecure International	NASDAQ
+PSCC	PowerShares Exchange+AC0-Traded Fund Trust II PowerShares S+ACY-P Smal	NASDAQ
+PSCD	PowerShares Exchange+AC0-Traded Fund Trust II PowerShares S+ACY-P Smal	NASDAQ
+PSCE	PowerShares Exchange+AC0-Traded Fund Trust II PowerShares S+ACY-P Smal	NASDAQ
+PSCF	PowerShares Exchange+AC0-Traded Fund Trust II PowerShares S+ACY-P Smal	NASDAQ
+PSCH	PowerShares Exchange+AC0-Traded Fund Trust II PowerShares S+ACY-P Smal	NASDAQ
+PSCI	PowerShares Exchange+AC0-Traded Fund Trust II PowerShares S+ACY-P Smal	NASDAQ
+PSCM	PowerShares Exchange+AC0-Traded Fund Trust II PowerShares S+ACY-P Smal	NASDAQ
+PSCT	PowerShares Exchange+AC0-Traded Fund Trust II PowerShares S+ACY-P Smal	NASDAQ
+PSCU	PowerShares Exchange+AC0-Traded Fund Trust II PowerShares S+ACY-P Smal	NASDAQ
+PRFZ	PowerShares FTSE RAFI US 1500 Small+AC0-Mid Portfolio	NASDAQ
+PAGG	PowerShares Global Agriculture Portfolio	NASDAQ
+PSAU	PowerShares Global Gold +ACY- Precious Metals Portfolio	NASDAQ
+PMNA	PowerShares MENA Frontier Countries Portfolio	NASDAQ
+PNQI	PowerShares NASDAQ Internet Portfolio	NASDAQ
+QQQ	PowerShares QQQ Trust	NASDAQ
+POZN	Pozen	NASDAQ
+PRAN	Prana Biotechnology Ltd	NASDAQ
+PFBC	Preferred Bank	NASDAQ
+PLPC	Preformed Line Products Company	NASDAQ
+PRXI	Premier Exhibitions	NASDAQ
+PFBI	Premier Financial Bancorp	NASDAQ
+PRGX	PRGX Global	NASDAQ
+PCLN	priceline.com Incorporated	NASDAQ
+PSMT	PriceSmart	NASDAQ
+PBMD	Prima BioMed Ltd	NASDAQ
+PACQ	Prime Acquisition Corp.	NASDAQ
+PACQU	Prime Acquisition Corp.	NASDAQ
+PACQW	Prime Acquisition Corp.	NASDAQ
+PNRG	PrimeEnergy Corporation	NASDAQ
+PRMW	Primo Water Corporation	NASDAQ
+PRIM	Primoris Services Corporation	NASDAQ
+PVTB	PrivateBancorp	NASDAQ
+PVTBP	PrivateBancorp	NASDAQ
+PKT	Procera Networks	NASDAQ
+PDEX	Pro+AC0-Dex	NASDAQ
+IPDN	Professional Diversity Network	NASDAQ
+PGNX	Progenics Pharmaceuticals Inc.	NASDAQ
+PRGS	Progress Software Corporation	NASDAQ
+PFPT	Proofpoint	NASDAQ
+PRPH	ProPhase Labs	NASDAQ
+BIB	ProShares Trust ProShares Ultra Nasdaq Biotechnology	NASDAQ
+BIS	ProShares Trust ProShares UltraShort Nasdaq Biotechnology	NASDAQ
+TQQQ	ProShares UltraPro QQQ	NASDAQ
+SQQQ	ProShares UltraPro Short QQQ 	NASDAQ
+PSEC	Prospect Capital Corporation	NASDAQ
+PGRX	Prospect Global Resources Inc.	NASDAQ
+PRTA	Prothena Corporation plc	NASDAQ
+PWX	Providence and Worcester Railroad Company	NASDAQ
+PROV	Provident Financial Holdings	NASDAQ
+PBIP	Prudential Bancorp	NASDAQ
+PSBH	PSB Holdings	NASDAQ
+PSDV	pSivida Corp.	NASDAQ
+PMD	Psychemedics Corporation	NASDAQ
+PMTC	PTC Inc.	NASDAQ
+PTCT	PTC Therapeutics	NASDAQ
+PULB	Pulaski Financial Corp.	NASDAQ
+PCYO	Pure Cycle Corporation	NASDAQ
+PVFC	PVF Capital Corp.	NASDAQ
+QADA	QAD Inc.	NASDAQ
+QADB	QAD Inc.	NASDAQ
+QCCO	QC Holdings	NASDAQ
+QCRH	QCR Holdings	NASDAQ
+QGEN	Qiagen N.V.	NASDAQ
+QIWI	QIWI plc	NASDAQ
+QKLS	QKL Stores	NASDAQ
+QLIK	Qlik Technologies Inc.	NASDAQ
+QLGC	QLogic Corporation	NASDAQ
+QLTI	QLT Inc.	NASDAQ
+QCOM	QUALCOMM Incorporated	NASDAQ
+QLTY	Quality Distribution	NASDAQ
+QSII	Quality Systems	NASDAQ
+QBAK	Qualstar Corporation	NASDAQ
+QLYS	Qualys	NASDAQ
+QTWW	Quantum Fuel Systems Technologies Worldwide	NASDAQ
+QCOR	Questcor Pharmaceuticals	NASDAQ
+QUIK	QuickLogic Corporation	NASDAQ
+QDEL	Quidel Corporation	NASDAQ
+QNST	QuinStreet	NASDAQ
+DFZ	R.G. Barry Corporation	NASDAQ
+RRD	R.R. Donnelley +ACY- Sons Company	NASDAQ
+RADA	Rada Electronics Industries Limited	NASDAQ
+RDCM	Radcom Ltd.	NASDAQ
+ROIA	Radio One	NASDAQ
+ROIAK	Radio One	NASDAQ
+RSYS	RadiSys Corporation	NASDAQ
+RDNT	RadNet	NASDAQ
+RDWR	Radware Ltd.	NASDAQ
+RMBS	Rambus	NASDAQ
+RAND	Rand Capital Corporation	NASDAQ
+RLOG	Rand Logistics	NASDAQ
+GOLD	Randgold Resources Limited	NASDAQ
+RPTP	Raptor Pharmaceutical Corp.	NASDAQ
+RAVN	Raven Industries	NASDAQ
+ROLL	RBC Bearings Incorporated	NASDAQ
+RCMT	RCM Technologies	NASDAQ
+RDA	RDA Microelectronics	NASDAQ
+RLOC	ReachLocal	NASDAQ
+RDI	Reading International Inc	NASDAQ
+RDIB	Reading International Inc	NASDAQ
+RSOL	Real Goods Solar	NASDAQ
+RNWK	RealNetworks	NASDAQ
+RP	RealPage	NASDAQ
+RCPT	Receptos	NASDAQ
+RCON	Recon Technology	NASDAQ
+RECV	Recovery Energy	NASDAQ
+RRGB	Red Robin Gourmet Burgers	NASDAQ
+RDHL	Redhill Biopharma Ltd.	NASDAQ
+REDF	Rediff.com India Limited	NASDAQ
+RGDO	Regado BioSciences	NASDAQ
+REGN	Regeneron Pharmaceuticals	NASDAQ
+RGLS	Regulus Therapeutics Inc.	NASDAQ
+REIS	Reis	NASDAQ
+RELV	Reliv+ACYAIw-39	NASDAQ
+MARK	Remark Media	NASDAQ
+REMY	Remy International	NASDAQ
+RNST	Renasant Corporation	NASDAQ
+REGI	Renewable Energy Group	NASDAQ
+RCII	Rent+AC0-A+AC0-Center Inc.	NASDAQ
+RENT	Rentrak Corporation	NASDAQ
+RGEN	Repligen Corporation	NASDAQ
+RPRX	Repros Therapeutics Inc.	NASDAQ
+RPRXW	Repros Therapeutics Inc.	NASDAQ
+RPRXZ	Repros Therapeutics Inc.	NASDAQ
+RJET	Republic Airways Holdings	NASDAQ
+RBCAA	Republic Bancorp	NASDAQ
+FRBK	Republic First Bancorp	NASDAQ
+REFR	Research Frontiers Incorporated	NASDAQ
+BBRY	Research In Motion Limited	NASDAQ
+REXI	Resource America	NASDAQ
+RECN	Resources Connection	NASDAQ
+RGDX	Response Genetics	NASDAQ
+MKTG	Responsys	NASDAQ
+ROIC	Retail Opportunity Investments Corp.	NASDAQ
+ROICU	Retail Opportunity Investments Corp.	NASDAQ
+ROICW	Retail Opportunity Investments Corp.	NASDAQ
+RVLT	Revolution Lighting Technologies	NASDAQ
+REXX	Rex Energy Corporation	NASDAQ
+RFIL	RF Industries	NASDAQ
+RFMD	RF Micro Devices	NASDAQ
+RGCO	RGC Resources Inc.	NASDAQ
+RELL	Richardson Electronics	NASDAQ
+RICK	Rick+ACYAIw-39	NASDAQ
+RIGL	Rigel Pharmaceuticals	NASDAQ
+RNET	RigNet	NASDAQ
+RIMG	Rimage Corporation	NASDAQ
+RITT	RIT Technologies Ltd.	NASDAQ
+RIVR	River Valley Bancorp.	NASDAQ
+RVBD	Riverbed Technology	NASDAQ
+RVSB	Riverview Bancorp Inc	NASDAQ
+RLJE	RLJ Entertainment	NASDAQ
+ROCM	Rochester Medical Corporation	NASDAQ
+RCKB	Rockville Financial	NASDAQ
+RMTI	Rockwell Medical	NASDAQ
+RCKY	Rocky Brands	NASDAQ
+RMCF	Rocky Mountain Chocolate Factory	NASDAQ
+RSTI	Rofin+AC0-Sinar Technologies	NASDAQ
+ROMA	Roma Financial Corporation	NASDAQ
+ROSG	Rosetta Genomics Ltd.	NASDAQ
+ROSE	Rosetta Resources Inc.	NASDAQ
+ROST	Ross Stores	NASDAQ
+ROVI	Rovi Corporation	NASDAQ
+RBPAA	Royal Bancshares of Pennsylvania	NASDAQ
+RGLD	Royal Gold	NASDAQ
+ROYL	Royale Energy	NASDAQ
+FUND	Royce Focus Trust	NASDAQ
+RPXC	RPX Corporation	NASDAQ
+RRST	RRSat Global Communications Network Ltd.	NASDAQ
+RTIX	RTI Biologics	NASDAQ
+RBCN	Rubicon Technology	NASDAQ
+RTEC	Rudolph Technologies	NASDAQ
+RUE	rue21	NASDAQ
+RUSHA	Rush Enterprises	NASDAQ
+RUSHB	Rush Enterprises	NASDAQ
+RUTH	Ruth+ACYAIw-39	NASDAQ
+RYAAY	Ryanair Holdings plc	NASDAQ
+STBA	S+ACY-T Bancorp	NASDAQ
+SANW	S+ACY-W Seed Company	NASDAQ
+SANWZ	S+ACY-W Seed Company	NASDAQ
+SYBT	S.Y. Bancorp	NASDAQ
+SYBTP	S.Y. Bancorp	NASDAQ
+SBRA	Sabra Healthcare REIT	NASDAQ
+SBRAP	Sabra Healthcare REIT	NASDAQ
+SAFT	Safety Insurance Group	NASDAQ
+SGNT	Sagent Pharmaceuticals	NASDAQ
+SAIA	Saia	NASDAQ
+SALM	Salem Communications Corporation	NASDAQ
+SAL	Salisbury Bancorp	NASDAQ
+SLXP	Salix Pharmaceuticals	NASDAQ
+SAFM	Sanderson Farms	NASDAQ
+SNDK	SanDisk Corporation	NASDAQ
+SASR	Sandy Spring Bancorp	NASDAQ
+SGMO	Sangamo BioSciences	NASDAQ
+SANM	Sanmina Corporation	NASDAQ
+GCVRZ	Sanofi	NASDAQ
+SNTS	Santarus	NASDAQ
+SPNS	Sapiens International Corporation N.V.	NASDAQ
+SAPE	Sapient Corporation	NASDAQ
+SRPT	Sarepta Therapeutics	NASDAQ
+SVNT	Savient Pharmaceuticals Inc	NASDAQ
+SBFG	SB Financial Group	NASDAQ
+SBAC	SBA Communications Corporation	NASDAQ
+SCSC	ScanSource	NASDAQ
+SCBT	SCBT Financial Corporation	NASDAQ
+RMGN	SCG Financial Acquisition Corp	NASDAQ
+SMIT	Schmitt Industries	NASDAQ
+SCHN	Schnitzer Steel Industries	NASDAQ
+SCHL	Scholastic Corporation	NASDAQ
+SCLN	SciClone Pharmaceuticals	NASDAQ
+SGMS	Scientific Games Corp	NASDAQ
+SQI	SciQuest	NASDAQ
+SEAC	SeaChange International	NASDAQ
+SBCF	Seacoast Banking Corporation of Florida	NASDAQ
+STX	Seagate Technology.	NASDAQ
+SHIP	Seanergy Maritime Holdings Corp	NASDAQ
+SHLD	Sears Holdings Corporation	NASDAQ
+SHOS	Sears Hometown and Outlet Stores	NASDAQ
+SGEN	Seattle Genetics	NASDAQ
+SNFCA	Security National Financial Corporation	NASDAQ
+SEIC	SEI Investments Company	NASDAQ
+SCSS	Select Comfort Corporation	NASDAQ
+SLTC	Selectica	NASDAQ
+SIGI	Selective Insurance Group	NASDAQ
+LEDS	SemiLEDS Corporation	NASDAQ
+SMTC	Semtech Corporation	NASDAQ
+SENEA	Seneca Foods Corp.	NASDAQ
+SENEB	Seneca Foods Corp.	NASDAQ
+SNMX	Senomyx	NASDAQ
+SQNM	Sequenom	NASDAQ
+SREV	ServiceSource International	NASDAQ
+SEV	Sevcon	NASDAQ
+SVBI	Severn Bancorp Inc	NASDAQ
+SGOC	SGOCO Group	NASDAQ
+GAME	Shanda Games Limited	NASDAQ
+SMED	Sharps Compliance Corp	NASDAQ
+SHEN	Shenandoah Telecommunications Co	NASDAQ
+VALV	Shengkai Innovations	NASDAQ
+SHFL	SHFL Entertainment	NASDAQ
+SHLO	Shiloh Industries	NASDAQ
+SHPG	Shire plc	NASDAQ
+SCVL	Shoe Carnival	NASDAQ
+SHBI	Shore Bancshares Inc	NASDAQ
+SHOR	ShoreTel	NASDAQ
+SFLY	Shutterfly	NASDAQ
+SIFI	SI Financial Group	NASDAQ
+SIEB	Siebert Financial Corp.	NASDAQ
+BSRR	Sierra Bancorp	NASDAQ
+SWIR	Sierra Wireless	NASDAQ
+SIFY	Sify Technologies Limited	NASDAQ
+SIGA	SIGA Technologies Inc.	NASDAQ
+SIGM	Sigma Designs	NASDAQ
+SIAL	Sigma+AC0-Aldrich Corporation	NASDAQ
+SGMA	SigmaTron International	NASDAQ
+SBNY	Signature Bank	NASDAQ
+SBNYW	Signature Bank	NASDAQ
+SLGN	Silgan Holdings	NASDAQ
+SILC	Silicom Ltd	NASDAQ
+SGI	Silicon Graphics International Corp	NASDAQ
+SIMG	Silicon Image	NASDAQ
+SLAB	Silicon Laboratories	NASDAQ
+SIMO	Silicon Motion Technology Corporation	NASDAQ
+SPIL	Siliconware Precision Industries Company	NASDAQ
+SSRI	Silver Standard Resources Inc.	NASDAQ
+SFNC	Simmons First National Corporation	NASDAQ
+SMPL	Simplicity Bancorp Inc.	NASDAQ
+SLP	Simulations Plus	NASDAQ
+SINA	Sina Corporation	NASDAQ
+SBGI	Sinclair Broadcast Group	NASDAQ
+SCOK	SinoCoking Coal and Coke Chemical Industries	NASDAQ
+SINO	Sino+AC0-Global Shipping America	NASDAQ
+SVA	Sinovac Biotech	NASDAQ
+SIRI	Sirius XM Radio Inc.	NASDAQ
+SIRO	Sirona Dental Systems	NASDAQ
+SKUL	Skullcandy	NASDAQ
+MOBI	Sky+AC0-mobi Limited	NASDAQ
+SPU	SkyPeople Fruit Juice	NASDAQ
+SKBI	Skystar Bio+AC0-Pharmaceutical Company	NASDAQ
+SKYW	SkyWest	NASDAQ
+SWKS	Skyworks Solutions	NASDAQ
+ISM	SLM Corporation	NASDAQ
+JSM	SLM Corporation	NASDAQ
+OSM	SLM Corporation	NASDAQ
+SLM	SLM Corporation	NASDAQ
+SLMAP	SLM Corporation	NASDAQ
+SLMBP	SLM Corporation	NASDAQ
+SMT	SMART Technologies Inc.	NASDAQ
+SPRO	SmartPros Ltd.	NASDAQ
+SWHC	Smith +ACY- Wesson Holding Corporation	NASDAQ
+SMSI	Smith Micro Software	NASDAQ
+SMTX	SMTC Corporation	NASDAQ
+LNCE	Snyder+ACYAIw-39	NASDAQ
+SODA	SodaStream International Ltd.	NASDAQ
+SOHU	Sohu.com Inc.	NASDAQ
+SLRC	Solar Capital Ltd.	NASDAQ
+SUNS	Solar Senior Capital Ltd.	NASDAQ
+SCTY	SolarCity Corporation	NASDAQ
+SZYM	Solazyme	NASDAQ
+SLTM	Solta Medical	NASDAQ
+SONC	Sonic Corp.	NASDAQ
+SOFO	Sonic Foundry	NASDAQ
+SONS	Sonus Networks	NASDAQ
+SORL	SORL Auto Parts	NASDAQ
+SOHO	Sotherly Hotels Inc.	NASDAQ
+SFBC	Sound Financial Bancorp	NASDAQ
+SDBT	SoundBite Communications	NASDAQ
+FIRE	Sourcefire	NASDAQ
+SOCB	Southcoast Financial Corporation	NASDAQ
+SFST	Southern First Bancshares	NASDAQ
+SMBC	Southern Missouri Bancorp	NASDAQ
+SONA	Southern National Bancorp of Virginia	NASDAQ
+SBSI	Southside Bancshares	NASDAQ
+OKSB	Southwest Bancorp	NASDAQ
+OKSBP	Southwest Bancorp	NASDAQ
+SPBC	SP Bancorp	NASDAQ
+SPAN	Span+AC0-America Medical Systems	NASDAQ
+SBSA	Spanish Broadcasting System	NASDAQ
+SGRP	SPAR Group	NASDAQ
+SPAR	Spartan Motors	NASDAQ
+SPTN	Spartan Stores	NASDAQ
+SPPI	Spectrum Pharmaceuticals	NASDAQ
+SPEX	Spherix Incorporated	NASDAQ
+SPIR	Spire Corporation	NASDAQ
+SAVE	Spirit Airlines	NASDAQ
+SPLK	Splunk Inc.	NASDAQ
+SPCHA	Sport Chalet	NASDAQ
+SPCHB	Sport Chalet	NASDAQ
+SPRD	Spreadtrum Communications	NASDAQ
+SPSC	SPS Commerce	NASDAQ
+SSNC	SS+ACY-C Technologies Holdings	NASDAQ
+STAA	STAAR Surgical Company	NASDAQ
+STMP	Stamps.com Inc.	NASDAQ
+STND	Standard Financial Corp.	NASDAQ
+STAN	Standard Parking Corporation	NASDAQ
+STLY	Stanley Furniture Company	NASDAQ
+SPLS	Staples	NASDAQ
+SBLK	Star Bulk Carriers Corp.	NASDAQ
+STSI	Star Scientific	NASDAQ
+SBUX	Starbucks Corporation	NASDAQ
+STRZA	Starz	NASDAQ
+STRZB	Starz	NASDAQ
+STFC	State Auto Financial Corporation	NASDAQ
+STBZ	State Bank Financial Corporation.	NASDAQ
+SIBC	State Investors Bancorp	NASDAQ
+GASS	StealthGas	NASDAQ
+STEC	STEC	NASDAQ
+STLD	Steel Dynamics	NASDAQ
+SMRT	Stein Mart	NASDAQ
+STNR	Steiner Leisure Limited	NASDAQ
+STEL	StellarOne Corporation	NASDAQ
+STEM	StemCells	NASDAQ
+STML	Stemline Therapeutics	NASDAQ
+STXS	Stereotaxis	NASDAQ
+SRCL	Stericycle	NASDAQ
+STRL	Sterling Construction Company Inc	NASDAQ
+STSA	Sterling Financial Corporation	NASDAQ
+SHOO	Steven Madden	NASDAQ
+SSFN	Stewardship Financial Corp	NASDAQ
+STEI	Stewart Enterprises	NASDAQ
+SSYS	Stratasys	NASDAQ
+SDIX	Strategic Diagnostics Inc.	NASDAQ
+STRT	Strattec Security Corporation	NASDAQ
+STRS	Stratus Properties	NASDAQ
+STRA	Strayer Education	NASDAQ
+STRM	Streamline Health Solutions	NASDAQ
+STB	Student Transportation Inc	NASDAQ
+SCMP	Sucampo Pharmaceuticals	NASDAQ
+SUBK	Suffolk Bancorp	NASDAQ
+SUMR	Summer Infant	NASDAQ
+SMMF	Summit Financial Group	NASDAQ
+SSBI	Summit State Bank	NASDAQ
+SNBC	Sun Bancorp	NASDAQ
+SNHY	Sun Hydraulics Corporation	NASDAQ
+SNSS	Sunesis Pharmaceuticals	NASDAQ
+STKL	SunOpta	NASDAQ
+SPWR	SunPower Corporation	NASDAQ
+SSH	Sunshine Heart Inc	NASDAQ
+SMCI	Super Micro Computer	NASDAQ
+SCON	Superconductor Technologies Inc.	NASDAQ
+SGC	Superior Uniform Group	NASDAQ
+SUPN	Supernus Pharmaceuticals	NASDAQ
+SPPR	Supertel Hospitality	NASDAQ
+SPPRO	Supertel Hospitality	NASDAQ
+SPPRP	Supertel Hospitality	NASDAQ
+SUPX	Supertex	NASDAQ
+SPRT	support.com	NASDAQ
+SRDX	SurModics	NASDAQ
+SUSQ	Susquehanna Bancshares	NASDAQ
+SBBX	Sussex Bancorp	NASDAQ
+SUTR	Sutor Technology Group Limited	NASDAQ
+STRN	Sutron Corporation	NASDAQ
+SIVB	SVB Financial Group	NASDAQ
+SIVBO	SVB Financial Group	NASDAQ
+SWSH	Swisher Hygiene	NASDAQ
+SYKE	Sykes Enterprises	NASDAQ
+SYMC	Symantec Corporation	NASDAQ
+SYMM	Symmetricom	NASDAQ
+SYNC	Synacor	NASDAQ
+GEVA	Synageva BioPharma Corp.	NASDAQ
+SYNL	Synalloy Corporation	NASDAQ
+SYNA	Synaptics Incorporated	NASDAQ
+SNCR	Synchronoss Technologies	NASDAQ
+SURG	Synergetics USA	NASDAQ
+SGYP	Synergy Pharmaceuticals	NASDAQ
+SGYPU	Synergy Pharmaceuticals	NASDAQ
+SGYPW	Synergy Pharmaceuticals	NASDAQ
+ELOS	Syneron Medical Ltd.	NASDAQ
+SNPS	Synopsys	NASDAQ
+SNTA	Synta Pharmaceuticals Corp.	NASDAQ
+SYNT	Syntel	NASDAQ
+SYMX	Synthesis Energy Systems	NASDAQ
+SYNM	Syntroleum Corporation	NASDAQ
+SYUT	Synutra International	NASDAQ
+SYPR	Sypris Solutions	NASDAQ
+TROW	T. Rowe Price Group	NASDAQ
+TAIT	Taitron Components Incorporated	NASDAQ
+TTWO	Take+AC0-Two Interactive Software	NASDAQ
+TBAC	Tandy Brands Accessories	NASDAQ
+TLF	Tandy Leather Factory	NASDAQ
+TNGO	Tangoe	NASDAQ
+TRGT	Targacept	NASDAQ
+TASR	TASER International	NASDAQ
+TATT	TAT Technologies Ltd.	NASDAQ
+TAYC	Taylor Capital Group	NASDAQ
+TAYCO	Taylor Capital Group	NASDAQ
+TAYCP	Taylor Capital Group	NASDAQ
+TAYD	Taylor Devices	NASDAQ
+TCPC	TCP Capital Corp.	NASDAQ
+TEAR	TearLab Corporation	NASDAQ
+TECD	Tech Data Corporation	NASDAQ
+TECH	Techne Corporation	NASDAQ
+TCCO	Technical Communications Corporation	NASDAQ
+TTGT	TechTarget	NASDAQ
+TECUA	Tecumseh Products Company	NASDAQ
+TECUB	Tecumseh Products Company	NASDAQ
+TKMR	Tekmira Pharmaceuticals Corp	NASDAQ
+TSYS	TeleCommunication Systems	NASDAQ
+TNAV	TeleNav	NASDAQ
+TTEC	TeleTech Holdings	NASDAQ
+TELK	Telik	NASDAQ
+TLAB	Tellabs	NASDAQ
+WRLS	Telular Corporation	NASDAQ
+TBNK	Territorial Bancorp Inc.	NASDAQ
+TSRO	TESARO	NASDAQ
+TESO	Tesco Corporation	NASDAQ
+TSLA	Tesla Motors	NASDAQ
+TESS	TESSCO Technologies Incorporated	NASDAQ
+TSRA	Tessera Technologies	NASDAQ
+TTEK	Tetra Tech	NASDAQ
+TTPH	Tetraphase Pharmaceuticals	NASDAQ
+TCBI	Texas Capital Bancshares	NASDAQ
+TCBIL	Texas Capital Bancshares	NASDAQ
+TCBIP	Texas Capital Bancshares	NASDAQ
+TCBIW	Texas Capital Bancshares	NASDAQ
+TXN	Texas Instruments Incorporated	NASDAQ
+TXRH	Texas Roadhouse	NASDAQ
+THRD	TF Financial Corporation	NASDAQ
+TFSL	TFS Financial Corporation	NASDAQ
+TGTX	TG Therapeutics	NASDAQ
+TGE	TGC Industries	NASDAQ
+ABCO	The Advisory Board Company	NASDAQ
+ANDE	The Andersons	NASDAQ
+TBBK	The Bancorp	NASDAQ
+BKYF	The Bank of Kentucky Financial Corp.	NASDAQ
+BONT	The Bon+AC0-Ton Stores	NASDAQ
+CG	The Carlyle Group L.P.	NASDAQ
+CAKE	The Cheesecake Factory Incorporated	NASDAQ
+CHEF	The Chefs+ACYAIw-39	NASDAQ
+PLCE	The Children+ACYAIw-39	NASDAQ
+DSGX	The Descartes Systems Group Inc.	NASDAQ
+DXYN	The Dixie Group	NASDAQ
+ENSG	The Ensign Group	NASDAQ
+XONE	The ExOne Company	NASDAQ
+FINL	The Finish Line	NASDAQ
+FBMS	The First Bancshares	NASDAQ
+FLIC	The First of Long Island Corporation	NASDAQ
+TFM	The Fresh Market	NASDAQ
+GT	The Goodyear Tire +ACY- Rubber Company	NASDAQ
+GTPPP	The Goodyear Tire +ACY- Rubber Company	NASDAQ
+HCKT	The Hackett Group	NASDAQ
+HAIN	The Hain Celestial Group	NASDAQ
+CUBA	The Herzfeld Caribbean Basin Fund	NASDAQ
+INTG	The Intergroup Corporation	NASDAQ
+KEYW	The KEYW Holding Corporation	NASDAQ
+MSG	The Madison Square Garden Company	NASDAQ
+TMNG	The Management Network Group	NASDAQ
+MDCO	The Medicines Company	NASDAQ
+MIDD	The Middleby Corporation	NASDAQ
+NDAQ	The NASDAQ OMX Group	NASDAQ
+NAVG	The Navigators Group	NASDAQ
+PTRY	The Pantry	NASDAQ
+PRSC	The Providence Service Corporation	NASDAQ
+SPNC	The Spectranetics Corporation	NASDAQ
+ULTI	The Ultimate Software Group	NASDAQ
+WTSL	The Wet Seal	NASDAQ
+YORW	The York Water Company	NASDAQ
+NCTY	The9 Limited	NASDAQ
+THRX	Theravance	NASDAQ
+KOOL	THERMOGENESIS Corp.	NASDAQ
+TST	TheStreet	NASDAQ
+TCRD	THL Credit	NASDAQ
+THOR	Thoratec Corporation	NASDAQ
+THLD	Threshold Pharmaceuticals	NASDAQ
+THTI	THT Heat Transfer Technology	NASDAQ
+OINK	Tianli Agritech	NASDAQ
+TIBX	TIBCO Software	NASDAQ
+TICC	TICC Capital Corp.	NASDAQ
+TIGR	TigerLogic Corporation	NASDAQ
+TTS	Tile Shop Hldgs	NASDAQ
+TSBK	Timberland Bancorp	NASDAQ
+TITN	Titan Machinery Inc.	NASDAQ
+TIVO	TiVo Inc.	NASDAQ
+TISA	Top Image Systems	NASDAQ
+TOPS	TOP Ships Inc.	NASDAQ
+TORM          	TOR Minerals International Inc	NASDAQ
+TRMD	TORM A/S	NASDAQ
+TRNX	Tornier N.V.	NASDAQ
+TOFC	Tower Financial Corporation	NASDAQ
+TWGP	Tower Group International	NASDAQ
+TSEM	Tower Semiconductor Ltd.	NASDAQ
+TWER	Towerstream Corporation	NASDAQ
+CLUB	Town Sports International Holdings	NASDAQ
+TOWN	Towne Bank	NASDAQ
+TSCO	Tractor Supply Company	NASDAQ
+TSRE	Trade Street Residential	NASDAQ
+TWMC	Trans World Entertainment Corp.	NASDAQ
+TACT	TransAct Technologies Incorporated	NASDAQ
+TRNS	Transcat	NASDAQ
+TSPT	Transcept Pharmaceuticals	NASDAQ
+TGA	Transglobe Energy Corp	NASDAQ
+TTHI	Transition Therapeutics	NASDAQ
+TXCC	TranSwitch Corporation	NASDAQ
+TZYM	Tranzyme	NASDAQ
+TZOO	Travelzoo Inc.	NASDAQ
+TREE	Tree.com	NASDAQ
+TCBK	TriCo Bancshares	NASDAQ
+TRS	TriMas Corporation	NASDAQ
+TRMB	Trimble Navigation Limited	NASDAQ
+TRIB	Trinity Biotech plc	NASDAQ
+TRIO	Trio Merger Corp.	NASDAQ
+TRIP	TripAdvisor	NASDAQ
+TQNT	TriQuint Semiconductor	NASDAQ
+TSC	TriState Capital Holdings	NASDAQ
+TRIT	Tri+AC0-Tech Holding Inc.	NASDAQ
+TSRX	Trius Therapeutics	NASDAQ
+TROV	TrovaGene	NASDAQ
+TROVU	TrovaGene	NASDAQ
+TROVW	TrovaGene	NASDAQ
+TRLG	True Religion Apparel	NASDAQ
+THST	Truett+AC0-Hurst	NASDAQ
+TBOW	Trunkbow International Holdings Ltd.	NASDAQ
+TRST	TrustCo Bank Corp NY	NASDAQ
+TRMK	Trustmark Corporation	NASDAQ
+TSRI	TSR	NASDAQ
+TTMI	TTM Technologies	NASDAQ
+TUES	Tuesday Morning Corp.	NASDAQ
+TFCO	Tufco Technologies	NASDAQ
+TWTC	tw telecom inc.	NASDAQ
+TWIN	Twin Disc	NASDAQ
+USCR	U S Concrete	NASDAQ
+PRTS	U.S. Auto Parts Network	NASDAQ
+USEG	U.S. Energy Corp.	NASDAQ
+GROW	U.S. Global Investors	NASDAQ
+UBIC	UBIC	NASDAQ
+UBNT	Ubiquiti Networks	NASDAQ
+UFPT	UFP Technologies	NASDAQ
+ULTA	Ulta Salon	NASDAQ
+UCTT	Ultra Clean Holdings	NASDAQ
+ULBI	Ultralife Corporation	NASDAQ
+ULTR	Ultrapetrol (Bahamas) Limited	NASDAQ
+UTEK	Ultratech	NASDAQ
+UMBF	UMB Financial Corporation	NASDAQ
+UMPQ	Umpqua Holdings Corporation	NASDAQ
+UNAM	Unico American Corporation	NASDAQ
+UNIS	Unilife Corporation	NASDAQ
+UNB	Union Bankshares	NASDAQ
+UBSH	Union First Market Bankshares Corporation	NASDAQ
+UNXL	Uni+AC0-Pixel	NASDAQ
+UBCP	United Bancorp	NASDAQ
+UBOH	United Bancshares	NASDAQ
+UBSI	United Bankshares	NASDAQ
+UCBA	United Community Bancorp	NASDAQ
+UCBI	United Community Banks	NASDAQ
+UCFC	United Community Financial Corp.	NASDAQ
+UBNK	United Financial Bancorp	NASDAQ
+UFCS	United Fire Group	NASDAQ
+UIHC	United Insurance Holdings Corp.	NASDAQ
+UNFI	United Natural Foods	NASDAQ
+UNTD	United Online	NASDAQ
+UBFO	United Security Bancshares	NASDAQ
+USBI	United Security Bancshares	NASDAQ
+USLM	United States Lime +ACY- Minerals	NASDAQ
+USTR	United Stationers Inc.	NASDAQ
+UTHR	United Therapeutics Corporation	NASDAQ
+UG	United+AC0-Guardian	NASDAQ
+UNTK	UniTek Global Services	NASDAQ
+UNTY	Unity Bancorp	NASDAQ
+UBPS	Universal Business Payment Solutions Acquisition Corporation	NASDAQ
+UEIC	Universal Electronics Inc.	NASDAQ
+UFPI	Universal Forest Products	NASDAQ
+USAP	Universal Stainless +ACY- Alloy Products	NASDAQ
+UACL	Universal Truckload Services	NASDAQ
+UVSP	Univest Corporation of Pennsylvania	NASDAQ
+UPIP	Unwired Planet	NASDAQ
+URRE	Uranium Resources	NASDAQ
+URBN	Urban Outfitters	NASDAQ
+UPI	Uroplasty	NASDAQ
+ECOL	US Ecology	NASDAQ
+USMO	USA Mobility	NASDAQ
+USAT	USA Technologies	NASDAQ
+USATP	USA Technologies	NASDAQ
+USATZ	USA Technologies	NASDAQ
+USAK	USA Truck	NASDAQ
+USMD	USMD Holdings	NASDAQ
+UTMD	Utah Medical Products	NASDAQ
+UTIW	UTi Worldwide Inc.	NASDAQ
+UTSI	UTStarcom Holdings Corp	NASDAQ
+VYFC	Valley Financial Corporation	NASDAQ
+VLYWW	Valley National Bancorp	NASDAQ
+VALU	Value Line	NASDAQ
+VCLK	ValueClick	NASDAQ
+VVTV	ValueVision Media	NASDAQ
+VNDA	Vanda Pharmaceuticals Inc.	NASDAQ
+BNDX	Vanguard Charlotte Funds Vanguard Total International Bond ETF	NASDAQ
+VGIT	Vanguard Intermediate +AC0-Term Government Bond ETF	NASDAQ
+VCIT	Vanguard Intermediate+AC0-Term Corporate Bond ETF	NASDAQ
+VNQI	Vanguard International Equity Index Funds Vanguard Global ex+AC0-U	NASDAQ
+VCLT	Vanguard Long+AC0-Term Corporate Bond ETF	NASDAQ
+VGLT	Vanguard Long+AC0-Term Government Bond ETF	NASDAQ
+VTIP	Vanguard Malvern Funds Vanguard Short+AC0-Term Inflation+AC0-Protected	NASDAQ
+VMBS	Vanguard Mortgage+AC0-Backed Securities ETF	NASDAQ
+VNR	Vanguard Natural Resources LLC	NASDAQ
+VONE	Vanguard Scottsdale Funds Vanguard Russell 1000 ETF	NASDAQ
+VONG	Vanguard Scottsdale Funds Vanguard Russell 1000 Growth ETF	NASDAQ
+VONV	Vanguard Scottsdale Funds Vanguard Russell 1000 Value ETF	NASDAQ
+VTWO	Vanguard Scottsdale Funds Vanguard Russell 2000 ETF	NASDAQ
+VTWG	Vanguard Scottsdale Funds Vanguard Russell 2000 Growth ETF	NASDAQ
+VTWV	Vanguard Scottsdale Funds Vanguard Russell 2000 Value ETF	NASDAQ
+VTHR	Vanguard Scottsdale Funds Vanguard Russell 3000 ETF	NASDAQ
+VGSH	Vanguard Short Term Government Bond ETF	NASDAQ
+VCSH	Vanguard Short+AC0-Term Corporate Bond ETF	NASDAQ
+VXUS	Vanguard STAR Funds Vanguard Total International Stock ETF	NASDAQ
+VWOB	Vanguard Whitehall Funds Vanguard Emerging Markets Government 	NASDAQ
+VDSI	VASCO Data Security International	NASDAQ
+VASC	Vascular Solutions	NASDAQ
+WOOF	VCA Antech	NASDAQ
+VECO	Veeco Instruments Inc.	NASDAQ
+VELT	Velti plc	NASDAQ
+APPY	Venaxis	NASDAQ
+VTUS	Ventrus Biosciences	NASDAQ
+VRA	Vera Bradley	NASDAQ
+VSTM	Verastem	NASDAQ
+VRNM	Verenium Corporation	NASDAQ
+VRNT	Verint Systems Inc.	NASDAQ
+VRSN	VeriSign	NASDAQ
+VRSK	Verisk Analytics	NASDAQ
+VRML	Vermillion	NASDAQ
+VTNR	Vertex Energy	NASDAQ
+VRTX	Vertex Pharmaceuticals Incorporated	NASDAQ
+VRTA	Vestin Realty Mortgage I	NASDAQ
+VRTB	Vestin Realty Mortgage II	NASDAQ
+VIA	Viacom Inc.	NASDAQ
+VIAB	Viacom Inc.	NASDAQ
+VSAT	ViaSat	NASDAQ
+VIAS	Viasystems Group	NASDAQ
+VICL	Vical Incorporated	NASDAQ
+VICR	Vicor Corporation	NASDAQ
+VIDE	Video Display Corporation	NASDAQ
+VPFG	ViewPoint Financial Group	NASDAQ
+VBFC	Village Bank and Trust Financial Corp.	NASDAQ
+VLGEA	Village Super Market	NASDAQ
+VIMC	Vimicro International Corporation	NASDAQ
+VIRC	Virco Manufacturing Corporation	NASDAQ
+VCBI	Virginia Commerce Bancorp	NASDAQ
+VPHM	ViroPharma Incorporated	NASDAQ
+VSCP	VirtualScopics	NASDAQ
+VRTS	Virtus Investment Partners	NASDAQ
+VRTU	Virtusa Corporation	NASDAQ
+VISN	VisionChina Media	NASDAQ
+VSCI	Vision+AC0-Sciences	NASDAQ
+VPRT	Vistaprint N.V.	NASDAQ
+VITC	Vitacost.com	NASDAQ
+VTSS	Vitesse Semiconductor Corporation	NASDAQ
+VTNC	Vitran Corporation	NASDAQ
+VVUS	VIVUS	NASDAQ
+VOCS	Vocus	NASDAQ
+VOD	Vodafone Group Plc	NASDAQ
+VOLC	Volcano Corporation	NASDAQ
+VLTC	Voltari Corporation	NASDAQ
+VLTR	Volterra Semiconductor Corporation	NASDAQ
+VOXX	VOXX International Corporation	NASDAQ
+VRNG	Vringo	NASDAQ
+VRNGW	Vringo	NASDAQ
+VSBN	VSB Bancorp	NASDAQ
+VSEC	VSE Corporation	NASDAQ
+WCRX	Warner Chilcott plc	NASDAQ
+WRES	Warren Resources	NASDAQ
+WBCO	Washington Banking Company	NASDAQ
+WAFD	Washington Federal	NASDAQ
+WAFDW	Washington Federal	NASDAQ
+WASH	Washington Trust Bancorp	NASDAQ
+WFBI	WashingtonFirst Bankshares Inc	NASDAQ
+WSBF	Waterstone Financial	NASDAQ
+WAVX	Wave Systems Corp.	NASDAQ
+WAYN	Wayne Savings Bancshares Inc.	NASDAQ
+WSTG	Wayside Technology Group	NASDAQ
+WDFC	WD+AC0-40 Company	NASDAQ
+WWWW	Web.com Group	NASDAQ
+WBMD	WebMD Health Corp	NASDAQ
+WBSN	Websense	NASDAQ
+WEBK	Wellesley Bancorp	NASDAQ
+WEN	Wendy+ACYAIw-39	NASDAQ
+WERN	Werner Enterprises	NASDAQ
+WSBC	WesBanco	NASDAQ
+WTBA	West Bancorporation	NASDAQ
+WSTC	West Corporation	NASDAQ
+WMAR	West Marine	NASDAQ
+WABC	Westamerica Bancorporation	NASDAQ
+WBB	Westbury Bancorp	NASDAQ
+WSTL	Westell Technologies	NASDAQ
+WDC	Western Digital Corporation	NASDAQ
+WFD	Westfield Financial	NASDAQ
+WLB	Westmoreland Coal Company	NASDAQ
+WLBPZ	Westmoreland Coal Company	NASDAQ
+WPRT	Westport Innovations Inc	NASDAQ
+WEYS	Weyco Group	NASDAQ
+WHLR	Wheeler Real Estate Investment Trust	NASDAQ
+WHF	WhiteHorse Finance	NASDAQ
+WFM	Whole Foods Market	NASDAQ
+WILN	Wi+AC0-Lan Inc	NASDAQ
+WVVI	Willamette Valley Vineyards	NASDAQ
+WLDN	Willdan Group	NASDAQ
+WLFC	Willis Lease Finance Corporation	NASDAQ
+WIBC	Wilshire Bancorp	NASDAQ
+WIN	Windstream Corporation	NASDAQ
+WINA	Winmark Corporation	NASDAQ
+WTFC	Wintrust Financial Corporation	NASDAQ
+WTFCW	Wintrust Financial Corporation	NASDAQ
+WETF	WisdomTree Investments	NASDAQ
+GULF	WisdomTree Middle East Dividend Fund	NASDAQ
+CHXF	WisdomTree Trust WisdomTree China Dividend Ex+AC0-Financials Fund	NASDAQ
+EMCB	WisdomTree Trust WisdomTree Emerging Markets Corporate Bond Fu	NASDAQ
+GLCB	WisdomTree Trust WisdomTree Global Corporate Bond Fund	NASDAQ
+DGRW	WisdomTree Trust WisdomTree U.S. Dividend Growth Fund	NASDAQ
+WBKC	Wolverine Bancorp	NASDAQ
+WWD	Woodward	NASDAQ
+WRLD	World Acceptance Corporation	NASDAQ
+XWES	World Energy Solutions Inc (DE)	NASDAQ
+WPCS	WPCS International Incorporated	NASDAQ
+WPPGY	WPP plc	NASDAQ
+WMGI	Wright Medical Group	NASDAQ
+WMGIZ	Wright Medical Group	NASDAQ
+WSFS	WSFS Financial Corporation	NASDAQ
+WSFSL	WSFS Financial Corporation	NASDAQ
+WSCI	WSI Industries Inc.	NASDAQ
+WVFC	WVS Financial Corp.	NASDAQ
+WYNN	Wynn Resorts	NASDAQ
+XBKS	Xenith Bankshares	NASDAQ
+XNPT	XenoPort	NASDAQ
+XLNX	Xilinx	NASDAQ
+XOMA	XOMA Corporation	NASDAQ
+XOOM	Xoom Corporation	NASDAQ
+XPLR	Xplore Technologies Corp	NASDAQ
+XRSC	XRS Corporation	NASDAQ
+XRTX	Xyratex Ltd.	NASDAQ
+YDKN	Yadkin Financial Corporation	NASDAQ
+YHOO	Yahoo+ACE- Inc.	NASDAQ
+YNDX	Yandex N.V.	NASDAQ
+YONG	Yongye International	NASDAQ
+YOD	You On Demand Holdings	NASDAQ
+YRCW	YRC Worldwide	NASDAQ
+YY	YY Inc.	NASDAQ
+ZAGG	ZAGG Inc	NASDAQ
+ZLCS	Zalicus Inc.	NASDAQ
+ZAZA	ZaZa Energy Corporation	NASDAQ
+ZBRA	Zebra Technologies Corporation	NASDAQ
+ZLTQ	ZELTIQ Aesthetics	NASDAQ
+ZHNE	Zhone Technologies	NASDAQ
+HOGS	Zhongpin Inc.	NASDAQ
+Z	Zillow	NASDAQ
+ZN	Zion Oil +ACY- Gas Inc	NASDAQ
+ZION	Zions Bancorporation	NASDAQ
+ZIONW	Zions Bancorporation	NASDAQ
+ZIONZ	Zions Bancorporation	NASDAQ
+ZIOP	ZIOPHARM Oncology Inc	NASDAQ
+ZIPR	ZipRealty	NASDAQ
+ZIXI	Zix Corporation	NASDAQ
+ZGNX	Zogenix	NASDAQ
+ZOLT	Zoltek Companies	NASDAQ
+ZOOM	Zoom Technologies	NASDAQ
+ZUMZ	Zumiez Inc.	NASDAQ
+ZIGO	Zygo Corporation	NASDAQ
+ZNGA	Zynga Inc.	NASDAQ
