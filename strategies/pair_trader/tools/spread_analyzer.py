@@ -37,7 +37,6 @@ def run(sym1,sym2,e,t):
     #sym2 = raw_input("Leg 2: ")
     #e = float(raw_input("End Years Back: "))
     #t = float(raw_input("Start Years Back: "))
-    
     pair_string = sym1+':'+sym2
     global results
     results = {pair_string:{'Random Walk I[1]':0,'Random Walk I[2]':0,'Cointegration Level':0,
@@ -63,27 +62,18 @@ def run(sym1,sym2,e,t):
 ##############################################################
 #                Run calls these functions                   #
 ##############################################################
-def make_url(symbol):
-    base_url = "http://ichart.finance.yahoo.com/table.csv?s="
-    return base_url + symbol
-def data_handler(sym,t,e):
-    url = make_url(sym)
-    page = urlopen(url)
-    df = pd.read_csv(page)['Adj Close'][e:(e+t)]
-    df = pd.DataFrame({sym:df})
-    return df
 def get_data(sym1,sym2,t,e):
-    print 'Getting data...'
     t = int(t*250)
     e = int(e*250)
-    df1 = data_handler(sym1,t,e)
-    df2 = data_handler(sym2,t,e)
+    print 'Getting data...'
+    df1 = pd.read_csv('/home/vin/git/QuantFox/data/price/'+sym1+'_price.csv')['Adj Close'][e:(e+t)]
+    df2 = pd.read_csv('/home/vin/git/QuantFox/data/price/'+sym2+'_price.csv')['Adj Close'][e:(e+t)]
     df = pd.concat((df1,df2),axis=1)
     return df
 def get_index(index,t,e):
     t = int(t*250)
     e = int(e*250)
-    index = data_handler(index,t,e)
+    index = pd.read_csv('/home/vin/git/QuantFox/data/price/'+index+'_price.csv')['Adj Close'][e:(e+t)]
     return index
 def ols_transform(df,sym1,sym2):
     """

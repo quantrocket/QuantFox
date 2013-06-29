@@ -1,9 +1,11 @@
-import spread_analyzer
+import test
 import pandas as pd
 import csv
 import itertools
+import os
 
-symReader = csv.reader(open('sp500_financials.csv', "rb"), delimiter = ",")
+sym_file = '/home/vin/git/QuantFox/data/instruments/sp500_financials.csv'
+symReader = csv.reader(open(sym_file, "rb"), delimiter = ",")
 sym_list = [symbol for line in symReader for symbol in line]
 #sym_list = ['GOOG','IBM','AAPL']
 pairs = []
@@ -18,8 +20,7 @@ etf = 'XLF'
 def all_perms():
     for sym in sym_list:
         pairs.append([sym,'XLF'])
-            
- 
+
 def all_pairs(lst):
     a = sym_list
     b = sym_list
@@ -50,7 +51,7 @@ for p in pairs:
     if sym1 != sym2:
         print sym1,':',sym2
         try:
-            df = spread_analyzer.run(sym1,sym2,end_years_back,start_years_back)
+            df = test.run(sym1,sym2,end_years_back,start_years_back)
             results = results.join(df)
         except:
             pass
@@ -61,5 +62,5 @@ results = results.reindex(index=['Random Walk I[1]','Random Walk I[2]','Cointegr
                            'Average Price-Ratio','Beta 1','Beta 2','Spread Mean',
                            'Spread Median','Spread Maximum','Spread Minimum',
                            'Half-life','Current z-score'])
-results.to_csv('spread_db_financials.csv')
+results.to_csv('/home/vin/git/QuantFox/strategies/pair_trader/spreads/testing.csv')
 print results
