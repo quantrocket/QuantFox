@@ -2,7 +2,7 @@ import pyGTrends as gt
 import pandas as pd
 from datetime import datetime
 
-sym_list = ['AAPL','GOOG']
+
 def run(sym_list):
     get_trends(sym_list)
     df = sync_db(sym_list)
@@ -23,7 +23,3 @@ def sync_db(sym_list):
         df = df.join(df1)
     df = df.fillna(method='ffill')
     return df
-
-df=run(sym_list)
-print df
-df.to_csv('test.csv')

@@ -15,7 +15,7 @@ from zipline.finance import performance, slippage, risk, trading
 from zipline.finance.risk import RiskMetricsBase
 from zipline.finance.performance import PerformanceTracker, PerformancePeriod
 
-sym_list = ['AAPL','GOOG']
+sym_list = ['CHTP']
 start = datetime(2010, 1, 1, 0, 0, 0, 0, pytz.utc)
 end = datetime(2013, 01, 01, 0, 0, 0, 0, pytz.utc)
 window = 14
@@ -53,39 +53,45 @@ class trend_trader(TradingAlgorithm):  # inherit from TradingAlgorithm
         self.order(sym,-q)
         
     def long(self,data,sym):
-        size = (self.portfolio.cash)/2
-        slice = self.trend_df[sym][-window:]
+        #size = (self.portfolio.cash)/2
+        price = data[sym].price
         q = 10000/price
         self.order(sym,q)
     
     def handle_data(self, data):  # overload handle_data() method
-        print self.day_count
+        #print self.day_count
         date = TradingAlgorithm.get_datetime(self)
-        self.dates.append(str(date)[0:10])
-        print str(date)[0:10]
-        if self.day_count >= window:
-            # Get price and trend data
-            for sym in sym_list:
-                # Price
-                sym_price = data[sym].price
-                self.prices[sym].append(sym_price)
-                # Trend
-                trend = self.trend_df[sym][self.dates[-1]]
-                self.trends[sym].append(trend)
-                
-                
+        self.dates.append(date)
+        #print str(date)[0:10]
+        # Get price and trend data
+        for sym in sym_list:
+            # Price
+            sym_price = data[sym].price
+            self.prices[sym].append(sym_price)
+            # Trend
+            trend = self.trend_df[sym][self.dates[-1]]
+            self.trends[sym].append(float(trend))      
             # Get RS and zscore
+            if self.day_count >= window:
                 rs = self.get_rs
-                zscore = trend_zscore(sym,date)
+                zscore = self.trend_zscore(sym,date)
+                self.zscores[sym].append(zscore)
                 # Execute trades
-                if zscore > 1:
-                    long(data,sym)
+                if self.portfolio.positions[sym].amount == 0 and zscore >= 3:
+                    self.long(data,sym)
+                    print str(date)[0:10],'LONG:',sym
+                if self.portfolio.positions[sym].amount != 0 and zscore <= -3:
+                    q = self.portfolio.positions[sym].amount
+                    self.order(sym,-q)
+                    print str(date)[0:10],'Exit:',sym
+            else:
+                self.zscores[sym].append(0)
         self.day_count += 1
 
 if __name__ == '__main__':
     data = load_from_yahoo(stocks=sym_list, indexes={}, start=start, end=end)
-    simple_algo = trend_trader()
-    results = simple_algo.run(data)
+    trend_trader = trend_trader()
+    results = trend_trader.run(data)
 
     ###########################################################################
     # Generate metrics
@@ -127,23 +133,16 @@ if __name__ == '__main__':
     print '------------------------------'
 
 
-
-    ax1 = plt.subplot(211)
-    results.portfolio_value.plot(ax=ax1)
-    ax2 = plt.subplot(212, sharex=ax1)
-    data.SPY.plot(ax=ax2)
-    data.XLY.plot(ax=ax2)
-    data.XLP.plot(ax=ax2)
-    data.XLE.plot(ax=ax2)
-    data.XLF.plot(ax=ax2)
-    data.XLB.plot(ax=ax2)
-    data.XLK.plot(ax=ax2)
-    data.XLV.plot(ax=ax2)
-    data.XLI.plot(ax=ax2)
-    data.XLU.plot(ax=ax2)
+    for sym in sym_list:
+        ax1 = plt.subplot(311, ylabel='Portfolio Value')
+        results.portfolio_value.plot(ax=ax1)
+        ax2 = plt.subplot(312, sharex=ax1, ylabel=str(sym+' Price'))
+        ax2.plot(trend_trader.dates,trend_trader.prices[sym])
+        plt.grid(b=True, which='major', color='k')
+        ax3 = plt.subplot(313, sharex=ax1, ylabel=str(sym+' gTrend zscore'))
+        ax3.plot(trend_trader.dates,trend_trader.zscores[sym])
+        plt.grid(b=True, which='major', color='k')
+        
     
-    
-    
-    
-    plt.gcf().set_size_inches(18, 8)
-    plt.show()
+        plt.gcf().set_size_inches(30, 20)
+        plt.show()
