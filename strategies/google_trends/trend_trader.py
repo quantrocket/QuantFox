@@ -7,10 +7,11 @@ import pytz
 import operator
 import pandas as pd
 from scipy.stats import zscore
+import talib
 
 from zipline.algorithm import TradingAlgorithm
 from zipline.transforms import batch_transform
-from zipline.utils.factory import create_returns_from_list, load_from_yahoo
+from zipline.utils.factory import create_returns_from_list, load_bars_from_yahoo
 from zipline.finance import performance, slippage, risk, trading
 from zipline.finance.risk import RiskMetricsBase
 from zipline.finance.performance import PerformanceTracker, PerformancePeriod
@@ -27,9 +28,14 @@ class trend_trader(TradingAlgorithm):  # inherit from TradingAlgorithm
         self.dates = []
         self.trends = {sym:[] for sym in sym_list}
         self.zscores = {sym:[] for sym in sym_list}
-        self.prices = {sym:[] for sym in sym_list}
+        self.prices = {sym:np.array([]) for sym in sym_list}
+        self.highs = {sym:np.array([]) for sym in sym_list}
+        self.lows = {sym:np.array([]) for sym in sym_list}
         self.day_count = 0
         self.last_order = 0
+        self.stops = {sym:[0,0] for sym in sym_list}    #[take,stop]
+        self.buy_plot = {sym:[] for sym in sym_list}
+        self.sell_plot = {sym:[] for sym in sym_list}
       
     def get_trends(self):
         trend_df = gt.run(sym_list)
@@ -47,6 +53,10 @@ class trend_trader(TradingAlgorithm):  # inherit from TradingAlgorithm
         rs = (current_price - window_price)/window_price
         return rs
         
+    def get_atr(self,sym):
+        atr = talib.ATR(self.highs[sym], self.lows[sym], self.prices[sym], timeperiod=14)
+        return atr
+    
     def short(self,data,sym):
         price = data[sym].price
         q = 10000/price
@@ -62,12 +72,19 @@ class trend_trader(TradingAlgorithm):  # inherit from TradingAlgorithm
         #print self.day_count
         date = TradingAlgorithm.get_datetime(self)
         self.dates.append(date)
+        #print self.portfolio
         #print str(date)[0:10]
         # Get price and trend data
         for sym in sym_list:
             # Price
             sym_price = data[sym].price
-            self.prices[sym].append(sym_price)
+            sym_high = data[sym].high
+            sym_low = data[sym].low
+            self.prices[sym] = np.append(self.prices[sym],sym_price)
+            self.lows[sym] = np.append(self.prices[sym],sym_low)
+            self.highs[sym] = np.append(self.prices[sym],sym_high)
+            # ATR
+            atr = self.get_atr(sym)[-1]
             # Trend
             trend = self.trend_df[sym][self.dates[-1]]
             self.trends[sym].append(float(trend))      
@@ -80,16 +97,20 @@ class trend_trader(TradingAlgorithm):  # inherit from TradingAlgorithm
                 if self.portfolio.positions[sym].amount == 0 and zscore >= 3:
                     self.long(data,sym)
                     print str(date)[0:10],'LONG:',sym
-                if self.portfolio.positions[sym].amount != 0 and zscore <= -3:
-                    q = self.portfolio.positions[sym].amount
-                    self.order(sym,-q)
-                    print str(date)[0:10],'Exit:',sym
+                    take = (atr*5)+sym_price
+                    stop = -(atr*2)+sym_price
+                    self.stops[sym] = [take,stop]
+                elif self.portfolio.positions[sym].amount != 0:
+                    if sym_price >= self.stops[sym][0] or sym_price <= self.stops[sym][1]:
+                        q = self.portfolio.positions[sym].amount
+                        self.order(sym,-q)
+                        print str(date)[0:10],'Exit:',sym
             else:
                 self.zscores[sym].append(0)
         self.day_count += 1
 
 if __name__ == '__main__':
-    data = load_from_yahoo(stocks=sym_list, indexes={}, start=start, end=end)
+    data = load_bars_from_yahoo(stocks=sym_list, indexes={}, start=start, end=end)
     trend_trader = trend_trader()
     results = trend_trader.run(data)
 
