@@ -16,7 +16,7 @@ from zipline.finance import performance, slippage, risk, trading
 from zipline.finance.risk import RiskMetricsBase
 from zipline.finance.performance import PerformanceTracker, PerformancePeriod
 
-sym_list = ['CHTP']
+sym_list = ['KO','IBM','FICO','FCX']
 start = datetime(2010, 1, 1, 0, 0, 0, 0, pytz.utc)
 end = datetime(2013, 01, 01, 0, 0, 0, 0, pytz.utc)
 window = 14
@@ -36,6 +36,7 @@ class trend_trader(TradingAlgorithm):  # inherit from TradingAlgorithm
         self.stops = {sym:[0,0] for sym in sym_list}    #[take,stop]
         self.buy_plot = {sym:[] for sym in sym_list}
         self.sell_plot = {sym:[] for sym in sym_list}
+        self.atr_plot = {sym:{'profit':[],'loss':[]} for sym in sym_list}
       
     def get_trends(self):
         trend_df = gt.run(sym_list)
@@ -53,9 +54,18 @@ class trend_trader(TradingAlgorithm):  # inherit from TradingAlgorithm
         rs = (current_price - window_price)/window_price
         return rs
         
+    def get_rsi(self,sym):
+        #print sym
+        rsi = talib.RSI(self.prices[sym],2)
+        return rsi
+    
     def get_atr(self,sym):
         atr = talib.ATR(self.highs[sym], self.lows[sym], self.prices[sym], timeperiod=14)
         return atr
+    
+    def get_macd(self,sym):
+        macd, macdsignal, macdhist = talib.MACD(self.prices[sym],fastperiod=12,slowperiod=26,signalperiod=9)
+        return macd, macdsignal, macdhist 
     
     def short(self,data,sym):
         price = data[sym].price
@@ -83,8 +93,9 @@ class trend_trader(TradingAlgorithm):  # inherit from TradingAlgorithm
             self.prices[sym] = np.append(self.prices[sym],sym_price)
             self.lows[sym] = np.append(self.prices[sym],sym_low)
             self.highs[sym] = np.append(self.prices[sym],sym_high)
-            # ATR
-            atr = self.get_atr(sym)[-1]
+            # RSI, MACD
+            rsi = self.get_rsi(sym)[-1]
+            macd, macdsignal, macdhist = self.get_macd(sym)
             # Trend
             trend = self.trend_df[sym][self.dates[-1]]
             self.trends[sym].append(float(trend))      
@@ -97,16 +108,16 @@ class trend_trader(TradingAlgorithm):  # inherit from TradingAlgorithm
                 if self.portfolio.positions[sym].amount == 0 and zscore >= 3:
                     self.long(data,sym)
                     print str(date)[0:10],'LONG:',sym
-                    take = (atr*5)+sym_price
-                    stop = -(atr*2)+sym_price
-                    self.stops[sym] = [take,stop]
                 elif self.portfolio.positions[sym].amount != 0:
-                    if sym_price >= self.stops[sym][0] or sym_price <= self.stops[sym][1]:
+                    if sym_price >= self.atr_plot[sym]['profit'][-1] or sym_price <= self.atr_plot[sym]['loss'][-1]:
                         q = self.portfolio.positions[sym].amount
                         self.order(sym,-q)
                         print str(date)[0:10],'Exit:',sym
             else:
                 self.zscores[sym].append(0)
+            atr = self.get_atr(sym)[-1]
+            self.atr_plot[sym]['profit'].append((atr*3)+sym_price)
+            self.atr_plot[sym]['loss'].append(-(atr*1.5)+sym_price)
         self.day_count += 1
 
 if __name__ == '__main__':
@@ -153,12 +164,18 @@ if __name__ == '__main__':
     print 'Max Drawdown: ' + str(round(max_drawdown*100,4)) + '%'
     print '------------------------------'
 
-
     for sym in sym_list:
         ax1 = plt.subplot(311, ylabel='Portfolio Value')
         results.portfolio_value.plot(ax=ax1)
         ax2 = plt.subplot(312, sharex=ax1, ylabel=str(sym+' Price'))
         ax2.plot(trend_trader.dates,trend_trader.prices[sym])
+        # Adjust ATR bands
+        trend_trader.atr_plot[sym]['profit'].insert(0,trend_trader.atr_plot[sym]['profit'][0])
+        trend_trader.atr_plot[sym]['loss'].insert(0,trend_trader.atr_plot[sym]['loss'][0])
+        del trend_trader.atr_plot[sym]['profit'][-1]
+        del trend_trader.atr_plot[sym]['loss'][-1]
+        ax2.plot(trend_trader.dates, trend_trader.atr_plot[sym]['profit'],alpha=0.3)
+        ax2.plot(trend_trader.dates, trend_trader.atr_plot[sym]['loss'],alpha=0.3)
         plt.grid(b=True, which='major', color='k')
         ax3 = plt.subplot(313, sharex=ax1, ylabel=str(sym+' gTrend zscore'))
         ax3.plot(trend_trader.dates,trend_trader.zscores[sym])
