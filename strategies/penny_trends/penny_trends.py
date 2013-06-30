@@ -32,12 +32,14 @@ class trend_trader(TradingAlgorithm):  # inherit from TradingAlgorithm
         self.trends = {sym:[] for sym in sym_list}
         self.zscores = {sym:[] for sym in sym_list}
         self.zscores_s = {sym:[] for sym in sym_list}
+        self.chaikin_plot = {sym:[] for sym in sym_list}
         self.prices = {sym:np.array([]) for sym in sym_list}
         self.volume = {sym:np.array([]) for sym in sym_list}
         self.highs = {sym:np.array([]) for sym in sym_list}
         self.lows = {sym:np.array([]) for sym in sym_list}
         self.day_count = 0
         self.last_order = 0
+        self.mfv = {sym:np.array([]) for sym in sym_list}
         self.stops = {sym:[0,0] for sym in sym_list}    #[take,stop]
         self.buy_plot = {sym:[] for sym in sym_list}
         self.sell_plot = {sym:[] for sym in sym_list}
@@ -58,6 +60,28 @@ class trend_trader(TradingAlgorithm):  # inherit from TradingAlgorithm
         current_price = self.prices[sym][-window_long]
         rs = (current_price - window_price)/window_price
         return rs
+        
+    def get_chaikin(self,sym):
+        high = self.highs[sym][-1]
+        low = self.lows[sym][-1]
+        close = self.prices[sym][-1]
+        volume = self.volume[sym][-1]
+        mfm = ((close-low)-(high-close)) / (high-low)
+        mfv = mfm*volume
+        self.mfv[sym] = np.append(self.mfv[sym],mfv)
+        if self.day_count >= 20:
+            vol_period = self.volume[sym][-20:]
+            mfv_period = self.mfv[sym][-20:]
+            cum_vol = 0
+            cum_mfv = 0
+            for i in mfv_period:
+                cum_mfv += i
+            for i in vol_period:
+                cum_vol += i
+            cmf = cum_mfv / cum_vol
+            return cmf
+        else:
+            return 0
         
     def get_rsi(self,sym):
         #print sym
@@ -101,7 +125,9 @@ class trend_trader(TradingAlgorithm):  # inherit from TradingAlgorithm
             self.highs[sym] = np.append(self.prices[sym],sym_high)
             # Volume
             self.volume[sym] = np.append(self.volume[sym],sym_volume)
-            # RSI, MACD
+            # RSI, MACD, Chaikin
+            cmf = self.get_chaikin(sym)
+            self.chaikin_plot[sym] = np.append(self.chaikin_plot[sym],cmf)
             rsi = self.get_rsi(sym)[-1]
             macd, macdsignal, macdhist = self.get_macd(sym)
             # Trend
@@ -115,7 +141,7 @@ class trend_trader(TradingAlgorithm):  # inherit from TradingAlgorithm
                 self.zscores[sym].append(zscore)
                 self.zscores_s[sym].append(zscore_s)
                 # Execute trades
-                if self.portfolio.positions[sym].amount == 0 and self.zscores[sym][-1] >= 2:
+                if self.portfolio.positions[sym].amount == 0 and self.zscores[sym][-1] >= 2 and cmf > 0:
                     #if self.zscores_s[sym][-1] > self.zscores[sym][-1] and self.zscores_s[sym][-2] < self.zscores[sym][-2]:
                      if 1 == 1:
                         self.long(data,sym)
@@ -178,17 +204,15 @@ if __name__ == '__main__':
     print '------------------------------'
 
     for sym in sym_list:
-        ax1 = plt.subplot(311, ylabel='Portfolio Value')
+        ax1 = plt.subplot(411, ylabel='Portfolio Value')
         results.portfolio_value.plot(ax=ax1)
-        ax2 = plt.subplot(312, sharex=ax1, ylabel=str(sym+' Price'))
+        ax2 = plt.subplot(412, sharex=ax1, ylabel=str(sym+' Price'))
         ax2t = ax2.twinx()
         fillcolor = 'darkgoldenrod'
         ax2.plot(trend_trader.dates,trend_trader.prices[sym])
         volume = (trend_trader.prices[sym]*trend_trader.volume[sym])/1e6  # dollar volume in millions
         vmax = volume.max()
         poly = ax2t.fill_between(trend_trader.dates,volume, 0, label='Volume', facecolor=fillcolor, edgecolor=fillcolor, alpha=0.5)
-        #ax2t.set_ylim(0, 5*vmax)
-        #ax2t.set_yticks([])
         # Adjust ATR bands
         trend_trader.atr_plot[sym]['profit'].insert(0,trend_trader.atr_plot[sym]['profit'][0])
         trend_trader.atr_plot[sym]['loss'].insert(0,trend_trader.atr_plot[sym]['loss'][0])
@@ -197,9 +221,15 @@ if __name__ == '__main__':
         ax2.plot(trend_trader.dates, trend_trader.atr_plot[sym]['profit'],alpha=0.3)
         ax2.plot(trend_trader.dates, trend_trader.atr_plot[sym]['loss'],alpha=0.3)
         plt.grid(b=True, which='major', color='k')
-        ax3 = plt.subplot(313, sharex=ax1, ylabel=str(sym+' gTrend zscore'))
+        ax3 = plt.subplot(413, sharex=ax1, ylabel=str(sym+' gTrend zscore'))
         ax3.plot(trend_trader.dates,trend_trader.zscores[sym])
-        #ax3.plot(trend_trader.dates,trend_trader.zscores_s[sym],color='r')
+        ax3.fill_between(trend_trader.dates,2,trend_trader.zscores[sym],facecolor='green',alpha=0.5)
+        ax3.fill_between(trend_trader.dates,-2,2,facecolor='white',alpha=1)
+        plt.grid(b=True, which='major', color='k')
+        ax4 = plt.subplot(414, sharex=ax1, ylabel=str(sym+' CMF'))
+        ax4.plot(trend_trader.dates,trend_trader.chaikin_plot[sym])
+        ax4.fill_between(trend_trader.dates,trend_trader.chaikin_plot[sym],0,where=trend_trader.chaikin_plot[sym]>0, facecolor='green',alpha=0.5)
+        ax4.fill_between(trend_trader.dates,trend_trader.chaikin_plot[sym],0,where=trend_trader.chaikin_plot[sym]<0, facecolor='red',alpha=0.5)
         plt.grid(b=True, which='major', color='k')
         plt.subplots_adjust(hspace=0)
         
