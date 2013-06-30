@@ -17,10 +17,19 @@ from zipline.finance import performance, slippage, risk, trading
 from zipline.finance.risk import RiskMetricsBase
 from zipline.finance.performance import PerformanceTracker, PerformancePeriod
 
-#sym_list = ['OCLS']
-#key_list = ['OCLS','microcyn']
-sym_list = ['CHTP']
-key_list = ['CHTP','northera']
+sym_list = ['OCLS']
+key_list = ['OCLS','microcyn']
+#sym_list = ['CHTP']
+#key_list = ['CHTP','northera']
+#sym_list = ['TSPT']
+#key_list = ['TSPT','zolpidem']
+#sym_list = ['CYCC']
+#key_list = ['CYCC','sapacitabine','seliciclib']
+#sym_list = ['AEZS']
+#key_list = ['AEZS','ozarelix','perifosine']
+
+
+
 start = datetime(2010, 1, 1, 0, 0, 0, 0, pytz.utc)
 end = datetime(2013, 01, 01, 0, 0, 0, 0, pytz.utc)
 window_long = 14
@@ -159,8 +168,8 @@ class trend_trader(TradingAlgorithm):  # inherit from TradingAlgorithm
                 self.zscores[sym].append(0)
                 self.zscores_s[sym].append(0)
             atr = self.get_atr(sym)[-1]
-            self.atr_plot[sym]['profit'].append((atr*5)+sym_price)
-            self.atr_plot[sym]['loss'].append(-(atr*3)+sym_price)
+            self.atr_plot[sym]['profit'].append((atr*6)+sym_price)
+            self.atr_plot[sym]['loss'].append(-(atr*2)+sym_price)
         self.day_count += 1
 
 if __name__ == '__main__':
