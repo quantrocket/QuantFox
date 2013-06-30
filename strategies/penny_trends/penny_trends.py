@@ -1,4 +1,4 @@
-import google_trends as gt
+import key_trends as gt
 import matplotlib.pyplot as plt
 import numpy as np
 import statsmodels.api as sm
@@ -17,11 +17,12 @@ from zipline.finance import performance, slippage, risk, trading
 from zipline.finance.risk import RiskMetricsBase
 from zipline.finance.performance import PerformanceTracker, PerformancePeriod
 
-sym_dictionary = pd.read_csv('sp500_2013.csv',delimiter='\t',index_col='TICKER')
-sym_list = ['AFL','PRU','TROW']
+sym_list = ['CHTP']
+key_list = ['CHTP','northera']
 start = datetime(2010, 1, 1, 0, 0, 0, 0, pytz.utc)
 end = datetime(2013, 01, 01, 0, 0, 0, 0, pytz.utc)
-window = 14
+window_long = 28
+window_short = 14
 
 class trend_trader(TradingAlgorithm):  # inherit from TradingAlgorithm
     def initialize(self):
@@ -30,7 +31,9 @@ class trend_trader(TradingAlgorithm):  # inherit from TradingAlgorithm
         self.dates = []
         self.trends = {sym:[] for sym in sym_list}
         self.zscores = {sym:[] for sym in sym_list}
+        self.zscores_s = {sym:[] for sym in sym_list}
         self.prices = {sym:np.array([]) for sym in sym_list}
+        self.volume = {sym:np.array([]) for sym in sym_list}
         self.highs = {sym:np.array([]) for sym in sym_list}
         self.lows = {sym:np.array([]) for sym in sym_list}
         self.day_count = 0
@@ -41,25 +44,18 @@ class trend_trader(TradingAlgorithm):  # inherit from TradingAlgorithm
         self.atr_plot = {sym:{'profit':[],'loss':[]} for sym in sym_list}
       
     def get_trends(self):
-        names = []
-        for sym in sym_list:
-            name = sym_dictionary['NAME'][sym]
-            name = name.replace(".", "")
-            name = name.replace("Inc", "")
-            names.append(name)
-        print names
-        trend_df = gt.run(names)
+        trend_df = gt.run(key_list)
         print trend_df
         return trend_df
             
-    def trend_zscore(self,sym,date):
+    def trend_zscore(self,sym,date,window):
         slice = self.trends[sym][-window:]
         z = zscore(slice)[-1]
         return z
                     
     def get_rs(self,sym):
-        window_price = self.prices[sym][-window]
-        current_price = self.prices[sym][-window]
+        window_price = self.prices[sym][-window_long]
+        current_price = self.prices[sym][-window_long]
         rs = (current_price - window_price)/window_price
         return rs
         
@@ -99,9 +95,12 @@ class trend_trader(TradingAlgorithm):  # inherit from TradingAlgorithm
             sym_price = data[sym].price
             sym_high = data[sym].high
             sym_low = data[sym].low
+            sym_volume = data[sym].volume
             self.prices[sym] = np.append(self.prices[sym],sym_price)
             self.lows[sym] = np.append(self.prices[sym],sym_low)
             self.highs[sym] = np.append(self.prices[sym],sym_high)
+            # Volume
+            self.volume[sym] = np.append(self.volume[sym],sym_volume)
             # RSI, MACD
             rsi = self.get_rsi(sym)[-1]
             macd, macdsignal, macdhist = self.get_macd(sym)
@@ -109,14 +108,18 @@ class trend_trader(TradingAlgorithm):  # inherit from TradingAlgorithm
             trend = self.trend_df[sym][self.dates[-1]]
             self.trends[sym].append(float(trend))      
             # Get RS and zscore
-            if self.day_count >= window:
+            if self.day_count >= window_long:
                 rs = self.get_rs
-                zscore = self.trend_zscore(sym,date)
+                zscore = self.trend_zscore(sym,date,window_long)
+                zscore_s = self.trend_zscore(sym,date,window_short)
                 self.zscores[sym].append(zscore)
+                self.zscores_s[sym].append(zscore_s)
                 # Execute trades
-                if self.portfolio.positions[sym].amount == 0 and zscore >= 3:
-                    self.long(data,sym)
-                    print str(date)[0:10],'LONG:',sym
+                if self.portfolio.positions[sym].amount == 0 and self.zscores[sym][-1] >= 2:
+                    #if self.zscores_s[sym][-1] > self.zscores[sym][-1] and self.zscores_s[sym][-2] < self.zscores[sym][-2]:
+                     if 1 == 1:
+                        self.long(data,sym)
+                        print str(date)[0:10],'LONG:',sym
                 elif self.portfolio.positions[sym].amount != 0:
                     if sym_price >= self.atr_plot[sym]['profit'][-1] or sym_price <= self.atr_plot[sym]['loss'][-1]:
                         q = self.portfolio.positions[sym].amount
@@ -124,6 +127,7 @@ class trend_trader(TradingAlgorithm):  # inherit from TradingAlgorithm
                         print str(date)[0:10],'Exit:',sym
             else:
                 self.zscores[sym].append(0)
+                self.zscores_s[sym].append(0)
             atr = self.get_atr(sym)[-1]
             self.atr_plot[sym]['profit'].append((atr*3)+sym_price)
             self.atr_plot[sym]['loss'].append(-(atr*1.5)+sym_price)
@@ -177,7 +181,14 @@ if __name__ == '__main__':
         ax1 = plt.subplot(311, ylabel='Portfolio Value')
         results.portfolio_value.plot(ax=ax1)
         ax2 = plt.subplot(312, sharex=ax1, ylabel=str(sym+' Price'))
+        ax2t = ax2.twinx()
+        fillcolor = 'darkgoldenrod'
         ax2.plot(trend_trader.dates,trend_trader.prices[sym])
+        volume = (trend_trader.prices[sym]*trend_trader.volume[sym])/1e6  # dollar volume in millions
+        vmax = volume.max()
+        poly = ax2t.fill_between(trend_trader.dates,volume, 0, label='Volume', facecolor=fillcolor, edgecolor=fillcolor, alpha=0.5)
+        #ax2t.set_ylim(0, 5*vmax)
+        #ax2t.set_yticks([])
         # Adjust ATR bands
         trend_trader.atr_plot[sym]['profit'].insert(0,trend_trader.atr_plot[sym]['profit'][0])
         trend_trader.atr_plot[sym]['loss'].insert(0,trend_trader.atr_plot[sym]['loss'][0])
@@ -188,7 +199,9 @@ if __name__ == '__main__':
         plt.grid(b=True, which='major', color='k')
         ax3 = plt.subplot(313, sharex=ax1, ylabel=str(sym+' gTrend zscore'))
         ax3.plot(trend_trader.dates,trend_trader.zscores[sym])
+        #ax3.plot(trend_trader.dates,trend_trader.zscores_s[sym],color='r')
         plt.grid(b=True, which='major', color='k')
+        plt.subplots_adjust(hspace=0)
         
     
         plt.gcf().set_size_inches(30, 20)
