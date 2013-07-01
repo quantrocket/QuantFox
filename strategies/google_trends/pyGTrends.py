@@ -18,8 +18,8 @@ import sys
 def main(argv):
     search = argv
     # Google Login credentials
-    username = 'vsraia'#argv[1]
-    password = 'vsraia513386'#argv[2]
+    username = 'quantfoxproject'#argv[1]
+    password = 'redfoxquant'#argv[2]
     
     # Where to save the CSV file
     pathname = 'trend_data/'+search+'_trends.csv'#argv[3]
