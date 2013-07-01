@@ -11,7 +11,7 @@ import talib
 import csv
 
 from zipline.algorithm import TradingAlgorithm
-from zipline.transforms import batch_transform
+from zipline.transforms import batch_transform, returns
 from zipline.utils.factory import create_returns_from_list, load_bars_from_yahoo
 from zipline.finance import performance, slippage, risk, trading
 from zipline.finance.risk import RiskMetricsBase
@@ -44,8 +44,9 @@ window_short = 14
 class trend_trader(TradingAlgorithm):  # inherit from TradingAlgorithm
     trend_dfs = {sym:[] for sym in sym_list}
     def initialize(self):
+        self.update = raw_input('Update Trends? [y/n]: ')
         for sym in sym_list:
-            self.get_trends(sym)
+            self.get_trends(sym,self.update)
         self.set_slippage(slippage.FixedSlippage())
         self.dates = []
         self.trends = {sym:[] for sym in sym_list}
@@ -64,9 +65,10 @@ class trend_trader(TradingAlgorithm):  # inherit from TradingAlgorithm
         self.buy_plot = {sym:[] for sym in sym_list}
         self.sell_plot = {sym:[] for sym in sym_list}
         self.atr_plot = {sym:{'profit':[],'loss':[]} for sym in sym_list}
+        self.gains = {sym:np.array([]) for sym in sym_list}
       
-    def get_trends(self,sym):
-        trend_df = gt.run(sym_dictionary[sym])
+    def get_trends(self,sym,update):
+        trend_df = gt.run(sym_dictionary[sym],self.update)
         self.trend_dfs[sym] = trend_df
             
     def trend_zscore(self,sym,date,window):
@@ -82,6 +84,16 @@ class trend_trader(TradingAlgorithm):  # inherit from TradingAlgorithm
         current_price = self.prices[sym][-window_long]
         rs = (current_price - window_price)/window_price
         return rs
+        
+    def trade_gain(self,sym):
+        #amount = self.portfolio.positions[sym].amount
+        cb = self.portfolio.positions[sym].cost_basis
+        lp = self.portfolio.positions[sym].last_sale_price
+        if cb == 0:
+            gain = 0
+        else:
+            gain = (lp-cb)/cb
+        return gain
         
     def get_chaikin(self,sym):
         high = self.highs[sym][-1]
@@ -137,6 +149,7 @@ class trend_trader(TradingAlgorithm):  # inherit from TradingAlgorithm
         #print str(date)[0:10]
         # Get price and trend data
         for sym in sym_list:
+            print self.portfolio
             # Price
             sym_price = data[sym].price
             sym_high = data[sym].high
@@ -155,7 +168,10 @@ class trend_trader(TradingAlgorithm):  # inherit from TradingAlgorithm
             macd, macdsignal, macdhist = self.get_macd(sym)
             # Trend
             trend = self.trend_dfs[sym][sym][self.dates[-1]]
-            self.trends[sym].append(float(trend))      
+            self.trends[sym].append(float(trend))
+            # Get gains
+            gain = self.trade_gain(sym)
+            self.gains[sym] = np.append(self.gains[sym],gain)      
             # Get RS and zscore
             if self.day_count >= window_long:
                 rs = self.get_rs
@@ -228,7 +244,8 @@ if __name__ == '__main__':
 
     for sym in sym_list:
         ax1 = plt.subplot(411, ylabel='Portfolio Value')
-        results.portfolio_value.plot(ax=ax1)
+        ((results.portfolio_value/100000)-1).plot(ax=ax1)
+        ax1.plot(trend_trader.dates,trend_trader.gains[sym], color='m')
         ax2 = plt.subplot(412, sharex=ax1, ylabel=str(sym+' Price'))
         ax2t = ax2.twinx()
         fillcolor = 'darkgoldenrod'

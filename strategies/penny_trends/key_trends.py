@@ -2,17 +2,21 @@ import pyGTrends as gt
 import pandas as pd
 from datetime import datetime
 
-def run(sym_list):
-    get_trends(sym_list)
-    df = sync_db(sym_list)
+def run(sym_list,update):
+    if update == 'y':
+        get_trends(sym_list)
+        df = sync_db(sym_list)
+    elif update == 'n':
+        df = sync_db(sym_list)
     return df
-   
+
 def get_trends(sym_list):
     print 'Getting trend Data...'
     for sym in sym_list:    
         gt.main(sym)
 
 def sync_db(sym_list):
+    print "Analyzing Trends..."
     df = pd.read_csv('trend_data/'+sym_list[0]+'_trends.csv',index_col='Date',parse_dates=True)
     start = df.index[0]
     end = df.index[-1]
