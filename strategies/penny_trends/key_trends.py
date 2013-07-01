@@ -2,7 +2,6 @@ import pyGTrends as gt
 import pandas as pd
 from datetime import datetime
 
-sym_list = ['CHTP','nothera','parkinsons']
 def run(sym_list):
     get_trends(sym_list)
     df = sync_db(sym_list)
@@ -25,10 +24,10 @@ def sync_db(sym_list):
     df = df.fillna(method='ffill')
     df['sum'] = 0
     for sym in sym_list:
-        for i in range (0,len(df)-1):
-            df['sum'][i] = df['sum'][i] + float(df[sym][i])
-    print df['sum']
-
+        nn = df[sym].count()
+        for i in range (0,nn):
+            if df[sym][i] != " ":
+                df['sum'][i] = df['sum'][i] + float(df[sym][i])
+    df[sym] = df['sum']
 
     return df
-run(sym_list)

@@ -17,8 +17,6 @@ from zipline.finance import performance, slippage, risk, trading
 from zipline.finance.risk import RiskMetricsBase
 from zipline.finance.performance import PerformanceTracker, PerformancePeriod
 
-sym_list = ['OCLS']
-key_list = ['OCLS','microcyn']
 #sym_list = ['CHTP']
 #key_list = ['CHTP','northera']
 #sym_list = ['TSPT']
@@ -28,6 +26,14 @@ key_list = ['OCLS','microcyn']
 #sym_list = ['AEZS']
 #key_list = ['AEZS','ozarelix','perifosine']
 
+sym_dictionary = {'OCLS':['OCLS','microcyn'],'CHTP':['CHTP','northera'],'TSPT':['TSPT','zolpidem'],
+                  'CYCC':['CYCC','sapacitabine','seliciclib'],'AEZS':['AEZS','ozarelix','perifosine']}
+sym_list = []
+for sym in sym_dictionary:
+    sym_list.append(sym)
+
+
+
 
 
 start = datetime(2010, 1, 1, 0, 0, 0, 0, pytz.utc)
@@ -36,8 +42,10 @@ window_long = 14
 window_short = 14
 
 class trend_trader(TradingAlgorithm):  # inherit from TradingAlgorithm
+    trend_dfs = {sym:[] for sym in sym_list}
     def initialize(self):
-        self.trend_df = self.get_trends()
+        for sym in sym_list:
+            self.get_trends(sym)
         self.set_slippage(slippage.FixedSlippage())
         self.dates = []
         self.trends = {sym:[] for sym in sym_list}
@@ -57,14 +65,16 @@ class trend_trader(TradingAlgorithm):  # inherit from TradingAlgorithm
         self.sell_plot = {sym:[] for sym in sym_list}
         self.atr_plot = {sym:{'profit':[],'loss':[]} for sym in sym_list}
       
-    def get_trends(self):
-        trend_df = gt.run(key_list)
-        print trend_df
-        return trend_df
+    def get_trends(self,sym):
+        trend_df = gt.run(sym_dictionary[sym])
+        self.trend_dfs[sym] = trend_df
             
     def trend_zscore(self,sym,date,window):
         slice = self.trends[sym][-window:]
-        z = zscore(slice)[-1]
+        if slice[-1] == slice[-2]:
+            z = self.zscores[sym][-1]
+        else:
+            z = zscore(slice)[-1]
         return z
                     
     def get_rs(self,sym):
@@ -144,7 +154,7 @@ class trend_trader(TradingAlgorithm):  # inherit from TradingAlgorithm
             self.rsi_plot[sym] = np.append(self.rsi_plot[sym],rsi)
             macd, macdsignal, macdhist = self.get_macd(sym)
             # Trend
-            trend = self.trend_df[sym][self.dates[-1]]
+            trend = self.trend_dfs[sym][sym][self.dates[-1]]
             self.trends[sym].append(float(trend))      
             # Get RS and zscore
             if self.day_count >= window_long:
@@ -154,7 +164,7 @@ class trend_trader(TradingAlgorithm):  # inherit from TradingAlgorithm
                 self.zscores[sym].append(zscore)
                 self.zscores_s[sym].append(zscore_s)
                 # Execute trades
-                if self.portfolio.positions[sym].amount == 0 and self.zscores[sym][-1] > 2 and rsi < 70: # and cmf > -0.05:
+                if self.portfolio.positions[sym].amount == 0 and self.zscores[sym][-1] > 2 and rsi < 100: # and cmf > -0.05:
                     #if self.zscores_s[sym][-1] > self.zscores[sym][-1] and self.zscores_s[sym][-2] < self.zscores[sym][-2]:
                      if 1 == 1:
                         self.long(data,sym)
@@ -168,7 +178,7 @@ class trend_trader(TradingAlgorithm):  # inherit from TradingAlgorithm
                 self.zscores[sym].append(0)
                 self.zscores_s[sym].append(0)
             atr = self.get_atr(sym)[-1]
-            self.atr_plot[sym]['profit'].append((atr*6)+sym_price)
+            self.atr_plot[sym]['profit'].append((atr*4)+sym_price)
             self.atr_plot[sym]['loss'].append(-(atr*2)+sym_price)
         self.day_count += 1
 
