@@ -27,7 +27,7 @@ from zipline.finance.performance import PerformanceTracker, PerformancePeriod
 #key_list = ['AEZS','ozarelix','perifosine']
 
 sym_dictionary = {'OCLS':['OCLS','microcyn'],'CHTP':['CHTP','northera'],'TSPT':['TSPT','zolpidem'],
-                  'CYCC':['CYCC','sapacitabine','seliciclib'],'AEZS':['AEZS','ozarelix','perifosine']}
+                  'AEZS':['AEZS','ozarelix','perifosine']}
 sym_list = []
 for sym in sym_dictionary:
     sym_list.append(sym)
@@ -103,9 +103,9 @@ class trend_trader(TradingAlgorithm):  # inherit from TradingAlgorithm
         mfm = ((close-low)-(high-close)) / (high-low)
         mfv = mfm*volume
         self.mfv[sym] = np.append(self.mfv[sym],mfv)
-        if self.day_count >= 20:
-            vol_period = self.volume[sym][-20:]
-            mfv_period = self.mfv[sym][-20:]
+        if self.day_count >= 10:
+            vol_period = self.volume[sym][-10:]
+            mfv_period = self.mfv[sym][-10:]
             cum_vol = 0
             cum_mfv = 0
             for i in mfv_period:
@@ -149,7 +149,7 @@ class trend_trader(TradingAlgorithm):  # inherit from TradingAlgorithm
         #print str(date)[0:10]
         # Get price and trend data
         for sym in sym_list:
-            print self.portfolio
+            #print self.portfolio
             # Price
             sym_price = data[sym].price
             sym_high = data[sym].high
@@ -180,7 +180,7 @@ class trend_trader(TradingAlgorithm):  # inherit from TradingAlgorithm
                 self.zscores[sym].append(zscore)
                 self.zscores_s[sym].append(zscore_s)
                 # Execute trades
-                if self.portfolio.positions[sym].amount == 0 and self.zscores[sym][-1] > 2 and rsi < 100: # and cmf > -0.05:
+                if self.portfolio.positions[sym].amount == 0 and self.zscores[sym][-1] > 2 and cmf > -0.1:# and rsi <= 30: # and cmf > -0.05:
                     #if self.zscores_s[sym][-1] > self.zscores[sym][-1] and self.zscores_s[sym][-2] < self.zscores[sym][-2]:
                      if 1 == 1:
                         self.long(data,sym)
@@ -194,8 +194,8 @@ class trend_trader(TradingAlgorithm):  # inherit from TradingAlgorithm
                 self.zscores[sym].append(0)
                 self.zscores_s[sym].append(0)
             atr = self.get_atr(sym)[-1]
-            self.atr_plot[sym]['profit'].append((atr*4)+sym_price)
-            self.atr_plot[sym]['loss'].append(-(atr*2)+sym_price)
+            self.atr_plot[sym]['profit'].append((atr*5)+sym_price)
+            self.atr_plot[sym]['loss'].append(-(atr*3)+sym_price)
         self.day_count += 1
 
 if __name__ == '__main__':
@@ -243,10 +243,10 @@ if __name__ == '__main__':
     print '------------------------------'
 
     for sym in sym_list:
-        ax1 = plt.subplot(411, ylabel='Portfolio Value')
+        ax1 = plt.subplot(511, ylabel='Portfolio Value')
         ((results.portfolio_value/100000)-1).plot(ax=ax1)
         ax1.plot(trend_trader.dates,trend_trader.gains[sym], color='m')
-        ax2 = plt.subplot(412, sharex=ax1, ylabel=str(sym+' Price'))
+        ax2 = plt.subplot(512, sharex=ax1, ylabel=str(sym+' Price'))
         ax2t = ax2.twinx()
         fillcolor = 'darkgoldenrod'
         ax2.plot(trend_trader.dates,trend_trader.prices[sym])
@@ -261,20 +261,22 @@ if __name__ == '__main__':
         ax2.plot(trend_trader.dates, trend_trader.atr_plot[sym]['profit'],alpha=0.3)
         ax2.plot(trend_trader.dates, trend_trader.atr_plot[sym]['loss'],alpha=0.3)
         plt.grid(b=True, which='major', color='k')
-        ax3 = plt.subplot(413, sharex=ax1, ylabel=str(' gTrend zscore'))
+        ax3 = plt.subplot(513, sharex=ax1, ylabel=str(' gScore'))
         ax3.plot(trend_trader.dates,trend_trader.zscores[sym])
-        ax3.fill_between(trend_trader.dates,2,trend_trader.zscores[sym],facecolor='green',alpha=0.5)
-        ax3.fill_between(trend_trader.dates,-2,2,facecolor='white',alpha=1)
+        #ax3.fill_between(trend_trader.dates,2,trend_trader.zscores[sym],facecolor='green',alpha=0.5
+        gline = np.array([2]*len(trend_trader.dates))
+        ax3.fill_between(trend_trader.dates,gline,trend_trader.zscores[sym],where=trend_trader.zscores[sym]>gline,facecolor='green',alpha=0.5)
+        #ax3.fill_between(trend_trader.dates,-2,2,facecolor='white',alpha=1)
         plt.grid(b=True, which='major', color='k')
-        #ax4 = plt.subplot(514, sharex=ax1, ylabel=str(sym+' CMF'))
-        #ax4.plot(trend_trader.dates,trend_trader.chaikin_plot[sym])
-        #ax4.fill_between(trend_trader.dates,trend_trader.chaikin_plot[sym],0,where=trend_trader.chaikin_plot[sym]>0, facecolor='green',alpha=0.5)
-        #ax4.fill_between(trend_trader.dates,trend_trader.chaikin_plot[sym],0,where=trend_trader.chaikin_plot[sym]<0, facecolor='red',alpha=0.5)
-        #plt.grid(b=True, which='major', color='k')
-        ax4 = plt.subplot(414, sharex=ax1, ylabel=str('RSI'))
-        ax4.plot(trend_trader.dates,trend_trader.rsi_plot[sym])
-        ax4.fill_between(trend_trader.dates,70,trend_trader.rsi_plot[sym],facecolor='green',alpha=0.5)
-        ax4.fill_between(trend_trader.dates,30,70,facecolor='white',alpha=1)
+        ax4 = plt.subplot(514, sharex=ax1, ylabel=str(sym+' CMF'))
+        ax4.plot(trend_trader.dates,trend_trader.chaikin_plot[sym])
+        ax4.fill_between(trend_trader.dates,trend_trader.chaikin_plot[sym],0,where=trend_trader.chaikin_plot[sym]>0, facecolor='green',alpha=0.5)
+        ax4.fill_between(trend_trader.dates,trend_trader.chaikin_plot[sym],0,where=trend_trader.chaikin_plot[sym]<0, facecolor='red',alpha=0.5)
+        plt.grid(b=True, which='major', color='k')
+        ax5 = plt.subplot(515, sharex=ax1, ylabel=str('RSI'))
+        ax5.plot(trend_trader.dates,trend_trader.rsi_plot[sym])
+        ax5.fill_between(trend_trader.dates,70,trend_trader.rsi_plot[sym],facecolor='green',alpha=0.5)
+        ax5.fill_between(trend_trader.dates,30,70,facecolor='white',alpha=1)
         plt.grid(b=True, which='major', color='k')
        
         plt.subplots_adjust(hspace=0) 
