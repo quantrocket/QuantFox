@@ -17,17 +17,11 @@ from zipline.finance import performance, slippage, risk, trading
 from zipline.finance.risk import RiskMetricsBase
 from zipline.finance.performance import PerformanceTracker, PerformancePeriod
 
-#sym_list = ['CHTP']
-#key_list = ['CHTP','northera']
-#sym_list = ['TSPT']
-#key_list = ['TSPT','zolpidem']
-#sym_list = ['CYCC']
-#key_list = ['CYCC','sapacitabine','seliciclib']
-#sym_list = ['AEZS']
-#key_list = ['AEZS','ozarelix','perifosine']
+sym_dictionary = {'OCLS':['OCLS','microcyn','etericyn','glucorein'],'CHTP':['CHTP','northera','droxidopa'],'TSPT':['TSPT','zolpidem','intermezzo'],
+                  'AEZS':['AEZS','ozarelix','perifosine','cetrotide']}
 
-sym_dictionary = {'OCLS':['OCLS','microcyn'],'CHTP':['CHTP','northera'],'TSPT':['TSPT','zolpidem'],
-                  'AEZS':['AEZS','ozarelix','perifosine']}
+#sym_dictionary = {'FICO':['FICO','fico+score','credit+score','FICO+stock']}#,
+                  #'VRNG':['VRNG','vringo','stock+vrngo']}
 sym_list = []
 for sym in sym_dictionary:
     sym_list.append(sym)
@@ -38,15 +32,20 @@ for sym in sym_dictionary:
 
 start = datetime(2010, 1, 1, 0, 0, 0, 0, pytz.utc)
 end = datetime(2013, 01, 01, 0, 0, 0, 0, pytz.utc)
-window_long = 14
+window_long = 20
 window_short = 14
 
 class trend_trader(TradingAlgorithm):  # inherit from TradingAlgorithm
     trend_dfs = {sym:[] for sym in sym_list}
     def initialize(self):
         self.update = raw_input('Update Trends? [y/n]: ')
-        for sym in sym_list:
-            self.get_trends(sym,self.update)
+        if self.update =='y':
+            for sym in sym_list:
+                self.get_trends(sym,self.update)
+        elif self.update =='n':
+            for sym in sym_list:
+                trend_df = pd.read_csv('trend_data/processed/'+sym_list[0]+'_trend_df.csv',index_col=0,parse_dates=True)
+                self.trend_dfs[sym] = trend_df
         self.set_slippage(slippage.FixedSlippage())
         self.dates = []
         self.trends = {sym:[] for sym in sym_list}
@@ -66,8 +65,10 @@ class trend_trader(TradingAlgorithm):  # inherit from TradingAlgorithm
         self.sell_plot = {sym:[] for sym in sym_list}
         self.atr_plot = {sym:{'profit':[],'loss':[]} for sym in sym_list}
         self.gains = {sym:np.array([]) for sym in sym_list}
+        self.mfi_plot = {sym:np.array([]) for sym in sym_list}
       
     def get_trends(self,sym,update):
+        print sym_dictionary[sym]
         trend_df = gt.run(sym_dictionary[sym],self.update)
         self.trend_dfs[sym] = trend_df
             
@@ -123,12 +124,17 @@ class trend_trader(TradingAlgorithm):  # inherit from TradingAlgorithm
         return rsi
     
     def get_atr(self,sym):
-        atr = talib.ATR(self.highs[sym], self.lows[sym], self.prices[sym], timeperiod=14)
+        atr = talib.ATR(self.highs[sym], self.lows[sym], self.prices[sym], timeperiod=7)
         return atr
     
     def get_macd(self,sym):
         macd, macdsignal, macdhist = talib.MACD(self.prices[sym],fastperiod=12,slowperiod=26,signalperiod=9)
         return macd, macdsignal, macdhist 
+    
+    def get_mfi(self,sym):
+        mfi = talib.MFI(self.highs[sym], self.lows[sym], self.prices[sym], self.volume[sym], timeperiod=14)
+        self.mfi_plot[sym] = mfi
+        return mfi[-1]
     
     def short(self,data,sym):
         price = data[sym].price
@@ -160,14 +166,15 @@ class trend_trader(TradingAlgorithm):  # inherit from TradingAlgorithm
             self.highs[sym] = np.append(self.prices[sym],sym_high)
             # Volume
             self.volume[sym] = np.append(self.volume[sym],sym_volume)
-            # RSI, MACD, Chaikin
+            # RSI, MACD, Chaikin, MFI
+            mfi = self.get_mfi(sym)
             cmf = self.get_chaikin(sym)
             self.chaikin_plot[sym] = np.append(self.chaikin_plot[sym],cmf)
             rsi = self.get_rsi(sym)[-1]
             self.rsi_plot[sym] = np.append(self.rsi_plot[sym],rsi)
             macd, macdsignal, macdhist = self.get_macd(sym)
             # Trend
-            trend = self.trend_dfs[sym][sym][self.dates[-1]]
+            trend = self.trend_dfs[sym]['sum'][self.dates[-1]]
             self.trends[sym].append(float(trend))
             # Get gains
             gain = self.trade_gain(sym)
@@ -180,7 +187,7 @@ class trend_trader(TradingAlgorithm):  # inherit from TradingAlgorithm
                 self.zscores[sym].append(zscore)
                 self.zscores_s[sym].append(zscore_s)
                 # Execute trades
-                if self.portfolio.positions[sym].amount == 0 and self.zscores[sym][-1] > 2 and cmf > -0.1:# and rsi <= 30: # and cmf > -0.05:
+                if self.portfolio.positions[sym].amount == 0 and self.zscores[sym][-1] >= 2 and mfi > 40: # cmf > -0.1 and :# and rsi <= 30: # and cmf > -0.05:
                     #if self.zscores_s[sym][-1] > self.zscores[sym][-1] and self.zscores_s[sym][-2] < self.zscores[sym][-2]:
                      if 1 == 1:
                         self.long(data,sym)
@@ -194,7 +201,7 @@ class trend_trader(TradingAlgorithm):  # inherit from TradingAlgorithm
                 self.zscores[sym].append(0)
                 self.zscores_s[sym].append(0)
             atr = self.get_atr(sym)[-1]
-            self.atr_plot[sym]['profit'].append((atr*5)+sym_price)
+            self.atr_plot[sym]['profit'].append((atr*3)+sym_price)
             self.atr_plot[sym]['loss'].append(-(atr*3)+sym_price)
         self.day_count += 1
 
@@ -258,8 +265,8 @@ if __name__ == '__main__':
         trend_trader.atr_plot[sym]['loss'].insert(0,trend_trader.atr_plot[sym]['loss'][0])
         del trend_trader.atr_plot[sym]['profit'][-1]
         del trend_trader.atr_plot[sym]['loss'][-1]
-        ax2.plot(trend_trader.dates, trend_trader.atr_plot[sym]['profit'],alpha=0.3)
-        ax2.plot(trend_trader.dates, trend_trader.atr_plot[sym]['loss'],alpha=0.3)
+        ax2.plot(trend_trader.dates, trend_trader.atr_plot[sym]['profit'],alpha=0.3,color='green')
+        ax2.plot(trend_trader.dates, trend_trader.atr_plot[sym]['loss'],alpha=0.3,color='red')
         plt.grid(b=True, which='major', color='k')
         ax3 = plt.subplot(513, sharex=ax1, ylabel=str(' gScore'))
         ax3.plot(trend_trader.dates,trend_trader.zscores[sym])
@@ -273,12 +280,19 @@ if __name__ == '__main__':
         ax4.fill_between(trend_trader.dates,trend_trader.chaikin_plot[sym],0,where=trend_trader.chaikin_plot[sym]>0, facecolor='green',alpha=0.5)
         ax4.fill_between(trend_trader.dates,trend_trader.chaikin_plot[sym],0,where=trend_trader.chaikin_plot[sym]<0, facecolor='red',alpha=0.5)
         plt.grid(b=True, which='major', color='k')
-        ax5 = plt.subplot(515, sharex=ax1, ylabel=str('RSI'))
-        ax5.plot(trend_trader.dates,trend_trader.rsi_plot[sym])
-        ax5.fill_between(trend_trader.dates,70,trend_trader.rsi_plot[sym],facecolor='green',alpha=0.5)
-        ax5.fill_between(trend_trader.dates,30,70,facecolor='white',alpha=1)
+        #ax5 = plt.subplot(515, sharex=ax1, ylabel=str('RSI'))
+        #ax5.plot(trend_trader.dates,trend_trader.rsi_plot[sym])
+        #ax5.fill_between(trend_trader.dates,70,trend_trader.rsi_plot[sym],facecolor='green',alpha=0.5)
+        #ax5.fill_between(trend_trader.dates,30,70,facecolor='white',alpha=1)
+        #plt.grid(b=True, which='major', color='k')
+        ax5 = plt.subplot(515, sharex=ax1, ylabel=str('MFI'))
+        trend_trader.mfi_plot[sym] = np.delete(trend_trader.mfi_plot[sym],-1)
+        ax5.plot(trend_trader.dates,trend_trader.mfi_plot[sym])
         plt.grid(b=True, which='major', color='k')
        
         plt.subplots_adjust(hspace=0) 
         plt.gcf().set_size_inches(30, 20)
         plt.show()
+        save_string = 'results/charts/'+sym+'.pdf'
+        plt.savefig(save_string)
+        plt.clf()
